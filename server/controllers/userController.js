@@ -68,7 +68,7 @@ const protect = catchAsync(async function (req, res, next) {
   if (!authorization || !authorization.startsWith(`Bearer`))
     return res.status(400).json({ status: `fail`, error: "Token invalid" });
 
-  const token = authorization.split(" ")[1]
+  const token = authorization.split(" ")[1];
 
   const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
 

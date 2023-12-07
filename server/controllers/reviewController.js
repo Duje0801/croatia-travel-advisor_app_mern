@@ -5,11 +5,13 @@ const createReview = catchAsync(async function (req, res, next) {
   const text = req.body.text;
   const rating = req.body.rating;
   const destination = `6571a79800ebf5febf06dcbb`;
+  const user = req.user._id;
 
   const newReview = await Review.create({
     text,
     rating,
     destination,
+    user,
   });
 
   Review.calcAverageRatings(destination);

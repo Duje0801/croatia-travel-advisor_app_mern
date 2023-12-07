@@ -12,6 +12,8 @@ const createReview = async (req, res, next) => {
       destination,
     });
 
+    Review.calcAverageRatings(destination);
+
     res.status(201).json({ status: `success`, review: newReview });
   } catch (error) {
     res.status(404).json({ status: `fail`, error });
@@ -43,6 +45,8 @@ const updateReview = async (req, res, next) => {
       });
     }
 
+    Review.calcAverageRatings(updatedReview.destination);
+
     res.status(201).json({ status: `success`, review: updatedReview });
   } catch (error) {
     res.status(404).json({ status: `fail`, error });
@@ -59,6 +63,8 @@ const deleteReview = async (req, res, next) => {
         error: `Can't find destination with this ID`,
       });
     }
+
+    Review.calcAverageRatings(deletedReview.destination);
 
     res
       .status(201)

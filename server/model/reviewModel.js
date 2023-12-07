@@ -1,4 +1,5 @@
 const mongoose = require(`mongoose`);
+const Destination = require("../model/destinationModel");
 
 const reviewSchema = new mongoose.Schema({
   text: {
@@ -23,6 +24,29 @@ const reviewSchema = new mongoose.Schema({
     default: Date.now(),
   },
 });
+
+reviewSchema.statics.calcAverageRatings = async function (destinationId) {
+  const newStats = await this.aggregate([
+    {
+      $match: { destination: destinationId },
+    },
+    {
+      $group: {
+        _id: `$destination`,
+        nRatings: { $sum: 1 },
+        avgRating: { $avg: `$rating` },
+      },
+    },
+  ]);
+
+  await Destination.findOneAndUpdate(
+    { _id: destinationId },
+    {
+      averageRating: newStats[0].avgRating,
+      ratingQuantity: newStats[0].nRatings,
+    }
+  );
+};
 
 const Review = mongoose.model(`Review`, reviewSchema);
 

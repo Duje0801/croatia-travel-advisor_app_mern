@@ -5,7 +5,9 @@ const getDestination = async (req, res, next) => {
     let destinationFind = Destination.find();
 
     if (req.params.id) {
-      destinationFind = Destination.find({ _id: req.params.id });
+      destinationFind = Destination.find({ _id: req.params.id }).populate({
+        path: `reviews`,
+      });
     }
 
     const destination = await destinationFind;

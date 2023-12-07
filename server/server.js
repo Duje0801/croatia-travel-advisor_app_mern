@@ -5,6 +5,7 @@ const dotenv = require(`dotenv`);
 
 const destinationRoutes = require("./routes/destinationRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 const errorHandling = require("./utilis/errorHandler");
 
@@ -15,6 +16,7 @@ app.use(cors());
 
 app.use(`/api/destination/`, destinationRoutes);
 app.use(`/api/review/`, reviewRoutes);
+app.use(`/api/user/`, userRoutes);
 
 mongoose.connect(`${process.env.MONGODB_CONNECTION}`).then(() => {
   console.log("Database connected!");

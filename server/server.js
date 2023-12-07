@@ -6,6 +6,8 @@ const dotenv = require(`dotenv`);
 const destinationRoutes = require("./routes/destinationRoutes");
 const reviewRoutes = require("./routes/reviewRoutes");
 
+const errorHandling = require("./utilis/errorHandler");
+
 const app = express();
 dotenv.config();
 app.use(express.json());
@@ -23,3 +25,5 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server working on port ${PORT}`);
 });
+
+app.use(errorHandling);

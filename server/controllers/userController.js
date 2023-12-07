@@ -47,6 +47,7 @@ const logIn = catchAsync(async function (req, res, next) {
   const password = req.body.password;
 
   const user = await User.findOne({ email }).select("+password");
+
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return res
       .status(400)
@@ -61,7 +62,29 @@ const logIn = catchAsync(async function (req, res, next) {
   });
 });
 
+const protect = catchAsync(async function (req, res, next) {
+  const authorization = req.headers.authorization;
+
+  if (!authorization || !authorization.startsWith(`Bearer`))
+    return res.status(400).json({ status: `fail`, error: "Token invalid" });
+
+  const token = authorization.split(" ")[1]
+
+  const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
+
+  const user = await User.findOne({ _id: decoded._id });
+
+  if (!user) {
+    return res.status(400).json({ status: `fail`, error: "User don't exist" });
+  }
+
+  req.user = user;
+
+  next();
+});
+
 module.exports = {
   signUp,
   logIn,
+  protect,
 };

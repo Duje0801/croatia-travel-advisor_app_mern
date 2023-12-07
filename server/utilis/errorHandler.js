@@ -15,6 +15,10 @@ module.exports = (error, req, res, next) => {
     return res
       .status(400)
       .json({ status: `fail`, error: `Destination name is already in use` });
+  } else if (error.name === "JsonWebTokenError") {
+    return res.status(400).json({ status: `fail`, error: `Invalid token` });
+  } else if (error.name === "TokenExpiredError") {
+    return res.status(400).json({ status: `fail`, error: `Token expiried` });
   }
 
   return res.status(400).json({ status: `fail`, error });

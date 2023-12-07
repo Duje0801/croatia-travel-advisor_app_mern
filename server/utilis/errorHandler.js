@@ -1,5 +1,10 @@
 module.exports = (error, req, res, next) => {
-  if (error.name === "ValidationError") {
+  if (error.name === "CastError") {
+    return res.status(400).json({
+      status: `fail`,
+      error: `Invalid ${error.path}: ${error.value}.`,
+    });
+  } else if (error.name === "ValidationError") {
     let text = ``;
     for (let oneError of Object.values(error.errors)) {
       if (text === ``) text = text + `${oneError}`;

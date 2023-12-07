@@ -1,7 +1,7 @@
 const Destination = require(`../model/destinationModel`);
 const catchAsync = require("../utilis/catchAsync");
 
-const getDestination = async function (req, res, next) {
+const getDestination = catchAsync(async function (req, res, next) {
   let destinationFind = Destination.find();
 
   if (req.params.id) {
@@ -22,7 +22,7 @@ const getDestination = async function (req, res, next) {
   res
     .status(200)
     .json({ status: `success`, quantity: destination.length, destination });
-};
+});
 
 const createDestination = catchAsync(async function (req, res, next) {
   const name = req.body.name;

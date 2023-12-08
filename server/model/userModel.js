@@ -5,6 +5,7 @@ const userSchema = new mongoose.Schema({
   username: {
     type: String,
     required: [true, `Username is mandatory`],
+    unique: [true, `Username is already in use`],
     minLength: [3, `Username must contain 3 or more characters`],
     maxLength: [
       15,
@@ -14,6 +15,7 @@ const userSchema = new mongoose.Schema({
   email: {
     type: String,
     required: [true, `Email is mandatory`],
+    unique: [true, `Email is already in use`],
     validate: [validator.isEmail, `Invalid email format`],
   },
   password: {

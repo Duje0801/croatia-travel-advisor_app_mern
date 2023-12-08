@@ -46,12 +46,20 @@ const logIn = catchAsync(async function (req, res, next) {
   const email = req.body.email;
   const password = req.body.password;
 
-  const user = await User.findOne({ email }).select("+password");
+  const user = await User.findOne({ email })
+    .select("+password")
+    .select("+active");
 
   if (!user || !(await bcrypt.compare(password, user.password))) {
     return res
       .status(400)
       .json({ status: `fail`, error: "Incorrect email or password" });
+  }
+
+  if (!user.active) {
+    return res
+      .status(400)
+      .json({ status: `fail`, error: "User is deactivated" });
   }
 
   const token = createToken(user._id);

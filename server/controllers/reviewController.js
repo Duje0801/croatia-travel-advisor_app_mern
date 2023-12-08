@@ -25,6 +25,22 @@ const updateReview = catchAsync(async function (req, res, next) {
   if (req.body.rating)
     updatedFields = { ...updatedFields, rating: req.body.rating };
 
+  const getReview = await Review.findOne({ _id: req.params.id });
+
+  if (!getReview) {
+    return res.status(404).json({
+      status: `fail`,
+      error: `Can't find destination with this ID`,
+    });
+  }
+
+  if (getReview.user !== String(req.user._id) && req.user.role !== "admin") {
+    return res.status(404).json({
+      status: `fail`,
+      error: `You don't have permission to update this review`,
+    });
+  }
+
   const updatedReview = await Review.findOneAndUpdate(
     { _id: req.params.id },
     {
@@ -36,27 +52,29 @@ const updateReview = catchAsync(async function (req, res, next) {
     }
   );
 
-  if (!updatedReview) {
-    return res.status(404).json({
-      status: `fail`,
-      error: `Can't find destination with this ID`,
-    });
-  }
-
   Review.calcAverageRatings(updatedReview.destination);
 
   res.status(201).json({ status: `success`, review: updatedReview });
 });
 
 const deleteReview = catchAsync(async function (req, res, next) {
-  const deletedReview = await Review.findOneAndDelete({ _id: req.params.id });
+  const getReview = await Review.findOne({ _id: req.params.id });
 
-  if (!deletedReview) {
+  if (!getReview) {
     return res.status(404).json({
       status: `fail`,
       error: `Can't find destination with this ID`,
     });
   }
+
+  if (getReview.user !== String(req.user._id) && req.user.role !== "admin") {
+    return res.status(404).json({
+      status: `fail`,
+      error: `You don't have permission to delete this review`,
+    });
+  }
+
+  const deletedReview = await Review.findOneAndDelete({ _id: req.params.id });
 
   Review.calcAverageRatings(deletedReview.destination);
 

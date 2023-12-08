@@ -39,13 +39,21 @@ reviewSchema.statics.calcAverageRatings = async function (destinationId) {
     },
   ]);
 
-  await Destination.findOneAndUpdate(
-    { _id: destinationId },
-    {
+  let newStatsData = {};
+
+  if (!newStats[0]) {
+    newStatsData = {
+      averageRating: 0,
+      ratingQuantity: 0,
+    };
+  } else {
+    newStatsData = {
       averageRating: newStats[0].avgRating,
       ratingQuantity: newStats[0].nRatings,
-    }
-  );
+    };
+  }
+
+  await Destination.findOneAndUpdate({ _id: destinationId }, newStatsData);
 };
 
 const Review = mongoose.model(`Review`, reviewSchema);

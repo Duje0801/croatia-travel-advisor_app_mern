@@ -72,7 +72,7 @@ const protect = catchAsync(async function (req, res, next) {
 
   const decoded = jwt.verify(token, process.env.JWT_PRIVATE_KEY);
 
-  const user = await User.findOne({ _id: decoded._id });
+  const user = await User.findOne({ _id: decoded._id }).select(`+role`);
 
   if (!user) {
     return res.status(400).json({ status: `fail`, error: "User don't exist" });
@@ -83,8 +83,20 @@ const protect = catchAsync(async function (req, res, next) {
   next();
 });
 
+const restrictTo = (...roles) => {
+  return function (req, res, next) {
+    if (!roles.includes(req.user.role)) {
+      return res.status(400).json({
+        status: `fail`,
+        error: "You don't have permission for this operation",
+      });
+    } else next();
+  };
+};
+
 module.exports = {
   signUp,
   logIn,
   protect,
+  restrictTo,
 };

@@ -7,7 +7,11 @@ const router = express.Router();
 router
   .route("/")
   .get(destinationController.getDestination)
-  .post(userController.protect, destinationController.createDestination);
+  .post(
+    userController.protect,
+    userController.restrictTo(`admin`),
+    destinationController.createDestination
+  );
 
 router
   .route("/:id")

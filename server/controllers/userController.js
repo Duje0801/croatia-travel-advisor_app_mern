@@ -81,6 +81,21 @@ const deleteMe = catchAsync(async function (req, res, next) {
   });
 });
 
+const deleteUser = catchAsync(async function (req, res, next) {
+  const profileToDelete = await User.findOneAndDelete({ _id: req.body.userId });
+
+  if (!profileToDelete)
+    return res.status(400).json({
+      status: `fail`,
+      error: "Can't find user with this ID",
+    });
+
+  res.status(201).json({
+    status: `success`,
+    message: "Profile permanently deleted!",
+  });
+});
+
 const protect = catchAsync(async function (req, res, next) {
   const authorization = req.headers.authorization;
 
@@ -117,6 +132,7 @@ module.exports = {
   signUp,
   logIn,
   deleteMe,
+  deleteUser,
   protect,
   restrictTo,
 };

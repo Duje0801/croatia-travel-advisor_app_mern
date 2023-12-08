@@ -70,6 +70,23 @@ const logIn = catchAsync(async function (req, res, next) {
   });
 });
 
+const getMe = catchAsync(async function (req, res, next) {
+  const myProfile = await User.findOne({ _id: req.user._id }).populate({
+    path: `reviews`,
+  });
+
+  if (!myProfile)
+    return res.status(400).json({
+      status: `fail`,
+      error: "Can't find user with this ID",
+    });
+
+  res.status(201).json({
+    status: `success`,
+    data: myProfile,
+  });
+});
+
 const deleteMe = catchAsync(async function (req, res, next) {
   const myProfile = await User.findOne({ _id: req.user._id }).select(`+active`);
 
@@ -139,6 +156,7 @@ const restrictTo = (...roles) => {
 module.exports = {
   signUp,
   logIn,
+  getMe,
   deleteMe,
   deleteUser,
   protect,

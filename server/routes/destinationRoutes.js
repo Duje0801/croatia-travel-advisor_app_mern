@@ -16,7 +16,15 @@ router
 router
   .route("/:id")
   .get(destinationController.getDestination)
-  .patch(userController.protect, destinationController.updateDestination)
-  .delete(userController.protect, destinationController.deleteDestination);
+  .patch(
+    userController.protect,
+    userController.restrictTo(`admin`),
+    destinationController.updateDestination
+  )
+  .delete(
+    userController.protect,
+    userController.restrictTo(`admin`),
+    destinationController.deleteDestination
+  );
 
 module.exports = router;

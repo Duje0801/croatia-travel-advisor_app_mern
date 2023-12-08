@@ -62,6 +62,25 @@ const logIn = catchAsync(async function (req, res, next) {
   });
 });
 
+const deleteMe = catchAsync(async function (req, res, next) {
+  const myProfile = await User.findOne({ _id: req.user._id }).select(`+active`);
+
+  if (!myProfile)
+    return res.status(400).json({
+      status: `fail`,
+      error: "Can't find user with this ID",
+    });
+
+  myProfile.active = false;
+
+  await myProfile.save();
+
+  res.status(201).json({
+    status: `success`,
+    message: "Profile deactivated!",
+  });
+});
+
 const protect = catchAsync(async function (req, res, next) {
   const authorization = req.headers.authorization;
 
@@ -97,6 +116,7 @@ const restrictTo = (...roles) => {
 module.exports = {
   signUp,
   logIn,
+  deleteMe,
   protect,
   restrictTo,
 };

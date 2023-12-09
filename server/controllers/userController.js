@@ -14,6 +14,40 @@ const createToken = (_id) => {
   });
 };
 
+const allUsers = catchAsync(async function (req, res, next) {
+  const users = await User.find().select(`+active`)
+
+  if (!users[0]) {
+    return res.status(400).json({
+      status: `fail`,
+      error: "Can't find any users",
+    });
+  }
+
+  res.status(200).json({
+    status: `success`,
+    users,
+  });
+});
+
+const oneUser = catchAsync(async function (req, res, next) {
+  const user = await User.findOne({ _id: req.params.id, active: true }).populate({
+    path: `reviews`,
+  });
+
+  if (!user) {
+    return res.status(400).json({
+      status: `fail`,
+      error: "Can't find user with this ID",
+    });
+  }
+
+  res.status(200).json({
+    status: `success`,
+    user,
+  });
+});
+
 const signUp = catchAsync(async function (req, res, next) {
   const username = req.body.username;
   const email = req.body.email;
@@ -326,6 +360,8 @@ const updateEmail = catchAsync(async function (req, res, next) {
 });
 
 module.exports = {
+  oneUser,
+  allUsers,
   signUp,
   logIn,
   getMe,

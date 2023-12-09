@@ -4,12 +4,29 @@ const router = express.Router();
 
 const userController = require(`../controllers/userController`);
 
+router.route("/find/:id").get(userController.protect, userController.oneUser);
+
+router
+  .route("/allUsers")
+  .get(
+    userController.protect,
+    userController.restrictTo(`admin`),
+    userController.allUsers
+  );
+
 router.route("/signUp").post(userController.signUp);
 router.route("/logIn").post(userController.logIn);
 
 router.route("/getMe").get(userController.protect, userController.getMe);
 
-router.route("/deleteMe").post(userController.protect, userController.deleteMe);
+router
+  .route("/deleteMe")
+  .post(
+    userController.protect,
+    userController.restrictTo(`user`),
+    userController.deleteMe
+  );
+
 router
   .route("/deleteUser")
   .delete(
@@ -26,7 +43,7 @@ router
   .route(`/updatePassword`)
   .patch(userController.protect, userController.updatePassword);
 
-  router
+router
   .route(`/updateEmail`)
   .patch(userController.protect, userController.updateEmail);
 

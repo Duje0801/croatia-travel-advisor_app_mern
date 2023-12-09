@@ -46,6 +46,8 @@ const userSchema = new mongoose.Schema(
       default: Date.now(),
       select: false,
     },
+    restartPasswordCode: String,
+    restartPasswordCodeExpire: Date,
   },
   {
     toJSON: { virtuals: true },

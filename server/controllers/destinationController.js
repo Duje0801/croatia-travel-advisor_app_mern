@@ -86,9 +86,24 @@ const deleteDestination = catchAsync(async function (req, res, next) {
   });
 });
 
+const searchDestination = catchAsync(async function (req, res, next) {
+  const destinations = await Destination.find({
+    name: { $regex: new RegExp(req.params.id, "i") },
+  })
+    .select(`name`)
+    .sort(`-ratingQuantity`)
+    .limit(3);
+
+  res.status(200).json({
+    status: `success`,
+    destinations,
+  });
+});
+
 module.exports = {
   getDestination,
   createDestination,
   updateDestination,
   deleteDestination,
+  searchDestination,
 };

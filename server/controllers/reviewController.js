@@ -4,7 +4,7 @@ const catchAsync = require("../utilis/catchAsync");
 const createReview = catchAsync(async function (req, res, next) {
   const text = req.body.text;
   const rating = req.body.rating;
-  const destination = `6571a79800ebf5febf06dcbb`;
+  const destination = `6574762d2d45ec575f0a3fa7`;
   const user = req.user._id;
 
   const newReview = await Review.create({

@@ -28,4 +28,8 @@ router
     destinationController.deleteDestination
   );
 
+  router
+  .route("/search/:id")
+  .get(destinationController.searchDestination)
+
 module.exports = router;

@@ -15,7 +15,7 @@ const createToken = (_id) => {
 };
 
 const allUsers = catchAsync(async function (req, res, next) {
-  const users = await User.find().select(`+active`)
+  const users = await User.find().select(`+active`);
 
   if (!users[0]) {
     return res.status(400).json({
@@ -31,7 +31,10 @@ const allUsers = catchAsync(async function (req, res, next) {
 });
 
 const oneUser = catchAsync(async function (req, res, next) {
-  const user = await User.findOne({ _id: req.params.id, active: true }).populate({
+  const user = await User.findOne({
+    _id: req.params.id,
+    active: true,
+  }).populate({
     path: `reviews`,
   });
 
@@ -154,6 +157,25 @@ const deleteUser = catchAsync(async function (req, res, next) {
   res.status(201).json({
     status: `success`,
     message: "Profile permanently deleted!",
+  });
+});
+
+const activateUser = catchAsync(async function (req, res, next) {
+  const user = await User.findOne({ _id: req.params.id });
+
+  if (!user)
+    return res.status(400).json({
+      status: `fail`,
+      error: "Can't find user with this ID",
+    });
+
+  user.active = true;
+
+  await user.save();
+
+  res.status(201).json({
+    status: `success`,
+    message: "User is active again!",
   });
 });
 
@@ -367,6 +389,7 @@ module.exports = {
   getMe,
   deleteMe,
   deleteUser,
+  activateUser,
   protect,
   restrictTo,
   forgotPassword,

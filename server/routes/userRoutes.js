@@ -21,7 +21,7 @@ router.route("/getMe").get(userController.protect, userController.getMe);
 
 router
   .route("/deleteMe")
-  .post(
+  .patch(
     userController.protect,
     userController.restrictTo(`user`),
     userController.deleteMe
@@ -33,6 +33,14 @@ router
     userController.protect,
     userController.restrictTo(`admin`),
     userController.deleteUser
+  );
+
+router
+  .route("/activate/:id")
+  .patch(
+    userController.protect,
+    userController.restrictTo(`admin`),
+    userController.activateUser
   );
 
 router.route("/forgotPassword").post(userController.forgotPassword);

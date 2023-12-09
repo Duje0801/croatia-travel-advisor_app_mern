@@ -245,6 +245,39 @@ const resetPassword = catchAsync(async function (req, res, next) {
   });
 });
 
+const updatePassword = catchAsync(async function (req, res, next) {
+  const oldPassword = req.body.oldPassword;
+  const newPassword = req.body.newPassword;
+  const confirmNewPassword = req.body.confirmNewPassword;
+
+  const user = await User.findOne({ _id: req.user._id }).select(`+password`);
+
+  if (!user) {
+    return res.status(200).json({ status: "fail", error: "User don't exist" });
+  }
+
+  if (newPassword !== confirmNewPassword) {
+    return res
+      .status(400)
+      .json({ status: `fail`, error: "Passwords must be identical" });
+  }
+
+  if (!(await bcrypt.compare(oldPassword, user.password))) {
+    return res
+      .status(400)
+      .json({ status: `fail`, error: "Incorrect old password" });
+  }
+
+  user.password = await bcrypt.hash(newPassword, 12);
+
+  await user.save();
+
+  res.status(201).json({
+    status: "success",
+    message: "Password successfully updated!",
+  });
+});
+
 module.exports = {
   signUp,
   logIn,
@@ -255,4 +288,5 @@ module.exports = {
   restrictTo,
   forgotPassword,
   resetPassword,
+  updatePassword,
 };

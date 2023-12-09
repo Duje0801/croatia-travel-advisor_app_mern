@@ -18,10 +18,12 @@ router
     userController.deleteUser
   );
 
-router
-  .route("/forgotPassword")
-  .post(userController.protect, userController.forgotPassword);
+router.route("/forgotPassword").post(userController.forgotPassword);
 
 router.route(`/resetPassword`).patch(userController.resetPassword);
+
+router
+  .route(`/updatePassword`)
+  .patch(userController.protect, userController.updatePassword);
 
 module.exports = router;

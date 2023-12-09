@@ -278,6 +278,53 @@ const updatePassword = catchAsync(async function (req, res, next) {
   });
 });
 
+const updateEmail = catchAsync(async function (req, res, next) {
+  const oldEmail = req.body.oldEmail;
+  const newEmail = req.body.newEmail;
+  const password = req.body.password;
+
+  const user = await User.findOne({ _id: req.user._id }).select(`+password`);
+
+  if (!user) {
+    return res.status(200).json({ status: "fail", error: "User don't exist" });
+  }
+
+  if (oldEmail === newEmail) {
+    return res
+      .status(400)
+      .json({ status: `fail`, error: "New mail is same as old email" });
+  }
+
+  if (oldEmail !== user.email) {
+    return res
+      .status(400)
+      .json({ status: `fail`, error: "Incorrect old mail" });
+  }
+
+  if (!(await bcrypt.compare(password, user.password))) {
+    return res
+      .status(400)
+      .json({ status: `fail`, error: "Incorrect password" });
+  }
+
+  const emailInUse = await User.findOne({ email: newEmail });
+
+  if (emailInUse) {
+    return res
+      .status(400)
+      .json({ status: `fail`, error: "Email is already in use" });
+  }
+
+  user.email = newEmail;
+
+  await user.save();
+
+  res.status(201).json({
+    status: "success",
+    message: "Email successfully updated!",
+  });
+});
+
 module.exports = {
   signUp,
   logIn,
@@ -289,4 +336,5 @@ module.exports = {
   forgotPassword,
   resetPassword,
   updatePassword,
+  updateEmail,
 };

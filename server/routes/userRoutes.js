@@ -26,4 +26,8 @@ router
   .route(`/updatePassword`)
   .patch(userController.protect, userController.updatePassword);
 
+  router
+  .route(`/updateEmail`)
+  .patch(userController.protect, userController.updateEmail);
+
 module.exports = router;

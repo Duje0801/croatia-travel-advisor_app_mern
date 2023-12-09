@@ -3,56 +3,57 @@ const express = require("express");
 const router = express.Router();
 
 const userController = require(`../controllers/userController`);
+const authController = require(`../controllers/authorizationController`);
 
-router.route("/find/:id").get(userController.protect, userController.oneUser);
+router.route("/find/:id").get(authController.protect, userController.oneUser);
 
 router
   .route("/allUsers")
   .get(
-    userController.protect,
-    userController.restrictTo(`admin`),
+    authController.protect,
+    authController.restrictTo(`admin`),
     userController.allUsers
   );
 
-router.route("/signUp").post(userController.signUp);
-router.route("/logIn").post(userController.logIn);
+router.route("/signUp").post(authController.signUp);
+router.route("/logIn").post(authController.logIn);
 
-router.route("/getMe").get(userController.protect, userController.getMe);
+router.route("/getMe").get(authController.protect, userController.getMe);
 
 router
   .route("/deleteMe")
   .patch(
-    userController.protect,
-    userController.restrictTo(`user`),
+    authController.protect,
+    authController.restrictTo(`user`),
     userController.deleteMe
   );
 
 router
   .route("/deleteUser")
   .delete(
-    userController.protect,
-    userController.restrictTo(`admin`),
+    authController.protect,
+    authController.restrictTo(`admin`),
     userController.deleteUser
   );
 
 router
   .route("/activate/:id")
   .patch(
-    userController.protect,
-    userController.restrictTo(`admin`),
+    authController.protect,
+    authController.restrictTo(`admin`),
     userController.activateUser
   );
 
-router.route("/forgotPassword").post(userController.forgotPassword);
+router.route("/forgotPassword").post(authController.forgotPassword);
 
-router.route(`/resetPassword`).patch(userController.resetPassword);
+router.route(`/resetPassword`).patch(authController.resetPassword);
 
 router
   .route(`/updatePassword`)
-  .patch(userController.protect, userController.updatePassword);
+  .patch(authController.protect, userController.updatePassword);
 
 router
   .route(`/updateEmail`)
-  .patch(userController.protect, userController.updateEmail);
+  .patch(authController.protect, userController.updateEmail);
 
 module.exports = router;

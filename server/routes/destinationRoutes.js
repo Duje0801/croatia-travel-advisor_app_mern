@@ -1,6 +1,7 @@
 const express = require("express");
+
 const destinationController = require("../controllers/destinationController");
-const userController = require("../controllers/userController");
+const authController = require(`../controllers/authorizationController`);
 
 const router = express.Router();
 
@@ -8,8 +9,8 @@ router
   .route("/")
   .get(destinationController.getDestination)
   .post(
-    userController.protect,
-    userController.restrictTo(`admin`),
+    authController.protect,
+    authController.restrictTo(`admin`),
     destinationController.createDestination
   );
 
@@ -17,13 +18,13 @@ router
   .route("/:id")
   .get(destinationController.getDestination)
   .patch(
-    userController.protect,
-    userController.restrictTo(`admin`),
+    authController.protect,
+    authController.restrictTo(`admin`),
     destinationController.updateDestination
   )
   .delete(
-    userController.protect,
-    userController.restrictTo(`admin`),
+    authController.protect,
+    authController.restrictTo(`admin`),
     destinationController.deleteDestination
   );
 

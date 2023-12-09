@@ -1,0 +1,44 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  padding: 20px 0px;
+  height: 35px;
+  width: 100vw;
+  background-color: white;
+  z-index: 3;
+}
+
+.navCentralList {
+  display: none;
+}
+
+.navCentral {
+  display: flex;
+  cursor: pointer;
+}
+
+.navCentral > img {
+  width: 50px;
+}
+
+.navCentral > div {
+  display: flex;
+  align-items: center;
+  font-size: $fontM;
+  font-weight: bold;
+}
+

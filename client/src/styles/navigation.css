@@ -1,0 +1,32 @@
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  position: fixed;
+  top: 0px;
+  padding: 20px 0px;
+  height: 35px;
+  width: 100vw;
+  background-color: white;
+  z-index: 3;
+}
+
+.navCentralList {
+  display: none;
+}
+
+.navCentral {
+  display: flex;
+  cursor: pointer;
+}
+
+.navCentral > img {
+  width: 50px;
+}
+
+.navCentral > div {
+  display: flex;
+  align-items: center;
+  font-size: 1.25rem;
+  font-weight: bold;
+}/*# sourceMappingURL=navigation.css.map */

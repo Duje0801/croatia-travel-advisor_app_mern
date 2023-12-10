@@ -1,0 +1,78 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+@keyframes slideRight {
+  0% {
+    left: -80vw;
+  }
+  100% {
+    left: 0px;
+  }
+}
+
+@keyframes slideLeft {
+  0% {
+    left: 0vw;
+  }
+  100% {
+    left: -80vw;
+  }
+}
+
+.sideMenu {
+  background-color: rgba(218, 218, 218, 0.964);
+  position: fixed;
+  top: 0px;
+  left: -80vw;
+  width: 75vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  z-index: 3;
+}
+
+.sideMenuToRight {
+  left: 0vw;
+  animation: slideRight 0.5s linear 1;
+}
+
+.sideMenuToLeft {
+  animation: slideLeft 0.5s linear 1;
+}
+
+.sideMenuBackButtonDiv {
+  margin: $gapM $gapM $gapM auto;
+}
+
+.sideMenuBackButton {
+  font-size: $fontL;
+}
+
+.sideMenuSignInButton {
+  background-color: black;
+  color: white;
+  border: 0px;
+  padding: 10px;
+  font-size: $fontL;
+  width: 75%;
+  height: fit-content;
+  margin: $gapL auto;
+}
+
+.sideMenuList:last-child {
+  margin-top: 0px;
+}
+
+.sideMenuList > li {
+  font-size: $fontM;
+  margin: $gapM 0px $gapM 35.175px;
+}

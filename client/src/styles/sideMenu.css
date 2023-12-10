@@ -1,0 +1,66 @@
+@keyframes slideRight {
+  0% {
+    left: -80vw;
+  }
+  100% {
+    left: 0px;
+  }
+}
+@keyframes slideLeft {
+  0% {
+    left: 0vw;
+  }
+  100% {
+    left: -80vw;
+  }
+}
+.sideMenu {
+  background-color: rgba(218, 218, 218, 0.964);
+  position: fixed;
+  top: 0px;
+  left: -80vw;
+  width: 75vw;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-y: scroll;
+  z-index: 3;
+}
+
+.sideMenuToRight {
+  left: 0vw;
+  animation: slideRight 0.5s linear 1;
+}
+
+.sideMenuToLeft {
+  animation: slideLeft 0.5s linear 1;
+}
+
+.sideMenuBackButtonDiv {
+  margin: 10px 10px 10px auto;
+}
+
+.sideMenuBackButton {
+  font-size: 1.5rem;
+}
+
+.sideMenuSignInButton {
+  background-color: black;
+  color: white;
+  border: 0px;
+  padding: 10px;
+  font-size: 1.5rem;
+  width: 75%;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 15px auto;
+}
+
+.sideMenuList:last-child {
+  margin-top: 0px;
+}
+
+.sideMenuList > li {
+  font-size: 1.25rem;
+  margin: 10px 0px 10px 35.175px;
+}/*# sourceMappingURL=sideMenu.css.map */

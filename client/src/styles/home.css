@@ -121,4 +121,37 @@
 
 .homeContainerImg {
   width: 100%;
+}
+
+.homeContainerText {
+  position: absolute;
+  width: -moz-fit-content;
+  width: fit-content;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: auto;
+  top: 0;
+  left: 5%;
+  bottom: 0;
+  right: 40%;
+  color: white;
+  font-weight: bold;
+  font-size: 1.25rem;
+}
+
+.homeContainerText > div {
+  font-weight: 300;
+}
+
+.homeContainerText > button {
+  font-size: 1.25rem;
+  background-color: white;
+  border: 0px;
+  padding: 10px;
+  font-weight: bold;
+  margin-top: 10px;
+}
+
+.homeTrendingBlackColor {
+  color: black;
 }/*# sourceMappingURL=home.css.map */

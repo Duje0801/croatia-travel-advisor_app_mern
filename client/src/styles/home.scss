@@ -134,3 +134,36 @@ $colorGreen: #00af87;
 .homeContainerImg {
   width: 100%;
 }
+
+.homeContainerText {
+  position: absolute;
+  width: fit-content;
+  height: fit-content;
+  margin: auto;
+  top: 0;
+  left: 5%;
+  bottom: 0;
+  right: 40%;
+  color: white;
+  font-weight: bold;
+  font-size: $fontM;
+}
+
+.homeContainerText > div {
+  font-weight: 300;
+}
+
+.homeContainerText > button {
+  font-size: $fontM;
+  background-color: white;
+  border: 0px;
+  padding: $gapM;
+  font-weight: bold;
+  margin-top: $gapM;
+}
+
+//Only Trending container text color change
+
+.homeTrendingBlackColor {
+  color: black;
+}

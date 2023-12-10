@@ -68,7 +68,7 @@ const logIn = catchAsync(async function (req, res, next) {
 
   res.status(201).json({
     status: `success`,
-    data: { user: { username: user.username, email: user.email }, token },
+    data: { username: user.username, email: user.email, token },
   });
 });
 

@@ -1,18 +1,38 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import SideMenu from "./sideMenu";
+import { UserContext } from "../context/userContext";
 import { RxHamburgerMenu } from "react-icons/rx";
 import logo from "../img/logo.png";
+import SideMenu from "./sideMenu";
 import { routes } from "../routes/routes";
 import "../styles/navigation.css";
 
 export default function Navigation() {
   const [openMenu, setOpenMenu] = useState(false);
 
+  const { user } = useContext(UserContext);
+
   const navigate = useNavigate();
+
+  const isSignedIn = () => {
+    //If user is  logged in
+    if (user)
+      return <div className="navHelloMessage">Hi, {user.username}!</div>;
+    //If user is not logged in
+    else
+      return (
+        <div className="navLogIn" onClick={handleLogIn}>
+          Log in
+        </div>
+      );
+  };
 
   const handleTitleClick = () => {
     navigate(routes.home);
+  };
+
+  const handleLogIn = () => {
+    navigate(routes.logIn);
   };
 
   return (
@@ -31,7 +51,7 @@ export default function Navigation() {
             <li>Entertainment</li>
           </ul>
         </div>
-        <div>Log In</div>
+        <div className="navLogIn">{isSignedIn()}</div>
       </div>
       <SideMenu openMenu={openMenu} setOpenMenu={setOpenMenu} />
     </div>

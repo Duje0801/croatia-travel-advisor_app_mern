@@ -1,0 +1,71 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.signUp {
+  border: 2px solid black;
+  padding: $fontS;
+  width: 80%;
+  position: absolute;
+  top: 75px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  height: fit-content;
+  margin: auto;
+  box-shadow: 2px 2px #88888874;
+}
+
+.signUpTitle {
+  font-size: $fontXL;
+  font-weight: bold;
+  margin-bottom: $gapM;
+}
+
+.signUpForm {
+  display: flex;
+  flex-direction: column;
+  gap: $gapL;
+  text-align: center;
+  margin-top: $gapM;
+}
+
+.signUpForm > label {
+  font-size: $fontM;
+}
+
+.signUpForm > input {
+  font-size: $fontM;
+  padding: 0px $gapL;
+  border: 1px solid black;
+}
+
+.signUp > button,
+.signUpForm > button {
+  font-size: $fontL;
+  background-color: black;
+  color: white;
+  border: 0px;
+  padding: $gapS 0px;
+  width: 100%;
+  margin-top: $fontS;
+}
+
+.signUpDontHaveAcc {
+  font-size: $fontS;
+  margin-top: $gapXL;
+  text-align: center;
+}
+
+.signUpError {
+  font-size: $fontM;
+  text-align: center;
+  color: red;
+}

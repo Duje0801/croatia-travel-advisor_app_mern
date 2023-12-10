@@ -22,10 +22,6 @@ $colorGreen: #00af87;
   z-index: 3;
 }
 
-.navCentralList {
-  display: none;
-}
-
 .navCentral {
   display: flex;
   cursor: pointer;
@@ -42,3 +38,11 @@ $colorGreen: #00af87;
   font-weight: bold;
 }
 
+.navCentralList {
+  display: none;
+}
+
+.navHelloMessage,
+.navLogIn {
+  text-align: right;
+}

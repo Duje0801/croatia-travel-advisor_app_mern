@@ -11,10 +11,6 @@
   z-index: 3;
 }
 
-.navCentralList {
-  display: none;
-}
-
 .navCentral {
   display: flex;
   cursor: pointer;
@@ -29,4 +25,13 @@
   align-items: center;
   font-size: 1.25rem;
   font-weight: bold;
+}
+
+.navCentralList {
+  display: none;
+}
+
+.navHelloMessage,
+.navLogIn {
+  text-align: right;
 }/*# sourceMappingURL=navigation.css.map */

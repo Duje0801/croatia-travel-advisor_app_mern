@@ -3,6 +3,7 @@ import HomePageWelcome from "../data/homePageWelcome";
 import Navigation from "../components/navigation";
 import SearchBar from "../components/searchBar";
 import TopRatedTrendingContainer from "../components/topRatedTrendingContainer";
+import Footer from "../components/footer";
 import "../styles/home.css";
 
 export default function Home() {
@@ -21,6 +22,7 @@ export default function Home() {
       <SearchBar />
       <TopRatedTrendingContainer value="topRated" />
       <TopRatedTrendingContainer value="trending" />
+      <Footer />
     </>
   );
 }

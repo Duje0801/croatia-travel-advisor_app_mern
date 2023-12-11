@@ -46,11 +46,13 @@ const createDestination = catchAsync(async function (req, res, next) {
   const name = req.body.name;
   const description = req.body.description;
   const image = req.body.image;
+  const category = req.body.category;
 
   const newDestination = await Destination.create({
     name,
     description,
     image,
+    category,
   });
 
   res.status(201).json({ status: `success`, destination: newDestination });
@@ -63,6 +65,8 @@ const updateDestination = catchAsync(async function (req, res, next) {
     updatedFields = { ...updatedFields, description: req.body.description };
   if (req.body.image)
     updatedFields = { ...updatedFields, image: req.body.image };
+  if (req.body.category)
+    updatedFields = { ...updatedFields, category: req.body.category };
 
   const updatedDestination = await Destination.findOneAndUpdate(
     { _id: req.params.id },

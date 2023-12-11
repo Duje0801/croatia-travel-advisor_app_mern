@@ -44,6 +44,10 @@ const destinationSchema = new mongoose.Schema(
       type: Number,
       default: 0,
     },
+    category: {
+      type: [String],
+      validate: (v) => v.length > 0,
+    },
     createdAt: {
       type: Date,
       default: Date.now(),

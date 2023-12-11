@@ -24,7 +24,7 @@ $colorGreen: #00af87;
 }
 
 .signUpTitle {
-  font-size: $fontXL;
+  font-size: $fontL;
   font-weight: bold;
   margin-bottom: $gapM;
 }
@@ -58,14 +58,14 @@ $colorGreen: #00af87;
   margin-top: $fontS;
 }
 
-.signUpDontHaveAcc {
+.logInDontHaveAcc {
   font-size: $fontS;
   margin-top: $gapXL;
   text-align: center;
 }
 
 .signUpError {
-  font-size: $fontM;
+  font-size: $fontS;
   text-align: center;
   color: red;
 }

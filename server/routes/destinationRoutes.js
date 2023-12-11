@@ -14,6 +14,12 @@ router
     destinationController.createDestination
   );
 
+router.route("/search/:id").get(destinationController.searchDestination);
+
+router.route("/topRated").get(destinationController.getDestination);
+
+router.route("/trending").get(destinationController.getDestination);
+
 router
   .route("/:id")
   .get(destinationController.getDestination)
@@ -27,9 +33,5 @@ router
     authController.restrictTo(`admin`),
     destinationController.deleteDestination
   );
-
-  router
-  .route("/search/:id")
-  .get(destinationController.searchDestination)
 
 module.exports = router;

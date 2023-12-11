@@ -1,6 +1,7 @@
 export const routes = {
     home: `/`,
     logIn: `/logIn`,
-    signUp: `/signUp`
+    signUp: `/signUp`,
+    category: `/category`
   };
   

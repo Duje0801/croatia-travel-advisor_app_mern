@@ -1,0 +1,62 @@
+.category {
+  margin-top: 75px;
+  text-align: center;
+}
+
+.categoryTitle {
+  position: relative;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 20px auto;
+  text-align: center;
+  width: 90%;
+}
+
+.categoryTitle > button {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 0px;
+  margin: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+}
+
+.categoryDescription {
+  font-size: 1rem;
+  width: 90%;
+  margin: 0px auto 15px;
+  text-align: justify;
+}
+
+.categoryDestination {
+  position: relative;
+  margin-bottom: 20px;
+  max-height: 510px;
+}
+
+.categoryDestinationTitle {
+  position: absolute;
+  bottom: -10px;
+  left: 0px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #00af87;
+  color: white;
+  min-width: 50vw;
+}
+
+.categoryDestinationTitleName {
+  text-align: left;
+}
+
+.categoryImage {
+  width: 100vw;
+  max-height: 510px;
+}/*# sourceMappingURL=category.css.map */

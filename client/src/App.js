@@ -3,6 +3,7 @@ import { routes } from "./routes/routes";
 import Home from "./pages/home";
 import LogIn from "./pages/logIn";
 import SignUp from "./pages/signUp";
+import Category from "./pages/category";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -17,6 +18,10 @@ export default function App() {
     {
       path: routes.signUp,
       element: <SignUp />,
+    },
+    {
+      path: `${routes.category}/:id`,
+      element: <Category />,
     },
     {
       path: `*`,

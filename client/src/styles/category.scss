@@ -1,0 +1,74 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.category {
+  margin-top: 75px;
+  text-align: center;
+}
+
+.categoryTitle {
+  position: relative;
+  font-size: $fontL;
+  font-weight: bold;
+  margin: $gapXL auto;
+  text-align: center;
+  width: 90%;
+}
+
+.categoryTitle > button {
+  position: absolute;
+  top: 0px;
+  bottom: 0px;
+  right: 0px;
+  background-color: $colorGreen;
+  color: white;
+  padding: $gapS $gapM;
+  font-size: $fontS;
+  border: 0px;
+  margin: auto;
+  height: fit-content;
+}
+
+.categoryDescription {
+  font-size: $fontS;
+  width: 90%;
+  margin: 0px auto $gapL;
+  text-align: justify;
+}
+
+//About destination
+
+.categoryDestination {
+  position: relative;
+  margin-bottom: $gapXL;
+  max-height: 510px;
+}
+
+.categoryDestinationTitle {
+  position: absolute;
+  bottom: -$gapM;
+  left: 0px;
+  font-size: $fontL;
+  font-weight: bold;
+  padding: $gapM;
+  background-color: $colorGreen;
+  color: white;
+  min-width: 50vw;
+}
+
+.categoryDestinationTitleName {
+  text-align: left;
+}
+
+.categoryImage {
+  width: 100vw;
+  max-height: 510px;
+}

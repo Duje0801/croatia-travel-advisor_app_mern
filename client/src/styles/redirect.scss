@@ -1,0 +1,30 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.redirectBox {
+  height: calc(100vh - 159.2px);
+  top: 75px;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: 0px auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: $fontM;
+  text-align: center;
+  padding: 0px $gapM;
+  font-weight: bold;
+}
+
+.redirectGoToHomePage {
+  color: $colorGreen;
+}

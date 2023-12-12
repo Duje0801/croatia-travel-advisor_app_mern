@@ -72,3 +72,20 @@ $colorGreen: #00af87;
   width: 100vw;
   max-height: 510px;
 }
+
+//Pagination
+
+.pages {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $gapXL;
+}
+
+.pages > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px $gapM $gapS;
+  min-width: $gapXL;
+  border: 1px solid black;
+}

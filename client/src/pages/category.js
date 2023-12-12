@@ -4,11 +4,14 @@ import CategoryDescription from "../data/categoryDescription";
 import Redirect from "./redirect";
 import Loading from "./loading";
 import Navigation from "../components/navigation";
+import Pagination from "../components/pagination";
 import Footer from "../components/footer";
 import "../styles/category.css";
 
 function Category() {
   const [categoryDestinations, setCategoryDestinations] = useState([]);
+  const [page, setPage] = useState(1);
+  const [destinationsNo, setDestinationsNo] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(``);
 
@@ -27,12 +30,13 @@ function Category() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/destination/category/${params.id}`
+          `http://localhost:4000/api/destination/category/${params.id}?page=${page}`
         );
         const responseJson = await response.json();
 
         if (responseJson.status === `success`) {
           setCategoryDestinations(responseJson.data);
+          setDestinationsNo(responseJson.quantity);
           setIsLoading(false);
         } else if (responseJson.status === `fail`) {
           setError(`Something went wrong. Please try again later`);
@@ -42,7 +46,7 @@ function Category() {
       }
     };
     fetchData();
-  }, [params.id]);
+  }, [params.id, page]);
 
   const handleGoBack = () => {
     navigate(-1);
@@ -93,6 +97,11 @@ function Category() {
             <div>
               <>{categoryDestinationsMapped}</>
             </div>
+            <Pagination
+              destinationsNo={destinationsNo}
+              page={page}
+              setPage={setPage}
+            />
           </div>
         </div>
         <Footer />

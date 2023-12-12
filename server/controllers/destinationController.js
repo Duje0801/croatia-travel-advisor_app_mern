@@ -3,6 +3,7 @@ const catchAsync = require("../utilis/catchAsync");
 
 const getDestination = catchAsync(async function (req, res, next) {
   let destinationFind = Destination.find();
+  let count = 0;
 
   if (req.params.id === `topRated`) {
     destinationFind = Destination.find({
@@ -22,11 +23,18 @@ const getDestination = catchAsync(async function (req, res, next) {
     req.params.id === `nature` ||
     req.params.id === `entertainment`
   ) {
+    count = await Destination.countDocuments({
+      category: req.params.id,
+    }).count();
+
+    const skip = ((req.query.page * 1 || 1) - 1) * 5;
+
     destinationFind = Destination.find({
       category: req.params.id,
     })
       .sort(`-ratingQuantity -averageRating`)
-      .limit(3);
+      .skip(skip)
+      .limit(5);
   } else if (req.params.id) {
     destinationFind = Destination.find({ _id: req.params.id }).populate({
       path: `reviews`,
@@ -44,7 +52,7 @@ const getDestination = catchAsync(async function (req, res, next) {
 
   res.status(200).json({
     status: `success`,
-    quantity: destination.length,
+    quantity: count || destination.length,
     data: destination,
   });
 });

@@ -16,9 +16,7 @@ router
 
 router.route("/search/:id").get(destinationController.searchDestination);
 
-router.route("/category/topRated").get(destinationController.getDestination);
-
-router.route("/category/trending").get(destinationController.getDestination);
+router.route("/category/:id").get(destinationController.getDestination);
 
 router
   .route("/:id")

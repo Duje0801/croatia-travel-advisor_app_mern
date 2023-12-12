@@ -4,7 +4,7 @@ const catchAsync = require("../utilis/catchAsync");
 const getDestination = catchAsync(async function (req, res, next) {
   let destinationFind = Destination.find();
 
-  if (req.url === `/topRated`) {
+  if (req.url === `/category/topRated`) {
     destinationFind = Destination.find({
       ratingQuantity: { $gte: 3 },
     })
@@ -12,7 +12,7 @@ const getDestination = catchAsync(async function (req, res, next) {
       .limit(3);
   }
 
-  if (req.url === `/trending`) {
+  if (req.url === `/category/trending`) {
     destinationFind = Destination.find({
       ratingQuantity: { $gte: 3 },
     })

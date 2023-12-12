@@ -27,7 +27,7 @@ function Category() {
     const fetchData = async () => {
       try {
         const response = await fetch(
-          `http://localhost:4000/api/destination/${params.id}`
+          `http://localhost:4000/api/destination/category/${params.id}`
         );
         const responseJson = await response.json();
 

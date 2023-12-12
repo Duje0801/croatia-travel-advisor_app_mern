@@ -1,10 +1,10 @@
-export default function HomeContainersText({ value }) {
+export default function HomeContainersText({ value, handleClick }) {
   if (value === `topRated`) {
     return (
       <div className="homeContainerText">
         Travelers Choice, Best Things to Do in Croatia
         <div>See our best reviewed locations!</div>
-        <button>See the list</button>
+        <button onClick={() => handleClick(value)}>See the list</button>
       </div>
     );
   } else {
@@ -14,7 +14,7 @@ export default function HomeContainersText({ value }) {
         <div>
           See a diverse range of experiences for every type of traveler!
         </div>
-        <button>See the list</button>
+        <button onClick={() => handleClick(value)}>See the list</button>
       </div>
     );
   }

@@ -39,6 +39,15 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
     dispatch({ type: "DELETE" });
   };
 
+  const handleClick = (value) => {
+    if (value === `home`) return navigate(routes.home);
+    else navigate(`${routes.category}/${value}`);
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <div ref={elementRef} className="sideMenu">
       <div className="sideMenuBackButtonDiv">
@@ -54,13 +63,13 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
         </button>
       )}
       <ul className="sideMenuList">
-        <li>Home</li>
-        <li>Top Rated</li>
-        <li>Trending</li>
-        <li>Nature</li>
-        <li>Towns</li>
-        <li>History</li>
-        <li>Entertainment</li>
+        <li onClick={() => handleClick(`home`)}>Home</li>
+        <li onClick={() => handleClick(`topRated`)}>Top Rated</li>
+        <li onClick={() => handleClick(`trending`)}>Trending</li>
+        <li onClick={() => handleClick(`nature`)}>Nature</li>
+        <li onClick={() => handleClick(`towns`)}>Towns</li>
+        <li onClick={() => handleClick(`history`)}>History</li>
+        <li onClick={() => handleClick(`entertainment`)}>Entertainment</li>
       </ul>
       <ul className="sideMenuList">
         <li>Terms of use</li>

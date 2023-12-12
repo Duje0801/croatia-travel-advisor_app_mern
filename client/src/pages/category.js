@@ -39,10 +39,12 @@ function Category() {
           setDestinationsNo(responseJson.quantity);
           setIsLoading(false);
         } else if (responseJson.status === `fail`) {
-          setError(`Something went wrong. Please try again later`);
+          responseJson.error === `There are no destinations in this category`
+            ? setError(`${responseJson.error}`)
+            : setError(`Something went wrong`);
         }
       } catch {
-        setError(`Something went wrong. Please try again later`);
+        setError(`Something went wrong`);
       }
     };
     fetchData();

@@ -46,7 +46,7 @@ const getDestination = catchAsync(async function (req, res, next) {
   if (!destination[0]) {
     return res.status(404).json({
       status: `fail`,
-      error: `Can't find any destination`,
+      error: `There are no destinations in this category`,
     });
   }
 

@@ -2,6 +2,15 @@ const mongoose = require(`mongoose`);
 const Destination = require("../model/destinationModel");
 
 const reviewSchema = new mongoose.Schema({
+  title: {
+    type: String,
+    required: [true, `Review title is mandatory`],
+    minLength: [3, `Review title must contain 3 or more characters`],
+    maxLength: [
+      20,
+      `The maximum number of characters allowed in the review title is 20`,
+    ],
+  },
   text: {
     type: String,
     required: [true, `Review text is mandatory`],
@@ -18,7 +27,10 @@ const reviewSchema = new mongoose.Schema({
     max: [5, `The highest allowed rating is 5`],
   },
   destination: String,
-  user: String,
+  user: {
+    username: String,
+    id: String
+  },
   createdAt: {
     type: Date,
     default: Date.now(),

@@ -1,0 +1,112 @@
+.review {
+  border-top: 2px solid black;
+  padding: 20px;
+  text-align: justify;
+}
+
+.reviewBox {
+  display: flex;
+}
+
+.reviewTitle {
+  font-weight: bold;
+}
+
+.reviewButtons {
+  margin-left: auto;
+}
+
+.reviewEditButton {
+  border: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+.reviewDeleteButton {
+  border: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: 5px 10px;
+}
+
+.reviewEdit {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0px auto;
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.reviewEditTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.reviewEditRatings {
+  text-align: center;
+  margin-top: 15px;
+  font-size: 15px;
+}
+
+.reviewEditCurrentRating {
+  text-align: center;
+  font-size: 15px;
+}
+
+.reviewEditTextarea {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.reviewEditTextarea:focus {
+  background-color: #00af87;
+  color: white;
+}
+
+.reviewEditFormButton {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 10px 0px;
+  font-weight: bold;
+}
+
+.reviewCloseEditButton {
+  margin: 5px 0px;
+}
+
+.reviewDeleteText {
+  font-size: 1rem;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 10px 0px;
+}
+
+.reviewDeleteButtonsDiv {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  margin: 10px auto 0px;
+}
+
+.reviewDeleteButtons {
+  background-color: #00af87;
+  color: white;
+  padding: 0px 10px;
+  font-size: 1rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 0px;
+}
+
+.reviewDeleteEditError {
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+}/*# sourceMappingURL=reviews.css.map */

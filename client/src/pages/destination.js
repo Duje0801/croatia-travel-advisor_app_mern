@@ -8,6 +8,7 @@ import DeleteDestinationQuestion from "../components/deleteDestinationQuestion";
 import EditDestination from "../components/editDestination";
 import Redirect from "./redirect";
 import Loading from "./loading";
+import Reviews from "./reviews";
 import Footer from "../components/footer";
 import { routes } from "../routes/routes";
 import "../styles/destination.css";
@@ -179,6 +180,10 @@ export default function Destination() {
             <div className="destinationDescription">
               {destination.description}
             </div>
+            {destination.reviews?.length > 0 && (
+              <div className="destinationReviewsTitle">Reviews:</div>
+            )}
+            <Reviews destination={destination} setDestination={setDestination}/>
           </>
         ) : (
           <Loading />

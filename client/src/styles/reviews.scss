@@ -1,0 +1,127 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.review {
+  border-top: 2px solid black;
+  padding: $gapXL;
+  text-align: justify;
+}
+
+.reviewBox {
+  display: flex;
+}
+
+.reviewTitle {
+  font-weight: bold;
+}
+
+.reviewButtons {
+  margin-left: auto;
+}
+
+.reviewEditButton {
+  border: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: $gapS $gapM;
+  margin-right: $gapM;
+}
+
+.reviewDeleteButton {
+  border: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: $gapS $gapM;
+}
+
+//Edit Review
+
+.reviewEdit {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0px auto;
+  border: 2px solid black;
+  padding: $gapM;
+}
+
+.reviewEditTitle {
+  font-size: $fontM;
+  font-weight: bold;
+  margin-bottom: $gapM;
+  text-align: center;
+}
+
+.reviewEditRatings {
+  text-align: center;
+  margin-top: $gapL;
+  font-size: $gapL;
+}
+
+.reviewEditCurrentRating {
+  text-align: center;
+  font-size: $gapL;
+}
+
+.reviewEditTextarea {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.reviewEditTextarea:focus {
+  background-color: $colorGreen;
+  color: white;
+}
+
+.reviewEditFormButton {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: $gapM 0px;
+  font-weight: bold;
+}
+
+.reviewCloseEditButton {
+  margin: $gapS 0px;
+}
+
+//Delete Review Question
+
+.reviewDeleteText {
+  font-size: $fontS;
+  border: 2px solid black;
+  padding: $gapM;
+  margin: $gapM 0px;
+}
+
+.reviewDeleteButtonsDiv {
+  display: flex;
+  justify-content: center;
+  gap: $gapM;
+  text-align: center;
+  margin: $gapM auto 0px;
+}
+
+.reviewDeleteButtons {
+  background-color: $colorGreen;
+  color: white;
+  padding: 0px $gapM;
+  font-size: $fontS;
+  width: fit-content;
+  border: 0px;
+}
+
+//Error
+
+.reviewDeleteEditError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+}

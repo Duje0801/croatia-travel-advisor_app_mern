@@ -1,4 +1,4 @@
-import ShowReviews from "../components/showReviews";
+import ShowReviews from "./showReviews";
 import "../styles/reviews.css";
 
 export default function Reviews({ destination, setDestination }) {

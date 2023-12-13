@@ -8,7 +8,7 @@ import DeleteDestinationQuestion from "../components/deleteDestinationQuestion";
 import EditDestination from "../components/editDestination";
 import Redirect from "./redirect";
 import Loading from "./loading";
-import Reviews from "./reviews";
+import Reviews from "../components/reviews";
 import Footer from "../components/footer";
 import { routes } from "../routes/routes";
 import "../styles/destination.css";

@@ -1,11 +1,15 @@
 import { useState } from "react";
+import { useNavigate } from "react-router-dom";
 import { BiSearchAlt2 } from "react-icons/bi";
 import SearchBarImg from "../img/SearchBarImg.jpg";
+import { routes } from "../routes/routes";
 import axios from "axios";
 
 export default function SearchBar() {
   const [searchResults, setSearchResults] = useState([]);
   const [error, setError] = useState(``);
+
+  const navigate = useNavigate();
 
   const handleSearch = (inputText) => {
     //If the number of characters was 2 or more and now is 0 or 1, no search results appear
@@ -23,6 +27,10 @@ export default function SearchBar() {
       );
   };
 
+  const handleClick = (value) => {
+    navigate(`${routes.destination}/${value}`);
+  };
+
   const searchResultsMapped = searchResults.map((destination, i) => {
     return (
       <div
@@ -32,6 +40,7 @@ export default function SearchBar() {
             ? "homeSearchResultsSingle"
             : "homeSearchResultsMultiple"
         }
+        onClick={() => handleClick(destination.name)}
       >
         {destination.name}
       </div>

@@ -1,0 +1,141 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+//Destination info
+
+.destination {
+  margin-top: 75px;
+}
+
+.destinationHeader {
+  position: relative;
+}
+
+.destinationHeader > img {
+  width: 100%;
+  max-height: 550px;
+}
+
+.destinationHeaderName {
+  position: absolute;
+  bottom: -$gapM;
+  left: 0px;
+  font-size: $fontL;
+  font-weight: bold;
+  padding: $gapM;
+  background-color: $colorGreen;
+  color: white;
+  min-width: 50vw;
+}
+
+.destinationRatings {
+  padding: $gapXL $gapXL 0px $gapXL;
+  font-size: $fontM;
+}
+
+.destinationAvgRating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.destinationGoBackEditDivs {
+  display: flex;
+  gap: $gapM;
+}
+
+.destinationInfoButtons {
+  background-color: $colorGreen;
+  color: white;
+  padding: $gapS $gapM;
+  font-size: $fontS;
+  border: 0px;
+}
+
+.destinationReviewsNumber {
+  font-size: $fontS;
+  margin-bottom: $gapM;
+}
+
+.destinationDescription {
+  padding: $gapM $gapXL $gapXL;
+  text-align: justify;
+}
+
+.destinationDeleteError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+}
+
+//Delete Destination Question
+
+.destinationDeleteText {
+  font-size: $fontS;
+  border: 2px solid black;
+  padding: $gapM;
+}
+
+.destinationDeleteButtonsDiv {
+  display: flex;
+  justify-content: center;
+  gap: $gapM;
+  text-align: center;
+  margin: $gapM auto 0px;
+}
+
+.destinationDeleteButtons {
+  background-color: $colorGreen;
+  color: white;
+  padding: 0px $gapM;
+  font-size: $fontS;
+  width: fit-content;
+  border: 0px;
+}
+
+//Edit destination
+
+.destinationEditForm {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0px auto;
+  border: 2px solid black;
+  padding: $gapM;
+  gap: $gapS;
+}
+
+.destinationEditTitle {
+  font-size: $fontM;
+  font-weight: bold;
+  margin-bottom: $gapM;
+  text-align: center;
+}
+
+.destinationEditTextarea {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.destinationEditImageDescription {
+  font-size: 0.75rem;
+}
+
+.destinationEditFileset {
+  font-size: 1rem;
+}
+
+.destinationEditDeleteButton {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: $gapM 0px;
+  font-weight: bold;
+}

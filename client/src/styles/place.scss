@@ -1,0 +1,27 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.place {
+  width: fit-content;
+  padding: $gapM;
+  background-color: $colorGreen;
+  color: white;
+  margin-left: auto;
+}
+
+.placeIcon {
+  margin-right: $gapM;
+  font-size: $fontS;
+}
+
+.starRow {
+  display: flex;
+  align-items: center;
+}

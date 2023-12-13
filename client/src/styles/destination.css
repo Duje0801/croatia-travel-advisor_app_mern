@@ -1,0 +1,125 @@
+.destination {
+  margin-top: 75px;
+}
+
+.destinationHeader {
+  position: relative;
+}
+
+.destinationHeader > img {
+  width: 100%;
+  max-height: 550px;
+}
+
+.destinationHeaderName {
+  position: absolute;
+  bottom: -10px;
+  left: 0px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  padding: 10px;
+  background-color: #00af87;
+  color: white;
+  min-width: 50vw;
+}
+
+.destinationRatings {
+  padding: 20px 20px 0px 20px;
+  font-size: 1.25rem;
+}
+
+.destinationAvgRating {
+  display: flex;
+  justify-content: space-between;
+}
+
+.destinationGoBackEditDivs {
+  display: flex;
+  gap: 10px;
+}
+
+.destinationInfoButtons {
+  background-color: #00af87;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 0px;
+}
+
+.destinationReviewsNumber {
+  font-size: 1rem;
+  margin-bottom: 10px;
+}
+
+.destinationDescription {
+  padding: 10px 20px 20px;
+  text-align: justify;
+}
+
+.destinationDeleteError {
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+}
+
+.destinationDeleteText {
+  font-size: 1rem;
+  border: 2px solid black;
+  padding: 10px;
+}
+
+.destinationDeleteButtonsDiv {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  text-align: center;
+  margin: 10px auto 0px;
+}
+
+.destinationDeleteButtons {
+  background-color: #00af87;
+  color: white;
+  padding: 0px 10px;
+  font-size: 1rem;
+  width: -moz-fit-content;
+  width: fit-content;
+  border: 0px;
+}
+
+.destinationEditForm {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0px auto;
+  border: 2px solid black;
+  padding: 10px;
+  gap: 5px;
+}
+
+.destinationEditTitle {
+  font-size: 1.25rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.destinationEditTextarea {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.destinationEditImageDescription {
+  font-size: 0.75rem;
+}
+
+.destinationEditFileset {
+  font-size: 1rem;
+}
+
+.destinationEditDeleteButton {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: 10px 0px;
+  font-weight: bold;
+}/*# sourceMappingURL=destination.css.map */

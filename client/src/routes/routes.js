@@ -2,6 +2,7 @@ export const routes = {
     home: `/`,
     logIn: `/logIn`,
     signUp: `/signUp`,
-    category: `/category`
+    category: `/category`,
+    destination: `/destination`
   };
   

@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import LogIn from "./pages/logIn";
 import SignUp from "./pages/signUp";
 import Category from "./pages/category";
+import Destination from "./pages/destination";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -22,6 +23,10 @@ export default function App() {
     {
       path: `${routes.category}/:id`,
       element: <Category />,
+    },
+    {
+      path: `${routes.destination}/:id`,
+      element: <Destination />,
     },
     {
       path: `*`,

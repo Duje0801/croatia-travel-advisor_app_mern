@@ -7,7 +7,6 @@ const router = express.Router();
 
 router
   .route("/")
-  .get(destinationController.getDestination)
   .post(
     authController.protect,
     authController.restrictTo(`admin`),
@@ -16,11 +15,11 @@ router
 
 router.route("/search/:id").get(destinationController.searchDestination);
 
-router.route("/category/:id").get(destinationController.getDestination);
+router.route("/category/:id").get(destinationController.getCategory);
 
 router
   .route("/:id")
-  .get(destinationController.getDestination)
+  .get(destinationController.getOneDestination)
   .patch(
     authController.protect,
     authController.restrictTo(`admin`),

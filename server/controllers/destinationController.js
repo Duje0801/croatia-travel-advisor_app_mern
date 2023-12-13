@@ -1,7 +1,27 @@
 const Destination = require(`../model/destinationModel`);
 const catchAsync = require("../utilis/catchAsync");
 
-const getDestination = catchAsync(async function (req, res, next) {
+const getOneDestination = catchAsync(async function (req, res, next) {
+  const destination = await Destination.find({
+    name: req.params.id,
+  }).populate({
+    path: `reviews`,
+  });
+
+  if (!destination) {
+    return res.status(404).json({
+      status: `fail`,
+      error: `Can't find destination with this name`,
+    });
+  }
+
+  res.status(200).json({
+    status: `success`,
+    data: destination,
+  });
+});
+
+const getCategory = catchAsync(async function (req, res, next) {
   let destinationFind = Destination.find();
   let count = 0;
 
@@ -35,10 +55,6 @@ const getDestination = catchAsync(async function (req, res, next) {
       .sort(`-ratingQuantity -averageRating`)
       .skip(skip)
       .limit(5);
-  } else if (req.params.id) {
-    destinationFind = Destination.find({ _id: req.params.id }).populate({
-      path: `reviews`,
-    });
   }
 
   const destination = await destinationFind;
@@ -46,7 +62,7 @@ const getDestination = catchAsync(async function (req, res, next) {
   if (!destination[0]) {
     return res.status(404).json({
       status: `fail`,
-      error: `There are no destinations in this category`,
+      error: `Can't find any destination`,
     });
   }
 
@@ -75,7 +91,6 @@ const createDestination = catchAsync(async function (req, res, next) {
 
 const updateDestination = catchAsync(async function (req, res, next) {
   let updatedFields = {};
-  if (req.body.name) updatedFields = { name: req.body.name };
   if (req.body.description)
     updatedFields = { ...updatedFields, description: req.body.description };
   if (req.body.image)
@@ -84,7 +99,7 @@ const updateDestination = catchAsync(async function (req, res, next) {
     updatedFields = { ...updatedFields, category: req.body.category };
 
   const updatedDestination = await Destination.findOneAndUpdate(
-    { _id: req.params.id },
+    { name: req.params.id },
     { ...updatedFields },
     {
       new: true,
@@ -95,25 +110,25 @@ const updateDestination = catchAsync(async function (req, res, next) {
   if (!updatedDestination) {
     return res.status(404).json({
       status: `fail`,
-      error: `Can't find destination with this ID`,
+      error: `Can't find destination with this name`,
     });
   }
 
   res.status(201).json({
     status: `success`,
-    destination: updatedDestination,
+    data: updatedDestination,
   });
 });
 
 const deleteDestination = catchAsync(async function (req, res, next) {
   const deletedDestination = await Destination.findOneAndDelete({
-    _id: req.params.id,
+    name: req.params.id,
   });
 
   if (!deletedDestination) {
     return res.status(404).json({
       status: `fail`,
-      error: `Can't find destination with this ID`,
+      error: `Can't find destination with this name`,
     });
   }
 
@@ -138,7 +153,8 @@ const searchDestination = catchAsync(async function (req, res, next) {
 });
 
 module.exports = {
-  getDestination,
+  getOneDestination,
+  getCategory,
   createDestination,
   updateDestination,
   deleteDestination,

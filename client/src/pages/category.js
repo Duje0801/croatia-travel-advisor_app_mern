@@ -6,6 +6,7 @@ import Loading from "./loading";
 import Navigation from "../components/navigation";
 import Pagination from "../components/pagination";
 import Footer from "../components/footer";
+import { routes } from "../routes/routes";
 import "../styles/category.css";
 
 function Category() {
@@ -39,7 +40,7 @@ function Category() {
           setDestinationsNo(responseJson.quantity);
           setIsLoading(false);
         } else if (responseJson.status === `fail`) {
-          responseJson.error === `There are no destinations in this category`
+          responseJson.error === `Can't find any destination`
             ? setError(`${responseJson.error}`)
             : setError(`Something went wrong`);
         }
@@ -54,6 +55,10 @@ function Category() {
     navigate(-1);
   };
 
+  const handleRedirectToDestination = (destinationName) => {
+    navigate(`${routes.destination}/${destinationName}`)
+  }
+
   const categoryDestinationsMapped = categoryDestinations.map(
     (destination, i) => {
       return (
@@ -67,6 +72,7 @@ function Category() {
             src={destination.image}
             alt={destination.name}
             className="categoryImage"
+            onClick={() => handleRedirectToDestination(destination.name)}
           ></img>
         </div>
       );

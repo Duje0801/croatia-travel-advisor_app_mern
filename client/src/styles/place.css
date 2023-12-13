@@ -1,0 +1,18 @@
+.place {
+  width: -moz-fit-content;
+  width: fit-content;
+  padding: 10px;
+  background-color: #00af87;
+  color: white;
+  margin-left: auto;
+}
+
+.placeIcon {
+  margin-right: 10px;
+  font-size: 1rem;
+}
+
+.starRow {
+  display: flex;
+  align-items: center;
+}/*# sourceMappingURL=place.css.map */

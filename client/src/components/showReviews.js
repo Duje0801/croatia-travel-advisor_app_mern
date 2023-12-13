@@ -3,16 +3,26 @@ import { UserContext } from "../context/userContext";
 import ShowReviewStarComments from "./showReviewStarComments";
 import DeleteReviewQuestion from "./deleteReviewQuestion";
 import { useParams } from "react-router-dom";
+import Pagination from "./pagination";
 import EditReview from "./editReview";
 
 export default function ShowReviews({ destination, setDestination }) {
   const [reviewEdit, setReviewEdit] = useState(null);
   const [deleteId, setDeleteId] = useState(``);
+  const [page, setPage] = useState(1);
   const [error, setError] = useState(``);
 
   const { user } = useContext(UserContext);
 
   const params = useParams();
+
+  useEffect(() => {
+    //Every time page is changed, window is scrolling to top
+    window.scrollTo({
+      top: 0,
+      behavior: "smooth",
+    });
+  }, [page]);
 
   useEffect(() => {
     //Restarts error text when another delete review box opens
@@ -41,6 +51,7 @@ export default function ShowReviews({ destination, setDestination }) {
       if (responseJson.status === `success`) {
         setDeleteId(``);
         setError(``);
+        setPage(1);
 
         //Fetching destination data again (without deleted review)
         const response = await fetch(
@@ -74,7 +85,11 @@ export default function ShowReviews({ destination, setDestination }) {
   };
 
   if (destination) {
-    const reviewsToReturn = destination.reviews.map((review, i) => {
+    const startSlice = page * 5 - 5;
+    const endSlice = page * 5;
+    const reviewsToShow = destination.reviews.slice(startSlice, endSlice);
+
+    const reviewsToReturn = reviewsToShow.map((review, i) => {
       return (
         <div className="review" key={i}>
           <div className="reviewBox">
@@ -126,6 +141,17 @@ export default function ShowReviews({ destination, setDestination }) {
         </div>
       );
     });
-    return <div>{reviewsToReturn}</div>;
+    return (
+      <div>
+        {reviewsToReturn}
+        <div>
+          <Pagination
+            totalLength={destination.reviews.length}
+            page={page}
+            setPage={setPage}
+          />
+        </div>
+      </div>
+    );
   } else return <div></div>;
 }

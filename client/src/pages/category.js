@@ -106,7 +106,7 @@ function Category() {
               <>{categoryDestinationsMapped}</>
             </div>
             <Pagination
-              destinationsNo={destinationsNo}
+              totalLength={destinationsNo}
               page={page}
               setPage={setPage}
             />

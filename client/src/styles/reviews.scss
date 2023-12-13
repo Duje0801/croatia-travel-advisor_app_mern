@@ -118,7 +118,62 @@ $colorGreen: #00af87;
   border: 0px;
 }
 
+// Write review
+
+.reviewWrite {
+  font-size: $fontL;
+  font-weight: bold;
+  text-align: center;
+  padding: $gapM 0px;
+  border-top: 2px solid black;
+}
+
+.reviewWriteForm {
+  display: flex;
+  flex-direction: column;
+  width: 80vw;
+  margin: 0px auto;
+}
+
+.reviewWriteRatings {
+  text-align: center;
+}
+
+.reviewWriteTextarea {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.reviewWriteTextarea:focus {
+  background-color: $colorGreen;
+  color: white;
+}
+
+.reviewWriteFormButton {
+  background-color: white;
+  border: 1px solid black;
+  border-radius: 0px;
+  padding: $gapM 0px;
+  margin-bottom: $gapM;
+  font-weight: bold;
+}
+
+.reviewWriteSignIn {
+  text-align: center;
+  font-weight: bold;
+  padding-bottom: $gapXL;
+}
+
+.reviewWriteSignInSpan {
+  color: $colorGreen;
+}
+
 //Error
+
+.reviewWriteError {
+  text-align: center;
+  color: red;
+}
 
 .reviewDeleteEditError {
   font-size: $fontS;

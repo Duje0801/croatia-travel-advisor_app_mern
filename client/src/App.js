@@ -6,9 +6,9 @@ import SignUp from "./pages/signUp";
 import Category from "./pages/category";
 import Destination from "./pages/destination";
 import NewDestination from "./pages/newDestination";
-import TermsOfUse from "./components/termsOfUse";
-import AboutUs from "./components/aboutUs";
-import Contact from "./components/contact";
+import TermsOfUse from "./pages/termsOfUse"
+import AboutUs from "./pages/aboutUs";
+import Contact from "./pages/contact";
 import AllUsers from "./pages/allUsers";
 
 export default function App() {

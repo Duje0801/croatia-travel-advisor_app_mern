@@ -39,21 +39,30 @@ export default function EditReview({
       const responseJson = await response.json();
 
       if (responseJson.status === `success`) {
-        setReviewEdit(null);
-        setError(``);
+        try {
+          //Fetching destination data again
+          const response = await fetch(
+            `http://localhost:4000/api/destination/${params.id}`
+          );
+          const responseJson = await response.json();
+          const data = responseJson.data[0];
+          if (responseJson.status === `success`) {
+            setReviewEdit(null);
+            setDestination(data);
+            setError(``);
 
-        //Fetching destination data again (without deleted review)
-        const response = await fetch(
-          `http://localhost:4000/api/destination/${params.id}`
-        );
-        const responseJson = await response.json();
-        const data = responseJson.data[0];
-        setDestination(data);
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          } else if (responseJson.status === `fail`) {
+            setError(`${responseJson.error}`);
+          }
+        } catch (err) {
+          setError(
+            `Review is edited but can't update destination info now. Please try again later.`
+          );
+        }
       } else if (responseJson.status === `fail`) {
         setError(`${responseJson.error}`);
       }

@@ -41,25 +41,34 @@ export default function WriteReview({ destination, setDestination }) {
         setTitle(``);
         setText(``);
         setRating(``);
-        setError(``);
+        try {
+          //Fetching destination data again
+          const response = await fetch(
+            `http://localhost:4000/api/destination/${params.id}`
+          );
+          const responseJson = await response.json();
+          const data = responseJson.data[0];
+          if (responseJson.status === `success`) {
+            setDestination(data);
+            setError(``);
 
-        const response = await fetch(
-          `http://localhost:4000/api/destination/${params.id}`
-        );
-        const responseJson = await response.json();
-        const data = responseJson.data[0];
-
-        setDestination(data);
-
-        window.scrollTo({
-          top: 0,
-          behavior: "smooth",
-        });
-      } else if (responseJson.status === `success`) {
-        setError(responseJson.error);
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          } else if (responseJson.status === `fail`) {
+            setError(`${responseJson.error}`);
+          }
+        } catch (err) {
+          setError(
+            `Review is added but can't update destination info now. Please try again later.`
+          );
+        }
+      } else if (responseJson.status === `fail`) {
+        setError(`${responseJson.error}`);
       }
     } catch (err) {
-      setError(`Can't add new review. Please try again later`);
+      setError(`Can't add new review. Please try again later.`);
     }
   };
 

@@ -7,6 +7,7 @@ import Category from "./pages/category";
 import Destination from "./pages/destination";
 import NewDestination from "./pages/newDestination";
 import TermsOfUse from "./components/termsOfUse";
+import AboutUs from "./components/aboutUs";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -37,6 +38,10 @@ export default function App() {
     {
       path: routes.termsOfUse,
       element: <TermsOfUse />,
+    },
+    {
+      path: routes.aboutUs,
+      element: <AboutUs />,
     },
     {
       path: `*`,

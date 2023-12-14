@@ -5,6 +5,7 @@ export const routes = {
     category: `/category`,
     destination: `/destination`,
     newDestination: `/newDestination`,
-    termsOfUse: `/termsOfUse`
+    termsOfUse: `/termsOfUse`,
+    aboutUs: `/aboutUs`
   };
   

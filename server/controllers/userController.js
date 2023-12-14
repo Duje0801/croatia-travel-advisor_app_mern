@@ -3,7 +3,13 @@ const catchAsync = require(`../utilis/catchAsync`);
 const User = require(`../model/userModel`);
 
 const allUsers = catchAsync(async function (req, res, next) {
-  const users = await User.find().select(`+active`);
+  const skip = ((req.query.page * 1 || 1) - 1) * 10;
+
+  const totalUsersNumber = await User.find({ active: true })
+    .countDocuments()
+    .count();
+
+  const users = await User.find({ active: true }).skip(skip).limit(10);
 
   if (!users[0]) {
     return res.status(400).json({
@@ -14,7 +20,8 @@ const allUsers = catchAsync(async function (req, res, next) {
 
   res.status(200).json({
     status: `success`,
-    users,
+    quantity: totalUsersNumber,
+    data: users,
   });
 });
 
@@ -57,7 +64,7 @@ const getMe = catchAsync(async function (req, res, next) {
 });
 
 const deleteMe = catchAsync(async function (req, res, next) {
-  const myProfile = await User.findOne({ _id: req.user._id }).select(`+active`);
+  const myProfile = await User.findOne({ _id: req.user._id });
 
   if (!myProfile)
     return res.status(400).json({
@@ -76,12 +83,14 @@ const deleteMe = catchAsync(async function (req, res, next) {
 });
 
 const deleteUser = catchAsync(async function (req, res, next) {
-  const profileToDelete = await User.findOneAndDelete({ _id: req.body.userId });
+  const profileToDelete = await User.findOneAndDelete({
+    username: req.body.username,
+  });
 
   if (!profileToDelete)
     return res.status(400).json({
       status: `fail`,
-      error: "Can't find user with this ID",
+      error: "Can't find user with this name",
     });
 
   res.status(201).json({

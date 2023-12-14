@@ -1,11 +1,11 @@
-export default function Pagination({ totalLength, page, setPage }) {
-  const numberOfPages = Math.ceil(totalLength / 5);
+export default function Pagination({ totalLength, itemsPerPage, page, setPage }) {
+  const numberOfPages = Math.ceil(totalLength / itemsPerPage);
 
   //If number of destinations is less then 6, pages list will not appear
-  if (totalLength < 6) return <div></div>;
+  if (totalLength < (itemsPerPage + 1)) return <div></div>;
   //If number of destinations is higher then 25, not all pages will appear
   //for example if 10 pages exists (1, 2, ... ,7 , ... , 10) will appear
-  else if (totalLength > 25) {
+  else if (totalLength > (itemsPerPage * 5)) {
     return (
       <div className="pages">
         <div onClick={() => setPage(page === 1 ? 1 : page - 1)}>Previous</div>

@@ -7,6 +7,7 @@ export const routes = {
     newDestination: `/newDestination`,
     termsOfUse: `/termsOfUse`,
     aboutUs: `/aboutUs`,
-    contact: `/contact`
+    contact: `/contact`,
+    allUsers: `/allUsers`
   };
   

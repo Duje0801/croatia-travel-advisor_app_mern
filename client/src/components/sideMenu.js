@@ -41,6 +41,7 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
 
   const handleClick = (value) => {
     if (value === `newDestination`) navigate(routes.newDestination);
+    else if (value === `allUsers`) navigate(routes.allUsers);
     else if (value === `home`) navigate(routes.home);
     else if (value === `termsOfUse`) navigate(routes.termsOfUse);
     else if (value === `aboutUs`) navigate(routes.aboutUs);
@@ -70,6 +71,9 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
         <ul className="sideMenuList">
           <li onClick={() => handleClick(`newDestination`)}>
             Add new destination
+          </li>
+          <li onClick={() => handleClick(`allUsers`)}>
+            All Users List
           </li>
         </ul>
       ) : null}

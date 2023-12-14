@@ -1,0 +1,57 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+th {
+  text-align: left;
+}
+
+td > button {
+  background-color: $colorGreen;
+  color: white;
+  padding: $gapS $gapM;
+  font-size: 0.9rem;
+  border: 0px;
+}
+
+.allUsersTable {
+  border: 2px solid black;
+  padding: $gapM;
+  height: fit-content;
+  margin: 20px auto;
+  box-shadow: 2px 2px #88888874;
+  font-size: 0.9rem;
+  min-width: 90%;
+}
+
+.allUsersTitle {
+  text-align: center;
+  font-size: $fontL;
+  font-weight: bold;
+  margin: 95px 0px $gapXL;
+}
+
+.userDeleteQuestion {
+  border: 2px solid black;
+  padding: $gapS;
+  text-align: center;
+}
+
+.userDeleteButton {
+  margin: 0px $gapS;
+}
+
+.allUsersError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+  margin-bottom: $gapM;
+}
+

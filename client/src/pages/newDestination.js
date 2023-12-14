@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navigation from "./navigation";
-import Footer from "./footer";
-import Redirect from "../pages/redirect";
+import Navigation from "../components/navigation";
+import Footer from "../components/footer";
+import Redirect from "./redirect";
 import { UserContext } from "../context/userContext";
 import "../styles/newDestination.css";
 

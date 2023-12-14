@@ -78,8 +78,10 @@ export default function WriteReview({ destination, setDestination }) {
     let check = false;
     for (let review of destination.reviews) {
       //Used for..of loop, so looping can finish earlier if needed review was found
-      if (review.user.username === user.username) check = true;
-      break;
+      if (review.user.username === user.username) {
+        check = true;
+        break;
+      }
     }
     return check;
   };

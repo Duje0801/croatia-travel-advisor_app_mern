@@ -26,7 +26,7 @@ app.use(helmet());
 
 //Limiting number of requests from one IP, maximum 50 in 30 minutes
 const limitRequests = rateLimit({
-  max: 50,
+  max: 1000,
   windowMs: 1800000,
   message: `Too many requests from this IP address, please try again in 30 minutes.`,
 });

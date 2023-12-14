@@ -105,7 +105,9 @@ const updateDestination = catchAsync(async function (req, res, next) {
       new: true,
       runValidators: true,
     }
-  );
+  ).populate({
+    path: `reviews`,
+  });
 
   if (!updatedDestination) {
     return res.status(404).json({

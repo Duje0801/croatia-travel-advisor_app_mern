@@ -8,6 +8,7 @@ import Destination from "./pages/destination";
 import NewDestination from "./pages/newDestination";
 import TermsOfUse from "./components/termsOfUse";
 import AboutUs from "./components/aboutUs";
+import Contact from "./components/contact";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -42,6 +43,10 @@ export default function App() {
     {
       path: routes.aboutUs,
       element: <AboutUs />,
+    },
+    {
+      path: routes.contact,
+      element: <Contact />,
     },
     {
       path: `*`,

@@ -8,6 +8,7 @@ export default function Footer() {
   const handleClick = (value) => {
     if (value === `TermsOfUse`) navigate(routes.termsOfUse);
     else if (value === `AboutUs`) navigate(routes.aboutUs);
+    else if (value === `Contact`) navigate(routes.contact);
   };
 
   return (
@@ -15,7 +16,7 @@ export default function Footer() {
       <ul>
         <li onClick={() => handleClick("TermsOfUse")}>Terms of use</li>
         <li onClick={() => handleClick("AboutUs")}>About Us</li>
-        <li>Contact</li>
+        <li onClick={() => handleClick("Contact")}>Contact</li>
       </ul>
     </div>
   );

@@ -6,6 +6,7 @@ export const routes = {
     destination: `/destination`,
     newDestination: `/newDestination`,
     termsOfUse: `/termsOfUse`,
-    aboutUs: `/aboutUs`
+    aboutUs: `/aboutUs`,
+    contact: `/contact`
   };
   

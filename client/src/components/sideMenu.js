@@ -40,8 +40,11 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
   };
 
   const handleClick = (value) => {
-    if (value === `newDestination`) return navigate(routes.newDestination);
-    else if (value === `home`) return navigate(routes.home);
+    if (value === `newDestination`) navigate(routes.newDestination);
+    else if (value === `home`) navigate(routes.home);
+    else if (value === `termsOfUse`) navigate(routes.termsOfUse);
+    else if (value === `aboutUs`) navigate(routes.aboutUs);
+    else if (value === `contact`) navigate(routes.contact);
     else navigate(`${routes.category}/${value}`);
     window.scrollTo({
       top: 0,
@@ -80,9 +83,9 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
         <li onClick={() => handleClick(`entertainment`)}>Entertainment</li>
       </ul>
       <ul className="sideMenuList">
-        <li>Terms of use</li>
-        <li>About Us</li>
-        <li>Contact</li>
+        <li onClick={() => handleClick(`termsOfUse`)}>Terms of use</li>
+        <li onClick={() => handleClick(`aboutUs`)}>About Us</li>
+        <li onClick={() => handleClick(`contact`)}>Contact</li>
       </ul>
     </div>
   );

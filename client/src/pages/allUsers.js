@@ -1,9 +1,9 @@
 import { useContext, useEffect, useState } from "react";
 import { UserContext } from "../context/userContext";
-import Navigation from "./navigation";
-import DeleteUser from "./deleteUser";
+import Navigation from "../components/navigation";
+import DeleteUser from "../components/deleteUser";
 import Pagination from "../components/pagination";
-import Redirect from "../pages/redirect";
+import Redirect from "./redirect";
 import "../styles/allUsers.css";
 
 export default function AllUsers() {

@@ -9,7 +9,7 @@ import NewDestination from "./pages/newDestination";
 import TermsOfUse from "./components/termsOfUse";
 import AboutUs from "./components/aboutUs";
 import Contact from "./components/contact";
-import AllUsers from "./components/allUsers";
+import AllUsers from "./pages/allUsers";
 
 export default function App() {
   const router = createBrowserRouter([

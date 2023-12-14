@@ -156,6 +156,7 @@ export default function ShowReviews({ destination, setDestination }) {
         <div>
           <Pagination
             totalLength={destination.reviews.length}
+            itemsPerPage={5}
             page={page}
             setPage={setPage}
           />

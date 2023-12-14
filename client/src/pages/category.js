@@ -107,6 +107,7 @@ function Category() {
             </div>
             <Pagination
               totalLength={destinationsNo}
+              itemsPerPage={5}
               page={page}
               setPage={setPage}
             />

@@ -8,4 +8,32 @@ ul {
   font-weight: bold;
   background-color: #00af87;
   color: white;
+}
+
+.footerCategory {
+  margin-top: 75px;
+  padding: 10px;
+}
+
+.footerCategoryTitle {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
+
+.footerGoBackButtonDiv {
+  position: relative;
+  height: 41.6px;
+}
+
+.footerGoBackButtonDiv > button {
+  background-color: #00af87;
+  color: white;
+  padding: 5px 10px;
+  font-size: 1rem;
+  border: 0px;
+  margin: auto;
+  height: -moz-fit-content;
+  height: fit-content;
+  position: absolute;
+  right: 10px;
 }/*# sourceMappingURL=footer.css.map */

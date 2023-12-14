@@ -6,6 +6,7 @@ import SignUp from "./pages/signUp";
 import Category from "./pages/category";
 import Destination from "./pages/destination";
 import NewDestination from "./pages/newDestination";
+import TermsOfUse from "./components/termsOfUse";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -32,6 +33,10 @@ export default function App() {
     {
       path: routes.newDestination,
       element: <NewDestination />,
+    },
+    {
+      path: routes.termsOfUse,
+      element: <TermsOfUse />,
     },
     {
       path: `*`,

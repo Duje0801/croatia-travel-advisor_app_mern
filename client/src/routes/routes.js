@@ -4,6 +4,7 @@ export const routes = {
     signUp: `/signUp`,
     category: `/category`,
     destination: `/destination`,
-    newDestination: `/newDestination`
+    newDestination: `/newDestination`,
+    termsOfUse: `/termsOfUse`
   };
   

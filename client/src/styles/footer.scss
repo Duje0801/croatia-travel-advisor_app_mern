@@ -19,3 +19,32 @@ ul {
   background-color: $colorGreen;
   color: white;
 }
+
+//Footer category
+
+.footerCategory {
+  margin-top: 75px;
+  padding: $gapM;
+}
+
+.footerCategoryTitle {
+  font-weight: bold;
+  font-size: $fontL;
+}
+
+.footerGoBackButtonDiv {
+  position: relative;
+  height: 41.6px;
+}
+
+.footerGoBackButtonDiv > button {
+  background-color: $colorGreen;
+  color: white;
+  padding: $gapS $gapM;
+  font-size: $fontS;
+  border: 0px;
+  margin: auto;
+  height: fit-content;
+  position: absolute;
+  right: $gapM;
+}

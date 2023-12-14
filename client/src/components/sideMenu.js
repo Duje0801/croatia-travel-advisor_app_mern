@@ -40,7 +40,8 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
   };
 
   const handleClick = (value) => {
-    if (value === `home`) return navigate(routes.home);
+    if (value === `newDestination`) return navigate(routes.newDestination);
+    else if (value === `home`) return navigate(routes.home);
     else navigate(`${routes.category}/${value}`);
     window.scrollTo({
       top: 0,
@@ -62,6 +63,13 @@ export default function SideMenu({ openMenu, setOpenMenu }) {
           Log Out
         </button>
       )}
+      {user?.username === `admin` ? (
+        <ul className="sideMenuList">
+          <li onClick={() => handleClick(`newDestination`)}>
+            Add new destination
+          </li>
+        </ul>
+      ) : null}
       <ul className="sideMenuList">
         <li onClick={() => handleClick(`home`)}>Home</li>
         <li onClick={() => handleClick(`topRated`)}>Top Rated</li>

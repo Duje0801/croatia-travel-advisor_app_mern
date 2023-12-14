@@ -3,6 +3,7 @@ export const routes = {
     logIn: `/logIn`,
     signUp: `/signUp`,
     category: `/category`,
-    destination: `/destination`
+    destination: `/destination`,
+    newDestination: `/newDestination`
   };
   

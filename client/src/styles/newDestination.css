@@ -1,0 +1,60 @@
+.newDestination {
+  border: 2px solid black;
+  padding: 10px;
+  width: 80%;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 95px auto 20px;
+  box-shadow: 2px 2px rgba(136, 136, 136, 0.4549019608);
+}
+
+.newDestinationTitle {
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.newDestinationForm {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  text-align: center;
+}
+
+.newDestinationForm > label {
+  text-align: left;
+}
+
+.newDestinationForm > input {
+  border: 1px solid black;
+}
+
+.newDestinationForm > textarea {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.newDestinationForm > fieldset {
+  border: 1px solid black;
+}
+
+.newDestinationImageDescription {
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.newDestinationButtons {
+  font-size: 1.25rem;
+  background-color: black;
+  color: white;
+  border: 0px;
+  padding: 5px 0px;
+  width: 100%;
+}
+
+.newDestinationError {
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
+}/*# sourceMappingURL=newDestination.css.map */

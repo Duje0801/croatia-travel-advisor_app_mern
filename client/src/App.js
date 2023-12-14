@@ -5,6 +5,7 @@ import LogIn from "./pages/logIn";
 import SignUp from "./pages/signUp";
 import Category from "./pages/category";
 import Destination from "./pages/destination";
+import NewDestination from "./components/newDestination";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -27,6 +28,10 @@ export default function App() {
     {
       path: `${routes.destination}/:id`,
       element: <Destination />,
+    },
+    {
+      path: routes.newDestination,
+      element: <NewDestination />,
     },
     {
       path: `*`,

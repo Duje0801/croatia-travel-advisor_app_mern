@@ -1,0 +1,70 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.newDestination {
+  border: 2px solid black;
+  padding: $gapM;
+  width: 80%;
+  height: fit-content;
+  margin: 95px auto 20px;
+  box-shadow: 2px 2px #88888874;
+}
+
+.newDestinationTitle {
+  font-size: $fontL;
+  font-weight: bold;
+  margin-bottom: $gapM;
+}
+
+.newDestinationForm {
+  display: flex;
+  flex-direction: column;
+  gap: $gapM;
+  text-align: center;
+}
+
+.newDestinationForm > label {
+  text-align: left;
+}
+
+.newDestinationForm > input {
+  border: 1px solid black;
+}
+
+.newDestinationForm > textarea {
+  border-radius: 0px;
+  border: 1px solid black;
+}
+
+.newDestinationForm > fieldset {
+  border: 1px solid black;
+}
+
+.newDestinationImageDescription {
+  font-size: 0.75rem;
+  text-align: left;
+}
+
+.newDestinationButtons {
+  font-size: $fontM;
+  background-color: black;
+  color: white;
+  border: 0px;
+  padding: $gapS 0px;
+  width: 100%;
+}
+
+.newDestinationError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+  margin-bottom: $gapM;
+}

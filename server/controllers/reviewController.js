@@ -5,22 +5,26 @@ const createReview = catchAsync(async function (req, res, next) {
   const title = req.body.title;
   const text = req.body.text;
   const rating = req.body.rating;
-  const destination = req.body.destination;
-  const id = req.user._id;
-  const username = req.user.username;
+  const destinationId = req.body.destination.id;
+  const destinationName = req.body.destination.name;
+  const userId = req.user._id;
+  const userUsername = req.user.username;
 
   const newReview = await Review.create({
     title,
     text,
     rating,
-    destination,
+    destination: {
+      id: destinationId,
+      name: destinationName,
+    },
     user: {
-      id,
-      username,
+      id: userId,
+      username: userUsername,
     },
   });
 
-  await Review.calcAverageRatings(destination);
+  await Review.calcAverageRatings(destinationId);
 
   res.status(201).json({ status: `success`, review: newReview });
 });
@@ -59,7 +63,7 @@ const updateReview = catchAsync(async function (req, res, next) {
     }
   );
 
-  await Review.calcAverageRatings(updatedReview.destination);
+  await Review.calcAverageRatings(updatedReview.destination.id);
 
   res.status(201).json({ status: `success`, review: updatedReview });
 });
@@ -83,7 +87,7 @@ const deleteReview = catchAsync(async function (req, res, next) {
 
   const deletedReview = await Review.findOneAndDelete({ _id: req.params.id });
 
-  await Review.calcAverageRatings(deletedReview.destination);
+  await Review.calcAverageRatings(deletedReview.destination.id);
 
   res
     .status(201)

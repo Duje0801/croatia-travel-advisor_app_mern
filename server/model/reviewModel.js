@@ -26,10 +26,22 @@ const reviewSchema = new mongoose.Schema({
     min: [1, `The lowest allowed rating is 0`],
     max: [5, `The highest allowed rating is 5`],
   },
-  destination: String,
+  destination: {
+    name: {
+      type: String,
+      required: [true, `Review destination name is mandatory`],
+    },
+    id: {
+      type: String,
+      required: [true, `Review destination id is mandatory`],
+    },
+  },
   user: {
-    username: String,
-    id: String
+    username: {
+      type: String,
+      required: [true, `Review user name is mandatory`],
+    },
+    id: { type: String, required: [true, `Review user id is mandatory`] },
   },
   createdAt: {
     type: Date,
@@ -40,7 +52,7 @@ const reviewSchema = new mongoose.Schema({
 reviewSchema.statics.calcAverageRatings = async function (destinationId) {
   const newStats = await this.aggregate([
     {
-      $match: { destination: destinationId },
+      $match: { "destination.id": destinationId },
     },
     {
       $group: {

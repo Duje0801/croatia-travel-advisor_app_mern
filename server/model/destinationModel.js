@@ -62,7 +62,7 @@ const destinationSchema = new mongoose.Schema(
 destinationSchema.virtual(`reviews`, {
   ref: "Review",
   localField: "_id",
-  foreignField: "destination",
+  foreignField: "destination.id",
 });
 
 const Destination = mongoose.model(`Destination`, destinationSchema);

@@ -31,7 +31,7 @@ export default function WriteReview({ destination, setDestination }) {
           title,
           text,
           rating,
-          destination: destination._id,
+          destination: { id: destination._id, name: destination.name },
         }),
       });
 

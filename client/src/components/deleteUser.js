@@ -11,7 +11,7 @@ export default function DeleteUser({
 }) {
   const { user } = useContext(UserContext);
 
-  const handleDelete = async (username) => {
+  const handleDelete = async (userId) => {
     try {
       const response = await fetch(
         `http://localhost:4000/api/user/deleteUser`,
@@ -22,7 +22,7 @@ export default function DeleteUser({
             authorization: `Bearer ${user.token}`,
           },
           body: JSON.stringify({
-            username,
+            id: userId,
           }),
         }
       );
@@ -30,7 +30,7 @@ export default function DeleteUser({
       const responseJson = await response.json();
 
       if (responseJson.status === `success`) {
-        setDeleteUser(``);
+        setDeleteUser(null);
 
         try {
           //Fetching all users data again, info in allUsers menu is instantly updated
@@ -74,10 +74,10 @@ export default function DeleteUser({
   return (
     <tr>
       <td className="userDeleteQuestion" colSpan="3">
-        Do you want to delete user {deleteUser}?
+        Do you want to delete user {deleteUser.username}?
         <button
           className="userDeleteButton"
-          onClick={() => handleDelete(deleteUser)}
+          onClick={() => handleDelete(deleteUser.id)}
         >
           Yes
         </button>

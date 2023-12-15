@@ -10,7 +10,7 @@ export default function AllUsers() {
   const [users, setUsers] = useState([]);
   const [usersNo, setUsersNo] = useState(0);
   const [page, setPage] = useState(1);
-  const [deleteUser, setDeleteUser] = useState(``);
+  const [deleteUser, setDeleteUser] = useState(null);
   const [error, setError] = useState(``);
 
   const { user } = useContext(UserContext);
@@ -46,9 +46,9 @@ export default function AllUsers() {
     fetchData();
   }, [page, user]);
 
-  const handleDelete = (username) => {
-    if (deleteUser === username) setDeleteUser(``);
-    else if (username !== deleteUser) setDeleteUser(username);
+  const handleDelete = (userObj) => {
+    if (deleteUser === userObj.username) setDeleteUser(null);
+    else if (userObj.username !== deleteUser) setDeleteUser(userObj);
   };
 
   const mappedUsers =
@@ -60,7 +60,11 @@ export default function AllUsers() {
           <td>{user.email}</td>
           <td>
             {user.username === `admin` ? null : (
-              <button onClick={() => handleDelete(user.username)}>
+              <button
+                onClick={() =>
+                  handleDelete({ username: user.username, id: user._id })
+                }
+              >
                 Delete
               </button>
             )}

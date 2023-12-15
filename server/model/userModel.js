@@ -43,7 +43,6 @@ const userSchema = new mongoose.Schema(
     createdAt: {
       type: Date,
       default: Date.now(),
-      select: false,
     },
     restartPasswordCode: String,
     restartPasswordCodeExpire: Date,
@@ -57,7 +56,7 @@ const userSchema = new mongoose.Schema(
 userSchema.virtual(`reviews`, {
   ref: "Review",
   localField: "_id",
-  foreignField: "user",
+  foreignField: "user.id",
 });
 
 const User = mongoose.model(`User`, userSchema);

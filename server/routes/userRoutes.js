@@ -18,8 +18,6 @@ router
 router.route("/signUp").post(authController.signUp);
 router.route("/logIn").post(authController.logIn);
 
-router.route("/getMe").get(authController.protect, userController.getMe);
-
 router
   .route("/deleteMe")
   .patch(
@@ -37,11 +35,19 @@ router
   );
 
 router
-  .route("/activate/:id")
+  .route("/activateUser")
   .patch(
     authController.protect,
     authController.restrictTo(`admin`),
     userController.activateUser
+  );
+
+router
+  .route("/deactivateUser")
+  .patch(
+    authController.protect,
+    authController.restrictTo(`admin`),
+    userController.deactivateUser
   );
 
 router.route("/forgotPassword").post(authController.forgotPassword);

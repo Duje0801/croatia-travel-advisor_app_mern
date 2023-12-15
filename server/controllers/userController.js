@@ -27,8 +27,7 @@ const allUsers = catchAsync(async function (req, res, next) {
 
 const oneUser = catchAsync(async function (req, res, next) {
   const user = await User.findOne({
-    _id: req.params.id,
-    active: true,
+    username: req.params.id,
   }).populate({
     path: `reviews`,
   });
@@ -36,7 +35,7 @@ const oneUser = catchAsync(async function (req, res, next) {
   if (!user) {
     return res.status(400).json({
       status: `fail`,
-      error: "Can't find user with this ID",
+      error: "Can't find user with this name",
     });
   }
 
@@ -46,30 +45,13 @@ const oneUser = catchAsync(async function (req, res, next) {
   });
 });
 
-const getMe = catchAsync(async function (req, res, next) {
-  const myProfile = await User.findOne({ _id: req.user._id }).populate({
-    path: `reviews`,
-  });
-
-  if (!myProfile)
-    return res.status(400).json({
-      status: `fail`,
-      error: "Can't find user with this ID",
-    });
-
-  res.status(201).json({
-    status: `success`,
-    data: myProfile,
-  });
-});
-
 const deleteMe = catchAsync(async function (req, res, next) {
-  const myProfile = await User.findOne({ _id: req.user._id });
+  const myProfile = await User.findOne({ username: req.user.username });
 
   if (!myProfile)
     return res.status(400).json({
       status: `fail`,
-      error: "Can't find user with this ID",
+      error: "Can't find user with this name",
     });
 
   myProfile.active = false;
@@ -84,7 +66,7 @@ const deleteMe = catchAsync(async function (req, res, next) {
 
 const deleteUser = catchAsync(async function (req, res, next) {
   const profileToDelete = await User.findOneAndDelete({
-    username: req.body.username,
+    _id: req.body.id,
   });
 
   if (!profileToDelete)
@@ -100,7 +82,7 @@ const deleteUser = catchAsync(async function (req, res, next) {
 });
 
 const activateUser = catchAsync(async function (req, res, next) {
-  const user = await User.findOne({ _id: req.params.id });
+  const user = await User.findOne({ _id: req.body.id });
 
   if (!user)
     return res.status(400).json({
@@ -109,6 +91,25 @@ const activateUser = catchAsync(async function (req, res, next) {
     });
 
   user.active = true;
+
+  await user.save();
+
+  res.status(201).json({
+    status: `success`,
+    message: "User is active again!",
+  });
+});
+
+const deactivateUser = catchAsync(async function (req, res, next) {
+  const user = await User.findOne({ _id: req.body.id });
+
+  if (!user)
+    return res.status(400).json({
+      status: `fail`,
+      error: "Can't find user with this ID",
+    });
+
+  user.active = false;
 
   await user.save();
 
@@ -201,10 +202,10 @@ const updateEmail = catchAsync(async function (req, res, next) {
 module.exports = {
   oneUser,
   allUsers,
-  getMe,
   deleteMe,
   deleteUser,
   activateUser,
+  deactivateUser,
   updatePassword,
   updateEmail,
 };

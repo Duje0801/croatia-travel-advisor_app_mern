@@ -6,10 +6,11 @@ import SignUp from "./pages/signUp";
 import Category from "./pages/category";
 import Destination from "./pages/destination";
 import NewDestination from "./pages/newDestination";
-import TermsOfUse from "./pages/termsOfUse"
+import TermsOfUse from "./pages/termsOfUse";
 import AboutUs from "./pages/aboutUs";
 import Contact from "./pages/contact";
 import AllUsers from "./pages/allUsers";
+import UserProfile from "./pages/userProfile";
 
 export default function App() {
   const router = createBrowserRouter([
@@ -52,6 +53,10 @@ export default function App() {
     {
       path: routes.allUsers,
       element: <AllUsers />,
+    },
+    {
+      path: `${routes.user}/:id`,
+      element: <UserProfile />,
     },
     {
       path: `*`,

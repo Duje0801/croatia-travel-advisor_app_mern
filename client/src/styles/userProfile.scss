@@ -1,0 +1,60 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+.userProfile {
+  border: 2px solid black;
+  padding: $gapM;
+  height: fit-content;
+  margin: 95px auto 20px;
+  box-shadow: 2px 2px #88888874;
+  font-size: $fontS;
+  width: fit-content;
+  min-width: 60%;
+}
+
+.userProfileTitle {
+  font-size: $fontXL;
+  text-decoration: underline;
+  margin: $gapXL 0px;
+}
+
+.userProfileHeader {
+  display: flex;
+}
+
+.userProfileButtonsDiv {
+  display: flex;
+  flex-direction: column;
+  margin: auto 0px auto auto;
+  gap: $gapM;
+}
+
+.userProfileButton {
+  border: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: $gapS $gapM;
+  height: fit-content;
+  margin-left: $gapM
+}
+
+.userProfileReviewsTitle {
+  margin: $gapXL 0px;
+  font-size: $fontL;
+  font-weight: bold;
+  text-align: center;
+}
+
+.userProfileError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+}

@@ -2,9 +2,10 @@ import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../context/userContext";
 import ShowReviewStarComments from "./showReviewStarComments";
 import DeleteReviewQuestion from "./deleteReviewQuestion";
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import Pagination from "./pagination";
 import EditReview from "./editReview";
+import { routes } from "../routes/routes";
 
 export default function ShowReviews({ destination, setDestination }) {
   const [reviewEdit, setReviewEdit] = useState(null);
@@ -13,6 +14,8 @@ export default function ShowReviews({ destination, setDestination }) {
   const [error, setError] = useState(``);
 
   const { user } = useContext(UserContext);
+
+  const navigate = useNavigate();
 
   const params = useParams();
 
@@ -93,6 +96,10 @@ export default function ShowReviews({ destination, setDestination }) {
     return `${time[0]}:${time[1]} ${date[2]}.${date[1]}.${date[0]}`;
   };
 
+  const handleUsernameClick = (username) => {
+    navigate(`${routes.user}/${username}`);
+  };
+
   if (destination) {
     const startSlice = page * 5 - 5;
     const endSlice = page * 5;
@@ -104,7 +111,10 @@ export default function ShowReviews({ destination, setDestination }) {
           <div className="reviewBox">
             <div>
               <div className="reviewTitle">
-                {review.user.username} on {date(review.createdAt)}
+                <span onClick={() => handleUsernameClick(review.user.username)}>
+                  {review.user.username}
+                </span>{" "}
+                on {date(review.createdAt)}
               </div>
               <div>{ShowReviewStarComments(review.rating)}</div>
               <div className="reviewTitle">{review.title}</div>

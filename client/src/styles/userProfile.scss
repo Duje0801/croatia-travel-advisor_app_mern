@@ -28,6 +28,7 @@ $colorGreen: #00af87;
 
 .userProfileHeader {
   display: flex;
+  margin-bottom: $gapM;
 }
 
 .userProfileButtonsDiv {
@@ -44,6 +45,30 @@ $colorGreen: #00af87;
   padding: $gapS $gapM;
   height: fit-content;
   margin-left: $gapM
+}
+
+.userActive{
+  display: flex;
+}
+
+.userIsActiveBox{
+  width: 10px;
+  height: 10px;
+  margin: auto $gapM auto 0px;
+  background-color: #00af87;
+  border:2px solid black;
+  border-radius: 50%;
+}
+
+.userIsNotActiveBox{
+  width: 10px;
+  height: 10px;
+  margin: auto $gapM auto 0px;
+  background-color: white;
+  border:2px solid black;
+  border-radius: 50%;
+
+
 }
 
 .userProfileReviewsTitle {

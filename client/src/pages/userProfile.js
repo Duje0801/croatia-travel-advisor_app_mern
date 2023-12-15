@@ -238,13 +238,28 @@ export default function UserProfile() {
               operation={!userProfile?.active ? `activate` : `deactivate`}
             />
           ) : null}
-          {user.username === `admin` ? <div>{isUserActive}</div> : null}
+          {user.username === `admin` ? (
+            <div className="userActive">
+              <div
+                className={
+                  userProfile.active ? `userIsActiveBox` : `userIsNotActiveBox`
+                }
+              ></div>
+              <b>{isUserActive}</b>
+            </div>
+          ) : null}
           {user.username === userProfile.username ||
           user.username === `admin` ? (
-            <div>Email address: {userProfile.email}</div>
+            <div>
+              <b>Email address:</b> {userProfile.email}
+            </div>
           ) : null}
-          <div>Profile created at: {date(userProfile.createdAt)}</div>
-          <div>Number of reviews: {userProfile.reviews.length}</div>
+          <div>
+            <b>Profile created at:</b> {date(userProfile.createdAt)}
+          </div>
+          <div>
+            <b>Number of reviews:</b> {userProfile.reviews.length}
+          </div>
           {userProfile.reviews?.length > 0 && (
             <>
               <div className="userProfileReviewsTitle">Reviews:</div>

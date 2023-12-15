@@ -2,7 +2,6 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../context/userContext";
 import Navigation from "../components/navigation";
-import DeleteUser from "../components/deleteUser";
 import Pagination from "../components/pagination";
 import Redirect from "./redirect";
 import { routes } from "../routes/routes";
@@ -12,7 +11,6 @@ export default function AllUsers() {
   const [users, setUsers] = useState([]);
   const [usersNo, setUsersNo] = useState(0);
   const [page, setPage] = useState(1);
-  const [deleteUser, setDeleteUser] = useState(null);
   const [error, setError] = useState(``);
 
   const { user } = useContext(UserContext);
@@ -54,30 +52,16 @@ export default function AllUsers() {
     navigate(`${routes.user}/${username}`);
   };
 
-  const handleDelete = (userObj) => {
-    if (deleteUser === userObj.username) setDeleteUser(null);
-    else if (userObj.username !== deleteUser) setDeleteUser(userObj);
-  };
-
   const mappedUsers =
     users &&
     users.map((user, i) => {
       return (
         <tr key={i}>
-          <td onClick={() => handleUsernameClick(user.username)}>{user.username}</td>
+          <td onClick={() => handleUsernameClick(user.username)}>
+            {user.username}
+          </td>
           <td>{user.email}</td>
           <td>{user.active ? `Yes` : `No`}</td>
-          <td>
-            {user.username === `admin` ? null : (
-              <button
-                onClick={() =>
-                  handleDelete({ username: user.username, id: user._id })
-                }
-              >
-                Delete
-              </button>
-            )}
-          </td>
         </tr>
       );
     });
@@ -96,22 +80,9 @@ export default function AllUsers() {
               <th>Username</th>
               <th>Email</th>
               <th>Active</th>
-              <th>Options</th>
             </tr>
           </thead>
-          <tbody>
-            {deleteUser && (
-              <DeleteUser
-                deleteUser={deleteUser}
-                setDeleteUser={setDeleteUser}
-                setUsers={setUsers}
-                setPage={setPage}
-                setUsersNo={setUsersNo}
-                setError={setError}
-              />
-            )}
-            {mappedUsers}
-          </tbody>
+          <tbody>{mappedUsers}</tbody>
         </table>
         <Pagination
           totalLength={usersNo}

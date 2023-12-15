@@ -6,6 +6,7 @@ import ShowReviewStarComments from "../components/showReviewStarComments";
 import Pagination from "../components/pagination";
 import Redirect from "./redirect";
 import DeleteDeactivateUserQuestion from "../components/deleteDeactivateUserQuestion";
+import { routes } from "../routes/routes";
 import "../styles/userProfile.css";
 import "../styles/reviews.css";
 
@@ -143,6 +144,10 @@ export default function UserProfile() {
     }
   };
 
+  const handleRedirectDestination = (name) => {
+    navigate(`${routes.destination}/${name}`);
+  };
+
   const date = (createdAt) => {
     const dateAndTime = createdAt.split("T");
     const date = dateAndTime[0].split("-");
@@ -182,7 +187,11 @@ export default function UserProfile() {
                 <div className="reviewTitle">{review.title}</div>
               </div>
             </div>
-            <div>{review.text}</div>
+            <div
+              onClick={() => handleRedirectDestination(review.destination.name)}
+            >
+              {review.text}
+            </div>
           </div>
         );
       });

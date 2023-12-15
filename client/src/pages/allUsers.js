@@ -17,31 +17,34 @@ export default function AllUsers() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(
-          `http://localhost:4000/api/user/allUsers/?page=${page}`,
-          {
-            headers: {
-              "Content-Type": "application/json",
-              authorization: `Bearer ${user.token}`,
-            },
+      if (!user?.token) return;
+      else {
+        try {
+          const response = await fetch(
+            `http://localhost:4000/api/user/allUsers/?page=${page}`,
+            {
+              headers: {
+                "Content-Type": "application/json",
+                authorization: `Bearer ${user.token}`,
+              },
+            }
+          );
+
+          const responseJson = await response.json();
+
+          if (responseJson.status === `success`) {
+            setUsers(responseJson.data);
+            setUsersNo(responseJson.quantity);
+          } else if (responseJson.status === `fail`) {
+            setError(`${responseJson.error}`);
           }
-        );
-
-        const responseJson = await response.json();
-
-        if (responseJson.status === `success`) {
-          setUsers(responseJson.data);
-          setUsersNo(responseJson.quantity);
-        } else if (responseJson.status === `fail`) {
-          setError(`${responseJson.error}`);
+        } catch (err) {
+          setError(`Something went wrong. Please try again later.`);
         }
-      } catch (err) {
-        setError(`Something went wrong. Please try again later.`);
       }
     };
     fetchData();
-  }, [page]);
+  }, [page, user]);
 
   const handleDelete = (username) => {
     if (deleteUser === username) setDeleteUser(``);

@@ -178,20 +178,22 @@ export default function UserProfile() {
       reviewsToShow.map((review, i) => {
         return (
           <div className="review" key={i}>
-            <div className="reviewBox">
+            <div
+              className="reviewBox"
+              onClick={() => handleRedirectDestination(review.destination.name)}
+            >
               <div>
                 <div className="reviewTitle">
                   {review.user.username} on {date(review.createdAt)}
                 </div>
                 <div>{ShowReviewStarComments(review.rating)}</div>
+                <div>
+                  <b>In {review.destination.name}</b>
+                </div>
                 <div className="reviewTitle">{review.title}</div>
               </div>
             </div>
-            <div
-              onClick={() => handleRedirectDestination(review.destination.name)}
-            >
-              {review.text}
-            </div>
+            <div>{review.text}</div>
           </div>
         );
       });

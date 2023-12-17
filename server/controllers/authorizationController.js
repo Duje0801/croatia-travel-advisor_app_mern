@@ -87,7 +87,9 @@ const forgotPassword = catchAsync(async function (req, res, next) {
 
   const code = crypto.randomBytes(12).toString(`hex`);
 
-  user.restartPasswordCode = code;
+  const codeHashed = await bcrypt.hash(code, 12);
+
+  user.restartPasswordCode = codeHashed;
   user.restartPasswordCodeExpire = Date.now() + 10 * 60 * 1000;
 
   await user.save();
@@ -139,7 +141,7 @@ const resetPassword = catchAsync(async function (req, res, next) {
       .json({ status: `fail`, error: "Passwords must be identical" });
   }
 
-  if (token !== user.restartPasswordCode) {
+  if (!(await bcrypt.compare(token, user.restartPasswordCode))) {
     return res
       .status(400)
       .json({ status: `fail`, error: "Invalid token code" });
@@ -157,7 +159,7 @@ const resetPassword = catchAsync(async function (req, res, next) {
 
   res.status(201).json({
     status: "success",
-    message: "Mail succesfully send!",
+    message: "Password succesfully changed!",
   });
 });
 

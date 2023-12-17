@@ -54,6 +54,11 @@
   text-align: center;
 }
 
+.forgotPasswordRedirect {
+  text-align: center;
+  margin: 10px 0px;
+}
+
 .signUpError {
   font-size: 1rem;
   text-align: center;

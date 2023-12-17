@@ -39,6 +39,10 @@ export default function LogIn() {
     }
   };
 
+  const handleGoToForgotPassword = () => {
+    navigate(routes.forgotPassword);
+  };
+
   const handleGoBack = () => {
     navigate(-1);
   };
@@ -70,6 +74,9 @@ export default function LogIn() {
             value={password}
             id="password"
           ></input>
+          <div onClick={handleGoToForgotPassword} style={{ color: `#00af87` }}>
+            Forgot password?
+          </div>
           <button type="submit">Submit</button>
         </form>
         <button onClick={handleGoBack}>Go Back</button>

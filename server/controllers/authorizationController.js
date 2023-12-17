@@ -101,7 +101,7 @@ const forgotPassword = catchAsync(async function (req, res, next) {
 
   const mailOptions = {
     from: "Admin <admin@cta.com",
-    to: req.user.email,
+    to: req.body.email,
     subject: "Restart password - Croatia Travel Advisor",
     text: `Token for email restart is: ${code}. This code is valid only 10 minutes. 
       If you have not requested a password change, ignore this email.`,

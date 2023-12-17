@@ -64,6 +64,15 @@ $colorGreen: #00af87;
   text-align: center;
 }
 
+//Forgot password
+
+.forgotPasswordRedirect {
+  text-align: center;
+  margin: $gapM 0px;
+}
+
+//Error
+
 .signUpError {
   font-size: $fontS;
   text-align: center;

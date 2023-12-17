@@ -1,10 +1,10 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../../context/userContext";
 import { RxHamburgerMenu } from "react-icons/rx";
 import logo from "../img/logo.png";
 import SideMenu from "./sideMenu";
-import { routes } from "../routes/routes";
+import { routes } from "../../routes/routes";
 import "../styles/navigation.css";
 
 export default function Navigation() {

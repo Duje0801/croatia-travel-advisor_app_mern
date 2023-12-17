@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { BiSearchAlt2 } from "react-icons/bi";
 import SearchBarImg from "../img/SearchBarImg.jpg";
-import { routes } from "../routes/routes";
+import { routes } from "../../routes/routes";
 import axios from "axios";
 
 export default function SearchBar() {

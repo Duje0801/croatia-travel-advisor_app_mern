@@ -1,5 +1,5 @@
-import Navigation from "../../components/navigation";
-import Footer from "../../components/footer";
+import Navigation from "../../components/home/navigation";
+import Footer from "../../components/home/footer";
 import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
 import "../styles/redirect.css";

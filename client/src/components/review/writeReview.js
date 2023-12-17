@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../../context/userContext";
 import { useNavigate, useParams } from "react-router-dom";
-import { routes } from "../routes/routes";
+import { routes } from "../../routes/routes";
 
 export default function WriteReview({ destination, setDestination }) {
   const [title, setTitle] = useState(``);

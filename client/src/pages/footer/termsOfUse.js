@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
-import Navigation from "../../components/navigation";
-import Footer from "../../components/footer";
+import Navigation from "../../components/homeComponents/navigation";
+import Footer from "../../components/homeComponents/footer";
 import { useEffect } from "react";
 
 export default function TermsOfUse() {

@@ -1,11 +1,11 @@
 import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../context/userContext";
+import { UserContext } from "../../context/userContext";
 import ShowReviewStarComments from "./showReviewStarComments";
 import DeleteReviewQuestion from "./deleteReviewQuestion";
 import { useNavigate, useParams } from "react-router-dom";
-import Pagination from "./pagination";
+import Pagination from "../pagination/pagination";
 import EditReview from "./editReview";
-import { routes } from "../routes/routes";
+import { routes } from "../../routes/routes";
 
 export default function ShowReviews({ destination, setDestination }) {
   const [reviewEdit, setReviewEdit] = useState(null);

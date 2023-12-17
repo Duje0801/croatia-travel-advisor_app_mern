@@ -148,6 +148,10 @@ export default function UserProfile() {
     navigate(routes.updateEmail);
   };
 
+  const handleChangePassword = () => {
+    navigate(routes.updatePassword);
+  };
+
   const handleRedirectDestination = (name) => {
     navigate(`${routes.destination}/${name}`);
   };
@@ -228,9 +232,19 @@ export default function UserProfile() {
                   Delete
                 </button>
               ) : null}
-              <button onClick={() => handleChangeEmail()} className="userProfileButton">
+              <button
+                onClick={() => handleChangeEmail()}
+                className="userProfileButton"
+              >
                 Change Email
               </button>
+              <button
+                onClick={() => handleChangePassword()}
+                className="userProfileButton"
+              >
+                Change Password
+              </button>
+
               <button
                 className="userProfileButton"
                 onClick={() => handleGoBack()}

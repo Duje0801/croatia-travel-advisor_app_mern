@@ -6,6 +6,7 @@ import SignUp from "./pages/signUp";
 import ForgotPassword from "./pages/forgotPassword";
 import ResetPassword from "./pages/resetPassword";
 import UpdateEmail from "./pages/updateEmail";
+import UpdatePassword from "./pages/updatePassword";
 import Category from "./pages/category";
 import Destination from "./pages/destination";
 import NewDestination from "./pages/newDestination";
@@ -40,6 +41,10 @@ export default function App() {
     {
       path: routes.updateEmail,
       element: <UpdateEmail />,
+    },
+    {
+      path: routes.updatePassword,
+      element: <UpdatePassword />,
     },
     {
       path: `${routes.category}/:id`,

@@ -4,6 +4,7 @@ export const routes = {
   signUp: `/signUp`,
   forgotPassword: `/forgotPassword`,
   resetPassword: `/resetPassword`,
+  updateEmail: `/updateEmail`,
   category: `/category`,
   destination: `/destination`,
   newDestination: `/newDestination`,

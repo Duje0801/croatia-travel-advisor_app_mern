@@ -193,9 +193,14 @@ const updateEmail = catchAsync(async function (req, res, next) {
 
   await user.save();
 
+  const userData = {
+    username: user.username,
+    email: user.email,
+  };
+
   res.status(201).json({
     status: "success",
-    message: "Email successfully updated!",
+    data: userData,
   });
 });
 

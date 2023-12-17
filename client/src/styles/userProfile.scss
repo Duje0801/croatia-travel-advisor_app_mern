@@ -17,18 +17,18 @@ $colorGreen: #00af87;
   box-shadow: 2px 2px #88888874;
   font-size: $fontS;
   width: fit-content;
-  min-width: 60%;
+  min-width: 70%;
 }
 
 .userProfileTitle {
   font-size: $fontXL;
   text-decoration: underline;
-  margin: $gapXL 0px;
 }
 
 .userProfileHeader {
   display: flex;
-  margin-bottom: $gapM;
+  padding-bottom: $gapXL;
+  border-bottom: 2px solid black;
 }
 
 .userProfileButtonsDiv {
@@ -44,31 +44,33 @@ $colorGreen: #00af87;
   color: white;
   padding: $gapS $gapM;
   height: fit-content;
-  margin-left: $gapM
+  margin-left: $gapM;
 }
 
-.userActive{
+.userProfileData {
+  padding: $gapXL $gapXL 0px $gapXL;
+}
+
+.userActive {
   display: flex;
 }
 
-.userIsActiveBox{
+.userIsActiveBox {
   width: 10px;
   height: 10px;
   margin: auto $gapM auto 0px;
   background-color: #00af87;
-  border:2px solid black;
+  border: 2px solid black;
   border-radius: 50%;
 }
 
-.userIsNotActiveBox{
+.userIsNotActiveBox {
   width: 10px;
   height: 10px;
   margin: auto $gapM auto 0px;
   background-color: white;
-  border:2px solid black;
+  border: 2px solid black;
   border-radius: 50%;
-
-
 }
 
 .userProfileReviewsTitle {

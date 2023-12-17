@@ -144,6 +144,10 @@ export default function UserProfile() {
     }
   };
 
+  const handleChangeEmail = () => {
+    navigate(routes.updateEmail);
+  };
+
   const handleRedirectDestination = (name) => {
     navigate(`${routes.destination}/${name}`);
   };
@@ -224,6 +228,9 @@ export default function UserProfile() {
                   Delete
                 </button>
               ) : null}
+              <button onClick={() => handleChangeEmail()} className="userProfileButton">
+                Change Email
+              </button>
               <button
                 className="userProfileButton"
                 onClick={() => handleGoBack()}
@@ -259,17 +266,19 @@ export default function UserProfile() {
               <b>{isUserActive}</b>
             </div>
           ) : null}
-          {user.username === userProfile.username ||
-          user.username === `admin` ? (
+          <div className="userProfileData">
+            {user.username === userProfile.username ||
+            user.username === `admin` ? (
+              <div>
+                <b>Email address:</b> {userProfile.email}
+              </div>
+            ) : null}
             <div>
-              <b>Email address:</b> {userProfile.email}
+              <b>Profile created at:</b> {date(userProfile.createdAt)}
             </div>
-          ) : null}
-          <div>
-            <b>Profile created at:</b> {date(userProfile.createdAt)}
-          </div>
-          <div>
-            <b>Number of reviews:</b> {userProfile.reviews.length}
+            <div>
+              <b>Number of reviews:</b> {userProfile.reviews.length}
+            </div>
           </div>
           {userProfile.reviews?.length > 0 && (
             <>

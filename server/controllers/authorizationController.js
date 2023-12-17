@@ -15,7 +15,7 @@ const createToken = (_id) => {
 };
 
 const signUp = catchAsync(async function (req, res, next) {
-  const body = req.body.data
+  const body = req.body.data;
   const username = body.username;
   const email = body.email;
   let password = body.password;
@@ -47,8 +47,9 @@ const signUp = catchAsync(async function (req, res, next) {
 });
 
 const logIn = catchAsync(async function (req, res, next) {
-  const email = req.body.email;
-  const password = req.body.password;
+  const body = req.body.data;
+  const email = body.email;
+  const password = body.password;
 
   const user = await User.findOne({ email })
     .select("+password")

@@ -76,7 +76,7 @@ const logIn = catchAsync(async function (req, res, next) {
 });
 
 const forgotPassword = catchAsync(async function (req, res, next) {
-  const user = await User.findOne({ email: req.body.email });
+  const user = await User.findOne({ email: req.body.data.email });
 
   if (!user) {
     return res.status(400).json({
@@ -103,7 +103,7 @@ const forgotPassword = catchAsync(async function (req, res, next) {
 
   const mailOptions = {
     from: "Admin <admin@cta.com",
-    to: req.body.email,
+    to: req.body.data.email,
     subject: "Restart password - Croatia Travel Advisor",
     text: `Token for email restart is: ${code}. This code is valid only 10 minutes. 
       If you have not requested a password change, ignore this email.`,

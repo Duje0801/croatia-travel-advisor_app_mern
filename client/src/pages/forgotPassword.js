@@ -1,6 +1,7 @@
 import { useState } from "react";
 import Navigation from "../components/navigation";
 import { useNavigate } from "react-router-dom";
+import { routes } from "../routes/routes";
 
 export default function ForgotPassword() {
   const [email, setEmail] = useState(``);
@@ -41,7 +42,9 @@ export default function ForgotPassword() {
     }
   };
 
-  const handleGoToRedirectPassword = () => {};
+  const handleGoToRedirectPassword = () => {
+    navigate(routes.resetPassword);
+  };
 
   const handleGoBack = () => {
     navigate(-1);

@@ -4,6 +4,7 @@ import Home from "./pages/home";
 import LogIn from "./pages/logIn";
 import SignUp from "./pages/signUp";
 import ForgotPassword from "./pages/forgotPassword";
+import ResetPassword from "./pages/resetPassword";
 import Category from "./pages/category";
 import Destination from "./pages/destination";
 import NewDestination from "./pages/newDestination";
@@ -30,6 +31,10 @@ export default function App() {
     {
       path: routes.forgotPassword,
       element: <ForgotPassword />,
+    },
+    {
+      path: routes.resetPassword,
+      element: <ResetPassword />,
     },
     {
       path: `${routes.category}/:id`,

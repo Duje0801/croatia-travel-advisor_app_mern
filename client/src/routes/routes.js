@@ -3,6 +3,7 @@ export const routes = {
   logIn: `/logIn`,
   signUp: `/signUp`,
   forgotPassword: `/forgotPassword`,
+  resetPassword: `/resetPassword`,
   category: `/category`,
   destination: `/destination`,
   newDestination: `/newDestination`,

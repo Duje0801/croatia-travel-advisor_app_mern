@@ -40,7 +40,7 @@ const signUp = catchAsync(async function (req, res, next) {
     data: {
       username,
       email,
-      token
+      token,
     },
   });
 });
@@ -125,7 +125,9 @@ const resetPassword = catchAsync(async function (req, res, next) {
     .select(`+restartPasswordCodeExpire`);
 
   if (!user) {
-    return res.status(200).json({ status: "fail", error: "User don't exist" });
+    return res
+      .status(200)
+      .json({ status: "fail", error: "User with this email don't exist" });
   }
 
   if (newPassword !== confirmNewPassword) {

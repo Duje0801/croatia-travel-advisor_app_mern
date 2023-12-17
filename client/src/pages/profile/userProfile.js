@@ -1,14 +1,14 @@
 import { useContext, useEffect, useState } from "react";
-import Navigation from "../../components/navigation";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import ShowReviewStarComments from "../../components/showReviewStarComments";
-import Pagination from "../../components/pagination";
+import Navigation from "../../components/home/navigation";
+import ShowReviewStarComments from "../../components/stars/showReviewStarComments";
+import DeleteDeactivateUserQuestion from "../../components/profile/deleteDeactivateUserQuestion";
 import Redirect from "../redirectLoading/redirect";
-import DeleteDeactivateUserQuestion from "../../components/deleteDeactivateUserQuestion";
+import Pagination from "../../components/pagination/pagination";
 import { routes } from "../../routes/routes";
-import "../styles/userProfile.css";
-import "../styles/reviews.css";
+import "../../styles/pages/userProfile.css";
+import "../../styles/components/reviews.css";
 
 export default function UserProfile() {
   const [userProfile, setUserProfile] = useState({});

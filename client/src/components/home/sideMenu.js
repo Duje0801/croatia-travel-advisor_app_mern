@@ -1,9 +1,9 @@
 import { useState, useEffect, useRef, useContext } from "react";
-import { BsBackspace } from "react-icons/bs";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import { BsBackspace } from "react-icons/bs";
 import { routes } from "../../routes/routes";
-import "../styles/sideMenu.css";
+import "../../styles/components/sideMenu.css";
 
 export default function SideMenu({ openMenu, setOpenMenu }) {
   const [avoidSlideAtOpening, setAvoidSlideAtOpening] = useState(false);

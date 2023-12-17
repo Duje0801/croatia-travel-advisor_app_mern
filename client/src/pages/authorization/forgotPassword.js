@@ -1,6 +1,6 @@
 import { useState } from "react";
-import Navigation from "../../components/homeComponents/navigation";
 import { useNavigate } from "react-router-dom";
+import Navigation from "../../components/home/navigation";
 import { routes } from "../../routes/routes";
 
 export default function ForgotPassword() {

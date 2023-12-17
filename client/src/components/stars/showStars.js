@@ -1,5 +1,5 @@
 import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
-import "../styles/place.css"
+import "../../styles/components/place.css";
 
 export default function ShowStars(avgRating) {
   if (avgRating == 0)

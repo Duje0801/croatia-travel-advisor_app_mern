@@ -1,9 +1,9 @@
 import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import Navigation from "../../components/navigation";
+import Navigation from "../../components/home/navigation";
 import { routes } from "../../routes/routes";
-import "../styles/logInSignUp.css";
+import "../../styles/pages/logInSignUp.css";
 
 export default function SignUp() {
   const [username, setUsername] = useState(``);

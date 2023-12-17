@@ -1,6 +1,6 @@
 import ShowReviews from "./showReviews";
-import "../styles/reviews.css";
 import WriteReview from "./writeReview";
+import "../../styles/components/reviews.css";
 
 export default function Reviews({ destination, setDestination }) {
   return (

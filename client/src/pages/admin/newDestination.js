@@ -1,10 +1,10 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../../components/navigation";
-import Footer from "../../components/footer";
-import Redirect from "../redirectLoading/redirect";
 import { UserContext } from "../../context/userContext";
-import "../styles/newDestination.css";
+import Navigation from "../../components/home/navigation";
+import Redirect from "../redirectLoading/redirect";
+import Footer from "../../components/home/footer";
+import "../../styles/pages/newDestination.css";
 
 export default function NewDestination() {
   const [name, setName] = useState(``);

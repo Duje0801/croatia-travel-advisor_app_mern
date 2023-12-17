@@ -2,10 +2,10 @@ import { useState, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import { RxHamburgerMenu } from "react-icons/rx";
-import logo from "../img/logo.png";
+import logo from "../../img/logo.png";
 import SideMenu from "./sideMenu";
 import { routes } from "../../routes/routes";
-import "../styles/navigation.css";
+import "../../styles/components/navigation.css";
 
 export default function Navigation() {
   const [openMenu, setOpenMenu] = useState(false);

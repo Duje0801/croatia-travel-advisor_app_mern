@@ -1,13 +1,13 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CategoryDescription from "../../data/categoryDescription";
-import Redirect from "../redirectLoading/redirect";
-import Loading from "../redirectLoading/loading";
 import Navigation from "../../components/home/navigation";
 import Pagination from "../../components/pagination/pagination";
+import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
 import Footer from "../../components/home/footer";
 import { routes } from "../../routes/routes";
-import "../styles/category.css";
+import "../../styles/pages/category.css";
 
 function Category() {
   const [categoryDestinations, setCategoryDestinations] = useState([]);

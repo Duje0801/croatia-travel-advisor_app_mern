@@ -1,7 +1,7 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import Navigation from "../../components/homeComponents/navigation";
+import Navigation from "../../components/home/navigation";
 import Redirect from "../redirectLoading/redirect";
 
 export default function UpdateEmail() {

@@ -2,10 +2,10 @@ import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/home/navigation";
-import Pagination from "../../components/pagination";
+import Pagination from "../../components/pagination/pagination";
 import Redirect from "../redirectLoading/redirect";
 import { routes } from "../../routes/routes";
-import "../styles/allUsers.css";
+import "../../styles/pages/allUsers.css";
 
 export default function AllUsers() {
   const [users, setUsers] = useState([]);

@@ -1,5 +1,5 @@
 import Navigation from "../../components/home/navigation";
-import "../styles/redirect.css";
+import "../../styles/pages/redirect.css";
 
 export default function LoadingPage() {
   return (

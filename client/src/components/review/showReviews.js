@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from "react";
-import { UserContext } from "../../context/userContext";
-import ShowReviewStarComments from "./showReviewStarComments";
-import DeleteReviewQuestion from "./deleteReviewQuestion";
 import { useNavigate, useParams } from "react-router-dom";
-import Pagination from "../pagination/pagination";
+import { UserContext } from "../../context/userContext";
+import ShowReviewStarComments from "../stars/showReviewStarComments";
+import DeleteReviewQuestion from "./deleteReviewQuestion";
 import EditReview from "./editReview";
+import Pagination from "../pagination/pagination";
 import { routes } from "../../routes/routes";
 
 export default function ShowReviews({ destination, setDestination }) {

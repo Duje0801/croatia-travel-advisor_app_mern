@@ -1,8 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import Navigation from "../../components/home/navigation";
 import Footer from "../../components/home/footer";
-import { useNavigate } from "react-router-dom";
 import { routes } from "../../routes/routes";
-import "../styles/redirect.css";
+import "../../styles/pages/redirect.css";
 
 export default function Redirect({message}) {
   const navigate = useNavigate();

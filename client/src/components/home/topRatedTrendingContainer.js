@@ -1,8 +1,8 @@
 import { useNavigate } from "react-router-dom";
-import { routes } from "../routes/routes";
-import bestThingsToVisitImg from "../img/bestThingsToVisit.jpg";
-import trendingImg from "../img/trending.jpg";
-import HomeContainersText from "../data/homeContainersText";
+import bestThingsToVisitImg from "../../img/bestThingsToVisit.jpg";
+import trendingImg from "../../img/trending.jpg";
+import HomeContainersText from "../../data/homeContainersText";
+import { routes } from "../../routes/routes";
 
 export default function TopRatedTrendingContainer({ value }) {
   const navigate = useNavigate();

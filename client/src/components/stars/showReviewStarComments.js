@@ -1,5 +1,5 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
-import "../styles/place.css";
+import "../../styles/components/place.css";
 
 export default function ShowReviewStarComments(rating) {
   if (rating == 1)

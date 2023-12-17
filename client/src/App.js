@@ -1,20 +1,20 @@
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { routes } from "./routes/routes";
 import Home from "./pages/home";
-import LogIn from "./pages/logIn";
-import SignUp from "./pages/signUp";
-import ForgotPassword from "./pages/forgotPassword";
-import ResetPassword from "./pages/resetPassword";
-import UpdateEmail from "./pages/updateEmail";
-import UpdatePassword from "./pages/updatePassword";
-import Category from "./pages/category";
-import Destination from "./pages/destination";
-import NewDestination from "./pages/newDestination";
-import TermsOfUse from "./pages/termsOfUse";
-import AboutUs from "./pages/aboutUs";
-import Contact from "./pages/contact";
-import AllUsers from "./pages/allUsers";
-import UserProfile from "./pages/userProfile";
+import LogIn from "./pages/authorization/logIn";
+import SignUp from "./pages/authorization/signUp";
+import ForgotPassword from "./pages/authorization/forgotPassword";
+import ResetPassword from "./pages/authorization/resetPassword";
+import UpdateEmail from "./pages/profile/updateEmail";
+import UpdatePassword from "./pages/profile/updatePassword";
+import Category from "./pages/info/category";
+import Destination from "./pages/info/destination";
+import NewDestination from "./pages/admin/newDestination";
+import TermsOfUse from "./pages/footer/termsOfUse";
+import AboutUs from "./pages/footer/aboutUs";
+import Contact from "./pages/footer/contact";
+import AllUsers from "./pages/admin/allUsers";
+import UserProfile from "./pages/profile/userProfile";
+import { routes } from "./routes/routes";
 
 export default function App() {
   const router = createBrowserRouter([

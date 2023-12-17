@@ -44,7 +44,7 @@ app.use(`/api/user/`, userRoutes);
 app.all(`*`, (req, res, next) => {
   res.status(404).json({
     status: `fail`,
-    message: `Cant find ${req.originalUrl} on this server`,
+    error: `Cant find ${req.originalUrl} on this server`,
   });
 });
 

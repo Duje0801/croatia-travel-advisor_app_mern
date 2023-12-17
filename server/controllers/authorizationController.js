@@ -15,10 +15,11 @@ const createToken = (_id) => {
 };
 
 const signUp = catchAsync(async function (req, res, next) {
-  const username = req.body.username;
-  const email = req.body.email;
-  let password = req.body.password;
-  const confirmPassword = req.body.confirmPassword;
+  const body = req.body.data
+  const username = body.username;
+  const email = body.email;
+  let password = body.password;
+  const confirmPassword = body.confirmPassword;
 
   if (password !== confirmPassword)
     return res

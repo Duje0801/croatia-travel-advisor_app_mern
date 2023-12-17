@@ -2,6 +2,7 @@ import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import Navigation from "../../components/home/navigation";
 import Redirect from "../redirectLoading/redirect";
+import axios from "axios";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState(``);
@@ -16,32 +17,30 @@ export default function ResetPassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch(
-        "http://localhost:4000/api/user/resetPassword",
+    axios
+      .patch(
+        `http://localhost:4000/api/user/resetPassword`,
+        { data: { email, token, newPassword, confirmNewPassword } },
         {
-          method: "PATCH",
-          body: JSON.stringify({
-            email,
-            token,
-            newPassword,
-            confirmNewPassword,
-          }),
           headers: {
-            "Content-Type": "application/json",
+            "content-type": "application/json",
           },
         }
-      );
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
+      )
+      .then((res) => {
+        setEmail(``);
+        setToken(``);
+        setNewPassword(``);
+        setConfirmNewPassword(``);
         setIsPasswordChanged(true);
-      } else if (responseJson.status === `fail`) {
-        setError(responseJson.error);
-      }
-    } catch (err) {
-      setError(`Something went wrong, please try again later.`);
-    }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.error) {
+          setNewPassword(``);
+          setConfirmNewPassword(``);
+          setError(`${err.response.data.error}`);
+        } else setError(`Something went wrong, please try again later.`);
+      });
   };
 
   const handleGoBack = () => {
@@ -79,7 +78,7 @@ export default function ResetPassword() {
             <input
               type="password"
               onChange={(e) => setNewPassword(e.target.value)}
-              maxLength={20}
+              maxLength={15}
               value={newPassword}
               id="password"
             ></input>
@@ -87,7 +86,7 @@ export default function ResetPassword() {
             <input
               type="password"
               onChange={(e) => setConfirmNewPassword(e.target.value)}
-              maxLength={20}
+              maxLength={15}
               value={confirmNewPassword}
               id="confirmPassword"
             ></input>

@@ -117,10 +117,11 @@ const forgotPassword = catchAsync(async function (req, res, next) {
 });
 
 const resetPassword = catchAsync(async function (req, res, next) {
-  const email = req.body.email;
-  const newPassword = req.body.newPassword;
-  const confirmNewPassword = req.body.confirmNewPassword;
-  const token = req.body.token;
+  const body = req.body.data;
+  const email = body.email;
+  const token = body.token;
+  const newPassword = body.newPassword;
+  const confirmNewPassword = body.confirmNewPassword;
 
   const user = await User.findOne({ email })
     .select(`+restartPasswordCode`)
@@ -128,8 +129,8 @@ const resetPassword = catchAsync(async function (req, res, next) {
 
   if (!user) {
     return res
-      .status(200)
-      .json({ status: "fail", error: "User with this email don't exist" });
+      .status(400)
+      .json({ status: `fail`, error: "User with this email don't exist" });
   }
 
   if (newPassword !== confirmNewPassword) {
@@ -154,16 +155,9 @@ const resetPassword = catchAsync(async function (req, res, next) {
 
   await user.save();
 
-  const newToken = createToken(user._id);
-
-  const userData = {
-    username: user.username,
-    email: user.email,
-  };
-
   res.status(201).json({
     status: "success",
-    data: { user: userData, token: newToken },
+    message: "Mail succesfully send!",
   });
 });
 

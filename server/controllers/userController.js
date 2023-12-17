@@ -127,7 +127,9 @@ const updatePassword = catchAsync(async function (req, res, next) {
   const user = await User.findById(req.user._id).select(`+password`);
 
   if (!user) {
-    return res.status(200).json({ status: "fail", error: "Can't find user with this ID" });
+    return res
+      .status(200)
+      .json({ status: "fail", error: "Can't find user with this ID" });
   }
 
   if (newPassword !== confirmNewPassword) {
@@ -157,7 +159,7 @@ const updateEmail = catchAsync(async function (req, res, next) {
   const newEmail = req.body.newEmail;
   const password = req.body.password;
 
-  const user = await User.findOne({ _id: req.user._id }).select(`+password`);
+  const user = await User.findById(req.user._id).select(`+password`);
 
   if (!user) {
     return res.status(200).json({ status: "fail", error: "User don't exist" });

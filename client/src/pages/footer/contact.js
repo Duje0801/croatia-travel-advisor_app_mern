@@ -1,7 +1,7 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../components/navigation";
-import Footer from "../components/footer";
+import Navigation from "../../components/navigation";
+import Footer from "../../components/footer";
 
 export default function Contact() {
   const navigate = useNavigate();

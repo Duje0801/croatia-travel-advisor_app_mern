@@ -1,12 +1,12 @@
 import { useContext, useEffect, useState } from "react";
-import Navigation from "../components/navigation";
+import Navigation from "../../components/navigation";
 import { useNavigate, useParams } from "react-router-dom";
-import { UserContext } from "../context/userContext";
-import ShowReviewStarComments from "../components/showReviewStarComments";
-import Pagination from "../components/pagination";
-import Redirect from "./redirect";
-import DeleteDeactivateUserQuestion from "../components/deleteDeactivateUserQuestion";
-import { routes } from "../routes/routes";
+import { UserContext } from "../../context/userContext";
+import ShowReviewStarComments from "../../components/showReviewStarComments";
+import Pagination from "../../components/pagination";
+import Redirect from "../redirectLoading/redirect";
+import DeleteDeactivateUserQuestion from "../../components/deleteDeactivateUserQuestion";
+import { routes } from "../../routes/routes";
 import "../styles/userProfile.css";
 import "../styles/reviews.css";
 

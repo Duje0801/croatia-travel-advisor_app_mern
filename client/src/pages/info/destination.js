@@ -1,16 +1,16 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Navigation from "../components/navigation";
-import { UserContext } from "../context/userContext";
-import ShowStars from "../components/showStars";
-import DestinationAdminOptions from "../components/destinationAdminOptions";
-import DeleteDestinationQuestion from "../components/deleteDestinationQuestion";
-import EditDestination from "../components/editDestination";
-import Redirect from "./redirect";
-import Loading from "./loading";
-import Reviews from "../components/reviews";
-import Footer from "../components/footer";
-import { routes } from "../routes/routes";
+import Navigation from "../../components/navigation";
+import { UserContext } from "../../context/userContext";
+import ShowStars from "../../components/showStars";
+import DestinationAdminOptions from "../../components/destinationAdminOptions";
+import DeleteDestinationQuestion from "../../components/deleteDestinationQuestion";
+import EditDestination from "../../components/editDestination";
+import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
+import Reviews from "../../components/reviews";
+import Footer from "../../components/footer";
+import { routes } from "../../routes/routes";
 import "../styles/destination.css";
 
 export default function Destination() {

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import Navigation from "../components/navigation";
-import Redirect from "./redirect";
+import Navigation from "../../components/navigation";
+import Redirect from "../redirectLoading/redirect";
 
 export default function ResetPassword() {
   const [email, setEmail] = useState(``);

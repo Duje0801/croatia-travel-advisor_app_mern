@@ -1,12 +1,12 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import CategoryDescription from "../data/categoryDescription";
-import Redirect from "./redirect";
-import Loading from "./loading";
-import Navigation from "../components/navigation";
-import Pagination from "../components/pagination";
-import Footer from "../components/footer";
-import { routes } from "../routes/routes";
+import CategoryDescription from "../../data/categoryDescription";
+import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
+import Navigation from "../../components/navigation";
+import Pagination from "../../components/pagination";
+import Footer from "../../components/footer";
+import { routes } from "../../routes/routes";
 import "../styles/category.css";
 
 function Category() {

@@ -1,8 +1,8 @@
 import { useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../context/userContext";
-import Navigation from "../components/navigation";
-import Redirect from "./redirect";
+import { UserContext } from "../../context/userContext";
+import Navigation from "../../components/navigation";
+import Redirect from "../redirectLoading/redirect";
 
 export default function UpdatePassword() {
   const [oldPassword, setOldPassword] = useState(``);

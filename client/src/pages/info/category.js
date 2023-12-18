@@ -2,11 +2,12 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CategoryDescription from "../../data/categoryDescription";
 import Navigation from "../../components/home/navigation";
-import Pagination from "../../components/pagination/pagination";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";
+import Pagination from "../../components/pagination/pagination";
 import Footer from "../../components/home/footer";
 import { routes } from "../../routes/routes";
+import axios from "axios";
 import "../../styles/pages/category.css";
 
 function Category() {
@@ -29,24 +30,23 @@ function Category() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        const response = await fetch(
+      axios
+        .get(
           `http://localhost:4000/api/destination/category/${params.id}?page=${page}`
-        );
-        const responseJson = await response.json();
-
-        if (responseJson.status === `success`) {
-          setCategoryDestinations(responseJson.data);
-          setDestinationsNo(responseJson.quantity);
+        )
+        .then((res) => {
+          const data = res.data;
+          setCategoryDestinations(data.data);
+          setDestinationsNo(data.quantity);
           setIsLoading(false);
-        } else if (responseJson.status === `fail`) {
-          responseJson.error === `Can't find any destination`
-            ? setError(`${responseJson.error}`)
-            : setError(`Something went wrong`);
-        }
-      } catch {
-        setError(`Something went wrong`);
-      }
+        })
+        .catch((err) => {
+          if (err?.response?.data?.error) {
+            setError(`${err.response.data.error}`);
+          } else {
+            setError(`Something went wrong`);
+          }
+        });
     };
     fetchData();
   }, [params.id, page]);
@@ -56,8 +56,8 @@ function Category() {
   };
 
   const handleRedirectToDestination = (destinationName) => {
-    navigate(`${routes.destination}/${destinationName}`)
-  }
+    navigate(`${routes.destination}/${destinationName}`);
+  };
 
   const categoryDestinationsMapped = categoryDestinations.map(
     (destination, i) => {

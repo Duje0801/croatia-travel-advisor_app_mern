@@ -55,6 +55,11 @@ const getCategory = catchAsync(async function (req, res, next) {
       .sort(`-ratingQuantity -averageRating`)
       .skip(skip)
       .limit(5);
+  } else if (req.params.id) {
+    return res.status(404).json({
+      status: `fail`,
+      error: `Category don't exist`,
+    });
   }
 
   const destination = await destinationFind;

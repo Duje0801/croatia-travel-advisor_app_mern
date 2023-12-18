@@ -56,16 +56,11 @@
   text-align: justify;
 }
 
-.destinationDeleteError {
-  font-size: 1rem;
-  text-align: center;
-  color: red;
-}
-
 .destinationDeleteText {
   font-size: 1rem;
   border: 2px solid black;
   padding: 10px;
+  margin: 20px;
 }
 
 .destinationDeleteButtonsDiv {
@@ -129,4 +124,10 @@
   border-radius: 0px;
   padding: 10px 0px;
   font-weight: bold;
+}
+
+.destinationError {
+  font-size: 1rem;
+  text-align: center;
+  color: red;
 }/*# sourceMappingURL=destination.css.map */

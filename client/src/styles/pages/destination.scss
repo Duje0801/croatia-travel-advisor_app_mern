@@ -69,18 +69,13 @@ $colorGreen: #00af87;
   text-align: justify;
 }
 
-.destinationDeleteError {
-  font-size: $fontS;
-  text-align: center;
-  color: red;
-}
-
 //Delete Destination Question
 
 .destinationDeleteText {
   font-size: $fontS;
   border: 2px solid black;
   padding: $gapM;
+  margin: $gapXL;
 }
 
 .destinationDeleteButtonsDiv {
@@ -145,4 +140,12 @@ $colorGreen: #00af87;
   border-radius: 0px;
   padding: $gapM 0px;
   font-weight: bold;
+}
+
+//Error
+
+.destinationError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
 }

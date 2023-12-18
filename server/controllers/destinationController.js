@@ -2,7 +2,7 @@ const Destination = require(`../model/destinationModel`);
 const catchAsync = require("../utilis/catchAsync");
 
 const getOneDestination = catchAsync(async function (req, res, next) {
-  const destination = await Destination.find({
+  const destination = await Destination.findOne({
     name: req.params.id,
   }).populate({
     path: `reviews`,
@@ -128,9 +128,7 @@ const updateDestination = catchAsync(async function (req, res, next) {
 });
 
 const deleteDestination = catchAsync(async function (req, res, next) {
-  const deletedDestination = await Destination.findOneAndDelete({
-    name: req.params.id,
-  });
+  const deletedDestination = await Destination.findByIdAndDelete(req.params.id);
 
   if (!deletedDestination) {
     return res.status(404).json({

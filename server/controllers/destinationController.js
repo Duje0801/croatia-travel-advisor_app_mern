@@ -95,16 +95,16 @@ const createDestination = catchAsync(async function (req, res, next) {
 });
 
 const updateDestination = catchAsync(async function (req, res, next) {
+  const body = req.body.data;
   let updatedFields = {};
-  if (req.body.description)
-    updatedFields = { ...updatedFields, description: req.body.description };
-  if (req.body.image)
-    updatedFields = { ...updatedFields, image: req.body.image };
-  if (req.body.category)
-    updatedFields = { ...updatedFields, category: req.body.category };
+  if (body.description)
+    updatedFields = { ...updatedFields, description: body.description };
+  if (body.image) updatedFields = { ...updatedFields, image: body.image };
+  if (body.category)
+    updatedFields = { ...updatedFields, category: body.category };
 
-  const updatedDestination = await Destination.findOneAndUpdate(
-    { name: req.params.id },
+  const updatedDestination = await Destination.findByIdAndUpdate(
+    req.params.id,
     { ...updatedFields },
     {
       new: true,
@@ -117,7 +117,7 @@ const updateDestination = catchAsync(async function (req, res, next) {
   if (!updatedDestination) {
     return res.status(404).json({
       status: `fail`,
-      error: `Can't find destination with this name`,
+      error: `Can't find destination with this ID`,
     });
   }
 
@@ -133,7 +133,7 @@ const deleteDestination = catchAsync(async function (req, res, next) {
   if (!deletedDestination) {
     return res.status(404).json({
       status: `fail`,
-      error: `Can't find destination with this name`,
+      error: `Can't find destination with this ID`,
     });
   }
 

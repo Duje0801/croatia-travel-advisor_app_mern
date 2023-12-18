@@ -1,9 +1,11 @@
-import { useContext } from "react";
-import { useParams } from "react-router-dom";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
+import axios from "axios";
 
 export default function EditDestination({
-  setEditOpen,
+  destinationId,
+  setDestination,
+  setEditQuestion,
   editedImg,
   setEditedImg,
   editedDescription,
@@ -16,18 +18,16 @@ export default function EditDestination({
   setEditedHistory,
   editedEntertainment,
   setEditedEntertainment,
-  setDestination,
-  setError,
 }) {
-  const params = useParams();
+  const [editError, setEditError] = useState(``);
 
   const { user } = useContext(UserContext);
 
   const handleEditDestination = async (e) => {
     e.preventDefault();
 
-    let requestBody = {};
     let category = [];
+    let requestBody = { category };
     if (editedImg) requestBody = { ...requestBody, image: editedImg };
     if (editedDescription)
       requestBody = { ...requestBody, description: editedDescription };
@@ -43,46 +43,43 @@ export default function EditDestination({
         category: [...category, "entertainment"],
       };
 
-    try {
-      const response = await fetch(
-        `http://localhost:4000/api/destination/${params.id}`,
+    axios
+      .patch(
+        `http://localhost:4000/api/destination/${destinationId}`,
+        { data: requestBody },
         {
-          method: "PATCH",
           headers: {
-            "Content-Type": "application/json",
+            "content-type": "application/json",
             authorization: `Bearer ${user.token}`,
           },
-          body: JSON.stringify(requestBody),
         }
-      );
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
-        setDestination(responseJson.data);
-        setEditOpen(false);
-        setError(``);
+      )
+      .then((res) => {
+        const data = res.data.data;
+        setDestination(data);
+        setEditError(``);
+        setEditQuestion(false);
 
         window.scrollTo({
           top: 0,
           behavior: "smooth",
         });
-      }
-      if (responseJson.status === `fail`) {
-        setError(`${responseJson.error}`);
-      }
-    } catch (err) {
-      setError(`Can't edit destination info. Please try again later`);
-      setEditOpen(false);
-
-      window.scrollTo({
-        top: 0,
-        behavior: "smooth",
+      })
+      .catch((err) => {
+        if (err?.response?.data?.error) {
+          setEditError(`${err.response.data.error}`);
+        } else {
+          setEditError(`Can't edit destination info`);
+        }
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
       });
-    }
   };
 
-  const handleCloseEditDestination = () => {
-    setEditOpen(false);
+  const handleCloseEdit = () => {
+    setEditQuestion(false);
 
     window.scrollTo({
       top: 0,
@@ -93,6 +90,7 @@ export default function EditDestination({
   return (
     <form className="destinationEditForm" onSubmit={handleEditDestination}>
       <div className="destinationEditTitle">Change destination info:</div>
+      <div className="destinationError">{editError}</div>
       <label htmlFor="img">Image link:</label>
       <input
         type="text"
@@ -162,10 +160,7 @@ export default function EditDestination({
           <label htmlFor="entertainment">Entertainment</label>
         </div>
       </fieldset>
-      <button
-        className="destinationEditDeleteButton"
-        onClick={handleCloseEditDestination}
-      >
+      <button className="destinationEditDeleteButton" onClick={handleCloseEdit}>
         Close Edit
       </button>
       <button className="destinationEditDeleteButton" type="submit">

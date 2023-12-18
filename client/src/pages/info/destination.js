@@ -93,6 +93,7 @@ export default function Destination() {
   } else {
     const valuesToShare = {
       destinationId: destination.id,
+      setDestination,
       setEditQuestion,
       editedImg,
       setEditedImg,
@@ -106,7 +107,6 @@ export default function Destination() {
       setEditedHistory,
       editedEntertainment,
       setEditedEntertainment,
-      setDestination,
     };
 
     return (

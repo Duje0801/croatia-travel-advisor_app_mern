@@ -3,11 +3,12 @@ const Review = require(`../model/reviewModel`);
 const catchAsync = require("../utilis/catchAsync");
 
 const createReview = catchAsync(async function (req, res, next) {
-  const title = req.body.title;
-  const text = req.body.text;
-  const rating = req.body.rating;
-  const destinationId = req.body.destination.id;
-  const destinationName = req.body.destination.name;
+  const body = req.body.data;
+  const title = body.title;
+  const text = body.text;
+  const rating = body.rating;
+  const destinationId = body.destination.id;
+  const destinationName = body.destination.name;
   const userId = req.user._id;
   const userUsername = req.user.username;
 
@@ -25,9 +26,33 @@ const createReview = catchAsync(async function (req, res, next) {
     },
   });
 
-  await Review.calcAverageRatings(destinationId);
+  if (!newReview) {
+    return res.status(404).json({
+      status: `fail`,
+      error: `Can't add new review`,
+    });
+  }
 
-  res.status(201).json({ status: `success`, review: newReview });
+  await Review.calcAverageRatings(newReview.destination.id);
+
+  const updatedDestination = await Destination.findById(
+    newReview.destination.id
+  ).populate({
+    path: `reviews`,
+  });
+
+  if (!updatedDestination) {
+    return res.status(404).json({
+      status: `fail`,
+      error: `Review is added but can't update destination info now. Please try again later.`,
+    });
+  }
+
+  res.status(201).json({
+    status: `success`,
+    message: `Review succesfully added!`,
+    data: updatedDestination,
+  });
 });
 
 const updateReview = catchAsync(async function (req, res, next) {
@@ -35,8 +60,7 @@ const updateReview = catchAsync(async function (req, res, next) {
   let updatedFields = {};
   if (body.title) updatedFields = { title: body.title };
   if (body.text) updatedFields = { ...updatedFields, text: body.text };
-  if (body.rating)
-    updatedFields = { ...updatedFields, rating: body.rating };
+  if (body.rating) updatedFields = { ...updatedFields, rating: body.rating };
 
   const getReview = await Review.findById(req.params.id);
 

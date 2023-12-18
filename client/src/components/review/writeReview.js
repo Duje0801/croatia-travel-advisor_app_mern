@@ -1,75 +1,70 @@
 import { useContext, useState } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import { routes } from "../../routes/routes";
+import axios from "axios";
 
-export default function WriteReview({ destination, setDestination }) {
+export default function WriteReview({ destination, setDestination, setError }) {
   const [title, setTitle] = useState(``);
   const [text, setText] = useState(``);
   const [rating, setRating] = useState(``);
-  const [error, setError] = useState(``);
+  const [reviewError, setReviewError] = useState(``);
 
   const navigate = useNavigate();
-
-  const params = useParams();
 
   const { user } = useContext(UserContext);
 
   if (!destination) return <div></div>;
 
-  const handleSendComment = async (e) => {
+  const handleSendReview = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch(`http://localhost:4000/api/review/`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${user.token}`,
+    const destinationInRequest = {
+      id: destination._id,
+      name: destination.name,
+    };
+
+    axios
+      .post(
+        `http://localhost:4000/api/review/`,
+        {
+          data: { title, text, rating, destination: destinationInRequest },
         },
-        body: JSON.stringify({
-          title,
-          text,
-          rating,
-          destination: { id: destination._id, name: destination.name },
-        }),
-      });
-
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
+      .then((res) => {
+        setDestination(res.data.data);
         setTitle(``);
         setText(``);
         setRating(``);
-        try {
-          //Fetching destination data again
-          const response = await fetch(
-            `http://localhost:4000/api/destination/${params.id}`
-          );
-          const responseJson = await response.json();
-          const data = responseJson.data[0];
-          if (responseJson.status === `success`) {
-            setDestination(data);
-            setError(``);
+        setReviewError(``);
+        setError(``);
 
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          } else if (responseJson.status === `fail`) {
-            setError(`${responseJson.error}`);
-          }
-        } catch (err) {
-          setError(
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      })
+      .catch((err) => {
+        console.log(err);
+        if (err?.response?.data?.error) {
+          //If review is added but destination is not updated,
+          //it will show near the top of the destination page
+          if (
+            err.response.data.error ===
             `Review is added but can't update destination info now. Please try again later.`
-          );
+          )
+            return setError(`${err.response.data.error}`);
+          else return setReviewError(`${err.response.data.error}`);
+        } else {
+          setReviewError(`Can't delete review, please try again later.`);
         }
-      } else if (responseJson.status === `fail`) {
-        setError(`${responseJson.error}`);
-      }
-    } catch (err) {
-      setError(`Can't add new review. Please try again later.`);
-    }
+      });
   };
 
   // This function is checking did user already reviewed destination
@@ -130,8 +125,8 @@ export default function WriteReview({ destination, setDestination }) {
       <div>
         <>
           <div className="reviewWrite">Write a review:</div>
-          <div className="reviewWriteError">{error}</div>
-          <form className="reviewWriteForm" onSubmit={handleSendComment}>
+          {reviewError && <div className="reviewWriteError">{reviewError}</div>}
+          <form className="reviewWriteForm" onSubmit={handleSendReview}>
             <div className="reviewWriteRatings">
               Your rating:
               <input

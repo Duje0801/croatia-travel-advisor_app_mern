@@ -92,7 +92,7 @@ export default function Destination() {
     return <Loading />;
   } else {
     const valuesToShare = {
-      destinationId: destination.id,
+      destinationId: destination._id,
       setDestination,
       setEditQuestion,
       editedImg,
@@ -166,7 +166,11 @@ export default function Destination() {
           {destination.reviews?.length > 0 && (
             <div className="destinationReviewsTitle">Reviews:</div>
           )}
-          <Reviews destination={destination} setDestination={setDestination} />
+          <Reviews
+            destination={destination}
+            setDestination={setDestination}
+            setError={setError}
+          />
         </>
         <Footer />
       </div>

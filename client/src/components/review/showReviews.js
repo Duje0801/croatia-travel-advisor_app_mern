@@ -1,23 +1,23 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import ShowReviewStarComments from "../stars/showReviewStarComments";
-import DeleteReviewQuestion from "./deleteReviewQuestion";
-import EditReview from "./editReview";
+import ShowReviewStarComments from "../stars/showReviewStarComments"
+import { useNavigate } from "react-router-dom";
+import DeleteReview from "./deleteReview";
 import Pagination from "../pagination/pagination";
+import EditReview from "./editReview";
+import DateString from "../../logic/dateString";
+import EditDeleteReviewButtons from "./editDeleteReviewButtons";
 import { routes } from "../../routes/routes";
 
-export default function ShowReviews({ destination, setDestination }) {
+export default function ShowReviews({ destination, setDestination, setError }) {
   const [reviewEdit, setReviewEdit] = useState(null);
   const [deleteId, setDeleteId] = useState(``);
   const [page, setPage] = useState(1);
-  const [error, setError] = useState(``);
+  const [reviewError, setReviewError] = useState(``);
 
   const { user } = useContext(UserContext);
 
   const navigate = useNavigate();
-
-  const params = useParams();
 
   useEffect(() => {
     //Every time page is changed, window is scrolling to top
@@ -29,71 +29,15 @@ export default function ShowReviews({ destination, setDestination }) {
 
   useEffect(() => {
     //Restarts error text when another delete review box opens
-    setError(``);
+    setReviewError(``);
   }, [deleteId]);
 
   const handleEditReview = (review) => {
-    if (!reviewEdit || reviewEdit._id !== review._id) setReviewEdit(review);
-    else if (reviewEdit._id === review._id) setReviewEdit(null);
-  };
-
-  const handleFinalDeleteReview = async (reviewId) => {
-    try {
-      const response = await fetch(
-        `http://localhost:4000/api/review/${reviewId}`,
-        {
-          method: "DELETE",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${user.token}`,
-          },
-        }
-      );
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
-        try {
-          //Fetching destination data again (without deleted review)
-          const response = await fetch(
-            `http://localhost:4000/api/destination/${params.id}`
-          );
-          const responseJson = await response.json();
-          const data = responseJson.data[0];
-          if (responseJson.status === `success`) {
-            setDestination(data);
-            setPage(1);
-            setDeleteId(``);
-            setError(``);
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          } else if (responseJson.status === `fail`) {
-            setError(`${responseJson.error}`);
-          }
-        } catch (err) {
-          setError(
-            `Review is deleted but can't update destination info now. Please try again later.`
-          );
-        }
-      } else if (responseJson.status === `fail`) {
-        setError(`${responseJson.error}`);
-      }
-    } catch (err) {
-      setError(`Can't delete review. Please try again later.`);
-    }
+    setReviewEdit(reviewEdit._id === review._id ? null : review);
   };
 
   const handleDeleteId = (id) => {
     setDeleteId(id);
-  };
-
-  const date = (createdAt) => {
-    const dateAndTime = createdAt.split("T");
-    const date = dateAndTime[0].split("-");
-    const time = dateAndTime[1].split(":");
-    return `${time[0]}:${time[1]} ${date[2]}.${date[1]}.${date[0]}`;
   };
 
   const handleUsernameClick = (username) => {
@@ -114,39 +58,31 @@ export default function ShowReviews({ destination, setDestination }) {
                 <span onClick={() => handleUsernameClick(review.user.username)}>
                   {review.user.username}
                 </span>{" "}
-                on {date(review.createdAt)}
+                on {DateString(review.createdAt)}
               </div>
               <div>{ShowReviewStarComments(review.rating)}</div>
               <div className="reviewTitle">{review.title}</div>
             </div>
-            <div className="reviewButtons">
-              {review.user.username === user?.username ||
-              user?.username === `admin` ? (
-                <>
-                  <button
-                    className="reviewEditButton"
-                    onClick={() => handleEditReview(review)}
-                  >
-                    Edit
-                  </button>
-                  <button
-                    className="reviewDeleteButton"
-                    onClick={() => handleDeleteId(review._id)}
-                  >
-                    Delete
-                  </button>
-                </>
-              ) : null}
-            </div>
+            {review.user.username === user?.username ||
+            user?.username === `admin` ? (
+              <EditDeleteReviewButtons
+                review={review}
+                handleEditReview={handleEditReview}
+                handleDeleteId={handleDeleteId}
+              />
+            ) : null}
           </div>
-          {error && deleteId === review._id ? (
-            <div className="reviewDeleteEditError">{error}</div>
+          {reviewError && deleteId === review._id ? (
+            <div className="reviewDeleteEditError">{reviewError}</div>
           ) : null}
           {deleteId === review._id ? (
-            <DeleteReviewQuestion
-              handleFinalDeleteReview={handleFinalDeleteReview}
-              setDeleteId={setDeleteId}
+            <DeleteReview
               deleteId={deleteId}
+              setDestination={setDestination}
+              handleDeleteId={handleDeleteId}
+              setPage={setPage}
+              setReviewError={setReviewError}
+              setError={setError}
             />
           ) : null}
           <div>{review.text}</div>
@@ -155,11 +91,13 @@ export default function ShowReviews({ destination, setDestination }) {
               reviewEdit={reviewEdit}
               setReviewEdit={setReviewEdit}
               setDestination={setDestination}
+              setError={setError}
             />
           ) : null}
         </div>
       );
     });
+
     return (
       <div>
         {reviewsToReturn}

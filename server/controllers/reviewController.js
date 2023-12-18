@@ -1,3 +1,4 @@
+const Destination = require("../model/destinationModel");
 const Review = require(`../model/reviewModel`);
 const catchAsync = require("../utilis/catchAsync");
 
@@ -69,12 +70,12 @@ const updateReview = catchAsync(async function (req, res, next) {
 });
 
 const deleteReview = catchAsync(async function (req, res, next) {
-  const getReview = await Review.findOne({ _id: req.params.id });
+  const getReview = await Review.findById(req.params.id);
 
   if (!getReview) {
     return res.status(404).json({
       status: `fail`,
-      error: `Can't find destination with this ID`,
+      error: `Can't find review with this ID`,
     });
   }
 
@@ -85,13 +86,21 @@ const deleteReview = catchAsync(async function (req, res, next) {
     });
   }
 
-  const deletedReview = await Review.findOneAndDelete({ _id: req.params.id });
+  const deletedReview = await Review.findByIdAndDelete(req.params.id);
 
   await Review.calcAverageRatings(deletedReview.destination.id);
 
-  res
-    .status(201)
-    .json({ status: `success`, message: `Review succesfully deleted!` });
+  const updatedDestination = await Destination.findById(
+    deletedReview.destination.id
+  ).populate({
+    path: `reviews`,
+  });
+
+  res.status(201).json({
+    status: `success`,
+    message: `Review succesfully deleted!`,
+    data: updatedDestination,
+  });
 });
 
 module.exports = {

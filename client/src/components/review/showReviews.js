@@ -33,7 +33,7 @@ export default function ShowReviews({ destination, setDestination, setError }) {
   }, [deleteId]);
 
   const handleEditReview = (review) => {
-    setReviewEdit(reviewEdit._id === review._id ? null : review);
+    setReviewEdit(reviewEdit?._id === review._id ? null : review);
   };
 
   const handleDeleteId = (id) => {

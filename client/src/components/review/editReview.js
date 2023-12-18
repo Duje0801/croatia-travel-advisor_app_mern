@@ -1,74 +1,65 @@
 import { useState, useContext } from "react";
-import { useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import axios from "axios";
 
 export default function EditReview({
   reviewEdit,
   setReviewEdit,
   setDestination,
+  setError,
 }) {
   const [editTitle, setEditTitle] = useState(reviewEdit.title);
   const [editText, setEditText] = useState(reviewEdit.text);
   const [editRating, setEditRating] = useState(reviewEdit.rating);
-  const [error, setError] = useState(``);
+  const [editReviewError, setEditReviewError] = useState(``);
 
   const { user } = useContext(UserContext);
-
-  const params = useParams();
 
   const handleEditSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch(
+    axios
+      .patch(
         `http://localhost:4000/api/review/${reviewEdit._id}`,
         {
-          method: "PATCH",
-          headers: {
-            "Content-Type": "application/json",
-            authorization: `Bearer ${user.token}`,
-          },
-          body: JSON.stringify({
+          data: {
             title: editTitle,
             text: editText,
             rating: editRating,
-          }),
+          },
+        },
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${user.token}`,
+          },
         }
-      );
+      )
+      .then((res) => {
+        const data = res.data.data;
+        setDestination(data);
+        setReviewEdit(null);
+        setError(``);
 
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
-        try {
-          //Fetching destination data again
-          const response = await fetch(
-            `http://localhost:4000/api/destination/${params.id}`
-          );
-          const responseJson = await response.json();
-          const data = responseJson.data[0];
-          if (responseJson.status === `success`) {
-            setReviewEdit(null);
-            setDestination(data);
-            setError(``);
-
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
-          } else if (responseJson.status === `fail`) {
-            setError(`${responseJson.error}`);
-          }
-        } catch (err) {
-          setError(
-            `Review is edited but can't update destination info now. Please try again later.`
-          );
+        window.scrollTo({
+          top: 0,
+          behavior: "smooth",
+        });
+      })
+      .catch((err) => {
+        if (err?.response?.data?.error) {
+          //If review is deleted but destination is not updated,
+          //it will show near the top of the destination page
+          if (
+            err.response.data.error ===
+            `Review is edited but destination is not updated.`
+          )
+            return setError(`${err.response.data.error}`);
+          else return setEditReviewError(`${err.response.data.error}`);
+        } else {
+          setEditReviewError(`Can't edit review, please try again later.`);
         }
-      } else if (responseJson.status === `fail`) {
-        setError(`${responseJson.error}`);
-      }
-    } catch (err) {
-      setError(`Can't edit review. Please try again later`);
-    }
+      });
   };
 
   return (
@@ -121,7 +112,9 @@ export default function EditReview({
         <div className="reviewEditCurrentRating">
           The current rating is: {reviewEdit.rating}
         </div>
-        <div className="reviewDeleteEditError">{error}</div>
+        {editReviewError && (
+          <div className="reviewDeleteEditError">{editReviewError}</div>
+        )}
         <label htmlFor="title">Title:</label>
         <input
           type="text"

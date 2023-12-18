@@ -31,13 +31,14 @@ const createReview = catchAsync(async function (req, res, next) {
 });
 
 const updateReview = catchAsync(async function (req, res, next) {
+  const body = req.body.data;
   let updatedFields = {};
-  if (req.body.title) updatedFields = { title: req.body.title };
-  if (req.body.text) updatedFields = { ...updatedFields, text: req.body.text };
-  if (req.body.rating)
-    updatedFields = { ...updatedFields, rating: req.body.rating };
+  if (body.title) updatedFields = { title: body.title };
+  if (body.text) updatedFields = { ...updatedFields, text: body.text };
+  if (body.rating)
+    updatedFields = { ...updatedFields, rating: body.rating };
 
-  const getReview = await Review.findOne({ _id: req.params.id });
+  const getReview = await Review.findById(req.params.id);
 
   if (!getReview) {
     return res.status(404).json({
@@ -53,8 +54,8 @@ const updateReview = catchAsync(async function (req, res, next) {
     });
   }
 
-  const updatedReview = await Review.findOneAndUpdate(
-    { _id: req.params.id },
+  const updatedReview = await Review.findByIdAndUpdate(
+    req.params.id,
     {
       ...updatedFields,
     },
@@ -66,7 +67,17 @@ const updateReview = catchAsync(async function (req, res, next) {
 
   await Review.calcAverageRatings(updatedReview.destination.id);
 
-  res.status(201).json({ status: `success`, review: updatedReview });
+  const updatedDestination = await Destination.findById(
+    updatedReview.destination.id
+  ).populate({
+    path: `reviews`,
+  });
+
+  res.status(201).json({
+    status: `success`,
+    message: `Review succesfully edited!`,
+    data: updatedDestination,
+  });
 });
 
 const deleteReview = catchAsync(async function (req, res, next) {

@@ -13,12 +13,28 @@
   box-shadow: 2px 2px rgba(136, 136, 136, 0.4549019608);
 }
 
+@media only screen and (min-width: 768px) {
+  .signUp {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .signUp {
+    width: 33%;
+    padding: 1.5rem;
+  }
+}
 .signUpTitle {
   font-size: 1.5rem;
   font-weight: bold;
   margin-bottom: 10px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .signUpTitle {
+    font-size: 2rem;
+  }
+}
 .signUpForm {
   display: flex;
   flex-direction: column;
@@ -27,16 +43,31 @@
   margin-top: 10px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .signUpForm {
+    gap: 10px;
+  }
+}
 .signUpForm > label {
   font-size: 1.25rem;
 }
 
+@media only screen and (min-width: 1024px) {
+  .signUpForm > label {
+    font-size: 1.25rem;
+  }
+}
 .signUpForm > input {
   font-size: 1.25rem;
   padding: 0px 15px;
   border: 1px solid black;
 }
 
+@media only screen and (min-width: 1024px) {
+  .signUpForm > input {
+    font-size: 1.25rem;
+  }
+}
 .signUp > button,
 .signUpForm > button {
   font-size: 1.5rem;
@@ -52,17 +83,47 @@
   margin-top: 0px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .signUp > button,
+  .signUpForm > button,
+  .signUpGoBackButton {
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+}
 .logInDontHaveAcc {
   font-size: 1rem;
   margin-top: 20px;
   text-align: center;
 }
 
+@media only screen and (min-width: 1024px) {
+  .logInDontHaveAcc {
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+}
+.logInforgotPassword {
+  color: #00af87;
+}
+
+@media only screen and (min-width: 1024px) {
+  .logInforgotPassword {
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+}
 .forgotPasswordRedirect {
   text-align: center;
   margin: 10px 0px;
+  font-size: 1.25rem;
 }
 
+@media only screen and (min-width: 1024px) {
+  .forgotPasswordRedirect {
+    cursor: pointer;
+  }
+}
 .signUpError {
   font-size: 1rem;
   text-align: center;

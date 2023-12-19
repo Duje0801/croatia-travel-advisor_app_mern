@@ -86,7 +86,7 @@ export default function LogIn() {
             ></input>
             <div
               onClick={handleGoToForgotPassword}
-              style={{ color: `#00af87` }}
+              className="logInforgotPassword"
             >
               Forgot password?
             </div>

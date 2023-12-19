@@ -23,10 +23,29 @@ $colorGreen: #00af87;
   box-shadow: 2px 2px #88888874;
 }
 
+@media only screen and (min-width: 768px) {
+  .signUp {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .signUp {
+    width: 33%;
+    padding: $fontL;
+  }
+}
+
 .signUpTitle {
   font-size: $fontL;
   font-weight: bold;
   margin-bottom: $gapM;
+}
+
+@media only screen and (min-width: 1024px) {
+  .signUpTitle {
+    font-size: $fontXL;
+  }
 }
 
 .signUpForm {
@@ -37,14 +56,32 @@ $colorGreen: #00af87;
   margin-top: $gapM;
 }
 
+@media only screen and (min-width: 1024px) {
+  .signUpForm {
+    gap: $gapM;
+  }
+}
+
 .signUpForm > label {
   font-size: $fontM;
+}
+
+@media only screen and (min-width: 1024px) {
+  .signUpForm > label {
+    font-size: $fontM;
+  }
 }
 
 .signUpForm > input {
   font-size: $fontM;
   padding: 0px $gapL;
   border: 1px solid black;
+}
+
+@media only screen and (min-width: 1024px) {
+  .signUpForm > input {
+    font-size: $fontM;
+  }
 }
 
 .signUp > button,
@@ -58,8 +95,17 @@ $colorGreen: #00af87;
   margin-top: $fontS;
 }
 
-.signUpGoBackButton{
-  margin-top: 0px
+.signUpGoBackButton {
+  margin-top: 0px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .signUp > button,
+  .signUpForm > button,
+  .signUpGoBackButton {
+    font-size: $fontM;
+    cursor: pointer;
+  }
 }
 
 .logInDontHaveAcc {
@@ -68,11 +114,36 @@ $colorGreen: #00af87;
   text-align: center;
 }
 
+@media only screen and (min-width: 1024px) {
+  .logInDontHaveAcc {
+    font-size: $fontM;
+    cursor: pointer;
+  }
+}
+
+.logInforgotPassword {
+  color: $colorGreen;
+}
+
+@media only screen and (min-width: 1024px) {
+  .logInforgotPassword {
+    font-size: $fontM;
+    cursor: pointer;
+  }
+}
+
 //Forgot password
 
 .forgotPasswordRedirect {
   text-align: center;
   margin: $gapM 0px;
+  font-size: $fontM;
+}
+
+@media only screen and (min-width: 1024px) {
+  .forgotPasswordRedirect {
+    cursor: pointer;
+  }
 }
 
 //Error

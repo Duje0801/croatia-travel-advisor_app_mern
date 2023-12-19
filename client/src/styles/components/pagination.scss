@@ -1,0 +1,34 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+//Pagination
+
+.pages {
+  display: flex;
+  justify-content: center;
+  margin-bottom: $gapXL;
+}
+
+.pages > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px $gapM $gapS;
+  min-width: $gapXL;
+  border: 1px solid black;
+}
+
+@media only screen and (min-width: 1024px) {
+  .pages > div {
+    font-size: $fontS;
+    cursor: pointer;
+  }
+}

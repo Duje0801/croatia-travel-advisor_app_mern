@@ -14,6 +14,12 @@ $colorGreen: #00af87;
   text-align: center;
 }
 
+@media only screen and (min-width: 768px) {
+  .category {
+    margin-top: 115px;
+  }
+}
+
 .categoryTitle {
   position: relative;
   font-size: $fontL;
@@ -21,6 +27,25 @@ $colorGreen: #00af87;
   margin: $gapXL auto;
   text-align: center;
   width: 90%;
+}
+
+@media only screen and (min-width: 768px) {
+  .categoryTitle {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryTitle {
+    font-size: $fontXL;
+    margin: $gapXL auto;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .categoryTitle {
+    width: 50%;
+  }
 }
 
 .categoryTitle > button {
@@ -37,11 +62,35 @@ $colorGreen: #00af87;
   height: fit-content;
 }
 
+@media only screen and (min-width: 1024px) {
+  .categoryTitle > button {
+    font-size: $fontM;
+    cursor: pointer;
+  }
+
+  .categoryTitle > button:hover {
+    color: black;
+  }
+}
+
 .categoryDescription {
   font-size: $fontS;
   width: 90%;
   margin: 0px auto $gapL;
   text-align: justify;
+}
+
+@media only screen and (min-width: 768px) {
+  .categoryDescription {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .categoryDescription {
+    font-size: $fontM;
+    width: 50%;
+  }
 }
 
 //About destination
@@ -50,6 +99,28 @@ $colorGreen: #00af87;
   position: relative;
   margin-bottom: $gapXL;
   max-height: 510px;
+}
+
+@media only screen and (min-width: 768px) {
+  .categoryDestination {
+    width: 60%;
+    max-height: 550px;
+    margin: $gapXL auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestination {
+    display: flex;
+    border-top: 2px solid black;
+    padding-top: $gapXL;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .categoryDestination {
+    width: 50%;
+  }
 }
 
 .categoryDestinationTitle {
@@ -64,8 +135,20 @@ $colorGreen: #00af87;
   min-width: 50vw;
 }
 
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationTitle {
+    display: none;
+  }
+}
+
 .categoryDestinationTitleName {
   text-align: left;
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationTitleName {
+    font-size: $fontL;
+  }
 }
 
 .categoryImage {
@@ -73,19 +156,90 @@ $colorGreen: #00af87;
   max-height: 510px;
 }
 
-//Pagination
-
-.pages {
-  display: flex;
-  justify-content: center;
-  margin-bottom: $gapXL;
+@media only screen and (min-width: 768px) {
+  .categoryImage {
+    max-height: 550px;
+    width: 100%;
+  }
 }
 
-.pages > div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 0px $gapM $gapS;
-  min-width: $gapXL;
-  border: 1px solid black;
+@media only screen and (min-width: 1024px) {
+  .categoryImage {
+    max-width: 50%;
+    cursor: pointer;
+  }
+}
+
+@media only screen and (min-width: 1024px) and (max-width: 1250px) {
+  .categoryImage {
+    max-height: 300px;
+  }
+}
+
+//Category Destination Text on Right
+
+.categoryDestinationRight {
+  display: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationRight {
+    display: block;
+    padding: 0px $gapXL;
+    width: 50%;
+  }
+
+  .categoryDestinationRight > button {
+    display: block;
+    width: fit-content;
+    background-color: $colorGreen;
+    color: white;
+    padding: $gapS $gapM;
+    font-size: $fontS;
+    border: 0px;
+    margin: $gapL 0px 0px auto;
+    cursor: pointer;
+  }
+
+  .categoryDestinationRight > button:hover {
+    color: black;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationNoReviewRight {
+    text-align: left;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationTitleRight {
+    font-size: $fontXL;
+    font-weight: bold;
+    margin-bottom: $gapM;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationTitleRight {
+    font-size: $fontXL;
+    font-weight: bold;
+    margin-bottom: $gapM;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationNotRated {
+    text-align: left;
+    font-size: $fontM;
+    font-weight: bold;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryDestinationDescriptionRight {
+    margin-top: $gapM;
+    font-size: $fontS;
+    text-align: justify;
+  }
 }

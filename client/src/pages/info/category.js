@@ -4,6 +4,7 @@ import CategoryDescription from "../../data/categoryDescription";
 import Navigation from "../../components/home/navigation";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";
+import ShowStars from "../../components/stars/showStars";
 import Pagination from "../../components/pagination/pagination";
 import Footer from "../../components/home/footer";
 import { routes } from "../../routes/routes";
@@ -26,7 +27,7 @@ function Category() {
       top: 0,
       behavior: "smooth",
     });
-  }, []);
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,6 +75,31 @@ function Category() {
             className="categoryImage"
             onClick={() => handleRedirectToDestination(destination.name)}
           ></img>
+          <div className="categoryDestinationRight">
+            <div className="categoryDestinationTitleRight">
+              {destination.name}
+            </div>
+            <div>
+              {destination.averageRating === 0 ? (
+                <div className="categoryDestinationNotRated">Not rated yet</div>
+              ) : (
+                ShowStars(destination.averageRating)
+              )}{" "}
+              <div className="categoryDestinationNoReviewRight">
+                {destination.ratingQuantity > 1
+                  ? `${destination.ratingQuantity} reviews`
+                  : `${destination.ratingQuantity} review`}
+              </div>
+            </div>
+            <div className="categoryDestinationDescriptionRight">
+              {destination.description}
+            </div>
+            <button
+              onClick={() => handleRedirectToDestination(destination.name)}
+            >
+              See more...
+            </button>
+          </div>
         </div>
       );
     }

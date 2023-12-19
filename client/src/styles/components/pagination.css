@@ -1,0 +1,21 @@
+.pages {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 20px;
+}
+
+.pages > div {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 0px 10px 5px;
+  min-width: 20px;
+  border: 1px solid black;
+}
+
+@media only screen and (min-width: 1024px) {
+  .pages > div {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}/*# sourceMappingURL=pagination.css.map */

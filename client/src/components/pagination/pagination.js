@@ -1,3 +1,5 @@
+import "../../styles/components/pagination.css"
+
 export default function Pagination({ totalLength, itemsPerPage, page, setPage }) {
   const numberOfPages = Math.ceil(totalLength / itemsPerPage);
 

@@ -122,9 +122,10 @@ const deactivateUser = catchAsync(async function (req, res, next) {
 });
 
 const updatePassword = catchAsync(async function (req, res, next) {
-  const oldPassword = req.body.oldPassword;
-  const newPassword = req.body.newPassword;
-  const confirmNewPassword = req.body.confirmNewPassword;
+  const body = req.body.data
+  const oldPassword = body.oldPassword;
+  const newPassword = body.newPassword;
+  const confirmNewPassword = body.confirmNewPassword;
 
   const user = await User.findById(req.user._id).select(`+password`);
 

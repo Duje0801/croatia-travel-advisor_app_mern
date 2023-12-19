@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/home/navigation";
 import Redirect from "../redirectLoading/redirect";
+import axios from "axios";
 
 export default function UpdatePassword() {
   const [oldPassword, setOldPassword] = useState(``);
@@ -18,34 +19,37 @@ export default function UpdatePassword() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch(
-        "http://localhost:4000/api/user/updatePassword",
+    axios
+      .patch(
+        `http://localhost:4000/api/user/updatePassword`,
         {
-          method: "PATCH",
-          body: JSON.stringify({
+          data: {
             oldPassword,
             newPassword,
             confirmNewPassword,
-          }),
+          },
+        },
+        {
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${user.token}`,
           },
         }
-      );
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
+      )
+      .then((res) => {
         setIsPasswordChanged(true);
         localStorage.removeItem("user");
         dispatch({ type: "DELETE" });
-      } else if (responseJson.status === `fail`) {
-        setError(responseJson.error);
-      }
-    } catch (err) {
-      setError(`Something went wrong, please try again later.`);
-    }
+      })
+      .catch((err) => {
+        setOldPassword(``);
+        setNewPassword(``);
+        setConfirmNewPassword(``);
+
+        if (err?.response?.data?.error) {
+          setError(`${err.response.data.error}`);
+        } else setError("Something went wrong, please try again later.");
+      });
   };
 
   const handleGoBack = () => {

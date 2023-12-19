@@ -14,6 +14,20 @@ $colorGreen: #00af87;
   text-align: justify;
 }
 
+@media only screen and (min-width: 768px) {
+  .review {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .review {
+    width: 700px;
+    font-size: $fontS;
+  }
+}
+
 .reviewBox {
   display: flex;
 }
@@ -34,11 +48,25 @@ $colorGreen: #00af87;
   margin-right: $gapM;
 }
 
+@media only screen and (min-width: 1024px) {
+  .reviewEditButton {
+    font-size: $fontS;
+    cursor: pointer;
+  }
+}
+
 .reviewDeleteButton {
   border: 0px;
   background-color: #00af87;
   color: white;
   padding: $gapS $gapM;
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewDeleteButton {
+    font-size: $fontS;
+    cursor: pointer;
+  }
 }
 
 //Edit Review
@@ -50,6 +78,19 @@ $colorGreen: #00af87;
   margin: 0px auto;
   border: 2px solid black;
   padding: $gapM;
+}
+
+@media only screen and (min-width: 768px) {
+  .reviewEdit {
+    width: calc(100% - 24px);
+    margin-top: $gapM;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewEdit > label {
+    font-size: $fontS;
+  }
 }
 
 .reviewEditTitle {
@@ -65,14 +106,32 @@ $colorGreen: #00af87;
   font-size: $gapL;
 }
 
+@media only screen and (min-width: 1024px) {
+  .reviewEditRatings {
+    font-size: $fontS;
+  }
+}
+
 .reviewEditCurrentRating {
   text-align: center;
   font-size: $gapL;
 }
 
+@media only screen and (min-width: 1024px) {
+  .reviewEditCurrentRating {
+    font-size: $fontS;
+  }
+}
+
 .reviewEditTextarea {
   border-radius: 0px;
   border: 1px solid black;
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewEditTextarea {
+    font-size: $fontS;
+  }
 }
 
 .reviewEditTextarea:focus {
@@ -86,6 +145,13 @@ $colorGreen: #00af87;
   border-radius: 0px;
   padding: $gapM 0px;
   font-weight: bold;
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewEditFormButton {
+    font-size: $fontS;
+    cursor: pointer;
+  }
 }
 
 .reviewCloseEditButton {
@@ -118,6 +184,12 @@ $colorGreen: #00af87;
   border: 0px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .reviewDeleteButtons {
+    cursor: pointer;
+  }
+}
+
 // Write review
 
 .reviewWrite {
@@ -128,6 +200,20 @@ $colorGreen: #00af87;
   border-top: 2px solid black;
 }
 
+@media only screen and (min-width: 768px) {
+  .reviewWrite {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewWrite {
+    width: 700px;
+    font-size: $fontM;
+  }
+}
+
 .reviewWriteForm {
   display: flex;
   flex-direction: column;
@@ -135,13 +221,41 @@ $colorGreen: #00af87;
   margin: 0px auto;
 }
 
+@media only screen and (min-width: 768px) {
+  .reviewWriteForm {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewWriteForm {
+    width: 700px;
+  }
+
+  .reviewWriteForm > label {
+    font-size: $fontS;
+  }
+}
+
 .reviewWriteRatings {
   text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewWriteRatings {
+    font-size: $fontS;
+  }
 }
 
 .reviewWriteTextarea {
   border-radius: 0px;
   border: 1px solid black;
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewWriteTextarea {
+    font-size: $fontS;
+  }
 }
 
 .reviewWriteTextarea:focus {
@@ -158,6 +272,13 @@ $colorGreen: #00af87;
   font-weight: bold;
 }
 
+@media only screen and (min-width: 1024px) {
+  .reviewWriteFormButton {
+    font-size: $fontS;
+    cursor: pointer;
+  }
+}
+
 .reviewWriteSignIn {
   text-align: center;
   font-weight: bold;
@@ -168,15 +289,27 @@ $colorGreen: #00af87;
   color: $colorGreen;
 }
 
+@media only screen and (min-width: 1024px) {
+  .reviewWriteSignInSpan {
+    cursor: pointer;
+  }
+}
+
 //Error
+
+.reviewDeleteEditError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+}
 
 .reviewWriteError {
   text-align: center;
   color: red;
 }
 
-.reviewDeleteEditError {
-  font-size: $fontS;
-  text-align: center;
-  color: red;
+@media only screen and (min-width: 768px) {
+  .reviewWriteError {
+    margin-bottom: $gapM;
+  }
 }

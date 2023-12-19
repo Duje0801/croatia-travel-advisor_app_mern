@@ -2,10 +2,26 @@
   margin-top: 75px;
 }
 
+@media only screen and (min-width: 768px) {
+  .destination {
+    margin-top: 115px;
+  }
+}
 .destinationHeader {
   position: relative;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationHeader {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .destinationHeader {
+    width: 700px;
+  }
+}
 .destinationHeader > img {
   width: 100%;
   max-height: 550px;
@@ -23,16 +39,39 @@
   min-width: 50vw;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationHeaderName {
+    min-width: 50%;
+    font-size: 2rem;
+  }
+}
 .destinationRatings {
   padding: 20px 20px 0px 20px;
   font-size: 1.25rem;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationRatings {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .destinationRatings {
+    width: 700px;
+  }
+}
 .destinationAvgRating {
   display: flex;
   justify-content: space-between;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationAvgRating {
+    width: 700px;
+    margin: 0px auto;
+  }
+}
 .destinationGoBackEditDivs {
   display: flex;
   gap: 10px;
@@ -46,16 +85,52 @@
   border: 0px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationInfoButtons {
+    cursor: pointer;
+  }
+}
 .destinationReviewsNumber {
   font-size: 1rem;
   margin-bottom: 10px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationReviewsNumber {
+    width: 700px;
+    margin: 0px auto;
+    font-size: 1.25rem;
+  }
+}
 .destinationDescription {
   padding: 10px 20px 20px;
   text-align: justify;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationDescription {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .destinationDescription {
+    width: 700px;
+    font-size: 1rem;
+  }
+}
+.destinationReviewsTitle {
+  margin-bottom: 20px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationReviewsTitle {
+    font-size: 1.5rem;
+  }
+}
 .destinationDeleteText {
   font-size: 1rem;
   border: 2px solid black;
@@ -63,6 +138,18 @@
   margin: 20px;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationDeleteText {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .destinationDeleteText {
+    font-size: 1rem;
+    width: 680px;
+    margin: 20px auto;
+  }
+}
 .destinationDeleteButtonsDiv {
   display: flex;
   justify-content: center;
@@ -81,13 +168,11 @@
   border: 0px;
 }
 
-.destinationReviewsTitle {
-  margin-bottom: 20px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
+@media only screen and (min-width: 1024px) {
+  .destinationDeleteButtons {
+    cursor: pointer;
+  }
 }
-
 .destinationEditForm {
   display: flex;
   flex-direction: column;
@@ -98,6 +183,23 @@
   gap: 5px;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationEditForm {
+    width: 60%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .destinationEditForm {
+    width: 680px;
+    margin: 15px auto;
+  }
+  .destinationEditForm > label {
+    font-size: 1rem;
+  }
+  .destinationEditForm > input {
+    font-size: 1rem;
+  }
+}
 .destinationEditTitle {
   font-size: 1.25rem;
   font-weight: bold;
@@ -105,19 +207,39 @@
   text-align: center;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationEditTitle {
+    font-size: 1.25rem;
+  }
+}
 .destinationEditTextarea {
   border-radius: 0px;
   border: 1px solid black;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationEditTextarea {
+    font-size: 1rem;
+  }
+}
 .destinationEditImageDescription {
   font-size: 0.75rem;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationEditImageDescription {
+    font-size: 1rem;
+  }
+}
 .destinationEditFileset {
   font-size: 1rem;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationEditFileset {
+    font-size: 1rem;
+  }
+}
 .destinationEditDeleteButton {
   background-color: white;
   border: 1px solid black;
@@ -126,6 +248,12 @@
   font-weight: bold;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationEditDeleteButton {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}
 .destinationError {
   font-size: 1rem;
   text-align: center;

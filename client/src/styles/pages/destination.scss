@@ -15,8 +15,27 @@ $colorGreen: #00af87;
   margin-top: 75px;
 }
 
+@media only screen and (min-width: 768px) {
+  .destination {
+    margin-top: 115px;
+  }
+}
+
 .destinationHeader {
   position: relative;
+}
+
+@media only screen and (min-width: 768px) {
+  .destinationHeader {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationHeader {
+    width: 700px;
+  }
 }
 
 .destinationHeader > img {
@@ -36,14 +55,41 @@ $colorGreen: #00af87;
   min-width: 50vw;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationHeaderName {
+    min-width: 50%;
+    font-size: $fontXL;
+  }
+}
+
 .destinationRatings {
   padding: $gapXL $gapXL 0px $gapXL;
   font-size: $fontM;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationRatings {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationRatings {
+    width: 700px;
+  }
+}
+
 .destinationAvgRating {
   display: flex;
   justify-content: space-between;
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationAvgRating {
+    width: 700px;
+    margin: 0px auto;
+  }
 }
 
 .destinationGoBackEditDivs {
@@ -59,14 +105,55 @@ $colorGreen: #00af87;
   border: 0px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationInfoButtons {
+    cursor: pointer;
+  }
+}
+
 .destinationReviewsNumber {
   font-size: $fontS;
   margin-bottom: $gapM;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationReviewsNumber {
+    width: 700px;
+    margin: 0px auto;
+    font-size: $fontM;
+  }
+}
+
 .destinationDescription {
   padding: $gapM $gapXL $gapXL;
   text-align: justify;
+}
+
+@media only screen and (min-width: 768px) {
+  .destinationDescription {
+    width: 60%;
+    margin: 0px auto;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationDescription {
+    width: 700px;
+    font-size: $fontS;
+  }
+}
+
+.destinationReviewsTitle {
+  margin-bottom: $gapXL;
+  font-size: $fontL;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationReviewsTitle {
+    font-size: $fontL;
+  }
 }
 
 //Delete Destination Question
@@ -76,6 +163,20 @@ $colorGreen: #00af87;
   border: 2px solid black;
   padding: $gapM;
   margin: $gapXL;
+}
+
+@media only screen and (min-width: 768px) {
+  .destinationDeleteText {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationDeleteText {
+    font-size: $fontS;
+    width: 680px;
+    margin: $gapXL auto;
+  }
 }
 
 .destinationDeleteButtonsDiv {
@@ -95,11 +196,10 @@ $colorGreen: #00af87;
   border: 0px;
 }
 
-.destinationReviewsTitle {
-  margin-bottom: $gapXL;
-  font-size: $fontL;
-  font-weight: bold;
-  text-align: center;
+@media only screen and (min-width: 1024px) {
+  .destinationDeleteButtons {
+    cursor: pointer;
+  }
 }
 
 //Edit destination
@@ -114,6 +214,27 @@ $colorGreen: #00af87;
   gap: $gapS;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationEditForm {
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationEditForm {
+    width: 680px;
+    margin: $gapL auto;
+  }
+
+  .destinationEditForm > label {
+    font-size: $fontS;
+  }
+
+  .destinationEditForm > input {
+    font-size: $fontS;
+  }
+}
+
 .destinationEditTitle {
   font-size: $fontM;
   font-weight: bold;
@@ -121,17 +242,41 @@ $colorGreen: #00af87;
   text-align: center;
 }
 
+@media only screen and (min-width: 1024px) {
+  .destinationEditTitle {
+    font-size: $fontM;
+  }
+}
+
 .destinationEditTextarea {
   border-radius: 0px;
   border: 1px solid black;
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationEditTextarea {
+    font-size: $fontS;
+  }
 }
 
 .destinationEditImageDescription {
   font-size: 0.75rem;
 }
 
+@media only screen and (min-width: 768px) {
+  .destinationEditImageDescription {
+    font-size: $fontS;
+  }
+}
+
 .destinationEditFileset {
   font-size: 1rem;
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationEditFileset {
+    font-size: $fontS;
+  }
 }
 
 .destinationEditDeleteButton {
@@ -140,6 +285,13 @@ $colorGreen: #00af87;
   border-radius: 0px;
   padding: $gapM 0px;
   font-weight: bold;
+}
+
+@media only screen and (min-width: 1024px) {
+  .destinationEditDeleteButton {
+    font-size: $fontS;
+    cursor: pointer;
+  }
 }
 
 //Error

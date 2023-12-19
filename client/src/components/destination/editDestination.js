@@ -31,16 +31,21 @@ export default function EditDestination({
     if (editedImg) requestBody = { ...requestBody, image: editedImg };
     if (editedDescription)
       requestBody = { ...requestBody, description: editedDescription };
-    if (editedNature)
-      requestBody = { ...requestBody, category: [...category, "nature"] };
+    if (editedNature) requestBody = { ...requestBody, category: ["nature"] };
     if (editedTowns)
-      requestBody = { ...requestBody, category: [...category, "towns"] };
+      requestBody = {
+        ...requestBody,
+        category: [...requestBody.category, "towns"],
+      };
     if (editedHistory)
-      requestBody = { ...requestBody, category: [...category, "history"] };
+      requestBody = {
+        ...requestBody,
+        category: [...requestBody.category, "history"],
+      };
     if (editedEntertainment)
       requestBody = {
         ...requestBody,
-        category: [...category, "entertainment"],
+        category: [...requestBody.category, "entertainment"],
       };
 
     axios

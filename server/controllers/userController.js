@@ -5,11 +5,9 @@ const User = require(`../model/userModel`);
 const allUsers = catchAsync(async function (req, res, next) {
   const skip = ((req.query.page * 1 || 1) - 1) * 10;
 
-  const totalUsersNumber = await User.find({ active: true })
-    .countDocuments()
-    .count();
+  const totalUsersNumber = await User.find().countDocuments().count();
 
-  const users = await User.find({ active: true }).skip(skip).limit(10);
+  const users = await User.find().skip(skip).limit(10);
 
   if (!users[0]) {
     return res.status(400).json({

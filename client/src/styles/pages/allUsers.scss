@@ -38,6 +38,12 @@ td > button {
   margin: 95px 0px $gapXL;
 }
 
+.allUsersExplanation{
+  font-size: 0.75rem;
+  text-align: center;
+  margin-bottom: $gapXL;
+}
+
 .userDeleteQuestion {
   border: 2px solid black;
   padding: $gapS;
@@ -47,6 +53,8 @@ td > button {
 .userDeleteButton {
   margin: 0px $gapS;
 }
+
+//Error
 
 .allUsersError {
   font-size: $fontS;

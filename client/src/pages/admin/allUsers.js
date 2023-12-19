@@ -5,6 +5,7 @@ import Navigation from "../../components/home/navigation";
 import Pagination from "../../components/pagination/pagination";
 import Redirect from "../redirectLoading/redirect";
 import { routes } from "../../routes/routes";
+import axios from "axios";
 import "../../styles/pages/allUsers.css";
 
 export default function AllUsers() {
@@ -17,32 +18,34 @@ export default function AllUsers() {
 
   const navigate = useNavigate();
 
+  //This page is available only if username is admin
+
   useEffect(() => {
     const fetchData = async () => {
       if (!user?.token) return;
       else {
-        try {
-          const response = await fetch(
-            `http://localhost:4000/api/user/allUsers/?page=${page}`,
-            {
-              headers: {
-                "Content-Type": "application/json",
-                authorization: `Bearer ${user.token}`,
-              },
+        axios
+          .get(`http://localhost:4000/api/user/allUsers/?page=${page}`, {
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${user.token}`,
+            },
+          })
+          .then((res) => {
+            setUsers(res.data.data);
+            setUsersNo(res.data.quantity);
+          })
+          .catch((err) => {
+            if (err?.response?.data?.error) {
+              setError(`${err.response.data.error}`);
+            } else {
+              setError(`Can't get users, please try again later.`);
             }
-          );
-
-          const responseJson = await response.json();
-
-          if (responseJson.status === `success`) {
-            setUsers(responseJson.data);
-            setUsersNo(responseJson.quantity);
-          } else if (responseJson.status === `fail`) {
-            setError(`${responseJson.error}`);
-          }
-        } catch (err) {
-          setError(`Something went wrong. Please try again later.`);
-        }
+            window.scrollTo({
+              top: 0,
+              behavior: "smooth",
+            });
+          });
       }
     };
     fetchData();
@@ -54,14 +57,14 @@ export default function AllUsers() {
 
   const mappedUsers =
     users &&
-    users.map((user, i) => {
+    users.map((userInfo, i) => {
       return (
         <tr key={i}>
-          <td onClick={() => handleUsernameClick(user.username)}>
-            {user.username}
+          <td onClick={() => handleUsernameClick(userInfo.username)}>
+            {userInfo.username}
           </td>
-          <td>{user.email}</td>
-          <td>{user.active ? `Yes` : `No`}</td>
+          <td>{userInfo.email}</td>
+          <td>{userInfo.active ? `Yes` : `No`}</td>
         </tr>
       );
     });
@@ -84,6 +87,9 @@ export default function AllUsers() {
           </thead>
           <tbody>{mappedUsers}</tbody>
         </table>
+        <div className="allUsersExplanation">
+          For profile details click on username
+        </div>
         <Pagination
           totalLength={usersNo}
           itemsPerPage={10}

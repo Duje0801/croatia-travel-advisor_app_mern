@@ -28,6 +28,12 @@ td > button {
   margin: 95px 0px 20px;
 }
 
+.allUsersExplanation {
+  font-size: 0.75rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
 .userDeleteQuestion {
   border: 2px solid black;
   padding: 5px;

@@ -79,10 +79,11 @@ const getCategory = catchAsync(async function (req, res, next) {
 });
 
 const createDestination = catchAsync(async function (req, res, next) {
-  const name = req.body.name;
-  const description = req.body.description;
-  const image = req.body.image;
-  const category = req.body.category;
+  const body = req.body.data;
+  const name = body.name;
+  const description = body.description;
+  const image = body.image;
+  const category = body.category;
 
   const newDestination = await Destination.create({
     name,
@@ -90,6 +91,12 @@ const createDestination = catchAsync(async function (req, res, next) {
     image,
     category,
   });
+
+  if (!newDestination)
+    return res.status(404).json({
+      status: `fail`,
+      error: `Can't add new destination`,
+    });
 
   res.status(201).json({ status: `success`, destination: newDestination });
 });

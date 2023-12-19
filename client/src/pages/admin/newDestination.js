@@ -4,6 +4,7 @@ import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/home/navigation";
 import Redirect from "../redirectLoading/redirect";
 import Footer from "../../components/home/footer";
+import axios from "axios";
 import "../../styles/pages/newDestination.css";
 
 export default function NewDestination() {
@@ -33,33 +34,37 @@ export default function NewDestination() {
     if (entertainment) category = [...category, "entertainment"];
 
     //Posts new destination
-    try {
-      const response = await fetch(`http://localhost:4000/api/destination`, {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          authorization: `Bearer ${user.token}`,
+
+    axios
+      .post(
+        `http://localhost:4000/api/destination`,
+        {
+          data: { name, image, description, category },
         },
-        body: JSON.stringify({ name, image, description, category }),
-      });
-
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${user.token}`,
+          },
+        }
+      )
+      .then((res) => {
         setAdded(true);
-      } else if (responseJson.status === `fail`) {
-        setError(`${responseJson.error}`);
+      })
+      .catch((err) => {
+        if (err?.response?.data?.error) {
+          setError(`${err.response.data.error}`);
+        } else {
+          setError(`Can't add new destination, please try again later.`);
+        }
         window.scrollTo({
           top: 0,
           behavior: "smooth",
         });
-      }
-    } catch (err) {
-      setError(`Can't save new destination. Please try again later`);
-    }
+      });
   };
 
-  const handleGoBack = () => {
+  const handleBack = () => {
     navigate(-1);
   };
 
@@ -69,8 +74,6 @@ export default function NewDestination() {
     return (
       <Redirect message={`${name} is succesfully added to destinations list`} />
     );
-  } else if (error === `Can't save new destination. Please try again later`) {
-    return <Redirect message={error} />;
   } else
     return (
       <>
@@ -158,8 +161,8 @@ export default function NewDestination() {
             <button className="newDestinationButtons" type="submit">
               Submit
             </button>
-            <button className="newDestinationButtons" onClick={handleGoBack}>
-              Go Back
+            <button className="newDestinationButtons" onClick={handleBack}>
+              Back
             </button>
           </form>
         </div>

@@ -23,13 +23,13 @@ export default function Navigation() {
           <div className="navAdminButtons">
             {user?.username === `admin` ? (
               <>
-                <button onClick={handleToAllUsers}>Users</button>
-                <button onClick={handleAddNewDestination}>
+                <button onClick={() => redirect(`allUsers`)}>Users</button>
+                <button onClick={() => redirect(`addNewDestination`)}>
                   Add new destination
                 </button>
               </>
             ) : (
-              <button onClick={handleToMyProfile}>My profile</button>
+              <button onClick={() => redirect(`myProfile`)}>My profile</button>
             )}
             <button onClick={handleSignOut}>Sign Out</button>
           </div>
@@ -38,30 +38,22 @@ export default function Navigation() {
     //If user is not logged in
     else
       return (
-        <div className="navLogIn" onClick={handleLogIn}>
+        <div className="navLogIn" onClick={() => redirect(`logIn`)}>
           Log in
         </div>
       );
   };
 
-  const handleTitleClick = () => {
-    navigate(routes.home);
-  };
-
-  const handleLogIn = () => {
-    navigate(routes.logIn);
-  };
-
-  const handleToAllUsers = () => {
-    navigate(routes.allUsers);
-  };
-
-  const handleAddNewDestination = () => {
-    navigate(routes.newDestination);
-  };
-
-  const handleToMyProfile = () => {
-    navigate(`${routes.user}/${user.username}`);
+  const redirect = (to) => {
+    if (to === `home`) navigate(routes.home);
+    else if (to === `logIn`) navigate(routes.logIn);
+    else if (to === `allUsers`) navigate(routes.allUsers);
+    else if (to === `addNewDestination`) navigate(routes.newDestination);
+    else if (to === `myProfile`) navigate(`${routes.user}/${user.username}`);
+    else if (to === `nature`) navigate(`${routes.category}/${to}`);
+    else if (to === `towns`) navigate(`${routes.category}/${to}`);
+    else if (to === `history`) navigate(`${routes.category}/${to}`);
+    else if (to === `entertainment`) navigate(`${routes.category}/${to}`);
   };
 
   const handleSignOut = () => {
@@ -76,16 +68,16 @@ export default function Navigation() {
           className="navIcon"
           onClick={() => setOpenMenu(true)}
         />
-        <div className="navCentral" onClick={handleTitleClick}>
+        <div className="navCentral" onClick={() => redirect(`home`)}>
           <img src={logo} alt="logo"></img>
           <div>Croatia Travel Advisor</div>
         </div>
         <div className="navCentralList">
           <ul>
-            <li>Nature</li>
-            <li>Towns</li>
-            <li>History</li>
-            <li>Entertainment</li>
+            <li onClick={() => redirect(`nature`)}>Nature</li>
+            <li onClick={() => redirect(`towns`)}>Towns</li>
+            <li onClick={() => redirect(`history`)}>History</li>
+            <li onClick={() => redirect(`entertainment`)}>Entertainment</li>
           </ul>
         </div>
         <div className="navLogIn">{isSignedIn()}</div>

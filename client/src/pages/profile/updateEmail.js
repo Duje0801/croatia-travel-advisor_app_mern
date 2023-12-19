@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/home/navigation";
 import Redirect from "../redirectLoading/redirect";
+import axios from "axios";
 
 export default function UpdateEmail() {
   const [oldEmail, setOldEmail] = useState(``);
@@ -18,39 +19,39 @@ export default function UpdateEmail() {
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    try {
-      const response = await fetch(
-        "http://localhost:4000/api/user/updateEmail",
+    axios
+      .patch(
+        `http://localhost:4000/api/user/updateEmail`,
         {
-          method: "PATCH",
-          body: JSON.stringify({
+          data: {
             oldEmail,
             newEmail,
             password,
-          }),
+          },
+        },
+        {
           headers: {
             "Content-Type": "application/json",
             authorization: `Bearer ${user.token}`,
           },
         }
-      );
-      const responseJson = await response.json();
-
-      if (responseJson.status === `success`) {
+      )
+      .then((res) => {
         setIsEmailChanged(true);
+        const data = res.data.data;
         const updatedUserInfo = {
-          email: responseJson.data.email,
-          username: responseJson.data.username,
+          email: data.email,
+          username: data.username,
           token: user.token,
         };
         dispatch({ type: "SET", payload: updatedUserInfo });
         localStorage.setItem("user", JSON.stringify(updatedUserInfo));
-      } else if (responseJson.status === `fail`) {
-        setError(responseJson.error);
-      }
-    } catch (err) {
-      setError(`Something went wrong, please try again later.`);
-    }
+      })
+      .catch((err) => {
+        if (err?.response?.data?.error) {
+          setError(`${err.response.data.error}`);
+        } else setError("Something went wrong, please try again later.");
+      });
   };
 
   const handleGoBack = () => {
@@ -87,7 +88,7 @@ export default function UpdateEmail() {
             <input
               type="password"
               onChange={(e) => setPassword(e.target.value)}
-              maxLength={20}
+              maxLength={15}
               value={password}
               id="password"
             ></input>

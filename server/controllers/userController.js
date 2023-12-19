@@ -158,9 +158,10 @@ const updatePassword = catchAsync(async function (req, res, next) {
 });
 
 const updateEmail = catchAsync(async function (req, res, next) {
-  const oldEmail = req.body.oldEmail;
-  const newEmail = req.body.newEmail;
-  const password = req.body.password;
+  const body = req.body.data
+  const oldEmail = body.oldEmail;
+  const newEmail = body.newEmail;
+  const password = body.password;
 
   const user = await User.findById(req.user._id).select(`+password`);
 

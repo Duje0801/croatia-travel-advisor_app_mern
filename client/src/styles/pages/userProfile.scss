@@ -12,8 +12,7 @@ $colorGreen: #00af87;
 .userProfile {
   border: 2px solid black;
   padding: $gapM;
-  height: fit-content;
-  margin: 95px auto 20px;
+  margin: 95px auto auto auto;
   box-shadow: 2px 2px #88888874;
   font-size: $fontS;
   width: fit-content;
@@ -48,10 +47,10 @@ $colorGreen: #00af87;
 }
 
 .userProfileData {
-  padding: $gapXL $gapXL 0px $gapXL;
+  padding: 0px $gapXL;
 }
 
-.userActive {
+.userProfileActive {
   display: flex;
 }
 
@@ -73,12 +72,66 @@ $colorGreen: #00af87;
   border-radius: 50%;
 }
 
-.userProfileReviewsTitle {
+.userProfileUserInfoTitle {
   margin: $gapXL 0px;
   font-size: $fontL;
   font-weight: bold;
   text-align: center;
 }
+
+.userProfileReviewsTitle {
+  margin: $gapXL 0px;
+  padding: $gapXL 0px 0px 0px;
+  font-size: $fontL;
+  font-weight: bold;
+  text-align: center;
+  border-top: 2px solid black;
+}
+
+//Reviews
+
+.userProfileReview {
+  margin: $gapM;
+  padding: $gapM;
+  border: 2px solid black;
+  text-align: justify;
+}
+
+.userProfileReviewBox {
+  display: flex;
+}
+
+.userProfileReviewTitle {
+  font-weight: bold;
+}
+
+//deleteQuestions
+
+.userProfileDeleteText {
+  font-size: $fontS;
+  border: 2px solid black;
+  padding: $gapM;
+  margin: $gapXL 0px;
+}
+
+.userProfileDeleteButtonsDiv {
+  display: flex;
+  justify-content: center;
+  gap: $gapM;
+  text-align: center;
+  margin: $gapM auto 0px;
+}
+
+.userProfileDeleteButtons {
+  background-color: $colorGreen;
+  color: white;
+  padding: 0px $gapM;
+  font-size: $fontS;
+  width: fit-content;
+  border: 0px;
+}
+
+//Error
 
 .userProfileError {
   font-size: $fontS;

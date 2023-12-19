@@ -39,17 +39,17 @@ const oneUser = catchAsync(async function (req, res, next) {
 
   res.status(200).json({
     status: `success`,
-    user,
+    data: user,
   });
 });
 
 const deleteMe = catchAsync(async function (req, res, next) {
-  const myProfile = await User.findOne({ username: req.user.username });
+  const myProfile = await User.findById(req.user._id);
 
   if (!myProfile)
     return res.status(400).json({
       status: `fail`,
-      error: "Can't find user with this name",
+      error: "Can't find user",
     });
 
   myProfile.active = false;
@@ -63,14 +63,12 @@ const deleteMe = catchAsync(async function (req, res, next) {
 });
 
 const deleteUser = catchAsync(async function (req, res, next) {
-  const profileToDelete = await User.findOneAndDelete({
-    _id: req.body.id,
-  });
+  const profileToDelete = await User.findByIdAndDelete(req.body.id);
 
   if (!profileToDelete)
     return res.status(400).json({
       status: `fail`,
-      error: "Can't find user with this name",
+      error: "Can't find user",
     });
 
   res.status(201).json({
@@ -80,7 +78,9 @@ const deleteUser = catchAsync(async function (req, res, next) {
 });
 
 const activateUser = catchAsync(async function (req, res, next) {
-  const user = await User.findOne({ _id: req.body.id });
+  const user = await User.findById(req.body.data).populate({
+    path: `reviews`,
+  });
 
   if (!user)
     return res.status(400).json({
@@ -94,12 +94,15 @@ const activateUser = catchAsync(async function (req, res, next) {
 
   res.status(201).json({
     status: `success`,
+    data: user,
     message: "User is active again!",
   });
 });
 
 const deactivateUser = catchAsync(async function (req, res, next) {
-  const user = await User.findOne({ _id: req.body.id });
+  const user = await User.findById(req.body.data).populate({
+    path: `reviews`,
+  });
 
   if (!user)
     return res.status(400).json({
@@ -113,7 +116,8 @@ const deactivateUser = catchAsync(async function (req, res, next) {
 
   res.status(201).json({
     status: `success`,
-    message: "User is active again!",
+    data: user,
+    message: "User is deactivated!",
   });
 });
 

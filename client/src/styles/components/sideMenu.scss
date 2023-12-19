@@ -40,6 +40,19 @@ $colorGreen: #00af87;
   z-index: 3;
 }
 
+@media only screen and (min-width: 768px) {
+  .sideMenu {
+    width: 60vw;
+    padding: $gapM;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .sideMenu {
+    display: none;
+  }
+}
+
 .sideMenuToRight {
   left: 0vw;
   animation: slideRight 0.5s linear 1;
@@ -66,6 +79,10 @@ $colorGreen: #00af87;
   width: 75%;
   height: fit-content;
   margin: $gapL auto;
+}
+
+.sideMenuList {
+  margin: $gapS;
 }
 
 .sideMenuList:last-child {

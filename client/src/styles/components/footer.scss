@@ -20,6 +20,22 @@ ul {
   color: white;
 }
 
+@media only screen and (min-width: 1024px) {
+  .footer > ul > li {
+    width: fit-content;
+    cursor: pointer;
+  }
+  .footer > ul > li:hover {
+    color: black;
+  }
+}
+
+@media only screen and (min-width: 1920px) {
+  .footer > ul > li {
+    width: 100%;
+  }
+}
+
 //Footer category
 
 .footerCategory {
@@ -27,9 +43,32 @@ ul {
   padding: $gapM;
 }
 
+@media only screen and (min-width: 768px) {
+  .footerCategory {
+    margin: 115px auto 0px auto;
+    width: 75%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .footerCategory {
+    width: 50%;
+  }
+}
+
 .footerCategoryTitle {
   font-weight: bold;
   font-size: $fontL;
+}
+
+.footerCategoryText {
+  font-size: $fontS;
+}
+
+@media only screen and (min-width: 520px) {
+  .footerCategoryText {
+    font-size: $fontM;
+  }
 }
 
 .footerGoBackButtonDiv {
@@ -47,4 +86,15 @@ ul {
   height: fit-content;
   position: absolute;
   right: $gapM;
+}
+
+@media only screen and (min-width: 1024px) {
+  .footerGoBackButtonDiv > button {
+    font-size: $fontM;
+    cursor: pointer;
+  }
+
+  .footerGoBackButtonDiv > button:hover {
+    color: black;
+  }
 }

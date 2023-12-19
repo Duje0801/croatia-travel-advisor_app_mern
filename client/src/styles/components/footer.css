@@ -10,16 +10,51 @@ ul {
   color: white;
 }
 
+@media only screen and (min-width: 1024px) {
+  .footer > ul > li {
+    width: -moz-fit-content;
+    width: fit-content;
+    cursor: pointer;
+  }
+  .footer > ul > li:hover {
+    color: black;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .footer > ul > li {
+    width: 100%;
+  }
+}
 .footerCategory {
   margin-top: 75px;
   padding: 10px;
 }
 
+@media only screen and (min-width: 768px) {
+  .footerCategory {
+    margin: 115px auto 0px auto;
+    width: 75%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .footerCategory {
+    width: 50%;
+  }
+}
 .footerCategoryTitle {
   font-weight: bold;
   font-size: 1.5rem;
 }
 
+.footerCategoryText {
+  font-size: 1rem;
+}
+
+@media only screen and (min-width: 520px) {
+  .footerCategoryText {
+    font-size: 1.25rem;
+  }
+}
 .footerGoBackButtonDiv {
   position: relative;
   height: 41.6px;
@@ -36,4 +71,14 @@ ul {
   height: fit-content;
   position: absolute;
   right: 10px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .footerGoBackButtonDiv > button {
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+  .footerGoBackButtonDiv > button:hover {
+    color: black;
+  }
 }/*# sourceMappingURL=footer.css.map */

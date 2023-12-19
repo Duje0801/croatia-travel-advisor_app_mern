@@ -8,6 +8,17 @@
   margin-top: calc(75px + 2.5vh);
 }
 
+@media only screen and (min-width: 768px) {
+  .homeMessageText {
+    margin-top: calc(90px + 2.5vh);
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .homeMessageText {
+    font-size: 1.25rem;
+    margin-top: 115px;
+  }
+}
 .homeSearchBar {
   position: absolute;
   width: 80%;
@@ -23,6 +34,16 @@
   z-index: 2;
 }
 
+@media only screen and (min-width: 768px) {
+  .homeSearchBar {
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .homeSearchBar {
+    width: 40%;
+  }
+}
 .homeSearchBar > form {
   display: flex;
 }
@@ -34,6 +55,12 @@
   margin: 10px 0px 10px 10px;
 }
 
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .homeSearchBarIcon {
+    height: 42.4px;
+    width: 42.4px;
+  }
+}
 .homeSearchBarIcon > svg {
   position: absolute;
   height: -moz-fit-content;
@@ -55,6 +82,11 @@
   border: none;
 }
 
+@media only screen and (min-width: 1024px) {
+  .homeSearchBar > form > input {
+    font-size: 1.25rem;
+  }
+}
 .homeSearchBar > form > button {
   display: none;
 }
@@ -71,6 +103,18 @@
   z-index: 2;
 }
 
+@media only screen and (min-width: 768px) {
+  .homeSearchResults {
+    top: calc(50% + 35.2px);
+    width: 50%;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .homeSearchResults {
+    top: calc(50% + 27.2px);
+    width: 40%;
+  }
+}
 .homeSearchResultsSingle,
 .homeSearchResultsMultiple {
   display: flex;
@@ -97,6 +141,18 @@
   border-bottom: 1px solid black;
 }
 
+@media only screen and (min-width: 1024px) {
+  .homeSearchResultsSingle:hover, .homeSearchResultsMultiple:hover {
+    background-color: #00af87;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .homeSearchResultsSingle,
+  .homeSearchResultsMultiple {
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+}
 .homeSearchError {
   position: absolute;
   display: flex;
@@ -114,11 +170,48 @@
   z-index: 2;
 }
 
+@media only screen and (min-width: 768px) {
+  .homeSearchError {
+    top: calc(50% + 40px);
+    width: calc(50% - 20px);
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .homeSearchError {
+    top: calc(50% + 30px);
+    width: calc(40% - 20px);
+  }
+}
 .homeContainer {
   position: relative;
   margin: 5vh 0px;
 }
 
+@media only screen and (orientation: landscape) {
+  .homeContainer {
+    width: 60%;
+    margin: 5vh auto;
+  }
+}
+@media only screen and (min-width: 768px) {
+  .homeContainer {
+    width: 75%;
+    max-height: 350px;
+    margin: 5vh auto;
+    overflow: hidden;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .homeContainer {
+    max-height: 400px;
+    overflow: hidden;
+  }
+}
+@media only screen and (min-width: 1920px) {
+  .homeContainer {
+    width: 50%;
+  }
+}
 .homeContainerImg {
   width: 100%;
 }
@@ -139,6 +232,12 @@
   font-size: 1.25rem;
 }
 
+@media only screen and (min-width: 1024px) {
+  .homeContainerText {
+    font-size: 1.25rem;
+    right: 60%;
+  }
+}
 .homeContainerText > div {
   font-weight: 300;
 }
@@ -152,6 +251,12 @@
   margin-top: 10px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .homeContainerText > button {
+    font-size: 1.25rem;
+    cursor: pointer;
+  }
+}
 .homeTrendingBlackColor {
   color: black;
 }/*# sourceMappingURL=home.css.map */

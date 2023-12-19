@@ -10,14 +10,31 @@ import "../../styles/components/navigation.css";
 export default function Navigation() {
   const [openMenu, setOpenMenu] = useState(false);
 
-  const { user } = useContext(UserContext);
+  const { user, dispatch } = useContext(UserContext);
 
   const navigate = useNavigate();
 
   const isSignedIn = () => {
     //If user is  logged in
     if (user)
-      return <div className="navHelloMessage">Hi, {user.username}!</div>;
+      return (
+        <div>
+          <div className="navHelloMessage">Hi, {user.username}!</div>{" "}
+          <div className="navAdminButtons">
+            {user?.username === `admin` ? (
+              <>
+                <button onClick={handleToAllUsers}>Users</button>
+                <button onClick={handleAddNewDestination}>
+                  Add new destination
+                </button>
+              </>
+            ) : (
+              <button onClick={handleToMyProfile}>My profile</button>
+            )}
+            <button onClick={handleSignOut}>Sign Out</button>
+          </div>
+        </div>
+      );
     //If user is not logged in
     else
       return (
@@ -35,10 +52,30 @@ export default function Navigation() {
     navigate(routes.logIn);
   };
 
+  const handleToAllUsers = () => {
+    navigate(routes.allUsers);
+  };
+
+  const handleAddNewDestination = () => {
+    navigate(routes.newDestination);
+  };
+
+  const handleToMyProfile = () => {
+    navigate(`${routes.user}/${user.username}`);
+  };
+
+  const handleSignOut = () => {
+    localStorage.removeItem("user");
+    dispatch({ type: "DELETE" });
+  };
+
   return (
     <div>
       <div className="nav">
-        <RxHamburgerMenu onClick={() => setOpenMenu(true)} />
+        <RxHamburgerMenu
+          className="navIcon"
+          onClick={() => setOpenMenu(true)}
+        />
         <div className="navCentral" onClick={handleTitleClick}>
           <img src={logo} alt="logo"></img>
           <div>Croatia Travel Advisor</div>

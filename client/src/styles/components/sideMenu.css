@@ -27,6 +27,17 @@
   z-index: 3;
 }
 
+@media only screen and (min-width: 768px) {
+  .sideMenu {
+    width: 60vw;
+    padding: 10px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .sideMenu {
+    display: none;
+  }
+}
 .sideMenuToRight {
   left: 0vw;
   animation: slideRight 0.5s linear 1;
@@ -54,6 +65,10 @@
   height: -moz-fit-content;
   height: fit-content;
   margin: 15px auto;
+}
+
+.sideMenuList {
+  margin: 5px;
 }
 
 .sideMenuList:last-child {

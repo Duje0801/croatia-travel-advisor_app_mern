@@ -56,10 +56,18 @@ router.route(`/resetPassword`).patch(authController.resetPassword);
 
 router
   .route(`/updatePassword`)
-  .patch(authController.protect, userController.updatePassword);
+  .patch(
+    authController.protect,
+    authController.restrictTo(`user`),
+    userController.updatePassword
+  );
 
 router
   .route(`/updateEmail`)
-  .patch(authController.protect, userController.updateEmail);
+  .patch(
+    authController.protect,
+    authController.restrictTo(`user`),
+    userController.updateEmail
+  );
 
 module.exports = router;

@@ -4,14 +4,16 @@ import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/home/navigation";
 import Pagination from "../../components/pagination/pagination";
 import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
 import { routes } from "../../routes/routes";
 import axios from "axios";
-import "../../styles/pages/allUsers.css";
+import "../../styles/pages/userList.css";
 
-export default function AllUsers() {
+export default function UserList() {
   const [users, setUsers] = useState([]);
   const [usersNo, setUsersNo] = useState(0);
   const [page, setPage] = useState(1);
+  const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(``);
 
   const { user } = useContext(UserContext);
@@ -25,7 +27,7 @@ export default function AllUsers() {
       if (!user?.token) return;
       else {
         axios
-          .get(`http://localhost:4000/api/user/allUsers/?page=${page}`, {
+          .get(`http://localhost:4000/api/user/userList/?page=${page}`, {
             headers: {
               "content-type": "application/json",
               authorization: `Bearer ${user.token}`,
@@ -34,6 +36,7 @@ export default function AllUsers() {
           .then((res) => {
             setUsers(res.data.data);
             setUsersNo(res.data.quantity);
+            setIsLoading(false);
           })
           .catch((err) => {
             if (err?.response?.data?.error) {
@@ -41,6 +44,7 @@ export default function AllUsers() {
             } else {
               setError(`Can't get users, please try again later.`);
             }
+            setIsLoading(false);
             window.scrollTo({
               top: 0,
               behavior: "smooth",
@@ -51,7 +55,7 @@ export default function AllUsers() {
     fetchData();
   }, [page, user]);
 
-  const handleUsernameClick = (username) => {
+  const handleUserClick = (username) => {
     navigate(`${routes.user}/${username}`);
   };
 
@@ -59,10 +63,8 @@ export default function AllUsers() {
     users &&
     users.map((userInfo, i) => {
       return (
-        <tr key={i}>
-          <td onClick={() => handleUsernameClick(userInfo.username)}>
-            {userInfo.username}
-          </td>
+        <tr onClick={() => handleUserClick(userInfo.username)} key={i}>
+          <td>{userInfo.username}</td>
           <td>{userInfo.email}</td>
           <td>{userInfo.active ? `Yes` : `No`}</td>
         </tr>
@@ -71,13 +73,14 @@ export default function AllUsers() {
 
   if (user?.username !== `admin`)
     return <Redirect message={`Only admin have access to this page`} />;
+  else if (isLoading) return <Loading />;
   else
     return (
       <div>
         <Navigation />
-        <div className="allUsersTitle">All users list:</div>
-        <div className="allUsersError">{error}</div>
-        <table className="allUsersTable">
+        <div className="userListTitle">User list:</div>
+        <div className="userListError">{error}</div>
+        <table className="userListTable">
           <thead>
             <tr>
               <th>Username</th>
@@ -87,8 +90,8 @@ export default function AllUsers() {
           </thead>
           <tbody>{mappedUsers}</tbody>
         </table>
-        <div className="allUsersExplanation">
-          For profile details click on username
+        <div className="userListExplanation">
+          For profile details click on username, email or active status
         </div>
         <Pagination
           totalLength={usersNo}

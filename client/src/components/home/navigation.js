@@ -23,7 +23,7 @@ export default function Navigation() {
           <div className="navAdminButtons">
             {user?.username === `admin` ? (
               <>
-                <button onClick={() => redirect(`allUsers`)}>Users</button>
+                <button onClick={() => redirect(`userList`)}>Users</button>
                 <button onClick={() => redirect(`addNewDestination`)}>
                   Add new destination
                 </button>
@@ -47,7 +47,7 @@ export default function Navigation() {
   const redirect = (to) => {
     if (to === `home`) navigate(routes.home);
     else if (to === `logIn`) navigate(routes.logIn);
-    else if (to === `allUsers`) navigate(routes.allUsers);
+    else if (to === `userList`) navigate(routes.userList);
     else if (to === `addNewDestination`) navigate(routes.newDestination);
     else if (to === `myProfile`) navigate(`${routes.user}/${user.username}`);
     else if (to === `nature`) navigate(`${routes.category}/${to}`);

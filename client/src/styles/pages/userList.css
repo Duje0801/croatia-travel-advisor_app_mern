@@ -1,0 +1,77 @@
+th {
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) {
+  th, td {
+    font-size: 1.25rem;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  td {
+    cursor: pointer;
+  }
+}
+.userListTitle {
+  text-align: center;
+  font-size: 1.5rem;
+  font-weight: bold;
+  margin: 95px 0px 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .userListTitle {
+    font-size: 2rem;
+    margin: 110px auto 20px;
+    width: 60%;
+  }
+}
+.userListTable {
+  border: 2px solid black;
+  padding: 10px;
+  height: -moz-fit-content;
+  height: fit-content;
+  margin: 20px auto;
+  box-shadow: 2px 2px rgba(136, 136, 136, 0.4549019608);
+  font-size: 0.9rem;
+  min-width: 90%;
+}
+
+@media only screen and (min-width: 768px) {
+  .userListTable {
+    min-width: 60%;
+  }
+}
+.userListExplanation {
+  font-size: 0.75rem;
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+@media only screen and (min-width: 768px) {
+  .userListExplanation {
+    font-size: 1.25rem;
+  }
+}
+.userDeleteQuestion {
+  border: 2px solid black;
+  padding: 5px;
+  text-align: center;
+}
+
+.userDeleteButton {
+  margin: 0px 5px;
+}
+
+.userListError {
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+  margin-bottom: 10px;
+}
+
+@media only screen and (min-width: 768px) {
+  .userListError {
+    font-size: 1.25rem;
+  }
+}/*# sourceMappingURL=userList.css.map */

@@ -12,7 +12,7 @@ import NewDestination from "./pages/admin/newDestination";
 import TermsOfUse from "./pages/footer/termsOfUse";
 import AboutUs from "./pages/footer/aboutUs";
 import Contact from "./pages/footer/contact";
-import AllUsers from "./pages/admin/allUsers";
+import UserList from "./pages/admin/userList";
 import UserProfile from "./pages/profile/userProfile";
 import { routes } from "./routes/routes";
 
@@ -71,8 +71,8 @@ export default function App() {
       element: <Contact />,
     },
     {
-      path: routes.allUsers,
-      element: <AllUsers />,
+      path: routes.userList,
+      element: <UserList />,
     },
     {
       path: `${routes.user}/:id`,

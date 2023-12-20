@@ -2,7 +2,7 @@ const bcrypt = require(`bcryptjs`);
 const catchAsync = require(`../utilis/catchAsync`);
 const User = require(`../model/userModel`);
 
-const allUsers = catchAsync(async function (req, res, next) {
+const userList = catchAsync(async function (req, res, next) {
   const skip = ((req.query.page * 1 || 1) - 1) * 10;
 
   const totalUsersNumber = await User.find().countDocuments().count();
@@ -212,7 +212,7 @@ const updateEmail = catchAsync(async function (req, res, next) {
 
 module.exports = {
   oneUser,
-  allUsers,
+  userList,
   deleteMe,
   deleteUser,
   activateUser,

@@ -12,6 +12,6 @@ export const routes = {
   termsOfUse: `/termsOfUse`,
   aboutUs: `/aboutUs`,
   contact: `/contact`,
-  allUsers: `/allUsers`,
+  userList: `/userList`,
   user: `/user`,
 };

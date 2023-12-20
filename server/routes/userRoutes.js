@@ -8,11 +8,11 @@ const authController = require(`../controllers/authorizationController`);
 router.route("/find/:id").get(authController.protect, userController.oneUser);
 
 router
-  .route("/allUsers")
+  .route("/userList")
   .get(
     authController.protect,
     authController.restrictTo(`admin`),
-    userController.allUsers
+    userController.userList
   );
 
 router.route("/signUp").post(authController.signUp);

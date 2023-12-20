@@ -18,10 +18,31 @@ $colorGreen: #00af87;
   box-shadow: 2px 2px #88888874;
 }
 
+@media only screen and (min-width: 768px) {
+  .newDestination {
+    margin: 110px auto 20px;
+    width: 60%;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .newDestination {
+    width: 33%;
+    padding: $gapM;
+    margin: 135px auto 20px;
+  }
+}
+
 .newDestinationTitle {
   font-size: $fontL;
   font-weight: bold;
   margin-bottom: $gapM;
+}
+
+@media only screen and (min-width: 1024px) {
+  .newDestinationTitle {
+    font-size: $fontXL;
+  }
 }
 
 .newDestinationForm {
@@ -48,6 +69,26 @@ $colorGreen: #00af87;
   border: 1px solid black;
 }
 
+@media only screen and (min-width: 1024px) {
+  .newDestinationForm > label {
+    font-size: $fontS;
+  }
+
+  .newDestinationForm > input {
+    font-size: $fontS;
+    border: 1px solid black;
+  }
+
+  .newDestinationForm > textarea {
+    font-size: $fontS;
+    border: 1px solid black;
+  }
+
+  .newDestinationForm > fieldset > div > label {
+    font-size: $fontS;
+  }
+}
+
 .newDestinationImageDescription {
   font-size: 0.75rem;
   text-align: left;
@@ -60,6 +101,13 @@ $colorGreen: #00af87;
   border: 0px;
   padding: $gapS 0px;
   width: 100%;
+}
+
+@media only screen and (min-width: 1024px) {
+  .newDestinationButtons {
+    font-size: $fontS;
+    cursor: pointer;
+  }
 }
 
 .newDestinationError {

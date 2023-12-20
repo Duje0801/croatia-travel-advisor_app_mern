@@ -1,0 +1,96 @@
+$fontS: 1rem;
+$fontM: 1.25rem;
+$fontL: 1.5rem;
+$fontXL: 2rem;
+$fontXXL: 2.5rem;
+$gapS: 5px;
+$gapM: 10px;
+$gapL: 15px;
+$gapXL: 20px;
+$colorGreen: #00af87;
+
+th {
+  text-align: left;
+}
+
+@media only screen and (min-width: 768px) {
+  th, td {
+    font-size: $fontM;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  td {
+    cursor: pointer
+  }
+}
+
+.userListTitle {
+  text-align: center;
+  font-size: $fontL;
+  font-weight: bold;
+  margin: 95px 0px $gapXL;
+}
+
+
+@media only screen and (min-width: 768px) {
+  .userListTitle {
+    font-size: $fontXL;
+    margin: 110px auto 20px;
+    width: 60%;
+  }
+}
+
+.userListTable {
+  border: 2px solid black;
+  padding: $gapM;
+  height: fit-content;
+  margin: 20px auto;
+  box-shadow: 2px 2px #88888874;
+  font-size: 0.9rem;
+  min-width: 90%;
+}
+
+@media only screen and (min-width: 768px) {
+  .userListTable {
+    min-width: 60%;
+  }
+}
+
+.userListExplanation{
+  font-size: 0.75rem;
+  text-align: center;
+  margin-bottom: $gapXL;
+}
+
+@media only screen and (min-width: 768px) {
+  .userListExplanation {
+    font-size: $fontM;
+  }
+}
+
+.userDeleteQuestion {
+  border: 2px solid black;
+  padding: $gapS;
+  text-align: center;
+}
+
+.userDeleteButton {
+  margin: 0px $gapS;
+}
+
+//Error
+
+.userListError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+  margin-bottom: $gapM;
+}
+
+@media only screen and (min-width: 768px) {
+  .userListError {
+    font-size: $fontM;
+  }
+}
+

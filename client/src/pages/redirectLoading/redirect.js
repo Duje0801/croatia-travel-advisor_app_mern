@@ -4,7 +4,7 @@ import Footer from "../../components/home/footer";
 import { routes } from "../../routes/routes";
 import "../../styles/pages/redirect.css";
 
-export default function Redirect({message}) {
+export default function Redirect({ message }) {
   const navigate = useNavigate();
 
   const handleHome = () => {
@@ -16,8 +16,9 @@ export default function Redirect({message}) {
       <Navigation />
       <div className="redirectBox">
         <div>
+          <div>{message}.</div>
           <div>
-            {message}. Go to{" "}
+            Go to{" "}
             <a className="redirectGoToHomePage" onClick={handleHome}>
               home page
             </a>

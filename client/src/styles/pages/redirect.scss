@@ -25,6 +25,18 @@ $colorGreen: #00af87;
   font-weight: bold;
 }
 
+@media only screen and (min-width: 1024px) {
+  .redirectBox {
+    font-size: $fontL;
+  }
+}
+
 .redirectGoToHomePage {
   color: $colorGreen;
+}
+
+@media only screen and (min-width: 1024px) {
+  .redirectGoToHomePage {
+    cursor: pointer
+  }
 }

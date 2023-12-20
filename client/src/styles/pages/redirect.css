@@ -14,6 +14,17 @@
   font-weight: bold;
 }
 
+@media only screen and (min-width: 1024px) {
+  .redirectBox {
+    font-size: 1.5rem;
+  }
+}
 .redirectGoToHomePage {
   color: #00af87;
+}
+
+@media only screen and (min-width: 1024px) {
+  .redirectGoToHomePage {
+    cursor: pointer;
+  }
 }/*# sourceMappingURL=redirect.css.map */

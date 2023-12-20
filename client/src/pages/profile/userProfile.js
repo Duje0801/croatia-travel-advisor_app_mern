@@ -211,8 +211,8 @@ export default function UserProfile() {
               setError={setError}
             />
           ) : null}
+          <div className="userProfileUserInfoTitle">User info:</div>
           <div className="userProfileData">
-            <div className="userProfileUserInfoTitle">User info:</div>
             {user.username === userProfile.username ||
             user.username === `admin` ? (
               <div>

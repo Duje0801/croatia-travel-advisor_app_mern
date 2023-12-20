@@ -15,8 +15,14 @@ $colorGreen: #00af87;
   margin: 95px auto auto auto;
   box-shadow: 2px 2px #88888874;
   font-size: $fontS;
-  width: fit-content;
-  min-width: 70%;
+  width: 80%;
+}
+
+@media only screen and (min-width: 768px) {
+  .userProfile {
+    margin: 135px auto 20px;
+    width: 60%;
+  }
 }
 
 .userProfileTitle {
@@ -26,7 +32,7 @@ $colorGreen: #00af87;
 
 .userProfileHeader {
   display: flex;
-  padding-bottom: $gapXL;
+  padding: $gapXL;
   border-bottom: 2px solid black;
 }
 
@@ -46,8 +52,26 @@ $colorGreen: #00af87;
   margin-left: $gapM;
 }
 
+@media only screen and (min-width: 768px) {
+  .userProfileButton {
+    font-size: $fontS;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .userProfileButton {
+    cursor: pointer;
+  }
+}
+
 .userProfileData {
   padding: 0px $gapXL;
+}
+
+@media only screen and (min-width: 768px) {
+  .userProfileData > div {
+    font-size: $fontM;
+  }
 }
 
 .userProfileActive {
@@ -74,11 +98,16 @@ $colorGreen: #00af87;
 
 .userProfileUserInfoTitle {
   margin: $gapXL 0px;
-  font-size: $fontL;
+  font-size: $fontM;
   font-weight: bold;
   text-align: center;
 }
 
+@media only screen and (min-width: 768px) {
+  .userProfileUserInfoTitle {
+    font-size: $fontL;
+  }
+}
 .userProfileReviewsTitle {
   margin: $gapXL 0px;
   padding: $gapXL 0px 0px 0px;
@@ -95,6 +124,12 @@ $colorGreen: #00af87;
   padding: $gapM;
   border: 2px solid black;
   text-align: justify;
+}
+
+@media only screen and (min-width: 1024px) {
+  .userProfileReview {
+    cursor: pointer;
+  }
 }
 
 .userProfileReviewBox {
@@ -114,6 +149,12 @@ $colorGreen: #00af87;
   margin: $gapXL 0px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .userProfileDeleteText {
+    font-size: $fontM;
+  }
+}
+
 .userProfileDeleteButtonsDiv {
   display: flex;
   justify-content: center;
@@ -129,6 +170,18 @@ $colorGreen: #00af87;
   font-size: $fontS;
   width: fit-content;
   border: 0px;
+}
+
+@media only screen and (min-width: 768px) {
+  .userProfileDeleteButtons {
+    padding: $gapS $gapM;
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .userProfileDeleteButtons {
+    cursor: pointer;
+  }
 }
 
 //Error

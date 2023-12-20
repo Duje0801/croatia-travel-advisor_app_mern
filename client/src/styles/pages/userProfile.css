@@ -4,11 +4,15 @@
   margin: 95px auto auto auto;
   box-shadow: 2px 2px rgba(136, 136, 136, 0.4549019608);
   font-size: 1rem;
-  width: -moz-fit-content;
-  width: fit-content;
-  min-width: 70%;
+  width: 80%;
 }
 
+@media only screen and (min-width: 768px) {
+  .userProfile {
+    margin: 135px auto 20px;
+    width: 60%;
+  }
+}
 .userProfileTitle {
   font-size: 2rem;
   text-decoration: underline;
@@ -16,7 +20,7 @@
 
 .userProfileHeader {
   display: flex;
-  padding-bottom: 20px;
+  padding: 20px;
   border-bottom: 2px solid black;
 }
 
@@ -37,10 +41,25 @@
   margin-left: 10px;
 }
 
+@media only screen and (min-width: 768px) {
+  .userProfileButton {
+    font-size: 1rem;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .userProfileButton {
+    cursor: pointer;
+  }
+}
 .userProfileData {
   padding: 0px 20px;
 }
 
+@media only screen and (min-width: 768px) {
+  .userProfileData > div {
+    font-size: 1.25rem;
+  }
+}
 .userProfileActive {
   display: flex;
 }
@@ -65,11 +84,16 @@
 
 .userProfileUserInfoTitle {
   margin: 20px 0px;
-  font-size: 1.5rem;
+  font-size: 1.25rem;
   font-weight: bold;
   text-align: center;
 }
 
+@media only screen and (min-width: 768px) {
+  .userProfileUserInfoTitle {
+    font-size: 1.5rem;
+  }
+}
 .userProfileReviewsTitle {
   margin: 20px 0px;
   padding: 20px 0px 0px 0px;
@@ -86,6 +110,11 @@
   text-align: justify;
 }
 
+@media only screen and (min-width: 1024px) {
+  .userProfileReview {
+    cursor: pointer;
+  }
+}
 .userProfileReviewBox {
   display: flex;
 }
@@ -101,6 +130,11 @@
   margin: 20px 0px;
 }
 
+@media only screen and (min-width: 1024px) {
+  .userProfileDeleteText {
+    font-size: 1.25rem;
+  }
+}
 .userProfileDeleteButtonsDiv {
   display: flex;
   justify-content: center;
@@ -119,6 +153,16 @@
   border: 0px;
 }
 
+@media only screen and (min-width: 768px) {
+  .userProfileDeleteButtons {
+    padding: 5px 10px;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .userProfileDeleteButtons {
+    cursor: pointer;
+  }
+}
 .userProfileError {
   font-size: 1rem;
   text-align: center;

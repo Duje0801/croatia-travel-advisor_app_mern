@@ -1,16 +1,14 @@
-const express = require("express");
-const mongoose = require("mongoose");
-const dotenv = require(`dotenv`);
-const helmet = require(`helmet`);
-const rateLimit = require(`express-rate-limit`);
-const mongoSanatize = require(`express-mongo-sanitize`);
-const cors = require(`cors`);
+import express from "express";
+import mongoose from "mongoose";
+import dotenv from "dotenv";
+import helmet from "helmet";
+import rateLimit from "express-rate-limit";
+import ExpressMongoSanitize from "express-mongo-sanitize";
+import cors from "cors";
 
-const destinationRoutes = require("./routes/destinationRoutes");
-const reviewRoutes = require("./routes/reviewRoutes");
-const userRoutes = require("./routes/userRoutes");
-
-const errorHandling = require("./utilis/errorHandler");
+import { router as destinationRoutes } from "./routes/destinationRoutes";
+import { router as reviewRoutes } from "./routes/reviewRoutes";
+import { router as userRoutes } from "./routes/userRoutes";
 
 const app = express();
 
@@ -19,7 +17,7 @@ dotenv.config();
 app.use(express.json({ limit: `10kb` }));
 
 //$ in unusable in input (for example logging only knowing password)
-app.use(mongoSanatize());
+app.use(ExpressMongoSanitize());
 
 //Additional security (headers)
 app.use(helmet());
@@ -30,8 +28,8 @@ app.use(helmet());
   windowMs: 1800000,
   message: `Too many requests from this IP address, please try again in 30 minutes.`,
 });
-app.use(`/api`, limitRequests);
- */
+app.use(`/api`, limitRequests); */
+
 //Allows access from other domains (front-end)
 app.use(cors());
 
@@ -58,6 +56,3 @@ const PORT = process.env.PORT;
 app.listen(PORT, () => {
   console.log(`Server working on port ${PORT}`);
 });
-
-//Global error handler, catches errors
-app.use(errorHandling);

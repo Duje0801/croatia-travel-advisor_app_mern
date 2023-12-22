@@ -1,7 +1,9 @@
-const mongoose = require(`mongoose`);
-const validator = require(`validator`);
+import { Schema, model } from "mongoose";
+import { Review } from "./reviewModel";
+import validator from "validator";
+import { IUser } from "../interfaces/user";
 
-const userSchema = new mongoose.Schema(
+const userSchema = new Schema(
   {
     username: {
       type: String,
@@ -38,14 +40,13 @@ const userSchema = new mongoose.Schema(
       type: String,
       enum: ["admin", "user"],
       default: `user`,
-      select: false,
     },
     createdAt: {
       type: Date,
       default: Date.now(),
     },
-    restartPasswordCode: String,
-    restartPasswordCodeExpire: Date,
+    restartPasswordCode: { type: String, select: false },
+    restartPasswordCodeExpire: { type: Date, select: false },
   },
   {
     toJSON: { virtuals: true },
@@ -54,11 +55,11 @@ const userSchema = new mongoose.Schema(
 );
 
 userSchema.virtual(`reviews`, {
-  ref: "Review",
+  ref: Review,
   localField: "_id",
   foreignField: "user.id",
 });
 
-const User = mongoose.model(`User`, userSchema);
+const User = model<IUser>(`User`, userSchema);
 
-module.exports = User;
+export { User };

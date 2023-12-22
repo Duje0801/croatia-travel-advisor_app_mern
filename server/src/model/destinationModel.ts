@@ -1,16 +1,14 @@
-const mongoose = require(`mongoose`);
+import { Schema, model } from "mongoose";
+import { IDestination } from "../interfaces/destination";
+import { Review } from "./reviewModel";
 
-const destinationSchema = new mongoose.Schema(
+const destinationSchema = new Schema(
   {
     name: {
       type: String,
       required: [true, `Destination name is mandatory`],
-      unique: [
-        true,
-        `the destination must have a unique name
-        `,
-      ],
-      minLength: [3, `The destination name must contain 3 or more characters`],
+      unique: [true, `Destination must have a unique name`],
+      minLength: [3, `Destination name must contain 3 or more characters`],
       maxLength: [
         20,
         `The maximum number of characters allowed in the destination name is 20`,
@@ -21,7 +19,7 @@ const destinationSchema = new mongoose.Schema(
       required: [true, `Destination description is mandatory`],
       minLength: [
         20,
-        `The destination description must contain 20 or more characters`,
+        `Destination description must contain 20 or more characters`,
       ],
       maxLength: [
         500,
@@ -46,11 +44,12 @@ const destinationSchema = new mongoose.Schema(
     },
     category: {
       type: [String],
-      validate: (v) => v.length > 0,
+      validate: (v: string) => v.length > 0,
     },
     createdAt: {
       type: Date,
       default: Date.now(),
+      select: false,
     },
   },
   {
@@ -59,12 +58,12 @@ const destinationSchema = new mongoose.Schema(
   }
 );
 
-destinationSchema.virtual(`reviews`, {
-  ref: "Review",
+destinationSchema.virtual("reviews", {
+  ref: Review,
   localField: "_id",
   foreignField: "destination.id",
 });
 
-const Destination = mongoose.model(`Destination`, destinationSchema);
+const Destination = model<IDestination>("Destination", destinationSchema);
 
-module.exports = Destination;
+export { Destination };

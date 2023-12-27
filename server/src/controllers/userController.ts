@@ -46,6 +46,7 @@ const oneUser: any = async function (req: Request, res: Response) {
       username: params,
     }).populate({
       path: `reviews`,
+      options: { sort: { createdAt: -1 } },
     });
 
     if (!user) {
@@ -103,6 +104,7 @@ const activationUser: any = async function (req: Request, res: Response) {
   try {
     const user: IUser | null = await User.findById(req.body.data).populate({
       path: `reviews`,
+      options: { sort: { createdAt: -1 } },
     });
 
     if (!user)

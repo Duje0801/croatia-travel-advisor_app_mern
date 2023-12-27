@@ -46,16 +46,8 @@ const destinationSchema = new Schema(
       type: [String],
       validate: (v: string) => v.length > 0,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-      select: false,
-    },
   },
-  {
-    toJSON: { virtuals: true },
-    toObject: { virtuals: true },
-  }
+  { timestamps: true, toJSON: { virtuals: true }, toObject: { virtuals: true } }
 );
 
 destinationSchema.virtual("reviews", {

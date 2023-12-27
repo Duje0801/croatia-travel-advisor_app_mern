@@ -41,14 +41,11 @@ const userSchema = new Schema(
       enum: ["admin", "user"],
       default: `user`,
     },
-    createdAt: {
-      type: Date,
-      default: Date.now(),
-    },
     restartPasswordCode: { type: String, select: false },
     restartPasswordCodeExpire: { type: Date, select: false },
   },
   {
+    timestamps: true,
     toJSON: { virtuals: true },
     toObject: { virtuals: true },
   }

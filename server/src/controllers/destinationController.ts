@@ -12,6 +12,7 @@ const getOneDestination: any = async function (req: Request, res: Response) {
       name: params,
     }).populate({
       path: `reviews`,
+      options: { sort: { createdAt: -1 } },
     });
 
     if (!destination)
@@ -69,11 +70,7 @@ const getCategory: any = async function (req: Request, res: Response) {
 
     //Checks if destination exists
     if (!destination || destination.length < 1)
-      return errorResponse(
-        `Can't find any destination`,
-        res,
-        404
-      );
+      return errorResponse(`Can't find any destination`, res, 404);
 
     res.status(200).json({
       status: `success`,
@@ -100,7 +97,11 @@ const createDestination: any = async function (req: Request, res: Response) {
     });
 
     if (!newDestination)
-      return errorResponse(`Can't create new destination, please try again later`, res, 404);
+      return errorResponse(
+        `Can't create new destination, please try again later`,
+        res,
+        404
+      );
 
     res.status(201).json({ status: `success`, destination: newDestination });
   } catch (error) {
@@ -131,6 +132,7 @@ const updateDestination: any = async function (req: Request, res: Response) {
         }
       ).populate({
         path: `reviews`,
+        options: { sort: { createdAt: -1 } },
       });
 
     if (!updatedDestination)

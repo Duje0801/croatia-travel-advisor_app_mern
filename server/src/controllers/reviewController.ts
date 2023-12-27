@@ -39,6 +39,7 @@ const createReview: any = async function (req: ReqUser, res: Response) {
       newReview.destination.id
     ).populate({
       path: `reviews`,
+      options: { sort: { createdAt: -1 } },
     });
 
     if (!updatedDestination)
@@ -109,6 +110,7 @@ const updateReview: any = async function (req: ReqUser, res: Response) {
       updatedReview.destination.id
     ).populate({
       path: `reviews`,
+      options: { sort: { createdAt: -1 } },
     });
 
     res.status(200).json({
@@ -145,6 +147,7 @@ const deleteReview: any = async function (req: ReqUser, res: Response) {
       getReview.destination.id
     ).populate({
       path: `reviews`,
+      options: { sort: { createdAt: -1 } },
     });
 
     if (!updatedDestination)

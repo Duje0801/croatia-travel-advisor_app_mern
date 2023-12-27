@@ -99,33 +99,7 @@ const deleteUser: any = async function (req: Request, res: Response) {
   }
 };
 
-const activateUser: any = async function (req: Request, res: Response) {
-  try {
-    const user: IUser | null = await User.findById(req.body.data).populate({
-      path: `reviews`,
-    });
-
-    if (!user)
-      return errorResponse(
-        "Can't find and activate user with this ID",
-        res,
-        404
-      );
-
-    user.active = true;
-    await user.save();
-
-    res.status(200).json({
-      status: `success`,
-      data: user,
-      message: "User is active again!",
-    });
-  } catch (error) {
-    errorHandler(error, req, res);
-  }
-};
-
-const deactivateUser: any = async function (req: Request, res: Response) {
+const activationUser: any = async function (req: Request, res: Response) {
   try {
     const user: IUser | null = await User.findById(req.body.data).populate({
       path: `reviews`,
@@ -138,7 +112,9 @@ const deactivateUser: any = async function (req: Request, res: Response) {
         404
       );
 
-    user.active = false;
+    if (user.active === true) user.active = false;
+    else if (user.active === false) user.active = true;
+
     await user.save();
 
     res.status(200).json({
@@ -227,8 +203,7 @@ export {
   userList,
   deleteMe,
   deleteUser,
-  activateUser,
-  deactivateUser,
+  activationUser,
   updatePassword,
   updateEmail,
 };

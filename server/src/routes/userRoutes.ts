@@ -5,8 +5,7 @@ import {
   userList,
   deleteMe,
   deleteUser,
-  activateUser,
-  deactivateUser,
+  activationUser,
   updatePassword,
   updateEmail,
 } from "../controllers/userController";
@@ -34,11 +33,9 @@ router.route("/deleteMe").patch(protect, restrictTo(`user`), deleteMe);
 
 router.route("/deleteUser").delete(protect, restrictTo(`admin`), deleteUser);
 
-router.route("/activateUser").patch(protect, restrictTo(`admin`), activateUser);
-
 router
-  .route("/deactivateUser")
-  .patch(protect, restrictTo(`admin`), deactivateUser);
+  .route("/activationUser")
+  .patch(protect, restrictTo(`admin`), activationUser);
 
 router.route("/forgotPassword").post(forgotPassword);
 

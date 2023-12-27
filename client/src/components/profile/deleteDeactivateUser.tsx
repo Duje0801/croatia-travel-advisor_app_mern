@@ -50,10 +50,9 @@ export default function DeleteDeactivateUser(props: {
   };
 
   const handleActivateUser = async (): Promise<void> => {
-    const activate = props.userProfile.active ? `de` : ``;
     axios
       .patch(
-        `http://localhost:4000/api/user/${activate}activateUser/`,
+        `http://localhost:4000/api/user/activationUser`,
         { data: props.userProfile.id },
         {
           headers: {
@@ -71,7 +70,7 @@ export default function DeleteDeactivateUser(props: {
           props.setError(`${err.response.data.error}`);
         } else {
           props.setError(
-            `Can't ${activate}activate user. Please try again later`
+            `Can't change user active status. Please try again later`
           );
         }
       });

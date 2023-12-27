@@ -7,11 +7,13 @@ import { errorHandler } from "../utilis/errorHandler";
 const getOneDestination: any = async function (req: Request, res: Response) {
   try {
     const params: string = req.params.id;
+    const reviewId: string = req.params.reviewId;
 
     const destination: IDestination | null = await Destination.findOne({
       name: params,
     }).populate({
       path: `reviews`,
+      match: reviewId ? { _id: { $eq: reviewId } } : ``,
       options: { sort: { createdAt: -1 } },
     });
 

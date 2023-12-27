@@ -80,8 +80,8 @@ export default function UserProfile(): JSX.Element {
     navigate(-1);
   };
 
-  const handleRedirectDestination = (name: string): void => {
-    navigate(`${routes.destination}/${name}`);
+  const handleRedirectDestination = (name: string, reviewId: string): void => {
+    navigate(`${routes.destination}/${name}/${reviewId}`);
   };
 
   if (!state.user) {
@@ -119,7 +119,9 @@ export default function UserProfile(): JSX.Element {
             </div>
             <div
               className="userProfileReviewBox"
-              onClick={() => handleRedirectDestination(review.destination.name)}
+              onClick={() =>
+                handleRedirectDestination(review.destination.name, review._id)
+              }
             >
               <div>
                 <div className="userProfileReviewTitle">

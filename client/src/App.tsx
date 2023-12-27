@@ -75,7 +75,7 @@ export default function App(): JSX.Element {
       element: <Category />,
     },
     {
-      path: `${routes.destination}/:id`,
+      path: `${routes.destination}/:id/:reviewId?`,
       element: <Destination />,
     },
     {

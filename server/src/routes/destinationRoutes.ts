@@ -9,10 +9,7 @@ import {
   searchDestination,
 } from "../controllers/destinationController";
 
-import {
-  protect,
-  restrictTo,
-} from "../controllers/authorizationController";
+import { protect, restrictTo } from "../controllers/authorizationController";
 
 export const router: Router = express.Router();
 
@@ -23,7 +20,7 @@ router.route("/search/:id").get(searchDestination);
 router.route("/category/:id").get(getCategory);
 
 router
-  .route("/:id")
+  .route("/:id/:reviewId?")
   .get(getOneDestination)
   .patch(protect, restrictTo(`admin`), updateDestination)
   .delete(protect, restrictTo(`admin`), deleteDestination);

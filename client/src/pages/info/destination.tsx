@@ -1,4 +1,4 @@
-import { useEffect, useState, useContext } from "react";
+import { useEffect, useState, useContext, useRef } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navigation from "../../components/home/navigation";
 import { UserContext } from "../../context/userContext";
@@ -40,7 +40,11 @@ export default function Destination(): JSX.Element {
   useEffect(() => {
     const fetchData = async () => {
       axios
-        .get(`http://localhost:4000/api/destination/${params.id}`)
+        .get(
+          `http://localhost:4000/api/destination/${params.id}${
+            params?.reviewId ? `/${params.reviewId}` : ``
+          }`
+        )
         .then((res) => {
           const data: IDestination = res.data.data;
           setDestination(data);

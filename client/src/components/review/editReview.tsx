@@ -12,8 +12,11 @@ import axios from "axios";
 
 export default function EditReview(props: {
   review: IReview;
+  setReviews: Dispatch<SetStateAction<IReview[]>>;
   setEditId: Dispatch<SetStateAction<string>>;
   setDestination: Dispatch<SetStateAction<IDestination | null>>;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [editTitle, setEditTitle] = useState<string>(props.review.title);
@@ -26,12 +29,12 @@ export default function EditReview(props: {
 
   const handleEditSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
-
     axios
       .patch(
         `http://localhost:4000/api/review/${props.review._id}`,
         {
           data: {
+            page: props.page,
             title: editTitle,
             text: editText,
             rating: editRating,
@@ -47,9 +50,10 @@ export default function EditReview(props: {
       .then((res) => {
         const data: IDestination = res.data.data;
         props.setDestination(data);
-        props.setEditId("");
+        props.setReviews(data.reviews);
+        props.setEditId(``);
         props.setError(``);
-
+        
         window.scrollTo({
           top: 0,
           behavior: "smooth",

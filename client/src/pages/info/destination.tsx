@@ -1,4 +1,5 @@
-import { useEffect, useState, useContext, useRef } from "react";
+import { useEffect, useState, useContext,
+ } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navigation from "../../components/home/navigation";
 import { UserContext } from "../../context/userContext";
@@ -11,11 +12,15 @@ import Loading from "../redirectLoading/loading";
 import Reviews from "../../components/review/reviews";
 import Footer from "../../components/home/footer";
 import { IDestination } from "../../interfaces/IDestination";
+import { IReview } from "../../interfaces/IReview";
 import axios from "axios";
 import "../../styles/pages/destination.css";
 
 export default function Destination(): JSX.Element {
   const [destination, setDestination] = useState<IDestination | null>(null);
+  const [reviews, setReviews] = useState<IReview[]>([]);
+  const [page, setPage] = useState<number>(1);
+  const [isOpening, setIsOpening] = useState<boolean>(true)
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [editQuestion, setEditQuestion] = useState<boolean>(false);
@@ -43,11 +48,12 @@ export default function Destination(): JSX.Element {
         .get(
           `http://localhost:4000/api/destination/${params.id}${
             params?.reviewId ? `/${params.reviewId}` : ``
-          }`
+          }/?page=${page}`
         )
         .then((res) => {
           const data: IDestination = res.data.data;
           setDestination(data);
+          setReviews(data.reviews);
           setIsLoading(false);
           // In case of editing destination info, all data is already fetched and given to states
           // that can be changed (edited) later
@@ -74,6 +80,34 @@ export default function Destination(): JSX.Element {
     };
     fetchData();
   }, [params.id]);
+
+  useEffect((): void => {
+    const fetchData = () => {
+      //To avoid fetching when page opens for first time
+      if(isOpening) return setIsOpening(false)
+      //Blocks if user wants to see only one coment (link from user profile)
+      if(params.reviewId) return;
+      axios
+        .get(
+          `http://localhost:4000/api/review/destinationReviews/${params.id}/?page=${page}`
+        )
+        .then((res) => {
+          setReviews(res.data.data);
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
+        })
+        .catch((err) => {
+          if (err?.response?.data?.error) {
+            setError(`${err.response.data.error}`);
+          } else {
+            setError(`Something went wrong`);
+          }
+        });
+    };
+    fetchData();
+  }, [page]);
 
   const handleEditDestination = (): void => {
     setEditQuestion(editQuestion ? false : true);
@@ -175,6 +209,10 @@ export default function Destination(): JSX.Element {
           <Reviews
             destination={destination}
             setDestination={setDestination}
+            reviews={reviews}
+            setReviews={setReviews}
+            page={page}
+            setPage={setPage}
             setError={setError}
           />
         </>

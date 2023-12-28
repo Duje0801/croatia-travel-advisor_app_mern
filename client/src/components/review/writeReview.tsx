@@ -8,12 +8,14 @@ import {
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import { IDestination } from "../../interfaces/IDestination";
+import { IReview } from "../../interfaces/IReview";
 import { routes } from "../../routes/routes";
 import axios from "axios";
 
 export default function WriteReview(props: {
   destination: IDestination | null;
   setDestination: Dispatch<SetStateAction<IDestination | null>>;
+  setReviews: Dispatch<SetStateAction<IReview[]>>;
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [title, setTitle] = useState<string>(``);
@@ -51,6 +53,7 @@ export default function WriteReview(props: {
       .then((res) => {
         const data: IDestination = res.data.data;
         props.setDestination(data);
+        props.setReviews(data.reviews);
         setTitle(``);
         setText(``);
         setRating(``);

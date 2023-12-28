@@ -1,12 +1,15 @@
 import { useContext, Dispatch, SetStateAction } from "react";
 import { UserContext } from "../../context/userContext";
 import { IDestination } from "../../interfaces/IDestination";
+import { IReview } from "../../interfaces/IReview";
 import axios from "axios";
 
 export default function DeleteReview(props: {
+  setReviews: Dispatch<SetStateAction<IReview[]>>;
   deleteId: string;
   setDestination: Dispatch<SetStateAction<IDestination | null>>;
   handleDeleteId: (id: string) => void;
+  page: number;
   setPage: Dispatch<SetStateAction<number>>;
   setReviewError: Dispatch<SetStateAction<string>>;
   setError: Dispatch<SetStateAction<string>>;
@@ -22,9 +25,11 @@ export default function DeleteReview(props: {
         },
       })
       .then((res) => {
-        props.setDestination(res.data.data);
-        props.handleDeleteId(``);
+        const data: IDestination = res.data.data;
+        props.setDestination(data);
+        props.setReviews(data.reviews);
         props.setPage(1);
+        props.handleDeleteId(``);
 
         window.scrollTo({
           top: 0,

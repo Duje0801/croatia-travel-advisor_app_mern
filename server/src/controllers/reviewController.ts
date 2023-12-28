@@ -33,14 +33,17 @@ const createReview: any = async function (req: ReqUser, res: Response) {
 
     if (!newReview) return errorResponse(`Can't create new review`, res, 404);
 
-    await Review.calcAverageRatings(newReview.destination.id);
+    const destinationId: string = newReview.destination.id;
+
+    await Review.calcAverageRatings(destinationId);
 
     const updatedDestination: IDestination | null = await Destination.findById(
-      newReview.destination.id
+      destinationId
     ).populate({
       path: `reviews`,
-      options: { sort: { createdAt: -1 } },
-    });
+      match: { "destination.id": { $eq: destinationId } },
+      options: { sort: { createdAt: -1 }, limit: 5 },
+    })
 
     if (!updatedDestination)
       return errorResponse(
@@ -104,13 +107,19 @@ const updateReview: any = async function (req: ReqUser, res: Response) {
         400
       );
 
-    await Review.calcAverageRatings(updatedReview.destination.id);
+    const destinationId: string = updatedReview.destination.id;
+
+    await Review.calcAverageRatings(destinationId);
+
+    const page: number = Number(req.body.data.page);
+    const skip: number = ((page || 1) - 1) * 5;
 
     const updatedDestination: IDestination | null = await Destination.findById(
-      updatedReview.destination.id
+      destinationId
     ).populate({
       path: `reviews`,
-      options: { sort: { createdAt: -1 } },
+      match: { "destination.id": { $eq: destinationId } },
+      options: { sort: { createdAt: -1 }, skip: skip, limit: 5 },
     });
 
     res.status(200).json({
@@ -141,14 +150,17 @@ const deleteReview: any = async function (req: ReqUser, res: Response) {
 
     await Review.findByIdAndDelete(params);
 
-    await Review.calcAverageRatings(getReview.destination.id);
+    const destinationId: string = getReview.destination.id;
+
+    await Review.calcAverageRatings(destinationId);
 
     const updatedDestination: IDestination | null = await Destination.findById(
-      getReview.destination.id
+      destinationId
     ).populate({
       path: `reviews`,
-      options: { sort: { createdAt: -1 } },
-    });
+      match: { "destination.id": { $eq: destinationId } },
+      options: { sort: { createdAt: -1 }, limit: 5 },
+    })
 
     if (!updatedDestination)
       return errorResponse(
@@ -167,4 +179,28 @@ const deleteReview: any = async function (req: ReqUser, res: Response) {
   }
 };
 
-export { createReview, updateReview, deleteReview };
+const destinationReviews: any = async function (req: ReqUser, res: Response) {
+  try {
+    const params: string = req.params.id;
+    const page: number = Number(req.query.page);
+    const skip: number = ((page || 1) - 1) * 5;
+
+    const reviews = await Review.find({
+      "destination.name": params,
+    })
+      .sort({ createdAt: -1 })
+      .skip(skip)
+      .limit(5);
+
+    if (!reviews) return errorResponse(`Can't find any reviews.`, res, 400);
+
+    res.status(200).json({
+      status: `success`,
+      data: reviews,
+    });
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
+};
+
+export { createReview, updateReview, deleteReview, destinationReviews };

@@ -8,13 +8,19 @@ const getOneDestination: any = async function (req: Request, res: Response) {
   try {
     const params: string = req.params.id;
     const reviewId: string = req.params.reviewId;
+    const page: number = Number(req.query.page);
+    const skip: number = ((page || 1) - 1) * 5;
 
+    //Two populate cases, one if user needs only for one comment (link from user profile page) 
+    //and another case if user wants to see all comments
     const destination: IDestination | null = await Destination.findOne({
       name: params,
-    }).populate({
+    }).populate(reviewId ? {
       path: `reviews`,
-      match: reviewId ? { _id: { $eq: reviewId } } : ``,
-      options: { sort: { createdAt: -1 } },
+      match: { _id: { $eq: reviewId } }
+    } : {
+      path: `reviews`,
+      options: { sort: { createdAt: -1 }, skip: skip, limit: 5 },
     });
 
     if (!destination)

@@ -7,37 +7,34 @@ import {
 } from "react";
 import { UserContext } from "../../context/userContext";
 import ShowReviewStarComments from "../stars/showReviewStarComments";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import DeleteReview from "./deleteReview";
 import Pagination from "../pagination/pagination";
 import EditReview from "./editReview";
 import DateString from "../../logic/dateString";
 import EditDeleteReviewButtons from "./editDeleteReviewButtons";
 import { IDestination } from "../../interfaces/IDestination";
-import { routes } from "../../routes/routes";
 import { IReview } from "../../interfaces/IReview";
+import { routes } from "../../routes/routes";
 
 export default function ShowReviews(props: {
   destination: IDestination | null;
   setDestination: Dispatch<SetStateAction<IDestination | null>>;
+  reviews: IReview[];
+  setReviews: Dispatch<SetStateAction<IReview[]>>;
+  page: number;
+  setPage: Dispatch<SetStateAction<number>>;
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [editId, setEditId] = useState<string>(``);
   const [deleteId, setDeleteId] = useState<string>(``);
-  const [page, setPage] = useState<number>(1);
   const [reviewError, setReviewError] = useState<string>(``);
+
+  const params = useParams();
 
   const { state } = useContext(UserContext);
 
   const navigate = useNavigate();
-
-  useEffect((): void => {
-    //Every time page is changed, window is scrolling to top
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  }, [page]);
 
   useEffect((): void => {
     //Restarts error text when another delete review box opens
@@ -56,15 +53,8 @@ export default function ShowReviews(props: {
     navigate(`${routes.user}/${username}`);
   };
 
-  if (props.destination) {
-    const startSlice: number = page * 5 - 5;
-    const endSlice: number = page * 5;
-    const reviewsToShow: IReview[] = props.destination.reviews.slice(
-      startSlice,
-      endSlice
-    );
-
-    const reviewsToReturn: JSX.Element[] = reviewsToShow.map(
+  if (props.destination && props.reviews) {
+    const reviewsToReturn: JSX.Element[] = props.reviews.map(
       (review, i): JSX.Element => {
         return (
           <div className="review" key={i}>
@@ -95,10 +85,12 @@ export default function ShowReviews(props: {
             ) : null}
             {deleteId === review._id ? (
               <DeleteReview
+                setReviews={props.setReviews}
                 deleteId={deleteId}
                 setDestination={props.setDestination}
                 handleDeleteId={handleDeleteId}
-                setPage={setPage}
+                page={props.page}
+                setPage={props.setPage}
                 setReviewError={setReviewError}
                 setError={props.setError}
               />
@@ -107,8 +99,11 @@ export default function ShowReviews(props: {
             {editId === review._id ? (
               <EditReview
                 review={review}
+                setReviews={props.setReviews}
                 setEditId={setEditId}
                 setDestination={props.setDestination}
+                page={props.page}
+                setPage={props.setPage}
                 setError={props.setError}
               />
             ) : null}
@@ -121,12 +116,12 @@ export default function ShowReviews(props: {
       <div>
         {reviewsToReturn}
         <div>
-          <Pagination
-            totalLength={props.destination.reviews.length}
+          {!params.reviewId ? <Pagination
+            totalLength={props.destination.ratingQuantity}
             itemsPerPage={5}
-            page={page}
-            setPage={setPage}
-          />
+            page={props.page}
+            setPage={props.setPage}
+          />: null}
         </div>
       </div>
     );

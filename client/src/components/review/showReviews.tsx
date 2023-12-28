@@ -13,17 +13,11 @@ import Pagination from "../pagination/pagination";
 import EditReview from "./editReview";
 import DateString from "../../logic/dateString";
 import EditDeleteReviewButtons from "./editDeleteReviewButtons";
-import { IDestination } from "../../interfaces/IDestination";
+import { DestinationContext } from "../../context/destinationContext";
 import { IReview } from "../../interfaces/IReview";
 import { routes } from "../../routes/routes";
 
 export default function ShowReviews(props: {
-  destination: IDestination | null;
-  setDestination: Dispatch<SetStateAction<IDestination | null>>;
-  reviews: IReview[];
-  setReviews: Dispatch<SetStateAction<IReview[]>>;
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [editId, setEditId] = useState<string>(``);
@@ -33,6 +27,8 @@ export default function ShowReviews(props: {
   const params = useParams();
 
   const { state } = useContext(UserContext);
+  const { destination, reviews, page, setPage } =
+    useContext(DestinationContext);
 
   const navigate = useNavigate();
 
@@ -53,8 +49,8 @@ export default function ShowReviews(props: {
     navigate(`${routes.user}/${username}`);
   };
 
-  if (props.destination && props.reviews) {
-    const reviewsToReturn: JSX.Element[] = props.reviews.map(
+  if (destination && reviews) {
+    const reviewsToReturn: JSX.Element[] = reviews.map(
       (review, i): JSX.Element => {
         return (
           <div className="review" key={i}>
@@ -85,12 +81,8 @@ export default function ShowReviews(props: {
             ) : null}
             {deleteId === review._id ? (
               <DeleteReview
-                setReviews={props.setReviews}
                 deleteId={deleteId}
-                setDestination={props.setDestination}
                 handleDeleteId={handleDeleteId}
-                page={props.page}
-                setPage={props.setPage}
                 setReviewError={setReviewError}
                 setError={props.setError}
               />
@@ -99,11 +91,7 @@ export default function ShowReviews(props: {
             {editId === review._id ? (
               <EditReview
                 review={review}
-                setReviews={props.setReviews}
                 setEditId={setEditId}
-                setDestination={props.setDestination}
-                page={props.page}
-                setPage={props.setPage}
                 setError={props.setError}
               />
             ) : null}
@@ -116,12 +104,14 @@ export default function ShowReviews(props: {
       <div>
         {reviewsToReturn}
         <div>
-          {!params.reviewId ? <Pagination
-            totalLength={props.destination.ratingQuantity}
-            itemsPerPage={5}
-            page={props.page}
-            setPage={props.setPage}
-          />: null}
+          {!params.reviewId ? (
+            <Pagination
+              totalLength={destination.ratingQuantity}
+              itemsPerPage={5}
+              page={page}
+              setPage={setPage}
+            />
+          ) : null}
         </div>
       </div>
     );

@@ -7,15 +7,12 @@ import {
 } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
+import { DestinationContext } from "../../context/destinationContext";
 import { IDestination } from "../../interfaces/IDestination";
-import { IReview } from "../../interfaces/IReview";
 import { routes } from "../../routes/routes";
 import axios from "axios";
 
 export default function WriteReview(props: {
-  destination: IDestination | null;
-  setDestination: Dispatch<SetStateAction<IDestination | null>>;
-  setReviews: Dispatch<SetStateAction<IReview[]>>;
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [title, setTitle] = useState<string>(``);
@@ -26,15 +23,17 @@ export default function WriteReview(props: {
   const navigate = useNavigate();
 
   const { state } = useContext(UserContext);
+  const { destination, setDestination, setReviews } =
+    useContext(DestinationContext);
 
-  if (!props.destination) return <div></div>;
+  if (!destination) return <div></div>;
 
   const handleSendReview = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
     const destinationInRequest = {
-      id: props.destination?.id,
-      name: props.destination?.name,
+      id: destination?.id,
+      name: destination?.name,
     };
 
     axios
@@ -52,8 +51,8 @@ export default function WriteReview(props: {
       )
       .then((res) => {
         const data: IDestination = res.data.data;
-        props.setDestination(data);
-        props.setReviews(data.reviews);
+        setDestination(data);
+        setReviews(data.reviews);
         setTitle(``);
         setText(``);
         setRating(``);
@@ -84,9 +83,9 @@ export default function WriteReview(props: {
   // This function checks did user already reviewed destination
   // User can only review destination once
   const isReviewed = () => {
-    if (props.destination) {
+    if (destination) {
       let check = false;
-      for (let review of props.destination.reviews) {
+      for (let review of destination.reviews) {
         //Used for..of loop, so looping can finish earlier if needed review was found
         if (review.user.username === state.user?.username) {
           check = true;
@@ -98,7 +97,7 @@ export default function WriteReview(props: {
   };
 
   //If user is not logged in and the destination already has at least one review
-  if (!state.user?.username && props.destination.reviews.length > 0) {
+  if (!state.user?.username && destination.reviews.length > 0) {
     return (
       <div className="reviewWriteSignIn">
         Please{" "}
@@ -113,7 +112,7 @@ export default function WriteReview(props: {
     );
   }
   //If user is not logged in and the destination is not reviewed yet
-  else if (!state.user?.username && props.destination.reviews.length === 0) {
+  else if (!state.user?.username && destination.reviews.length === 0) {
     return (
       <div className="reviewWriteSignIn">
         {" "}

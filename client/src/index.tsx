@@ -1,6 +1,7 @@
 import ReactDOM from "react-dom/client";
 import App from "./App";
 import { UserProvider } from "./context/userContext";
+import { DestinationProvider } from "./context/destinationContext";
 import "./styles/index.css";
 
 const root: ReactDOM.Root = ReactDOM.createRoot(
@@ -9,7 +10,9 @@ const root: ReactDOM.Root = ReactDOM.createRoot(
 root.render(
   //<React.StrictMode>
   <UserProvider>
-    <App />
+    <DestinationProvider>
+      <App />
+    </DestinationProvider>
   </UserProvider>
   //</React.StrictMode>
 );

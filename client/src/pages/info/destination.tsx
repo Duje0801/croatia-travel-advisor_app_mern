@@ -1,8 +1,8 @@
-import { useEffect, useState, useContext,
- } from "react";
+import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import Navigation from "../../components/home/navigation";
 import { UserContext } from "../../context/userContext";
+import { DestinationContext } from "../../context/destinationContext";
 import ShowStars from "../../components/stars/showStars";
 import DestinationAdminOptions from "../../components/destination/destinationAdminOptions";
 import DeleteDestination from "../../components/destination/deleteDestination";
@@ -12,15 +12,11 @@ import Loading from "../redirectLoading/loading";
 import Reviews from "../../components/review/reviews";
 import Footer from "../../components/home/footer";
 import { IDestination } from "../../interfaces/IDestination";
-import { IReview } from "../../interfaces/IReview";
 import axios from "axios";
 import "../../styles/pages/destination.css";
 
 export default function Destination(): JSX.Element {
-  const [destination, setDestination] = useState<IDestination | null>(null);
-  const [reviews, setReviews] = useState<IReview[]>([]);
-  const [page, setPage] = useState<number>(1);
-  const [isOpening, setIsOpening] = useState<boolean>(true)
+  const [isOpening, setIsOpening] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [editQuestion, setEditQuestion] = useState<boolean>(false);
@@ -41,6 +37,8 @@ export default function Destination(): JSX.Element {
   const navigate = useNavigate();
 
   const { state } = useContext(UserContext);
+  const { destination, setDestination, setReviews, page } =
+    useContext(DestinationContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,9 +82,9 @@ export default function Destination(): JSX.Element {
   useEffect((): void => {
     const fetchData = () => {
       //To avoid fetching when page opens for first time
-      if(isOpening) return setIsOpening(false)
+      if (isOpening) return setIsOpening(false);
       //Blocks if user wants to see only one coment (link from user profile)
-      if(params.reviewId) return;
+      if (params.reviewId) return;
       axios
         .get(
           `http://localhost:4000/api/review/destinationReviews/${params.id}/?page=${page}`
@@ -206,15 +204,7 @@ export default function Destination(): JSX.Element {
           {destination.reviews?.length > 0 && (
             <div className="destinationReviewsTitle">Reviews:</div>
           )}
-          <Reviews
-            destination={destination}
-            setDestination={setDestination}
-            reviews={reviews}
-            setReviews={setReviews}
-            page={page}
-            setPage={setPage}
-            setError={setError}
-          />
+          <Reviews setError={setError} />
         </>
         <Footer />
       </div>

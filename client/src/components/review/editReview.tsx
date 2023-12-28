@@ -6,17 +6,14 @@ import {
   FormEvent,
 } from "react";
 import { UserContext } from "../../context/userContext";
+import { DestinationContext } from "../../context/destinationContext";
 import { IDestination } from "../../interfaces/IDestination";
 import { IReview } from "../../interfaces/IReview";
 import axios from "axios";
 
 export default function EditReview(props: {
   review: IReview;
-  setReviews: Dispatch<SetStateAction<IReview[]>>;
   setEditId: Dispatch<SetStateAction<string>>;
-  setDestination: Dispatch<SetStateAction<IDestination | null>>;
-  page: number;
-  setPage: Dispatch<SetStateAction<number>>;
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [editTitle, setEditTitle] = useState<string>(props.review.title);
@@ -26,6 +23,7 @@ export default function EditReview(props: {
   const [editReviewError, setEditReviewError] = useState<string>(``);
 
   const { state } = useContext(UserContext);
+  const { setDestination, setReviews, page } = useContext(DestinationContext);
 
   const handleEditSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -34,7 +32,7 @@ export default function EditReview(props: {
         `http://localhost:4000/api/review/${props.review._id}`,
         {
           data: {
-            page: props.page,
+            page: page,
             title: editTitle,
             text: editText,
             rating: editRating,
@@ -49,11 +47,11 @@ export default function EditReview(props: {
       )
       .then((res) => {
         const data: IDestination = res.data.data;
-        props.setDestination(data);
-        props.setReviews(data.reviews);
+        setDestination(data);
+        setReviews(data.reviews);
         props.setEditId(``);
         props.setError(``);
-        
+
         window.scrollTo({
           top: 0,
           behavior: "smooth",

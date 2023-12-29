@@ -15,7 +15,23 @@ const userList: any = async function (req: QueryInRequest, res: Response) {
     const page: number = Number(req.query.page);
     const skip: number = ((page || 1) - 1) * 10;
 
-    const totalUsersNumber: number | null = await User.find().countDocuments();
+    const params: string = req.params.id;
+
+    let usersFind: any = {};
+
+    if (params) {
+      usersFind = {
+        username: { $regex: new RegExp(params, "i") },
+      };
+    }
+
+    const users: IUser[] = await User.find(usersFind).skip(skip).limit(10);
+
+    if (!users[0]) return errorResponse("Can't find any users", res, 404);
+
+    const totalUsersNumber: number | null = await User.find(
+      usersFind
+    ).countDocuments();
 
     if (totalUsersNumber === null)
       return errorResponse(
@@ -23,11 +39,6 @@ const userList: any = async function (req: QueryInRequest, res: Response) {
         res,
         404
       );
-
-    const users: IUser[] | null = await User.find().skip(skip).limit(10);
-
-    if (!users || !users[0])
-      return errorResponse("Can't find any users", res, 404);
 
     res.status(200).json({
       status: `success`,

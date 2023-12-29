@@ -6,12 +6,13 @@ import Pagination from "../../components/pagination/pagination";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";
 import { IUser } from "../../interfaces/IUser";
+import { BiSearchAlt2 } from "react-icons/bi";
 import { routes } from "../../routes/routes";
 import axios from "axios";
 import "../../styles/pages/userList.css";
 
 export default function UserList(): JSX.Element {
-  const [users, setUsers] = useState([]);
+  const [users, setUsers] = useState<IUser[]>([]);
   const [usersNo, setUsersNo] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
   const [isLoading, setIsLoading] = useState<boolean>(true);
@@ -23,38 +24,74 @@ export default function UserList(): JSX.Element {
 
   //This page is available only if username is admin
 
-  useEffect((): void => {
-    const fetchData = async () => {
-      if (!state.user?.token) return;
-      else {
-        axios
-          .get(`http://localhost:4000/api/user/userList/?page=${page}`, {
-            headers: {
-              "content-type": "application/json",
-              authorization: `Bearer ${state.user.token}`,
-            },
-          })
-          .then((res) => {
-            setUsers(res.data.data);
-            setUsersNo(res.data.quantity);
-            setIsLoading(false);
-          })
-          .catch((err) => {
-            if (err?.response?.data?.error) {
-              setError(`${err.response.data.error}`);
-            } else {
-              setError(`Can't get users, please try again later.`);
-            }
-            setIsLoading(false);
-            window.scrollTo({
-              top: 0,
-              behavior: "smooth",
-            });
+  const fetchData = async (): Promise<void> => {
+    if (!state.user?.token) return;
+    else {
+      axios
+        .get(`http://localhost:4000/api/user/userList/?page=${page}`, {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${state.user.token}`,
+          },
+        })
+        .then((res) => {
+          setUsers(res.data.data);
+          setUsersNo(res.data.quantity);
+          setIsLoading(false);
+        })
+        .catch((err) => {
+          if (err?.response?.data?.error) {
+            setError(`${err.response.data.error}`);
+          } else {
+            setError(`Can't get users, please try again later.`);
+          }
+          setPage(1);
+          setIsLoading(false);
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
           });
-      }
-    };
+        });
+    }
+  };
+
+  useEffect((): void => {
     fetchData();
   }, [page, state.user]);
+
+  const handleSearch = (inputText: string): void => {
+    //If the number of characters is zero, list is set to default
+    if (inputText.length < 1) {
+      setError(``);
+      setPage(1);
+      fetchData();
+      return;
+    }
+
+    axios
+      .get(`http://localhost:4000/api/user/userList/${inputText}/?page=1`, {
+        headers: {
+          "content-type": "application/json",
+          authorization: `Bearer ${state.user?.token}`,
+        },
+      })
+      .then((res) => {
+        setUsers(res.data.data);
+        setUsersNo(res.data.quantity);
+        setPage(1);
+        setError(``);
+      })
+      .catch((err) => {
+        if (err?.response?.data?.error) {
+          setError(`${err.response.data.error}`);
+        } else {
+          setError(`Can't add new destination, please try again later.`);
+        }
+        setUsers([]);
+        setUsersNo(0);
+        setPage(1);
+      });
+  };
 
   const handleUserClick = (username: string): void => {
     navigate(`${routes.user}/${username}`);
@@ -81,6 +118,20 @@ export default function UserList(): JSX.Element {
         <Navigation />
         <div className="userListTitle">User list:</div>
         <div className="userListError">{error}</div>
+        <div className="userListSearchBar">
+          <form>
+            <div className="userListSearchBarIcon">
+              <BiSearchAlt2 />
+            </div>
+            <input
+              type="text"
+              placeholder="Search user..."
+              maxLength={10}
+              onChange={(e) => handleSearch(e.target.value)}
+            ></input>
+            <button type="submit">Submit</button>
+          </form>
+        </div>
         <table className="userListTable">
           <thead>
             <tr>

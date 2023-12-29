@@ -23,7 +23,7 @@ export const router: Router = express.Router();
 
 router.route("/find/:id").get(protect, oneUser);
 
-router.route("/userList").get(protect, restrictTo(`admin`), userList);
+router.route("/userList/:id?").get(protect, restrictTo(`admin`), userList);
 
 router.route("/signUp").post(signUp);
 

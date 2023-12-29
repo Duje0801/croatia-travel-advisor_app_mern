@@ -3,7 +3,8 @@ th {
 }
 
 @media only screen and (min-width: 768px) {
-  th, td {
+  th,
+  td {
     font-size: 1.25rem;
   }
 }
@@ -26,6 +27,72 @@ th {
     width: 60%;
   }
 }
+.userListSearchBar {
+  margin: 0px auto;
+  width: calc(90% - 2px);
+  height: -moz-fit-content;
+  height: fit-content;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  border: 2px solid black;
+  background-color: white;
+  box-shadow: 2px 2px rgba(136, 136, 136, 0.4549019608);
+}
+
+@media only screen and (min-width: 768px) {
+  .userListSearchBar {
+    width: calc(60% - 2px);
+  }
+}
+.userListSearchBar > form {
+  display: flex;
+}
+
+.userListSearchBarIcon {
+  position: relative;
+  height: 26.4px;
+  width: 26.4px;
+  margin: 10px 0px 10px 10px;
+}
+
+@media only screen and (min-width: 768px) and (max-width: 1023px) {
+  .userListSearchBarIcon {
+    height: 42.4px;
+    width: 42.4px;
+  }
+}
+.userListSearchBarIcon > svg {
+  position: absolute;
+  height: -moz-fit-content;
+  height: fit-content;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: auto;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+}
+
+.userListSearchBar > form > input {
+  font-size: 1.25rem;
+  margin: 10px;
+  padding: 0px;
+  width: 100%;
+  border: none;
+}
+
+@media only screen and (min-width: 1024px) {
+  .userListSearchBar > form > input {
+    font-size: 1.25rem;
+  }
+}
+.userListSearchBar > form > button {
+  display: none;
+}
+
 .userListTable {
   border: 2px solid black;
   padding: 10px;

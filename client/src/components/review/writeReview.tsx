@@ -76,7 +76,7 @@ export default function WriteReview(props: {
             return props.setError(`${err.response.data.error}`);
           else return setReviewError(`${err.response.data.error}`);
         } else {
-          setReviewError(`Can't delete review, please try again later.`);
+          setReviewError(`Can't create new review, please try again later.`);
         }
       });
   };

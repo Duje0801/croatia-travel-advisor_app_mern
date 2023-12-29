@@ -11,7 +11,7 @@ export default function DeleteReview(props: {
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const { state } = useContext(UserContext);
-  const { setDestination, setReviews, setPage } =
+  const { setDestination, setReviews, setReviewsNo, setPage } =
     useContext(DestinationContext);
 
   const handleDeleteReview = async (): Promise<void> => {
@@ -26,6 +26,7 @@ export default function DeleteReview(props: {
         const data: IDestination = res.data.data;
         setDestination(data);
         setReviews(data.reviews);
+        setReviewsNo(data.ratingQuantity);
         setPage(1);
         props.handleDeleteId(``);
 

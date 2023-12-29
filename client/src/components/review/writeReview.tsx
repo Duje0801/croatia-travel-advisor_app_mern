@@ -23,7 +23,7 @@ export default function WriteReview(props: {
   const navigate = useNavigate();
 
   const { state } = useContext(UserContext);
-  const { destination, setDestination, setReviews } =
+  const { destination, setDestination, setReviews, setReviewsNo } =
     useContext(DestinationContext);
 
   if (!destination) return <div></div>;
@@ -53,6 +53,7 @@ export default function WriteReview(props: {
         const data: IDestination = res.data.data;
         setDestination(data);
         setReviews(data.reviews);
+        setReviewsNo(data.ratingQuantity);
         setTitle(``);
         setText(``);
         setRating(``);

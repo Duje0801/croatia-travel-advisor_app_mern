@@ -11,6 +11,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import DeleteReview from "./deleteReview";
 import Pagination from "../pagination/pagination";
 import EditReview from "./editReview";
+import FilterByRating from "./filterByRating";
 import DateString from "../../logic/dateString";
 import EditDeleteReviewButtons from "./editDeleteReviewButtons";
 import { DestinationContext } from "../../context/destinationContext";
@@ -27,7 +28,7 @@ export default function ShowReviews(props: {
   const params = useParams();
 
   const { state } = useContext(UserContext);
-  const { destination, reviews, page, setPage } =
+  const { destination, reviews, reviewsNo, page, setPage } =
     useContext(DestinationContext);
 
   const navigate = useNavigate();
@@ -102,11 +103,12 @@ export default function ShowReviews(props: {
 
     return (
       <div>
+        <FilterByRating />
         {reviewsToReturn}
         <div>
           {!params.reviewId ? (
             <Pagination
-              totalLength={destination.ratingQuantity}
+              totalLength={reviewsNo}
               itemsPerPage={5}
               page={page}
               setPage={setPage}

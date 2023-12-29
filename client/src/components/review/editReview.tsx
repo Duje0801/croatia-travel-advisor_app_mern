@@ -23,7 +23,8 @@ export default function EditReview(props: {
   const [editReviewError, setEditReviewError] = useState<string>(``);
 
   const { state } = useContext(UserContext);
-  const { setDestination, setReviews, page } = useContext(DestinationContext);
+  const { setDestination, setReviews, setFilterRating, page } =
+    useContext(DestinationContext);
 
   const handleEditSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -49,6 +50,7 @@ export default function EditReview(props: {
         const data: IDestination = res.data.data;
         setDestination(data);
         setReviews(data.reviews);
+        setFilterRating(0);
         props.setEditId(``);
         props.setError(``);
 

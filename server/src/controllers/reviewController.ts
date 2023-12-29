@@ -43,7 +43,7 @@ const createReview: any = async function (req: ReqUser, res: Response) {
       path: `reviews`,
       match: { "destination.id": { $eq: destinationId } },
       options: { sort: { createdAt: -1 }, limit: 5 },
-    })
+    });
 
     if (!updatedDestination)
       return errorResponse(
@@ -160,7 +160,7 @@ const deleteReview: any = async function (req: ReqUser, res: Response) {
       path: `reviews`,
       match: { "destination.id": { $eq: destinationId } },
       options: { sort: { createdAt: -1 }, limit: 5 },
-    })
+    });
 
     if (!updatedDestination)
       return errorResponse(
@@ -184,18 +184,41 @@ const destinationReviews: any = async function (req: ReqUser, res: Response) {
     const params: string = req.params.id;
     const page: number = Number(req.query.page);
     const skip: number = ((page || 1) - 1) * 5;
+    const rating: number = Number(req.query.rating);
 
-    const reviews = await Review.find({
+    let findRating: any = {
       "destination.name": params,
-    })
+    };
+
+    if (rating > 0) {
+      //If user wants to see only reviews with selected rating
+      findRating = {
+        "destination.name": params,
+        rating: rating,
+      };
+    }
+
+    const reviews = await Review.find(findRating)
       .sort({ createdAt: -1 })
       .skip(skip)
       .limit(5);
 
     if (!reviews) return errorResponse(`Can't find any reviews.`, res, 400);
 
+    const totalUsersNumber: number | null = await Review.find(
+      findRating
+    ).countDocuments();
+
+    if (totalUsersNumber === null)
+      return errorResponse(
+        "Something went wrong, please try again later.",
+        res,
+        404
+      );
+
     res.status(200).json({
       status: `success`,
+      quantity: totalUsersNumber || 0,
       data: reviews,
     });
   } catch (error) {

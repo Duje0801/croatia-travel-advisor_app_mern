@@ -37,8 +37,15 @@ export default function Destination(): JSX.Element {
   const navigate = useNavigate();
 
   const { state } = useContext(UserContext);
-  const { destination, setDestination, setReviews, page } =
-    useContext(DestinationContext);
+  const {
+    destination,
+    setDestination,
+    setReviews,
+    setReviewsNo,
+    filterRating,
+    setFilterRating,
+    page,
+  } = useContext(DestinationContext);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -52,6 +59,8 @@ export default function Destination(): JSX.Element {
           const data: IDestination = res.data.data;
           setDestination(data);
           setReviews(data.reviews);
+          setReviewsNo(data.ratingQuantity);
+          setFilterRating(0);
           setIsLoading(false);
           // In case of editing destination info, all data is already fetched and given to states
           // that can be changed (edited) later
@@ -80,6 +89,7 @@ export default function Destination(): JSX.Element {
   }, [params.id]);
 
   useEffect((): void => {
+    //This function changes reviews to display in destination when pages or filterRating changes
     const fetchData = () => {
       //To avoid fetching when page opens for first time
       if (isOpening) return setIsOpening(false);
@@ -87,10 +97,11 @@ export default function Destination(): JSX.Element {
       if (params.reviewId) return;
       axios
         .get(
-          `http://localhost:4000/api/review/destinationReviews/${params.id}/?page=${page}`
+          `http://localhost:4000/api/review/destinationReviews/${params.id}/?page=${page}&rating=${filterRating}`
         )
         .then((res) => {
           setReviews(res.data.data);
+          setReviewsNo(res.data.quantity);
           window.scrollTo({
             top: 0,
             behavior: "smooth",
@@ -105,7 +116,7 @@ export default function Destination(): JSX.Element {
         });
     };
     fetchData();
-  }, [page]);
+  }, [page, filterRating]);
 
   const handleEditDestination = (): void => {
     setEditQuestion(editQuestion ? false : true);

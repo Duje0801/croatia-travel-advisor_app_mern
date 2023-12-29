@@ -42,6 +42,20 @@
     cursor: pointer;
   }
 }
+.reviewEditButtonSelected {
+  border: 0px;
+  background-color: black;
+  color: white;
+  padding: 5px 10px;
+  margin-right: 10px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewEditButtonSelected {
+    font-size: 1rem;
+    cursor: pointer;
+  }
+}
 .reviewDeleteButton {
   border: 0px;
   background-color: #00af87;
@@ -55,6 +69,20 @@
     cursor: pointer;
   }
 }
+.reviewFilterRating {
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 10px auto;
+}
+
+.reviewFilterRating > div:first-child {
+  text-align: center;
+}
+
+.reviewFilterRating > div:last-child {
+  margin-top: 10px;
+}
+
 .reviewEdit {
   display: flex;
   flex-direction: column;

@@ -8,11 +8,15 @@ export default function DeleteReview(props: {
   deleteId: string;
   handleDeleteId: (id: string) => void;
   setReviewError: Dispatch<SetStateAction<string>>;
-  setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const { state } = useContext(UserContext);
-  const { setDestination, setReviews, setReviewsNo, setPage } =
-    useContext(DestinationContext);
+  const {
+    setDestination,
+    setReviews,
+    setReviewsNo,
+    setPage,
+    setDestinationError,
+  } = useContext(DestinationContext);
 
   const handleDeleteReview = async (): Promise<void> => {
     axios
@@ -43,7 +47,7 @@ export default function DeleteReview(props: {
             err.response.data.error ===
             `Review is deleted but destination is not updated.`
           )
-            return props.setError(`${err.response.data.error}`);
+            return setDestinationError(`${err.response.data.error}`);
           else return props.setReviewError(`${err.response.data.error}`);
         } else {
           props.setReviewError(`Can't delete review, please try again later.`);

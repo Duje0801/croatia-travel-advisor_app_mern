@@ -17,6 +17,8 @@ interface ContextObject {
   setReviewsNo: Dispatch<SetStateAction<number>>;
   filterRating: number;
   setFilterRating: Dispatch<SetStateAction<number>>;
+  destinationError: string;
+  setDestinationError: Dispatch<SetStateAction<string>>;
   page: number;
   setPage: Dispatch<SetStateAction<number>>;
 }
@@ -31,6 +33,8 @@ export const DestinationProvider = ({ children }: { children: ReactNode }) => {
   const [reviewsNo, setReviewsNo] = useState<number>(0);
   const [filterRating, setFilterRating] = useState<number>(0);
   const [page, setPage] = useState<number>(1);
+  //Destination error is displayed above destination description
+  const [destinationError, setDestinationError] = useState<string>(``);
 
   const value: ContextObject = {
     destination,
@@ -43,6 +47,8 @@ export const DestinationProvider = ({ children }: { children: ReactNode }) => {
     setFilterRating,
     page,
     setPage,
+    destinationError,
+    setDestinationError,
   };
 
   return (

@@ -14,17 +14,22 @@ import axios from "axios";
 export default function EditReview(props: {
   review: IReview;
   setEditId: Dispatch<SetStateAction<string>>;
-  setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [editTitle, setEditTitle] = useState<string>(props.review.title);
   const [editText, setEditText] = useState<string>(props.review.text);
   const [editRating, setEditRating] = useState<number>(props.review.rating);
-  //editReviewError will show inside edit box, error (setError) will show before destination description
+  //editReviewError will show inside edit box,
+  //destination error (setDestinationError) will show before destination description
   const [editReviewError, setEditReviewError] = useState<string>(``);
 
   const { state } = useContext(UserContext);
-  const { setDestination, setReviews, setFilterRating, page } =
-    useContext(DestinationContext);
+  const {
+    setDestination,
+    setReviews,
+    setFilterRating,
+    page,
+    setDestinationError,
+  } = useContext(DestinationContext);
 
   const handleEditSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -52,7 +57,7 @@ export default function EditReview(props: {
         setReviews(data.reviews);
         setFilterRating(0);
         props.setEditId(``);
-        props.setError(``);
+        setDestinationError(``);
 
         window.scrollTo({
           top: 0,
@@ -67,7 +72,7 @@ export default function EditReview(props: {
             err.response.data.error ===
             `Review is edited but destination is not updated.`
           )
-            return props.setError(`${err.response.data.error}`);
+            return setDestinationError(`${err.response.data.error}`);
           else return setEditReviewError(`${err.response.data.error}`);
         } else {
           setEditReviewError(`Can't edit review, please try again later.`);

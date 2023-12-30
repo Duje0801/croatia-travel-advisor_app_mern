@@ -21,7 +21,6 @@ export default function Destination(): JSX.Element {
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [editQuestion, setEditQuestion] = useState<boolean>(false);
   const [deleteQuestion, setDeleteQuestion] = useState<boolean>(false);
-  const [deleteError, setDeleteError] = useState<string>(``);
   const [error, setError] = useState<string>(``);
 
   //Editing states
@@ -44,6 +43,8 @@ export default function Destination(): JSX.Element {
     setReviewsNo,
     filterRating,
     setFilterRating,
+    destinationError,
+    setDestinationError,
     page,
   } = useContext(DestinationContext);
 
@@ -62,6 +63,7 @@ export default function Destination(): JSX.Element {
           setReviewsNo(data.ratingQuantity);
           setFilterRating(0);
           setIsLoading(false);
+          setDestinationError(``);
           // In case of editing destination info, all data is already fetched and given to states
           // that can be changed (edited) later
           setEditedImg(data.image);
@@ -109,10 +111,14 @@ export default function Destination(): JSX.Element {
         })
         .catch((err) => {
           if (err?.response?.data?.error) {
-            setError(`${err.response.data.error}`);
+            setDestinationError(`${err.response.data.error}`);
           } else {
-            setError(`Something went wrong`);
+            setDestinationError(`Something went wrong`);
           }
+          window.scrollTo({
+            top: 0,
+            behavior: "smooth",
+          });
         });
     };
     fetchData();
@@ -196,14 +202,16 @@ export default function Destination(): JSX.Element {
               </div>
             </div>
           </div>
-          {deleteError && <div className="destinationError">{deleteError}</div>}
+          {destinationError && (
+            <div className="destinationError">{destinationError}</div>
+          )}
           {deleteQuestion && (
             <DeleteDestination
               destinationId={destination.id}
               destinationName={destination.name}
               handleDeleteDestination={handleDeleteDestination}
               setIsDeleted={setIsDeleted}
-              setDeleteError={setDeleteError}
+              setError={setError}
             />
           )}
           {editQuestion && state.user?.username === `admin` && (
@@ -215,7 +223,7 @@ export default function Destination(): JSX.Element {
           {destination.reviews?.length > 0 && (
             <div className="destinationReviewsTitle">Reviews:</div>
           )}
-          <Reviews setError={setError} />
+          <Reviews />
         </>
         <Footer />
       </div>

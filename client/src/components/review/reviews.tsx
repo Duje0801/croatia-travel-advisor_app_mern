@@ -1,10 +1,4 @@
-import {
-  useEffect,
-  useState,
-  useContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../context/userContext";
 import ShowReviewStarComments from "../stars/showReviewStarComments";
 import { useNavigate, useParams } from "react-router-dom";
@@ -19,9 +13,7 @@ import { DestinationContext } from "../../context/destinationContext";
 import { IReview } from "../../interfaces/IReview";
 import { routes } from "../../routes/routes";
 
-export default function Reviews(props: {
-  setError: Dispatch<SetStateAction<string>>;
-}): JSX.Element {
+export default function Reviews(): JSX.Element {
   const [editId, setEditId] = useState<string>(``);
   const [deleteId, setDeleteId] = useState<string>(``);
   const [reviewError, setReviewError] = useState<string>(``);
@@ -86,16 +78,11 @@ export default function Reviews(props: {
                 deleteId={deleteId}
                 handleDeleteId={handleDeleteId}
                 setReviewError={setReviewError}
-                setError={props.setError}
               />
             ) : null}
             <div>{review.text}</div>
             {editId === review._id ? (
-              <EditReview
-                review={review}
-                setEditId={setEditId}
-                setError={props.setError}
-              />
+              <EditReview review={review} setEditId={setEditId} />
             ) : null}
           </div>
         );
@@ -116,7 +103,7 @@ export default function Reviews(props: {
             />
           ) : null}
         </div>
-        <WriteReview setError={props.setError} />
+        <WriteReview />
       </div>
     );
   } else return <div></div>;

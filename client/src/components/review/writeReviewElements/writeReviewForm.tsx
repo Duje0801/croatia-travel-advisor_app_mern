@@ -11,7 +11,6 @@ import { IDestination } from "../../../interfaces/IDestination";
 import axios from "axios";
 
 export default function WriteReviewForm(props: {
-  setError: Dispatch<SetStateAction<string>>;
   setOpenForm: Dispatch<SetStateAction<boolean>>;
 }): JSX.Element {
   const [title, setTitle] = useState<string>(``);
@@ -20,8 +19,14 @@ export default function WriteReviewForm(props: {
   const [reviewError, setReviewError] = useState<string>(``);
 
   const { state } = useContext(UserContext);
-  const { destination, setDestination, setReviews, setReviewsNo, setPage } =
-    useContext(DestinationContext);
+  const {
+    destination,
+    setDestination,
+    setReviews,
+    setReviewsNo,
+    setPage,
+    setDestinationError,
+  } = useContext(DestinationContext);
 
   const handleSendReview = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -55,7 +60,7 @@ export default function WriteReviewForm(props: {
         setText(``);
         setRating(``);
         setReviewError(``);
-        props.setError(``);
+        setDestinationError(``);
 
         window.scrollTo({
           top: 0,
@@ -70,7 +75,7 @@ export default function WriteReviewForm(props: {
             err.response.data.error ===
             `Review is added but can't update destination info now. Please try again later.`
           )
-            return props.setError(`${err.response.data.error}`);
+            return setDestinationError(`${err.response.data.error}`);
           else return setReviewError(`${err.response.data.error}`);
         } else {
           setReviewError(`Can't create new review, please try again later.`);

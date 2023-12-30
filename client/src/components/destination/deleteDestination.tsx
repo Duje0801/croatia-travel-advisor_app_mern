@@ -7,7 +7,7 @@ export default function DeleteDestination(props: {
   destinationName: string;
   handleDeleteDestination: () => void;
   setIsDeleted: Dispatch<SetStateAction<boolean>>;
-  setDeleteError: Dispatch<SetStateAction<string>>;
+  setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const { state } = useContext(UserContext);
 
@@ -26,11 +26,11 @@ export default function DeleteDestination(props: {
       .catch((err) => {
         if (err?.response?.data?.error) {
           props.handleDeleteDestination();
-          props.setDeleteError(`${err.response.data.error}`);
+          props.setError(`${err.response.data.error}`);
         } else {
           props.handleDeleteDestination();
-          props.setDeleteError(
-            `Can't delete destination. Please try again later.`
+          props.setError(
+            `Can't delete destination. Please try again later`
           );
         }
       });

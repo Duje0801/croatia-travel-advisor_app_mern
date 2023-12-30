@@ -1,15 +1,16 @@
 import { useState, useContext, Dispatch, SetStateAction } from "react";
 import { UserContext } from "../../../context/userContext";
+import { DestinationContext } from "../../../context/destinationContext";
 import axios from "axios";
 
 export default function WriteReviewButton(props: {
   destinationId: string;
   setOpenForm: Dispatch<SetStateAction<boolean>>;
-  setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const [alreadyReviewedError, setAlreadyReviewedError] = useState<string>(``);
 
   const { state } = useContext(UserContext);
+  const { setDestinationError } = useContext(DestinationContext);
 
   const handleWriteReview = () => {
     //This function checks if the user has already reviewed this destination
@@ -34,9 +35,11 @@ export default function WriteReviewButton(props: {
       })
       .catch((err) => {
         if (err?.response?.data?.error) {
-          props.setError(`${err.response.data.error}`);
+          setDestinationError(`${err.response.data.error}`);
         } else {
-          props.setError(`Something went wrong`);
+          setDestinationError(
+            `Something went wrong, can't open write a review form. please try again later.`
+          );
         }
         window.scrollTo({
           top: 0,

@@ -14,6 +14,7 @@ export default function DeleteReview(props: {
     setDestination,
     setReviews,
     setReviewsNo,
+    setFilterRating,
     setPage,
     setDestinationError,
   } = useContext(DestinationContext);
@@ -31,6 +32,7 @@ export default function DeleteReview(props: {
         setDestination(data);
         setReviews(data.reviews);
         setReviewsNo(data.ratingQuantity);
+        setFilterRating(0);
         setPage(1);
         props.handleDeleteId(``);
 

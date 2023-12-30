@@ -16,6 +16,18 @@
     font-size: 1rem;
   }
 }
+.reviewsTitle {
+  margin-bottom: 10px;
+  font-size: 1.5rem;
+  font-weight: bold;
+  text-align: center;
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewsTitle {
+    font-size: 1.5rem;
+  }
+}
 .reviewBox {
   display: flex;
 }
@@ -73,6 +85,24 @@
   }
   .reviewDeleteButton:hover {
     color: black;
+  }
+}
+.reviewNoReviews {
+  text-align: center;
+  padding: 20px 0px;
+  border-top: 2px solid black;
+  font-weight: bold;
+}
+
+@media only screen and (min-width: 768px) {
+  .reviewNoReviews {
+    width: calc(60% + 40px);
+    margin: 0px auto;
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .reviewNoReviews {
+    width: 740px;
   }
 }
 .reviewFilterRating {

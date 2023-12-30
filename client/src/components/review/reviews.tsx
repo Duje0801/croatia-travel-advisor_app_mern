@@ -90,9 +90,14 @@ export default function Reviews(): JSX.Element {
     );
 
     return (
-      <div>
+      <>
+        <div className="reviewsTitle">Reviews:</div>
         <FilterByRating />
-        {reviewsToReturn}
+        {reviews.length > 0 ? (
+          reviewsToReturn
+        ) : (
+          <div className="reviewNoReviews">No reviews to show</div>
+        )}
         <div>
           {!params.reviewId ? (
             <Pagination
@@ -104,7 +109,7 @@ export default function Reviews(): JSX.Element {
           ) : null}
         </div>
         <WriteReview />
-      </div>
+      </>
     );
   } else return <div></div>;
 }

@@ -220,9 +220,6 @@ export default function Destination(): JSX.Element {
           <div className="destinationDescription">
             {destination.description}
           </div>
-          {destination.reviews?.length > 0 && (
-            <div className="destinationReviewsTitle">Reviews:</div>
-          )}
           <Reviews />
         </>
         <Footer />

@@ -143,19 +143,6 @@ $colorGreen: #00af87;
   }
 }
 
-.destinationReviewsTitle {
-  margin-bottom: $gapM;
-  font-size: $fontL;
-  font-weight: bold;
-  text-align: center;
-}
-
-@media only screen and (min-width: 1024px) {
-  .destinationReviewsTitle {
-    font-size: $fontL;
-  }
-}
-
 //Delete Destination Question
 
 .destinationDeleteText {

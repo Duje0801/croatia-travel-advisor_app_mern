@@ -119,18 +119,6 @@
     font-size: 1rem;
   }
 }
-.destinationReviewsTitle {
-  margin-bottom: 10px;
-  font-size: 1.5rem;
-  font-weight: bold;
-  text-align: center;
-}
-
-@media only screen and (min-width: 1024px) {
-  .destinationReviewsTitle {
-    font-size: 1.5rem;
-  }
-}
 .destinationDeleteText {
   font-size: 1rem;
   border: 2px solid black;

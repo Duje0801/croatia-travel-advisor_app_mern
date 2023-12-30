@@ -53,6 +53,9 @@ $colorGreen: #00af87;
     font-size: $fontS;
     cursor: pointer;
   }
+  .reviewEditButton:hover {
+    color: black;
+  }
 }
 
 .reviewEditButtonSelected {
@@ -81,6 +84,9 @@ $colorGreen: #00af87;
   .reviewDeleteButton {
     font-size: $fontS;
     cursor: pointer;
+  }
+  .reviewDeleteButton:hover {
+    color: black;
   }
 }
 
@@ -220,6 +226,39 @@ $colorGreen: #00af87;
   }
 }
 
+//Write a review button
+
+.reviewWriteDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewWriteDiv > button {
+  border: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: $gapS $gapM;
+  width: fit-content;
+  margin: 0px auto $gapL auto;
+  font-size: $fontM;
+}
+
+@media only screen and (min-width: 768px) {
+  .reviewWriteDiv > button {
+    width: calc(60% + 40px);
+  }
+}
+
+@media only screen and (min-width: 1024px) {
+  .reviewWriteDiv > button {
+    width: 740px;
+    cursor: pointer;
+  }
+  .reviewWriteDiv > button:hover {
+    color: black;
+  }
+}
+
 // Write review
 
 .reviewWrite {
@@ -331,6 +370,13 @@ $colorGreen: #00af87;
   font-size: $fontS;
   text-align: center;
   color: red;
+}
+
+.reviewAlreadyReviewedError {
+  font-size: $fontS;
+  text-align: center;
+  color: red;
+  margin-bottom: $gapL;
 }
 
 .reviewWriteError {

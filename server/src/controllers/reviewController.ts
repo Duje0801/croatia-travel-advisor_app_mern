@@ -1,4 +1,4 @@
-import { Response } from "express";
+import { Request, Response } from "express";
 import { Destination } from "../model/destinationModel";
 import { Review } from "../model/reviewModel";
 import { IReview } from "../interfaces/review";
@@ -179,7 +179,7 @@ const deleteReview: any = async function (req: ReqUser, res: Response) {
   }
 };
 
-const destinationReviews: any = async function (req: ReqUser, res: Response) {
+const destinationReviews: any = async function (req: Request, res: Response) {
   try {
     const params: string = req.params.id;
     const page: number = Number(req.query.page);
@@ -226,4 +226,29 @@ const destinationReviews: any = async function (req: ReqUser, res: Response) {
   }
 };
 
-export { createReview, updateReview, deleteReview, destinationReviews };
+const alreadyReviewed: any = async function (req: ReqUser, res: Response) {
+  try {
+    const userId: string = req.user._id;
+    const destinationId: string = req.params.id;
+
+    const getReview: IReview | null = await Review.findOne({
+      "destination.id": destinationId,
+      "user.id": userId,
+    });
+
+    return res.status(200).json({
+      status: `success`,
+      data: { isReviewed: getReview === null ? false : true },
+    });
+  } catch (error) {
+    errorHandler(error, req, res);
+  }
+};
+
+export {
+  createReview,
+  updateReview,
+  deleteReview,
+  destinationReviews,
+  alreadyReviewed,
+};

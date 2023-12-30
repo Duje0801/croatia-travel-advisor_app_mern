@@ -41,6 +41,9 @@
     font-size: 1rem;
     cursor: pointer;
   }
+  .reviewEditButton:hover {
+    color: black;
+  }
 }
 .reviewEditButtonSelected {
   border: 0px;
@@ -67,6 +70,9 @@
   .reviewDeleteButton {
     font-size: 1rem;
     cursor: pointer;
+  }
+  .reviewDeleteButton:hover {
+    color: black;
   }
 }
 .reviewFilterRating {
@@ -194,6 +200,36 @@
     cursor: pointer;
   }
 }
+.reviewWriteDiv {
+  display: flex;
+  flex-direction: column;
+}
+
+.reviewWriteDiv > button {
+  border: 0px;
+  background-color: #00af87;
+  color: white;
+  padding: 5px 10px;
+  width: -moz-fit-content;
+  width: fit-content;
+  margin: 0px auto 15px auto;
+  font-size: 1.25rem;
+}
+
+@media only screen and (min-width: 768px) {
+  .reviewWriteDiv > button {
+    width: calc(60% + 40px);
+  }
+}
+@media only screen and (min-width: 1024px) {
+  .reviewWriteDiv > button {
+    width: 740px;
+    cursor: pointer;
+  }
+  .reviewWriteDiv > button:hover {
+    color: black;
+  }
+}
 .reviewWrite {
   font-size: 1.5rem;
   font-weight: bold;
@@ -292,6 +328,13 @@
   font-size: 1rem;
   text-align: center;
   color: red;
+}
+
+.reviewAlreadyReviewedError {
+  font-size: 1rem;
+  text-align: center;
+  color: red;
+  margin-bottom: 15px;
 }
 
 .reviewWriteError {

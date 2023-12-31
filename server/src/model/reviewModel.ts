@@ -56,6 +56,9 @@ const reviewSchema = new Schema(
 reviewSchema.static(
   "calcAverageRatings",
   async function calcAverageRatings(destinationId: string) {
+    //This function is used to change the average rating and amount of ratings
+    //in destination after review is added, deleted or updated
+
     interface Stats {
       averageRating: number;
       ratingQuantity: number;

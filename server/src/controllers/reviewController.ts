@@ -35,6 +35,8 @@ const createReview: any = async function (req: ReqUser, res: Response) {
 
     const destinationId: string = newReview.destination.id;
 
+    //Updates the amount of destination ratings and average ratings,
+    //then sends it to client (front-end)
     await Review.calcAverageRatings(destinationId);
 
     const updatedDestination: IDestination | null = await Destination.findById(
@@ -109,6 +111,8 @@ const updateReview: any = async function (req: ReqUser, res: Response) {
 
     const destinationId: string = updatedReview.destination.id;
 
+    //Updates the amount of destination ratings and average ratings,
+    //then sends it to client (front-end)
     await Review.calcAverageRatings(destinationId);
 
     const page: number = Number(req.body.data.page);
@@ -152,6 +156,8 @@ const deleteReview: any = async function (req: ReqUser, res: Response) {
 
     const destinationId: string = getReview.destination.id;
 
+    //Updates the amount of destination ratings and average ratings,
+    //then sends it to client (front-end)
     await Review.calcAverageRatings(destinationId);
 
     const updatedDestination: IDestination | null = await Destination.findById(
@@ -181,22 +187,24 @@ const deleteReview: any = async function (req: ReqUser, res: Response) {
 
 const destinationReviews: any = async function (req: Request, res: Response) {
   try {
+    //This function is used when user selects another reviews page (in destination)
+    //Then user (for example) moves from page 1 to 2 (reviews 1-5 to 6-10)
     const params: string = req.params.id;
     const page: number = Number(req.query.page);
     const skip: number = ((page || 1) - 1) * 5;
     const rating: number = Number(req.query.rating);
 
-    let findRating: any = {
-      "destination.name": params,
-    };
-
-    if (rating > 0) {
-      //If user wants to see only reviews with selected rating
-      findRating = {
-        "destination.name": params,
-        rating: rating,
-      };
-    }
+    //If user selected reviews with only one possible ratings,
+    //search inside find() will change
+    let findRating: any =
+      rating > 0
+        ? {
+            "destination.name": params,
+            rating: rating,
+          }
+        : {
+            "destination.name": params,
+          };
 
     const reviews = await Review.find(findRating)
       .sort({ createdAt: -1 })
@@ -205,6 +213,7 @@ const destinationReviews: any = async function (req: Request, res: Response) {
 
     if (!reviews) return errorResponse(`Can't find any reviews.`, res, 400);
 
+    //Gets the total number of reviews for pagination
     const totalUsersNumber: number | null = await Review.find(
       findRating
     ).countDocuments();
@@ -228,6 +237,7 @@ const destinationReviews: any = async function (req: Request, res: Response) {
 
 const alreadyReviewed: any = async function (req: ReqUser, res: Response) {
   try {
+    //This function checks if the user has already viewed this destination
     const userId: string = req.user._id;
     const destinationId: string = req.params.id;
 

@@ -29,6 +29,7 @@ const userList: any = async function (req: QueryInRequest, res: Response) {
 
     if (!users[0]) return errorResponse("Can't find any users", res, 404);
 
+    //Gets the total number of reviews for pagination
     const totalUsersNumber: number | null = await User.find(
       usersFind
     ).countDocuments();
@@ -60,9 +61,8 @@ const oneUser: any = async function (req: Request, res: Response) {
       options: { sort: { createdAt: -1 } },
     });
 
-    if (!user) {
+    if (!user)
       return errorResponse("Can't find user with this username", res, 404);
-    }
 
     res.status(200).json({
       status: `success`,
@@ -75,19 +75,18 @@ const oneUser: any = async function (req: Request, res: Response) {
 
 const deleteMe: any = async function (req: ReqUser, res: Response) {
   try {
+    //This function deactivates the user if the user selects this option
     const myProfile: IUser | null = await User.findById(req.user._id);
 
-    if (!myProfile) errorResponse("Can't find user", res, 404);
-    else {
-      //else is needed to save changes if myProfile === null
-      myProfile.active = false;
-      await myProfile.save();
+    if (!myProfile) return errorResponse("Can't find user", res, 404);
 
-      res.status(200).json({
-        status: `success`,
-        message: "Profile deactivated!",
-      });
-    }
+    myProfile.active = false;
+    await myProfile.save();
+
+    res.status(200).json({
+      status: `success`,
+      message: "Profile deactivated!",
+    });
   } catch (error) {
     errorHandler(error, req, res);
   }
@@ -95,6 +94,7 @@ const deleteMe: any = async function (req: ReqUser, res: Response) {
 
 const deleteUser: any = async function (req: Request, res: Response) {
   try {
+    //This function deletes the user if the admin selects this option
     const profileToDelete: IUser | {} = await User.findByIdAndDelete(
       req.body.id
     );
@@ -113,6 +113,7 @@ const deleteUser: any = async function (req: Request, res: Response) {
 
 const activationUser: any = async function (req: Request, res: Response) {
   try {
+    //This function (de)activates the user if the admin selects this option
     const user: IUser | null = await User.findById(req.body.data).populate({
       path: `reviews`,
       options: { sort: { createdAt: -1 } },
@@ -165,7 +166,7 @@ const updatePassword: any = async function (req: ReqUser, res: Response) {
         status: "success",
         message: "Password successfully updated!",
       });
-    } else return errorResponse("Can't find user with this ID", res, 404);
+    } else return errorResponse("Can't find this user", res, 404);
   } catch (error) {
     errorHandler(error, req, res);
   }
@@ -205,7 +206,7 @@ const updateEmail: any = async function (req: ReqUser, res: Response) {
           email: user.email,
         },
       });
-    } else return errorResponse("Can't find user with this ID", res, 404);
+    } else return errorResponse("Can't find this user", res, 404);
   } catch (error) {
     errorHandler(error, req, res);
   }

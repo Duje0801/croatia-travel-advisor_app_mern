@@ -19,7 +19,7 @@ export default function ForgotPassword(): JSX.Element {
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
 
-    setError(`Sending email...`);
+    setError(`Sending email (delivery can take up to 1 minute)...`);
 
     axios
       .post(
@@ -34,7 +34,7 @@ export default function ForgotPassword(): JSX.Element {
       .then((res) => {
         setEmail(``);
         setIsSended(true);
-        setError(`Token has been sent to your email`);
+        setError(`Token has been sent to your email (please check spam mail)`);
       })
       .catch((err) => {
         if (err?.response?.data?.error) {

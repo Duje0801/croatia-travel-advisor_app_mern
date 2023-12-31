@@ -2,14 +2,13 @@ import { Request, Response, NextFunction } from "express";
 import bcrypt from "bcryptjs";
 import dotenv from "dotenv";
 import jwt from "jsonwebtoken";
-import nodemailer from "nodemailer";
 import crypto from "crypto";
 import { User } from "../model/userModel";
 import { IUser } from "../interfaces/user";
 import { ReqUser } from "../interfaces/reqUser";
-import { Mail } from "../interfaces/mail";
 import { errorResponse } from "../utilis/errorResponse";
 import { errorHandler } from "../utilis/errorHandler";
+import { sendEmail } from "../utilis/sendEmail";
 
 dotenv.config();
 
@@ -107,28 +106,11 @@ const forgotPassword: any = async function (req: Request, res: Response) {
 
     await user.save();
 
-    const transport: nodemailer.Transporter = nodemailer.createTransport({
-      host: "sandbox.smtp.mailtrap.io",
-      port: 2525,
-      auth: {
-        user: process.env.EMAIL_USERNAME,
-        pass: process.env.EMAIL_PASSWORD,
-      },
-    });
-
-    const mailOptions: Mail = {
-      from: "Admin <admin@cta.com",
-      to: req.body.data.email,
-      subject: "Restart password - Croatia Travel Advisor",
-      text: `Token for email restart is: ${code}. This code is valid only 10 minutes. 
-        If you have not requested a password change, ignore this email.`,
-    };
-
-    await transport.sendMail(mailOptions);
+    await sendEmail(code, req.body.data.email);
 
     res
       .status(200)
-      .json({ status: "success", message: "Mail succesfully send!" });
+      .json({ status: "success", message: "Email was sent successfully!" });
   } catch (error) {
     errorHandler(error, req, res);
   }
@@ -202,7 +184,7 @@ const protect: any = async function (
     );
 
     if (user && "active" in user && user.active) {
-      //Memorize user data in request only if user has key active true
+      //Memorize user data in request, only if user has key active true
       req.user = user;
       next();
     } else if (user && "active" in user && !user.active)

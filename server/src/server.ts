@@ -22,13 +22,15 @@ app.use(ExpressMongoSanitize());
 //Additional security (headers)
 app.use(helmet());
 
-//Limiting number of requests from one IP, maximum 50 in 30 minutes
-/* const limitRequests = rateLimit({
-  max: 1000,
-  windowMs: 1800000,
-  message: `Too many requests from this IP address, please try again in 30 minutes.`,
-});
-app.use(`/api`, limitRequests); */
+//Limiting number of requests from one IP, maximum 100 in 30 minutes
+app.use(
+  `/api`,
+  rateLimit({
+    max: 100,
+    windowMs: 1800000,
+    message: `Too many requests from this IP address, please try again in 30 minutes.`,
+  })
+);
 
 //Allows access from other domains (front-end)
 app.use(cors());

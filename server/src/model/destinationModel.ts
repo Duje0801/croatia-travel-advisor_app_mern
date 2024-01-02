@@ -10,8 +10,8 @@ const destinationSchema = new Schema(
       unique: [true, `Destination must have a unique name`],
       minLength: [3, `Destination name must contain 3 or more characters`],
       maxLength: [
-        20,
-        `The maximum number of characters allowed in the destination name is 20`,
+        30,
+        `The maximum number of characters allowed in the destination name is 30`,
       ],
     },
     description: {

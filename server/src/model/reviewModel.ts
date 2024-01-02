@@ -13,8 +13,8 @@ const reviewSchema = new Schema(
       required: [true, `Review title is mandatory`],
       minLength: [3, `Review title must contain 3 or more characters`],
       maxLength: [
-        20,
-        `The maximum number of characters allowed in the review title is 20`,
+        50,
+        `The maximum number of characters allowed in the review title is 50`,
       ],
     },
     text: {
@@ -22,8 +22,8 @@ const reviewSchema = new Schema(
       required: [true, `Review text is mandatory`],
       minLength: [3, `Review text must contain 3 or more characters`],
       maxLength: [
-        500,
-        `The maximum number of characters allowed in the Review text is 500`,
+        1000,
+        `The maximum number of characters allowed in the Review text is 1000`,
       ],
     },
     rating: {

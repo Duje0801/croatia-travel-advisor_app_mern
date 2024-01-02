@@ -86,7 +86,7 @@ export default function NewDestination(): JSX.Element {
             <input
               type="text"
               value={name}
-              maxLength={20}
+              maxLength={30}
               onChange={(e) => setName(e.target.value)}
               id="name"
               required

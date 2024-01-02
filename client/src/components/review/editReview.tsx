@@ -138,7 +138,7 @@ export default function EditReview(props: {
           type="text"
           className="reviewEditTextarea"
           value={editTitle}
-          maxLength={20}
+          maxLength={50}
           onChange={(e) => setEditTitle(e.currentTarget.value)}
           id="title"
           required
@@ -149,7 +149,7 @@ export default function EditReview(props: {
           value={editText}
           rows={4}
           cols={40}
-          maxLength={500}
+          maxLength={1000}
           onChange={(e) => setEditText(e.currentTarget.value)}
           id="text"
           required

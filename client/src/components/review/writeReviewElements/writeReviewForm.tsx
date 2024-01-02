@@ -136,7 +136,7 @@ export default function WriteReviewForm(props: {
           type="text"
           className="reviewWriteTextarea"
           value={title}
-          maxLength={20}
+          maxLength={50}
           onChange={(e) => setTitle(e.target.value)}
           id="title"
           required
@@ -147,7 +147,7 @@ export default function WriteReviewForm(props: {
           value={text}
           rows={4}
           cols={40}
-          maxLength={500}
+          maxLength={1000}
           onChange={(e) => setText(e.target.value)}
           id="review"
           required

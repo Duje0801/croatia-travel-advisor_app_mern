@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "build": "npm i && tsc",
-    "start": "tsc && nodemon dist/server"
+    "start": "nodemon dist/server"
   },
   "author": "",
   "license": "ISC",

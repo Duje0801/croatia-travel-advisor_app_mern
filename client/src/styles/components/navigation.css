@@ -82,6 +82,11 @@
     font-size: 2rem;
   }
 }
+.navLogIn,
+.navHelloMessage {
+  text-align: right;
+}
+
 @media only screen and (min-width: 1024px) {
   .navLogIn {
     display: flex;
@@ -89,15 +94,11 @@
     font-size: 1.25rem;
     cursor: pointer;
   }
-}
-.navHelloMessage,
-.navLogIn {
-  text-align: right;
-}
-
-@media only screen and (min-width: 1024px) {
-  .navHelloMessage:hover {
+  .navLogIn:hover {
     color: #00af87;
+  }
+  .navHelloMessage {
+    color: black;
   }
 }
 .navSignIn:hover {

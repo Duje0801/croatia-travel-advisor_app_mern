@@ -100,6 +100,11 @@ $colorGreen: #00af87;
   }
 }
 
+.navLogIn,
+.navHelloMessage {
+  text-align: right;
+}
+
 @media only screen and (min-width: 1024px) {
   .navLogIn {
     display: flex;
@@ -107,16 +112,11 @@ $colorGreen: #00af87;
     font-size: $fontM;
     cursor: pointer;
   }
-}
-
-.navHelloMessage,
-.navLogIn {
-  text-align: right;
-}
-
-@media only screen and (min-width: 1024px) {
-  .navHelloMessage:hover {
+  .navLogIn:hover {
     color: $colorGreen;
+  }
+  .navHelloMessage {
+    color: black;
   }
 }
 

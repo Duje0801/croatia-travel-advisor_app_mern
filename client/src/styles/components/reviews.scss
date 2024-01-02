@@ -380,7 +380,7 @@ $colorGreen: #00af87;
   border: 1px solid black;
   border-radius: 0px;
   padding: $gapM 0px;
-  margin-bottom: $gapM;
+  margin: $gapM 0px;
   font-weight: bold;
 }
 
@@ -388,6 +388,10 @@ $colorGreen: #00af87;
   .reviewWriteFormButton {
     font-size: $fontS;
     cursor: pointer;
+  }
+
+  .reviewWriteFormButton:hover{
+    background-color: $colorGreen;
   }
 }
 

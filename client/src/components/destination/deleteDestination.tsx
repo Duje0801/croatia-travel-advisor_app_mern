@@ -39,15 +39,13 @@ export default function DeleteDestination(props: {
   return (
     <div className="destinationDeleteText">
       Are you sure you want to delete destination {props.destinationName}?
-      <div className="destinationDeleteButtonsDiv">
+      <div className="destinationDeleteButtons">
         <button
-          className="destinationDeleteButtons"
           onClick={finalDeleteDestination}
         >
           Yes
         </button>
         <button
-          className="destinationDeleteButtons"
           onClick={props.handleDeleteDestination}
         >
           No

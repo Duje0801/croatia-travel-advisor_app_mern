@@ -36,12 +36,7 @@ export default function Navigation(): JSX.Element {
         </div>
       );
     //If user is not logged in
-    else
-      return (
-        <div className="navLogIn" onClick={() => redirect(`logIn`)}>
-          Log in
-        </div>
-      );
+    else return <div onClick={() => redirect(`logIn`)}>Log in</div>;
   };
 
   const redirect = (to: string): void => {

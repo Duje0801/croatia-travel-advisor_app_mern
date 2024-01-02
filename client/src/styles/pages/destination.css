@@ -132,16 +132,16 @@
 @media only screen and (min-width: 768px) {
   .destinationDeleteText {
     width: 60%;
+    margin: 20px auto;
   }
 }
 @media only screen and (min-width: 1024px) {
   .destinationDeleteText {
     font-size: 1rem;
     width: 680px;
-    margin: 20px auto;
   }
 }
-.destinationDeleteButtonsDiv {
+.destinationDeleteButtons {
   display: flex;
   justify-content: center;
   gap: 10px;
@@ -149,7 +149,7 @@
   margin: 10px auto 0px;
 }
 
-.destinationDeleteButtons {
+.destinationDeleteButtons > button {
   background-color: #00af87;
   color: white;
   padding: 0px 10px;
@@ -160,8 +160,11 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .destinationDeleteButtons {
+  .destinationDeleteButtons > button {
     cursor: pointer;
+  }
+  .destinationDeleteButtons > button:hover {
+    color: black;
   }
 }
 .destinationEditForm {
@@ -243,6 +246,9 @@
   .destinationEditDeleteButton {
     font-size: 1rem;
     cursor: pointer;
+  }
+  .destinationEditDeleteButton:hover {
+    background-color: #00af87;
   }
 }
 .destinationError {

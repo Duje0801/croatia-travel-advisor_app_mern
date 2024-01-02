@@ -21,7 +21,7 @@ export default function DeleteReview(props: {
 
   const handleDeleteReview = async (): Promise<void> => {
     axios
-      .delete(`http://localhost:4000/api/review/${props.deleteId}`, {
+      .delete(`https://croatia-travel-advisor-app-mern.onrender.com/api/review/${props.deleteId}`, {
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${state.user?.token}`,

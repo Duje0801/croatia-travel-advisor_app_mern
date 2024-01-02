@@ -22,7 +22,7 @@ export default function DeleteDeactivateUser(props: {
 
     axios({
       method: `${axiosMethod}`,
-      url: `http://localhost:4000/api/user/${url}/`,
+      url: `https://croatia-travel-advisor-app-mern.onrender.com/api/user/${url}/`,
       data: { id: props.userProfile.id },
       headers: {
         "content-type": "application/json",
@@ -52,7 +52,7 @@ export default function DeleteDeactivateUser(props: {
   const handleActivateUser = async (): Promise<void> => {
     axios
       .patch(
-        `http://localhost:4000/api/user/activationUser`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/activationUser`,
         { data: props.userProfile.id },
         {
           headers: {

@@ -21,7 +21,7 @@ export default function SearchBar(): JSX.Element {
     }
 
     axios
-      .get(`http://localhost:4000/api/destination/search/${inputText}`)
+      .get(`https://croatia-travel-advisor-app-mern.onrender.com/api/destination/search/${inputText}`)
       .then((res) => setSearchResults(res.data.destinations))
       .catch((error) =>
         setError(`Search is not working properly. Please try again later.`)

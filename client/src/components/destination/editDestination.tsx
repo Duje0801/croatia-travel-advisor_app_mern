@@ -48,7 +48,7 @@ export default function EditDestination(props: {
 
     axios
       .patch(
-        `http://localhost:4000/api/destination/${props.destinationId}`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/destination/${props.destinationId}`,
         { data: requestBody },
         {
           headers: {

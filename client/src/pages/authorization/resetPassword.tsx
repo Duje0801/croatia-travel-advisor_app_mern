@@ -19,7 +19,7 @@ export default function ResetPassword(): JSX.Element {
 
     axios
       .patch(
-        `http://localhost:4000/api/user/resetPassword`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/resetPassword`,
         { data: { email, token, newPassword, confirmNewPassword } },
         {
           headers: {

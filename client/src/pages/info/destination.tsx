@@ -52,9 +52,9 @@ export default function Destination(): JSX.Element {
     const fetchData = async () => {
       axios
         .get(
-          `http://localhost:4000/api/destination/${params.id}${
-            params?.reviewId ? `/${params.reviewId}` : ``
-          }/?page=${page}`
+          `https://croatia-travel-advisor-app-mern.onrender.com/api/destination/${
+            params.id
+          }${params?.reviewId ? `/${params.reviewId}` : ``}/?page=${page}`
         )
         .then((res) => {
           const data: IDestination = res.data.data;
@@ -99,7 +99,7 @@ export default function Destination(): JSX.Element {
       if (params.reviewId) return;
       axios
         .get(
-          `http://localhost:4000/api/review/destinationReviews/${params.id}/?page=${page}&rating=${filterRating}`
+          `https://croatia-travel-advisor-app-mern.onrender.com/api/review/destinationReviews/${params.id}/?page=${page}&rating=${filterRating}`
         )
         .then((res) => {
           setReviews(res.data.data);

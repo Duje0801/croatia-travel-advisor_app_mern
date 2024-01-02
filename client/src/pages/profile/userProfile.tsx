@@ -33,12 +33,15 @@ export default function UserProfile(): JSX.Element {
       if (!state.user?.token) return;
       else {
         axios
-          .get(`http://localhost:4000/api/user/find/${params.id}`, {
-            headers: {
-              "content-type": "application/json",
-              authorization: `Bearer ${state.user.token}`,
-            },
-          })
+          .get(
+            `https://croatia-travel-advisor-app-mern.onrender.com/api/user/find/${params.id}`,
+            {
+              headers: {
+                "content-type": "application/json",
+                authorization: `Bearer ${state.user.token}`,
+              },
+            }
+          )
           .then((res) => {
             setUserProfile(res.data.data);
           })

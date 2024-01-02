@@ -1,4 +1,4 @@
-import { useContext, useState, Dispatch, SetStateAction } from "react";
+import { useContext, useState } from "react";
 import { UserContext } from "../../context/userContext";
 import { DestinationContext } from "../../context/destinationContext";
 import WriteReviewForm from "./writeReviewElements/writeReviewForm";

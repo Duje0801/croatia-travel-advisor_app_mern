@@ -28,12 +28,15 @@ export default function UserList(): JSX.Element {
     if (!state.user?.token) return;
     else {
       axios
-        .get(`http://localhost:4000/api/user/userList/?page=${page}`, {
-          headers: {
-            "content-type": "application/json",
-            authorization: `Bearer ${state.user.token}`,
-          },
-        })
+        .get(
+          `https://croatia-travel-advisor-app-mern.onrender.com/api/user/userList/?page=${page}`,
+          {
+            headers: {
+              "content-type": "application/json",
+              authorization: `Bearer ${state.user.token}`,
+            },
+          }
+        )
         .then((res) => {
           setUsers(res.data.data);
           setUsersNo(res.data.quantity);
@@ -69,12 +72,15 @@ export default function UserList(): JSX.Element {
     }
 
     axios
-      .get(`http://localhost:4000/api/user/userList/${inputText}/?page=1`, {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${state.user?.token}`,
-        },
-      })
+      .get(
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/userList/${inputText}/?page=1`,
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${state.user?.token}`,
+          },
+        }
+      )
       .then((res) => {
         setUsers(res.data.data);
         setUsersNo(res.data.quantity);

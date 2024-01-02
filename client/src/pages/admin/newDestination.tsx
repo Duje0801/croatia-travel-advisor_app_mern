@@ -37,7 +37,7 @@ export default function NewDestination(): JSX.Element {
 
     axios
       .post(
-        `http://localhost:4000/api/destination`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/destination`,
         {
           data: { name, image, description, category },
         },

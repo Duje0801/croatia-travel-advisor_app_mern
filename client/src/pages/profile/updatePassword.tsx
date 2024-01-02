@@ -21,7 +21,7 @@ export default function UpdatePassword(): JSX.Element {
 
     axios
       .patch(
-        `http://localhost:4000/api/user/updatePassword`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/updatePassword`,
         {
           data: {
             oldPassword,

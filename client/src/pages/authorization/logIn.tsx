@@ -22,7 +22,7 @@ export default function LogIn(): JSX.Element {
 
     axios
       .post(
-        `http://localhost:4000/api/user/logIn`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/logIn`,
         { data: { email, password } },
         {
           headers: {

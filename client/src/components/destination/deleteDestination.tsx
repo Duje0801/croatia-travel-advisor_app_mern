@@ -13,7 +13,7 @@ export default function DeleteDestination(props: {
 
   const finalDeleteDestination = (): void => {
     axios
-      .delete(`http://localhost:4000/api/destination/${props.destinationId}`, {
+      .delete(`https://croatia-travel-advisor-app-mern.onrender.com/api/destination/${props.destinationId}`, {
         headers: {
           "content-type": "application/json",
           authorization: `Bearer ${state.user?.token}`,

@@ -14,7 +14,7 @@ import "../../styles/pages/category.css";
 
 function Category(): JSX.Element {
   const [categoryDestinations, setCategoryDestinations] = useState<
-  IDestination[]
+    IDestination[]
   >([]);
   const [page, setPage] = useState<number>(1);
   const [destinationsNo, setDestinationsNo] = useState<number>(0);
@@ -36,7 +36,7 @@ function Category(): JSX.Element {
     const fetchData = async () => {
       axios
         .get(
-          `http://localhost:4000/api/destination/category/${params.id}?page=${page}`
+          `https://croatia-travel-advisor-app-mern.onrender.com/api/destination/category/${params.id}?page=${page}`
         )
         .then((res) => {
           const data = res.data;

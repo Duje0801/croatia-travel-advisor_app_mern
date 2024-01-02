@@ -23,7 +23,7 @@ export default function SignUp(): JSX.Element {
 
     axios
       .post(
-        `http://localhost:4000/api/user/signUp`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/signUp`,
         { data: { username, email, password, confirmPassword } },
         {
           headers: {

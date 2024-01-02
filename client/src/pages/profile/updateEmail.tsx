@@ -21,7 +21,7 @@ export default function UpdateEmail(): JSX.Element {
 
     axios
       .patch(
-        `http://localhost:4000/api/user/updateEmail`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/updateEmail`,
         {
           data: {
             oldEmail,

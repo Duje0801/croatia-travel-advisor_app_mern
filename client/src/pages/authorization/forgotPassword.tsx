@@ -23,7 +23,7 @@ export default function ForgotPassword(): JSX.Element {
 
     axios
       .post(
-        `http://localhost:4000/api/user/forgotPassword`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/user/forgotPassword`,
         { data: { email } },
         {
           headers: {

@@ -19,7 +19,7 @@ export default function WriteReviewButton(props: {
     //This function checks if the user has already reviewed this destination
     axios
       .get(
-        `http://localhost:4000/api/review/alreadyReviewed/${props.destinationId}`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/review/alreadyReviewed/${props.destinationId}`,
         {
           headers: {
             "content-type": "application/json",

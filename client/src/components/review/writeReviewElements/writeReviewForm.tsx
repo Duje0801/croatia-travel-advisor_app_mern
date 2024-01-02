@@ -38,7 +38,7 @@ export default function WriteReviewForm(props: {
 
     axios
       .post(
-        `http://localhost:4000/api/review/`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/review/`,
         {
           data: { title, text, rating, destination: destinationInRequest },
         },

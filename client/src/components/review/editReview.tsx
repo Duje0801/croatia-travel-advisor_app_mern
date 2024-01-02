@@ -35,7 +35,7 @@ export default function EditReview(props: {
     e.preventDefault();
     axios
       .patch(
-        `http://localhost:4000/api/review/${props.review._id}`,
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/review/${props.review._id}`,
         {
           data: {
             page: page,

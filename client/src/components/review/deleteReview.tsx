@@ -61,18 +61,8 @@ export default function DeleteReview(props: {
     <div className="reviewDeleteText">
       Are you sure you want to delete this review?
       <div className="reviewDeleteButtonsDiv">
-        <button
-          className="reviewDeleteButtons"
-          onClick={() => handleDeleteReview()}
-        >
-          Yes
-        </button>
-        <button
-          className="reviewDeleteButtons"
-          onClick={() => props.handleDeleteId(``)}
-        >
-          No
-        </button>
+        <button onClick={() => handleDeleteReview()}>Yes</button>
+        <button onClick={() => props.handleDeleteId(``)}>No</button>
       </div>
     </div>
   );

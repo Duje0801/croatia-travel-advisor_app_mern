@@ -142,7 +142,8 @@
 }
 
 @media only screen and (min-width: 1024px) {
-  .homeSearchResultsSingle:hover, .homeSearchResultsMultiple:hover {
+  .homeSearchResultsSingle:hover,
+  .homeSearchResultsMultiple:hover {
     background-color: #00af87;
   }
 }
@@ -245,7 +246,7 @@
 .homeContainerText > button {
   font-size: 1.25rem;
   background-color: white;
-  border: 0px;
+  border: 4px solid black;
   padding: 10px;
   font-weight: bold;
   margin-top: 10px;
@@ -255,6 +256,9 @@
   .homeContainerText > button {
     font-size: 1.25rem;
     cursor: pointer;
+  }
+  .homeContainerText > button:hover {
+    background-color: #00af87;
   }
 }
 .homeTrendingBlackColor {

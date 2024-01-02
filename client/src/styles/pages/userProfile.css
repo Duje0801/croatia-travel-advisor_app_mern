@@ -31,7 +31,7 @@
   gap: 10px;
 }
 
-.userProfileButton {
+.userProfileButtonsDiv > button {
   border: 0px;
   background-color: #00af87;
   color: white;
@@ -42,13 +42,16 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .userProfileButton {
+  .userProfileButtonsDiv > button {
     font-size: 1rem;
   }
 }
 @media only screen and (min-width: 1024px) {
-  .userProfileButton {
+  .userProfileButtonsDiv > button {
     cursor: pointer;
+  }
+  .userProfileButtonsDiv > button:hover {
+    color: black;
   }
 }
 .userProfileData {
@@ -113,6 +116,9 @@
 @media only screen and (min-width: 1024px) {
   .userProfileReview {
     cursor: pointer;
+  }
+  .userProfileReview:hover {
+    background-color: #00af87;
   }
 }
 .userProfileReviewBox {

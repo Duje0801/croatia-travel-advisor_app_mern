@@ -160,7 +160,8 @@ $colorGreen: #00af87;
 }
 
 @media only screen and (min-width: 1024px) {
-  .homeSearchResultsSingle:hover, .homeSearchResultsMultiple:hover  {
+  .homeSearchResultsSingle:hover,
+  .homeSearchResultsMultiple:hover {
     background-color: #00af87;
   }
 }
@@ -193,14 +194,14 @@ $colorGreen: #00af87;
 @media only screen and (min-width: 768px) {
   .homeSearchError {
     top: calc(50% + 40px);
-    width: calc(50% - (2*$gapM))
+    width: calc(50% - (2 * $gapM));
   }
 }
 
 @media only screen and (min-width: 1024px) {
   .homeSearchError {
     top: calc(50% + 30px);
-    width: calc(40% - (2*$gapM));
+    width: calc(40% - (2 * $gapM));
   }
 }
 
@@ -272,7 +273,7 @@ $colorGreen: #00af87;
 .homeContainerText > button {
   font-size: $fontM;
   background-color: white;
-  border: 0px;
+  border: 4px solid black;
   padding: $gapM;
   font-weight: bold;
   margin-top: $gapM;
@@ -282,6 +283,9 @@ $colorGreen: #00af87;
   .homeContainerText > button {
     font-size: $fontM;
     cursor: pointer;
+  }
+  .homeContainerText > button:hover {
+    background-color: $colorGreen;
   }
 }
 

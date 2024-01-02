@@ -109,6 +109,9 @@ $colorGreen: #00af87;
   .destinationInfoButtons {
     cursor: pointer;
   }
+  .destinationInfoButtons:hover {
+    color: black
+  }
 }
 
 .destinationReviewsNumber {

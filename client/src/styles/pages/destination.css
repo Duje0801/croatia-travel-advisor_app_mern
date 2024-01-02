@@ -89,6 +89,9 @@
   .destinationInfoButtons {
     cursor: pointer;
   }
+  .destinationInfoButtons:hover {
+    color: black;
+  }
 }
 .destinationReviewsNumber {
   font-size: 1rem;

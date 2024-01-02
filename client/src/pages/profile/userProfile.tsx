@@ -160,16 +160,10 @@ export default function UserProfile(): JSX.Element {
               {state.user.username === userProfile.username &&
               state.user.username !== `admin` ? (
                 <>
-                  <button
-                    onClick={() => handleChangeEmail()}
-                    className="userProfileButton"
-                  >
+                  <button onClick={() => handleChangeEmail()}>
                     Change Email
                   </button>
-                  <button
-                    onClick={() => handleChangePassword()}
-                    className="userProfileButton"
-                  >
+                  <button onClick={() => handleChangePassword()}>
                     Change Password
                   </button>{" "}
                 </>

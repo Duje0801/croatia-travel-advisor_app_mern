@@ -39,6 +39,10 @@ $colorGreen: #00af87;
   .reviewsTitle {
     font-size: $fontL;
   }
+  .reviewTitleAuthor:hover {
+    color:$colorGreen;
+    cursor: pointer;
+  }
 }
 
 .reviewBox {
@@ -221,6 +225,9 @@ $colorGreen: #00af87;
     font-size: $fontS;
     cursor: pointer;
   }
+  .reviewEditFormButton:hover {
+    background-color: $colorGreen;
+  }
 }
 
 .reviewCloseEditButton {
@@ -244,7 +251,7 @@ $colorGreen: #00af87;
   margin: $gapM auto 0px;
 }
 
-.reviewDeleteButtons {
+.reviewDeleteButtonsDiv > button {
   background-color: $colorGreen;
   color: white;
   padding: 0px $gapM;
@@ -254,8 +261,11 @@ $colorGreen: #00af87;
 }
 
 @media only screen and (min-width: 1024px) {
-  .reviewDeleteButtons {
+  .reviewDeleteButtonsDiv > button {
     cursor: pointer;
+  }
+  .reviewDeleteButtonsDiv > button:hover {
+    color: black;
   }
 }
 
@@ -311,8 +321,8 @@ $colorGreen: #00af87;
 
 @media only screen and (min-width: 1024px) {
   .reviewWrite {
-    width: 700px;
-    font-size: $fontM;
+    width: 740px;
+    font-size: $fontL;
   }
 }
 

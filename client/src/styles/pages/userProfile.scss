@@ -43,7 +43,7 @@ $colorGreen: #00af87;
   gap: $gapM;
 }
 
-.userProfileButton {
+.userProfileButtonsDiv > button {
   border: 0px;
   background-color: #00af87;
   color: white;
@@ -53,14 +53,17 @@ $colorGreen: #00af87;
 }
 
 @media only screen and (min-width: 768px) {
-  .userProfileButton {
+  .userProfileButtonsDiv > button {
     font-size: $fontS;
   }
 }
 
 @media only screen and (min-width: 1024px) {
-  .userProfileButton {
+  .userProfileButtonsDiv > button {
     cursor: pointer;
+  }
+  .userProfileButtonsDiv > button:hover {
+    color: black;
   }
 }
 
@@ -129,6 +132,9 @@ $colorGreen: #00af87;
 @media only screen and (min-width: 1024px) {
   .userProfileReview {
     cursor: pointer;
+  }
+  .userProfileReview:hover {
+    background-color: $colorGreen;
   }
 }
 

@@ -52,6 +52,7 @@ export default function Reviews(): JSX.Element {
               <div>
                 <div className="reviewTitle">
                   <span
+                    className="reviewTitleAuthor"
                     onClick={() => handleUsernameClick(review.user.username)}
                   >
                     {review.user.username}

@@ -95,6 +95,11 @@
   text-align: right;
 }
 
+@media only screen and (min-width: 1024px) {
+  .navHelloMessage:hover {
+    color: #00af87;
+  }
+}
 .navSignIn:hover {
   color: #00af87;
 }

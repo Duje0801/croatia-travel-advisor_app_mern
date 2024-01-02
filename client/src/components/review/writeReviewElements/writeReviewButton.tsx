@@ -1,4 +1,5 @@
 import { useState, useContext, Dispatch, SetStateAction } from "react";
+import { useParams } from "react-router-dom";
 import { UserContext } from "../../../context/userContext";
 import { DestinationContext } from "../../../context/destinationContext";
 import axios from "axios";
@@ -8,6 +9,8 @@ export default function WriteReviewButton(props: {
   setOpenForm: Dispatch<SetStateAction<boolean>>;
 }): JSX.Element {
   const [alreadyReviewedError, setAlreadyReviewedError] = useState<string>(``);
+
+  const params = useParams();
 
   const { state } = useContext(UserContext);
   const { setDestinationError } = useContext(DestinationContext);
@@ -58,19 +61,21 @@ export default function WriteReviewButton(props: {
 
   return (
     <div className="reviewWriteDiv">
-      {!alreadyReviewedError ? (
-        <button onClick={() => handleWriteReview()}>Write a review</button>
-      ) : (
-        <div className="reviewAlreadyReviewedError">
-          {alreadyReviewedError}{" "}
-          <button
-            onClick={() => handleCloseAlreadyReviewedError()}
-            className="reviewEditButton"
-          >
-            Close
-          </button>
-        </div>
-      )}
+      {!params.reviewId ? (
+        !alreadyReviewedError ? (
+          <button onClick={() => handleWriteReview()}>Write a review</button>
+        ) : (
+          <div className="reviewAlreadyReviewedError">
+            {alreadyReviewedError}{" "}
+            <button
+              onClick={() => handleCloseAlreadyReviewedError()}
+              className="reviewEditButton"
+            >
+              Close
+            </button>
+          </div>
+        )
+      ) : null}
     </div>
   );
 }

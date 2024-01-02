@@ -113,16 +113,17 @@ export default function UserProfile(): JSX.Element {
       userProfile?.reviews &&
       reviewsToShow.map((review: IReview, i) => {
         return (
-          <div className="userProfileReview" key={i}>
+          <div
+            className="userProfileReview"
+            onClick={() =>
+              handleRedirectDestination(review.destination.name, review._id)
+            }
+            key={i}
+          >
             <div>
               <b>In {review.destination.name}</b>
             </div>
-            <div
-              className="userProfileReviewBox"
-              onClick={() =>
-                handleRedirectDestination(review.destination.name, review._id)
-              }
-            >
+            <div className="userProfileReviewBox">
               <div>
                 <div className="userProfileReviewTitle">
                   {review.user.username} on {DateString(review.createdAt)}

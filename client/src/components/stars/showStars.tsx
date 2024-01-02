@@ -2,14 +2,13 @@ import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
 import "../../styles/components/place.css";
 
 export default function ShowStars(avgRating: number): JSX.Element {
-  if (avgRating == 0)
+  if (avgRating === 0)
     return (
       <div className="starRow">
         <BsStarFill /> Not rated yet
       </div>
     );
-
-  if (avgRating >= 1 && avgRating < 1.5)
+  else if (avgRating >= 1 && avgRating < 1.5)
     return (
       <div className="starRow">
         <BsStarFill />
@@ -19,7 +18,7 @@ export default function ShowStars(avgRating: number): JSX.Element {
         <BsStar />
       </div>
     );
-  if (avgRating >= 1.5 && avgRating < 2)
+  else if (avgRating >= 1.5 && avgRating < 2)
     return (
       <div className="starRow">
         <BsStarFill />
@@ -29,7 +28,7 @@ export default function ShowStars(avgRating: number): JSX.Element {
         <BsStar />
       </div>
     );
-  if (avgRating >= 2 && avgRating < 2.5)
+  else if (avgRating >= 2 && avgRating < 2.5)
     return (
       <div className="starRow">
         <BsStarFill />
@@ -39,7 +38,7 @@ export default function ShowStars(avgRating: number): JSX.Element {
         <BsStar />
       </div>
     );
-  if (avgRating >= 2.5 && avgRating < 3)
+  else if (avgRating >= 2.5 && avgRating < 3)
     return (
       <div className="starRow">
         <BsStarFill />
@@ -49,7 +48,7 @@ export default function ShowStars(avgRating: number): JSX.Element {
         <BsStar />
       </div>
     );
-  if (avgRating >= 3 && avgRating < 3.5)
+  else if (avgRating >= 3 && avgRating < 3.5)
     return (
       <div className="starRow">
         <BsStarFill />
@@ -59,7 +58,7 @@ export default function ShowStars(avgRating: number): JSX.Element {
         <BsStar />
       </div>
     );
-  if (avgRating >= 3.5 && avgRating < 4)
+  else if (avgRating >= 3.5 && avgRating < 4)
     return (
       <div className="starRow">
         <BsStarFill />
@@ -69,7 +68,7 @@ export default function ShowStars(avgRating: number): JSX.Element {
         <BsStar />
       </div>
     );
-  if (avgRating >= 4 && avgRating < 4.5)
+  else if (avgRating >= 4 && avgRating <= 4.5)
     return (
       <div className="starRow">
         <BsStarFill />

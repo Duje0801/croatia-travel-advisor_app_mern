@@ -1,7 +1,7 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import Navigation from "../../components/home/navigation";
+import Navigation from "../../components/navigation/navigation";
 import Pagination from "../../components/pagination/pagination";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";

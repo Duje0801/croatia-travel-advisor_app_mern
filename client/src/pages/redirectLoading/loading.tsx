@@ -1,4 +1,4 @@
-import Navigation from "../../components/home/navigation";
+import Navigation from "../../components/navigation/navigation";
 import Footer from "../../components/home/footer";
 import "../../styles/pages/redirect.css";
 

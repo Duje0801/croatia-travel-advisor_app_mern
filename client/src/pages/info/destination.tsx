@@ -1,9 +1,9 @@
 import { useEffect, useState, useContext } from "react";
 import { useNavigate, useParams } from "react-router-dom";
-import Navigation from "../../components/home/navigation";
+import Navigation from "../../components/navigation/navigation";
 import { UserContext } from "../../context/userContext";
 import { DestinationContext } from "../../context/destinationContext";
-import ShowStars from "../../components/stars/showStars";
+import ShowStars from "../../components/stars/showDestinationStars";
 import DestinationAdminOptions from "../../components/destination/destinationAdminOptions";
 import DeleteDestination from "../../components/destination/deleteDestination";
 import EditDestination from "../../components/destination/editDestination";

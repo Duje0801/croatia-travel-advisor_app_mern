@@ -21,7 +21,9 @@ export default function SearchBar(): JSX.Element {
     }
 
     axios
-      .get(`https://croatia-travel-advisor-app-mern.onrender.com/api/destination/search/${inputText}`)
+      .get(
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/destination/search/${inputText}`
+      )
       .then((res) => setSearchResults(res.data.destinations))
       .catch((error) =>
         setError(`Search is not working properly. Please try again later.`)
@@ -65,7 +67,7 @@ export default function SearchBar(): JSX.Element {
           <input
             type="text"
             placeholder="Explore places to go..."
-            maxLength={10}
+            maxLength={15}
             onChange={(e) => handleSearch(e.target.value)}
           ></input>
           <button type="submit">Submit</button>

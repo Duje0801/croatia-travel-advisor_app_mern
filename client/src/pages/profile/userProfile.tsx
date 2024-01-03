@@ -1,8 +1,8 @@
 import { useContext, useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import Navigation from "../../components/home/navigation";
-import ShowReviewStarComments from "../../components/stars/showReviewStarComments";
+import Navigation from "../../components/navigation/navigation";
+import ShowReviewStarComments from "../../components/stars/showReviewStars";
 import DeleteDeactivateUser from "../../components/profile/deleteDeactivateUser";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";

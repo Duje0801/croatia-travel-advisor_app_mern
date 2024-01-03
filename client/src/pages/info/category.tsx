@@ -1,10 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CategoryDescription from "../../data/categoryDescription";
-import Navigation from "../../components/home/navigation";
+import Navigation from "../../components/navigation/navigation";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";
-import ShowStars from "../../components/stars/showStars";
+import ShowStars from "../../components/stars/showDestinationStars";
 import Pagination from "../../components/pagination/pagination";
 import Footer from "../../components/home/footer";
 import { IDestination } from "../../interfaces/IDestination";

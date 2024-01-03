@@ -1,6 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { UserContext } from "../../context/userContext";
-import ShowReviewStarComments from "../stars/showReviewStarComments";
+import ShowReviewStarComments from "../stars/showReviewStars";
 import { useNavigate, useParams } from "react-router-dom";
 import DeleteReview from "./deleteReview";
 import Pagination from "../pagination/pagination";

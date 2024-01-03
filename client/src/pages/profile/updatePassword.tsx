@@ -1,7 +1,7 @@
 import { FormEvent, useContext, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
-import Navigation from "../../components/home/navigation";
+import Navigation from "../../components/navigation/navigation";
 import Redirect from "../redirectLoading/redirect";
 import axios from "axios";
 

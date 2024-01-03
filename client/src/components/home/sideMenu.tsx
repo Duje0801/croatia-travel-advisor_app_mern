@@ -50,7 +50,7 @@ export default function SideMenu(props: {
     dispatch({ type: "DELETE", payload: null });
   };
 
-  const handleClick = (value: string): void => {
+  const redirect = (value: string): void => {
     if (value === `newDestination`) navigate(routes.newDestination);
     else if (value === `userList`) navigate(routes.userList);
     else if (value === `myProfile`)
@@ -82,30 +82,30 @@ export default function SideMenu(props: {
       )}
       {state.user && state.user?.username !== `admin` ? (
         <ul className="sideMenuList">
-          <li onClick={() => handleClick(`myProfile`)}>My profile</li>
+          <li onClick={() => redirect(`myProfile`)}>My profile</li>
         </ul>
       ) : null}
       {state.user?.username === `admin` ? (
         <ul className="sideMenuList">
-          <li onClick={() => handleClick(`newDestination`)}>
+          <li onClick={() => redirect(`newDestination`)}>
             Add new destination
           </li>
-          <li onClick={() => handleClick(`userList`)}>User list</li>
+          <li onClick={() => redirect(`userList`)}>User list</li>
         </ul>
       ) : null}
       <ul className="sideMenuList">
-        <li onClick={() => handleClick(`home`)}>Home</li>
-        <li onClick={() => handleClick(`topRated`)}>Top Rated</li>
-        <li onClick={() => handleClick(`trending`)}>Trending</li>
-        <li onClick={() => handleClick(`nature`)}>Nature</li>
-        <li onClick={() => handleClick(`towns`)}>Towns</li>
-        <li onClick={() => handleClick(`history`)}>History</li>
-        <li onClick={() => handleClick(`entertainment`)}>Entertainment</li>
+        <li onClick={() => redirect(`home`)}>Home</li>
+        <li onClick={() => redirect(`topRated`)}>Top Rated</li>
+        <li onClick={() => redirect(`trending`)}>Trending</li>
+        <li onClick={() => redirect(`nature`)}>Nature</li>
+        <li onClick={() => redirect(`towns`)}>Towns</li>
+        <li onClick={() => redirect(`history`)}>History</li>
+        <li onClick={() => redirect(`entertainment`)}>Entertainment</li>
       </ul>
       <ul className="sideMenuList">
-        <li onClick={() => handleClick(`termsOfUse`)}>Terms of use</li>
-        <li onClick={() => handleClick(`aboutUs`)}>About Us</li>
-        <li onClick={() => handleClick(`contact`)}>Contact</li>
+        <li onClick={() => redirect(`termsOfUse`)}>Terms of use</li>
+        <li onClick={() => redirect(`aboutUs`)}>About Us</li>
+        <li onClick={() => redirect(`contact`)}>Contact</li>
       </ul>
     </div>
   );

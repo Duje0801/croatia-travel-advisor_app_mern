@@ -12,7 +12,7 @@ export default function ShowReviewStarComments(rating: number): JSX.Element {
         <AiOutlineStar />
       </div>
     );
-  else if (rating == 2)
+  else if (rating === 2)
     return (
       <div className="starRow">
         <AiFillStar />
@@ -22,7 +22,7 @@ export default function ShowReviewStarComments(rating: number): JSX.Element {
         <AiOutlineStar />
       </div>
     );
-  else if (rating == 3)
+  else if (rating === 3)
     return (
       <div className="starRow">
         <AiFillStar />
@@ -32,7 +32,7 @@ export default function ShowReviewStarComments(rating: number): JSX.Element {
         <AiOutlineStar />
       </div>
     );
-  else if (rating == 4)
+  else if (rating === 4)
     return (
       <div className="starRow">
         <AiFillStar />
@@ -42,7 +42,7 @@ export default function ShowReviewStarComments(rating: number): JSX.Element {
         <AiOutlineStar />
       </div>
     );
-  else if (rating == 5)
+  else if (rating === 5)
     return (
       <div className="starRow">
         <AiFillStar />

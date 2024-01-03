@@ -17,6 +17,8 @@ function Category(): JSX.Element {
     IDestination[]
   >([]);
   const [page, setPage] = useState<number>(1);
+  const [prevPage, setPrevPage] = useState<number>(1);
+  const [prevParamsId, setPrevParamsId] = useState<string>(``);
   const [destinationsNo, setDestinationsNo] = useState<number>(0);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [error, setError] = useState<string>(``);
@@ -36,13 +38,18 @@ function Category(): JSX.Element {
     const fetchData = async () => {
       axios
         .get(
-          `https://croatia-travel-advisor-app-mern.onrender.com/api/destination/category/${params.id}?page=${page}`
+          `https://croatia-travel-advisor-app-mern.onrender.com/api/destination/category/${
+            params.id
+          }?page=${page === prevPage ? 1 : page}`
         )
         .then((res) => {
           const data = res.data;
           setCategoryDestinations(data.data);
           setDestinationsNo(data.quantity);
           setIsLoading(false);
+          setPrevParamsId(`${params.id}`);
+          setPrevPage(page);
+          setPage(params.id === prevParamsId ? page : 1);
         })
         .catch((err) => {
           if (err?.response?.data?.error) {

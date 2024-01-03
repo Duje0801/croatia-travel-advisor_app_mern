@@ -13,12 +13,15 @@ export default function DeleteDestination(props: {
 
   const finalDeleteDestination = (): void => {
     axios
-      .delete(`https://croatia-travel-advisor-app-mern.onrender.com/api/destination/${props.destinationId}`, {
-        headers: {
-          "content-type": "application/json",
-          authorization: `Bearer ${state.user?.token}`,
-        },
-      })
+      .delete(
+        `https://croatia-travel-advisor-app-mern.onrender.com/api/destination/${props.destinationId}`,
+        {
+          headers: {
+            "content-type": "application/json",
+            authorization: `Bearer ${state.user?.token}`,
+          },
+        }
+      )
       .then((res) => {
         props.handleDeleteDestination();
         props.setIsDeleted(true);
@@ -29,9 +32,7 @@ export default function DeleteDestination(props: {
           props.setError(`${err.response.data.error}`);
         } else {
           props.handleDeleteDestination();
-          props.setError(
-            `Can't delete destination. Please try again later`
-          );
+          props.setError(`Can't delete destination. Please try again later`);
         }
       });
   };
@@ -40,16 +41,8 @@ export default function DeleteDestination(props: {
     <div className="destinationDeleteText">
       Are you sure you want to delete destination {props.destinationName}?
       <div className="destinationDeleteButtons">
-        <button
-          onClick={finalDeleteDestination}
-        >
-          Yes
-        </button>
-        <button
-          onClick={props.handleDeleteDestination}
-        >
-          No
-        </button>
+        <button onClick={finalDeleteDestination}>Yes</button>
+        <button onClick={props.handleDeleteDestination}>No</button>
       </div>
     </div>
   );

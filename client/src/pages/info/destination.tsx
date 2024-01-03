@@ -1,10 +1,10 @@
 import { useEffect, useState, useContext } from "react";
-import { useNavigate, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
 import Navigation from "../../components/navigation/navigation";
 import { UserContext } from "../../context/userContext";
 import { DestinationContext } from "../../context/destinationContext";
 import ShowStars from "../../components/stars/showDestinationStars";
-import DestinationAdminOptions from "../../components/destination/destinationAdminOptions";
+import DestinationButtons from "../../components/destination/destinationButtons";
 import DeleteDestination from "../../components/destination/deleteDestination";
 import EditDestination from "../../components/destination/editDestination";
 import Redirect from "../redirectLoading/redirect";
@@ -33,7 +33,6 @@ export default function Destination(): JSX.Element {
     useState<boolean>(false);
 
   const params = useParams();
-  const navigate = useNavigate();
 
   const { state } = useContext(UserContext);
   const {
@@ -93,9 +92,11 @@ export default function Destination(): JSX.Element {
   useEffect((): void => {
     //This function changes reviews to display in destination when pages or filterRating changes
     const fetchData = () => {
-      //To avoid fetching when page opens for first time
+      //To avoid fetching when page opens for first time, first five reviews
+      //will already be there in the state destination (destination.reviews)
       if (isOpening) return setIsOpening(false);
-      //Blocks if user wants to see only one coment (link from user profile)
+      //Blocks if user wants to see only one coment (link from user profile),
+      //because this fetch will return 5 reviews
       if (params.reviewId) return;
       axios
         .get(
@@ -104,10 +105,6 @@ export default function Destination(): JSX.Element {
         .then((res) => {
           setReviews(res.data.data);
           setReviewsNo(res.data.quantity);
-          window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-          });
         })
         .catch((err) => {
           if (err?.response?.data?.error) {
@@ -124,16 +121,8 @@ export default function Destination(): JSX.Element {
     fetchData();
   }, [page, filterRating]);
 
-  const handleEditDestination = (): void => {
-    setEditQuestion(editQuestion ? false : true);
-  };
-
   const handleDeleteDestination = (): void => {
     setDeleteQuestion(deleteQuestion ? false : true);
-  };
-
-  const handleBackClick = (): void => {
-    navigate(-1);
   };
 
   if (error) return <Redirect message={error} />;
@@ -178,20 +167,11 @@ export default function Destination(): JSX.Element {
                 {destination.averageRating === 0
                   ? `Not rated yet`
                   : ShowStars(destination.averageRating)}
-                <div className="destinationGoBackEditDivs">
-                  {state.user?.username === `admin` && (
-                    <DestinationAdminOptions
-                      handleEditDestination={handleEditDestination}
-                      handleDeleteDestination={handleDeleteDestination}
-                    />
-                  )}
-                  <button
-                    className="destinationInfoButtons"
-                    onClick={handleBackClick}
-                  >
-                    Back
-                  </button>
-                </div>
+                <DestinationButtons
+                  editQuestion={editQuestion}
+                  setEditQuestion={setEditQuestion}
+                  handleDeleteDestination={handleDeleteDestination}
+                />
               </div>
               <div className="destinationReviewsNumber">
                 {destination.ratingQuantity

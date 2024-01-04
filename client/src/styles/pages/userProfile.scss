@@ -12,7 +12,7 @@ $colorGreen: #00af87;
 .userProfile {
   border: 2px solid black;
   padding: $gapM;
-  margin: 95px auto auto auto;
+  margin: 95px auto $gapM auto;
   box-shadow: 2px 2px #88888874;
   font-size: $fontS;
   width: 80%;
@@ -84,7 +84,7 @@ $colorGreen: #00af87;
 .userIsActiveBox {
   width: 10px;
   height: 10px;
-  margin: auto $gapM auto 0px;
+  margin: auto 0px auto $gapS;
   background-color: #00af87;
   border: 2px solid black;
   border-radius: 50%;
@@ -93,7 +93,7 @@ $colorGreen: #00af87;
 .userIsNotActiveBox {
   width: 10px;
   height: 10px;
-  margin: auto $gapM auto 0px;
+  margin: auto 0px auto $gapS;
   background-color: white;
   border: 2px solid black;
   border-radius: 50%;
@@ -187,6 +187,10 @@ $colorGreen: #00af87;
 @media only screen and (min-width: 1024px) {
   .userProfileDeleteButtons {
     cursor: pointer;
+  }
+
+  .userProfileDeleteButtons:hover {
+    color: black;
   }
 }
 

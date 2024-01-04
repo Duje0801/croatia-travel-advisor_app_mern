@@ -1,6 +1,7 @@
 import { Request, Response } from "express";
 import bcrypt from "bcryptjs";
 import { User } from "../model/userModel";
+import { Review } from "../model/reviewModel";
 import { IUser } from "../interfaces/user";
 import { ReqUser } from "../interfaces/reqUser";
 import { errorResponse } from "../utilis/errorResponse";
@@ -54,18 +55,26 @@ const userList: any = async function (req: QueryInRequest, res: Response) {
 const oneUser: any = async function (req: Request, res: Response) {
   try {
     const params: string = req.params.id;
+    const page: number = Number(req.query.page);
+    const skip: number = ((page || 1) - 1) * 5;
+
     const user: IUser | null = await User.findOne({
       username: params,
     }).populate({
       path: `reviews`,
-      options: { sort: { createdAt: -1 } },
+      options: { sort: { createdAt: -1 }, skip: skip, limit: 5 },
     });
 
     if (!user)
       return errorResponse("Can't find user with this username", res, 404);
 
+    const count: number = await Review.find({
+      "user.username": params,
+    }).countDocuments();
+
     res.status(200).json({
       status: `success`,
+      reviewsQuantity: count,
       data: user,
     });
   } catch (error) {

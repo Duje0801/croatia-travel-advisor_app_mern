@@ -36,8 +36,9 @@ export default function UserProfileButtons(props: {
           </button>{" "}
         </>
       ) : null}
-      {state.user?.username === props.userProfile.username ||
-      state.user?.username === `admin` ? (
+      {(state.user?.username === props.userProfile.username ||
+        state.user?.username === `admin`) &&
+      props.userProfile.username !== `admin` ? (
         <>
           <button
             className="userProfileButton"

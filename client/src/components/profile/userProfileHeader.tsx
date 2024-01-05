@@ -14,7 +14,7 @@ export default function UserProfileHeader(props: {
     <div className="userProfileHeader">
       <div>
         <div className="userProfileTitle"> {props.userProfile.username}</div>
-        {state.user?.username === `admin` ? (
+        {state.user?.username === `admin` && props.userProfile.username !== `admin` ? (
           <div className="userProfileActive">
             {props.userProfile.active ? `User is active` : `User is not active`}
             <div

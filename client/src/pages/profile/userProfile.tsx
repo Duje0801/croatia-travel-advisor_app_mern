@@ -4,7 +4,8 @@ import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import UserProfileHeader from "../../components/profile/userProfileHeader";
 import UserProfileInfo from "../../components/profile/userProfileInfo";
-import DeleteDeactivateUser from "../../components/profile/deleteDeactivateUser";
+import DeactivateUser from "../../components/profile/deactivateUser";
+import DeleteUser from "../../components/profile/deleteUser";
 import UserProfileReviews from "../../components/profile/userProfileReviews";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";
@@ -25,6 +26,7 @@ export default function UserProfile(): JSX.Element {
   const [openDeleteQuestion, setDeleteQuestion] = useState<boolean>(false);
   const [openActivateQuestion, setActivateQuestion] = useState<boolean>(false);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
+  const [isDeactivated, setIsDeactivated] = useState<boolean>(false);
   const [error, setError] = useState<string>(``);
 
   const params = useParams();
@@ -82,13 +84,11 @@ export default function UserProfile(): JSX.Element {
 
   if (isLoading || (state.user && !userProfile && !error)) {
     return <Loading />;
-  } else if (isDeleted) {
+  } else if (isDeactivated || isDeleted) {
     return (
       <Redirect
-        message={`${
-          state.user?.username === `admin` ? `User` : `Your profile`
-        } is successfully ${
-          state.user?.username === `admin` ? `deleted` : `deactivated`
+        message={`User is successfully ${
+          isDeactivated ? `deactivated` : `deleted`
         }`}
       />
     );
@@ -112,23 +112,21 @@ export default function UserProfile(): JSX.Element {
             handleDelete={handleDelete}
           />
           <div className="userProfileError">{error}</div>
-          {openDeleteQuestion ? (
-            <DeleteDeactivateUser
+          {openActivateQuestion ? (
+            <DeactivateUser
               userProfile={userProfile}
               setUserProfile={setUserProfile}
-              handleNoAnswer={handleDelete}
-              operation={`delete`}
-              setIsDeleted={setIsDeleted}
+              handleNoAnswer={handleActivate}
+              setIsDeactivated={setIsDeactivated}
               setActivateQuestion={setActivateQuestion}
               setError={setError}
             />
           ) : null}
-          {openActivateQuestion ? (
-            <DeleteDeactivateUser
+          {openDeleteQuestion ? (
+            <DeleteUser
               userProfile={userProfile}
               setUserProfile={setUserProfile}
-              handleNoAnswer={handleActivate}
-              operation={!userProfile?.active ? `activate` : `deactivate`}
+              handleNoAnswer={handleDelete}
               setIsDeleted={setIsDeleted}
               setActivateQuestion={setActivateQuestion}
               setError={setError}

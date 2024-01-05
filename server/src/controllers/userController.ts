@@ -82,19 +82,38 @@ const oneUser: any = async function (req: Request, res: Response) {
   }
 };
 
-const deleteMe: any = async function (req: ReqUser, res: Response) {
+const activationUser: any = async function (req: ReqUser, res: Response) {
   try {
-    //This function deactivates the user if the user selects this option
-    const myProfile: IUser | null = await User.findById(req.user._id);
+    //This function (de)activates the user if the admin selects this option
+    const user: IUser | null = await User.findById(req.body.data).populate({
+      path: `reviews`,
+      options: { sort: { createdAt: -1 } },
+    });
 
-    if (!myProfile) return errorResponse("Can't find user", res, 404);
+    if (!user)
+      return errorResponse(
+        "Can't find and deactivate user with this ID",
+        res,
+        404
+      );
 
-    myProfile.active = false;
-    await myProfile.save();
+    //Only logged user and admin can activate/deactivate user profile
+    if (String(req.user._id) !== String(user._id) && req.user.role !== `admin`)
+      return errorResponse(
+        "You don't have permission for this operation",
+        res,
+        401
+      );
+
+    if (user.active === true) user.active = false;
+    else if (user.active === false) user.active = true;
+
+    await user.save();
 
     res.status(200).json({
       status: `success`,
-      message: "Profile deactivated!",
+      data: user,
+      message: "User is deactivated!",
     });
   } catch (error) {
     errorHandler(error, req, res);
@@ -114,36 +133,6 @@ const deleteUser: any = async function (req: Request, res: Response) {
     res.status(200).json({
       status: `success`,
       message: "Profile permanently deleted!",
-    });
-  } catch (error) {
-    errorHandler(error, req, res);
-  }
-};
-
-const activationUser: any = async function (req: Request, res: Response) {
-  try {
-    //This function (de)activates the user if the admin selects this option
-    const user: IUser | null = await User.findById(req.body.data).populate({
-      path: `reviews`,
-      options: { sort: { createdAt: -1 } },
-    });
-
-    if (!user)
-      return errorResponse(
-        "Can't find and deactivate user with this ID",
-        res,
-        404
-      );
-
-    if (user.active === true) user.active = false;
-    else if (user.active === false) user.active = true;
-
-    await user.save();
-
-    res.status(200).json({
-      status: `success`,
-      data: user,
-      message: "User is deactivated!",
     });
   } catch (error) {
     errorHandler(error, req, res);
@@ -224,7 +213,6 @@ const updateEmail: any = async function (req: ReqUser, res: Response) {
 export {
   oneUser,
   userList,
-  deleteMe,
   deleteUser,
   activationUser,
   updatePassword,

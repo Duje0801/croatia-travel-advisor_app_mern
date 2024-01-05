@@ -3,7 +3,6 @@ import express, { Router } from "express";
 import {
   oneUser,
   userList,
-  deleteMe,
   deleteUser,
   activationUser,
   updatePassword,
@@ -29,13 +28,10 @@ router.route("/signUp").post(signUp);
 
 router.route("/logIn").post(logIn);
 
-router.route("/deleteMe").patch(protect, restrictTo(`user`), deleteMe);
+//Change of field active from other users is prohibited within the function activationUser
+router.route("/activationUser").patch(protect, activationUser);
 
 router.route("/deleteUser").delete(protect, restrictTo(`admin`), deleteUser);
-
-router
-  .route("/activationUser")
-  .patch(protect, restrictTo(`admin`), activationUser);
 
 router.route("/forgotPassword").post(forgotPassword);
 

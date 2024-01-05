@@ -3,51 +3,15 @@ import { UserContext } from "../../context/userContext";
 import { IUser } from "../../interfaces/IUser";
 import axios from "axios";
 
-export default function DeleteDeactivateUser(props: {
+export default function DeactivateUser(props: {
   userProfile: IUser;
   setUserProfile: Dispatch<SetStateAction<IUser | null>>;
   handleNoAnswer: () => void;
-  operation: string;
-  setIsDeleted: Dispatch<SetStateAction<boolean>>;
+  setIsDeactivated: Dispatch<SetStateAction<boolean>>;
   setActivateQuestion: Dispatch<SetStateAction<boolean>>;
   setError: Dispatch<SetStateAction<string>>;
 }): JSX.Element {
   const { state, dispatch } = useContext(UserContext);
-
-  const handleDeleteUser = async (): Promise<void> => {
-    let axiosMethod: string =
-      state.user?.username === `admin` ? `delete` : `patch`;
-    let url: string =
-      state.user?.username === `admin` ? `deleteUser` : `deleteMe`;
-
-    axios({
-      method: `${axiosMethod}`,
-      url: `https://croatia-travel-advisor-app-mern.onrender.com/api/user/${url}/`,
-      data: { id: props.userProfile.id },
-      headers: {
-        "content-type": "application/json",
-        authorization: `Bearer ${state.user?.token}`,
-      },
-    })
-      .then((res) => {
-        props.setIsDeleted(true);
-        if (state.user?.username !== `admin`) {
-          localStorage.removeItem("user");
-          dispatch({ type: "DELETE", payload: null });
-        }
-      })
-      .catch((err) => {
-        if (err?.response?.data?.error) {
-          props.setError(`${err.response.data.error}`);
-        } else {
-          props.setError(
-            `Can't ${
-              state.user?.username === `admin` ? `deactivate` : `delete`
-            } user. Please try again later`
-          );
-        }
-      });
-  };
 
   const handleActivateUser = async (): Promise<void> => {
     axios
@@ -62,8 +26,17 @@ export default function DeleteDeactivateUser(props: {
         }
       )
       .then((res) => {
-        props.setUserProfile(res.data.data);
-        props.setActivateQuestion(false);
+        if (
+          !res.data.data.active &&
+          res.data.data.username === state.user?.username
+        ) {
+          localStorage.removeItem("user");
+          dispatch({ type: "DELETE", payload: null });
+          props.setIsDeactivated(true);
+        } else if (state.user?.username === `admin`) {
+          props.setUserProfile(res.data.data);
+          props.setActivateQuestion(false);
+        }
       })
       .catch((err) => {
         if (err?.response?.data?.error) {
@@ -78,15 +51,12 @@ export default function DeleteDeactivateUser(props: {
 
   return (
     <div className="userProfileDeleteText">
-      Do you want to {props.operation} user {props.userProfile.username}?
+      Do you want to {props.userProfile.active ? `deactivate` : `activate`} user{" "}
+      {props.userProfile.username}?
       <div className="userProfileDeleteButtonsDiv">
         <button
           className="userProfileDeleteButtons"
-          onClick={() =>
-            props.operation === `delete`
-              ? handleDeleteUser()
-              : handleActivateUser()
-          }
+          onClick={() => handleActivateUser()}
         >
           Yes
         </button>

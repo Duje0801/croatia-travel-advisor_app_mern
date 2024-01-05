@@ -36,17 +36,18 @@ export default function UserProfileButtons(props: {
           </button>{" "}
         </>
       ) : null}
-      {state.user?.username === `admin` &&
-      props.userProfile.username !== `admin` ? (
-        <button
-          className="userProfileButton"
-          onClick={() => props.handleActivate()}
-        >
-          {!props.userProfile?.active ? `Activate` : `Deactivate`}
-        </button>
+      {state.user?.username === props.userProfile.username ||
+      state.user?.username === `admin` ? (
+        <>
+          <button
+            className="userProfileButton"
+            onClick={() => props.handleActivate()}
+          >
+            {!props.userProfile?.active ? `Activate` : `Deactivate`}
+          </button>
+        </>
       ) : null}
-      {(props.userProfile.username === state.user?.username ||
-        state.user?.username === `admin`) &&
+      {state.user?.username === `admin` &&
       props.userProfile.username !== `admin` ? (
         <button
           className="userProfileButton"

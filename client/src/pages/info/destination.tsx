@@ -16,7 +16,6 @@ import axios from "axios";
 import "../../styles/pages/destination.css";
 
 export default function Destination(): JSX.Element {
-  const [isOpening, setIsOpening] = useState<boolean>(true);
   const [isLoading, setIsLoading] = useState<boolean>(true);
   const [isDeleted, setIsDeleted] = useState<boolean>(false);
   const [editQuestion, setEditQuestion] = useState<boolean>(false);
@@ -92,12 +91,6 @@ export default function Destination(): JSX.Element {
   useEffect((): void => {
     //This function changes reviews to display in destination when pages or filterRating changes
     const fetchData = () => {
-      //To avoid fetching when page opens for first time, first five reviews
-      //will already be there in the state destination (destination.reviews)
-      if (isOpening) return setIsOpening(false);
-      //Blocks if user wants to see only one coment (link from user profile),
-      //because this fetch will return 5 reviews
-      if (params.reviewId) return;
       axios
         .get(
           `https://croatia-travel-advisor-app-mern.onrender.com/api/review/destinationReviews/${params.id}/?page=${page}&rating=${filterRating}`
@@ -118,6 +111,11 @@ export default function Destination(): JSX.Element {
           });
         });
     };
+    //To avoid fetching when page opens for first time, first five reviews
+    //will already be there in the state destination (destination.reviews)
+    if (!destination || params.reviewId) return;
+    //params.reviewId blocks if user wants to see only one coment (link from user profile),
+    //because this fetch will return 5 reviews
     fetchData();
   }, [page, filterRating]);
 
@@ -205,5 +203,7 @@ export default function Destination(): JSX.Element {
         <Footer />
       </div>
     );
-  } else return <Redirect message={"Something went wrong"} />;
+  } else {
+    return <Redirect message={"Something went wrong"} />;
+  }
 }

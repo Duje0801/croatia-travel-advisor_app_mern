@@ -3,7 +3,7 @@ import { useParams } from "react-router-dom";
 import Navigation from "../../components/navigation/navigation";
 import { UserContext } from "../../context/userContext";
 import { DestinationContext } from "../../context/destinationContext";
-import ShowStars from "../../components/stars/showDestinationStars";
+import ShowDestinationStars from "../../components/stars/showDestinationStars";
 import DestinationButtons from "../../components/destination/destinationButtons";
 import DeleteDestination from "../../components/destination/deleteDestination";
 import EditDestination from "../../components/destination/editDestination";
@@ -164,7 +164,7 @@ export default function Destination(): JSX.Element {
               <div className="destinationAvgRating">
                 {destination.averageRating === 0
                   ? `Not rated yet`
-                  : ShowStars(destination.averageRating)}
+                  : ShowDestinationStars(destination.averageRating)}
                 <DestinationButtons
                   editQuestion={editQuestion}
                   setEditQuestion={setEditQuestion}

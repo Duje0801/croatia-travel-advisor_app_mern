@@ -1,6 +1,6 @@
 import { useNavigate } from "react-router-dom";
 import DateString from "../../logic/dateString";
-import ShowReviewStarComments from "../stars/showReviewStars";
+import ShowReviewStars from "../stars/showReviewStars";
 import { IReview } from "../../interfaces/IReview";
 import { routes } from "../../routes/routes";
 
@@ -32,7 +32,7 @@ export default function UserProfileReviews(props: {
                 <div className="userProfileReviewTitle">
                   {review.user.username} on {DateString(review.createdAt)}
                 </div>
-                <div>{ShowReviewStarComments(review.rating)}</div>
+                <div>{ShowReviewStars(review.rating)}</div>
                 <div className="userProfileReviewTitle">{review.title}</div>
               </div>
             </div>

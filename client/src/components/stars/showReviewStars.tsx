@@ -1,7 +1,7 @@
 import { AiFillStar, AiOutlineStar } from "react-icons/ai";
 import "../../styles/components/place.css";
 
-export default function ShowReviewStarComments(rating: number): JSX.Element {
+export default function ShowReviewStars(rating: number): JSX.Element {
   if (rating === 1)
     return (
       <div className="starRow">

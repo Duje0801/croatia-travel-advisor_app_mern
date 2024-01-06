@@ -148,6 +148,19 @@
     max-height: 300px;
   }
 }
+.categoryPlace {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryPlace {
+    left: 0px;
+    top: 20px;
+    right: 50%;
+  }
+}
 .categoryDestinationRight {
   display: none;
 }

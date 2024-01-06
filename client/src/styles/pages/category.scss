@@ -176,6 +176,20 @@ $colorGreen: #00af87;
   }
 }
 
+.categoryPlace {
+  position: absolute;
+  top: 0px;
+  right: 0px;
+}
+
+@media only screen and (min-width: 1024px) {
+  .categoryPlace {
+    left: 0px;
+    top: $gapXL;
+    right: 50%;
+  }
+}
+
 //Category Destination Text on Right
 
 .categoryDestinationRight {

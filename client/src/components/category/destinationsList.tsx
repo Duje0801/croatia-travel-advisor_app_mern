@@ -1,5 +1,7 @@
-import { useNavigate } from "react-router-dom";
-import ShowStars from "../stars/showDestinationStars";
+import { useNavigate, useParams } from "react-router-dom";
+import ShowDestinationStars from "../stars/showDestinationStars";
+import TopRatedPlace from "../stars/topRatedPlace";
+import TrendingPlace from "../stars/trendingPlace";
 import { IDestination } from "../../interfaces/IDestination";
 import { routes } from "../../routes/routes";
 
@@ -7,6 +9,8 @@ export default function DestinationsList(props: {
   categoryDestinations: IDestination[];
 }): JSX.Element {
   const navigate = useNavigate();
+
+  const params = useParams();
 
   const handleRedirectToDestination = (destinationName: string): void => {
     navigate(`${routes.destination}/${destinationName}`);
@@ -20,6 +24,7 @@ export default function DestinationsList(props: {
             <div className="categoryDestinationTitle">
               <div className="categoryDestinationTitleName">
                 {destination.name}
+                {ShowDestinationStars(destination.averageRating)}
               </div>
             </div>
             <img
@@ -28,6 +33,10 @@ export default function DestinationsList(props: {
               className="categoryImage"
               onClick={() => handleRedirectToDestination(destination.name)}
             ></img>
+            <div className="categoryPlace">
+              {params.id === `topRated` ? TopRatedPlace(i + 1) : null}{" "}
+              {params.id === `trending` ? TrendingPlace(i + 1) : null}
+            </div>
             <div className="categoryDestinationRight">
               <div className="categoryDestinationTitleRight">
                 {destination.name}
@@ -38,7 +47,7 @@ export default function DestinationsList(props: {
                     Not rated yet
                   </div>
                 ) : (
-                  ShowStars(destination.averageRating)
+                  ShowDestinationStars(destination.averageRating)
                 )}{" "}
                 <div className="categoryDestinationNoReviewRight">
                   {destination.ratingQuantity > 1

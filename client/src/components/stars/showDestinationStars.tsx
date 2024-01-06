@@ -1,7 +1,7 @@
 import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
 import "../../styles/components/place.css";
 
-export default function ShowStars(avgRating: number): JSX.Element {
+export default function ShowDestinationStars(avgRating: number): JSX.Element {
   if (avgRating === 0)
     return (
       <div className="starRow">

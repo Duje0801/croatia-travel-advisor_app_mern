@@ -90,6 +90,9 @@ reviewSchema.static(
   }
 );
 
+//This index (with unique true) already existed in Mongo, but I added it here to be visible in the code
+reviewSchema.index({"destination.id": 1, "user.id": 1}, {unique: true})
+
 const Review = model<IReview, ReviewCalc>("Review", reviewSchema);
 
 export { Review };

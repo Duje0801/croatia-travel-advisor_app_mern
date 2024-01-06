@@ -28,6 +28,14 @@ const signUp: any = async function (req: Request, res: Response) {
     if (password !== confirmPassword)
       return errorResponse("Passwords must be identical", res, 401);
 
+    if (password.length < 8 || confirmPassword.length < 8) {
+      return errorResponse(
+        "Password must contain 8 or more characters",
+        res,
+        400
+      );
+    }
+
     password = await bcrypt.hash(password, 12);
 
     const newUser: IUser | null = await User.create({
@@ -104,7 +112,7 @@ const forgotPassword: any = async function (req: Request, res: Response) {
     user.restartPasswordCode = codeHashed;
     user.restartPasswordCodeExpire = new Date(Date.now() + 10 * 60 * 1000);
 
-    await user.save();
+    await user.save({ validateBeforeSave: true });
 
     await sendEmail(code, req.body.data.email);
 
@@ -122,6 +130,14 @@ const resetPassword: any = async function (req: Request, res: Response) {
     const token: string = req.body.data.token;
     const newPassword: string = req.body.data.newPassword;
     const confirmNewPassword: string = req.body.data.confirmNewPassword;
+
+    if (newPassword.length < 8 || confirmNewPassword.length < 8) {
+      return errorResponse(
+        "Password must contain 8 or more characters",
+        res,
+        400
+      );
+    }
 
     const user: IUser | {} = await User.findOne({ email })
       .select(`+restartPasswordCode`)

@@ -145,6 +145,14 @@ const updatePassword: any = async function (req: ReqUser, res: Response) {
     const newPassword: string = req.body.data.newPassword;
     const confirmNewPassword: string = req.body.data.confirmNewPassword;
 
+    if (newPassword.length < 8 || confirmNewPassword.length < 8) {
+      return errorResponse(
+        "Password must contain 8 or more characters",
+        res,
+        400
+      );
+    }
+
     const user: IUser | {} = await User.findById(req.user._id).select(
       `+password`
     );
@@ -158,7 +166,7 @@ const updatePassword: any = async function (req: ReqUser, res: Response) {
 
       user.password = await bcrypt.hash(newPassword, 12);
 
-      await user.save({ validateBeforeSave: true });
+      await user.save();
 
       res.status(200).json({
         status: "success",

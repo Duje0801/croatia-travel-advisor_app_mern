@@ -32,10 +32,11 @@ const signUp: any = async function (req: Request, res: Response) {
       return errorResponse(
         "Password must contain 8 or more characters",
         res,
-        400
+        401
       );
     }
 
+    //Password hashing
     password = await bcrypt.hash(password, 12);
 
     const newUser: IUser | null = await User.create({
@@ -68,15 +69,17 @@ const logIn: any = async function (req: Request, res: Response) {
 
     const user: IUser | {} = await User.findOne({ email }).select("+password");
 
-    //User can log in only if user exists (in shape of IUser interface and contains password)
+    if (!user)
+      return errorResponse("User with this email don't exist", res, 401);
+
+    if ("active" in user && !user.active)
+      return errorResponse("User is deactivated", res, 401);
+
     if (
-      !user ||
       !("password" in user) ||
       !(await bcrypt.compare(password, user.password))
     )
-      return errorResponse("Incorrect email or password", res, 401);
-
-    if (!user.active) return errorResponse("User is deactivated", res, 401);
+      return errorResponse("Incorrect password", res, 401);
 
     const token: string = createToken(user._id);
 
@@ -105,15 +108,20 @@ const forgotPassword: any = async function (req: Request, res: Response) {
     if (!user.active)
       return errorResponse("User with this email is deactivated", res, 401);
 
+    //Generates code (restart password token)
     const code: string = crypto.randomBytes(12).toString(`hex`);
 
+    //Code hashing
     const codeHashed: string = await bcrypt.hash(code, 12);
 
+    //Adds code and expiraton time to mongo document
     user.restartPasswordCode = codeHashed;
     user.restartPasswordCodeExpire = new Date(Date.now() + 10 * 60 * 1000);
 
+    //Saves changes to user document
     await user.save({ validateBeforeSave: true });
 
+    //Sends mail (with token inside)
     await sendEmail(code, req.body.data.email);
 
     res
@@ -131,11 +139,14 @@ const resetPassword: any = async function (req: Request, res: Response) {
     const newPassword: string = req.body.data.newPassword;
     const confirmNewPassword: string = req.body.data.confirmNewPassword;
 
+    if (newPassword !== confirmNewPassword)
+      return errorResponse("Passwords must be identical", res, 401);
+
     if (newPassword.length < 8 || confirmNewPassword.length < 8) {
       return errorResponse(
         "Password must contain 8 or more characters",
         res,
-        400
+        401
       );
     }
 
@@ -153,13 +164,12 @@ const resetPassword: any = async function (req: Request, res: Response) {
       if (Date.now() > user.restartPasswordCodeExpire!.getTime())
         return errorResponse("Token expired, please log in again", res, 401);
 
-      if (newPassword !== confirmNewPassword)
-        return errorResponse("Passwords must be identical", res, 401);
-
+      //Deletes info about code (token) and expiration time from user document
       user.restartPasswordCode = undefined;
       user.restartPasswordCodeExpire = undefined;
       user.password = await bcrypt.hash(newPassword, 12);
 
+      //Saves changes to user document
       await user.save();
 
       res.status(200).json({
@@ -200,7 +210,7 @@ const protect: any = async function (
     );
 
     if (user && "active" in user && user.active) {
-      //Memorize user data in request, only if user has key active true
+      //Memorize user data in request, only if user has field {active: true}
       req.user = user;
       next();
     } else if (user && "active" in user && !user.active)

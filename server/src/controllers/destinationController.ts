@@ -11,17 +11,21 @@ const getOneDestination: any = async function (req: Request, res: Response) {
     const page: number = Number(req.query.page);
     const skip: number = ((page || 1) - 1) * 5;
 
-    //Two populate cases, one if user needs only for one comment (link from user profile page) 
+    //Two populate cases, one if user needs only for one comment (link from user profile page)
     //and another case if user wants to see all comments
     const destination: IDestination | null = await Destination.findOne({
       name: params,
-    }).populate(reviewId ? {
-      path: `reviews`,
-      match: { _id: { $eq: reviewId } }
-    } : {
-      path: `reviews`,
-      options: { sort: { createdAt: -1 }, skip: skip, limit: 5 },
-    });
+    }).populate(
+      reviewId
+        ? {
+            path: `reviews`,
+            match: { _id: { $eq: reviewId } },
+          }
+        : {
+            path: `reviews`,
+            options: { sort: { createdAt: -1 }, skip: skip, limit: 5 },
+          }
+    );
 
     if (!destination)
       return errorResponse(`Can't find destination with this name`, res, 404);
@@ -119,6 +123,7 @@ const createDestination: any = async function (req: Request, res: Response) {
 
 const updateDestination: any = async function (req: Request, res: Response) {
   try {
+    //Checks for changes in destination data
     let updatedFields: {} = {};
     if (req.body.data.description)
       updatedFields = {
@@ -191,6 +196,7 @@ const searchDestination: any = async function (req: Request, res: Response) {
         res,
         404
       );
+    //Don't response if there is no destination containing the selected characters (in search bar)
     else if (destinations.length < 1) return;
 
     res.status(200).json({

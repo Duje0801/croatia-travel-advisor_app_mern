@@ -7,11 +7,7 @@ import { ReqUser } from "../interfaces/reqUser";
 import { errorResponse } from "../utilis/errorResponse";
 import { errorHandler } from "../utilis/errorHandler";
 
-interface QueryInRequest extends Request {
-  query: { page: string };
-}
-
-const userList: any = async function (req: QueryInRequest, res: Response) {
+const userList: any = async function (req: Request, res: Response) {
   try {
     const page: number = Number(req.query.page);
     const skip: number = ((page || 1) - 1) * 10;
@@ -30,7 +26,7 @@ const userList: any = async function (req: QueryInRequest, res: Response) {
 
     if (!users[0]) return errorResponse("Can't find any users", res, 404);
 
-    //Gets the total number of reviews for pagination
+    //Gets the total number of users (for pagination)
     const totalUsersNumber: number | null = await User.find(
       usersFind
     ).countDocuments();
@@ -97,7 +93,7 @@ const activationUser: any = async function (req: ReqUser, res: Response) {
         404
       );
 
-    //Only logged user and admin can activate/deactivate user profile
+    //Checks if user is allowed to delete review
     if (String(req.user._id) !== String(user._id) && req.user.role !== `admin`)
       return errorResponse(
         "You don't have permission for this operation",
@@ -145,7 +141,14 @@ const updatePassword: any = async function (req: ReqUser, res: Response) {
     const newPassword: string = req.body.data.newPassword;
     const confirmNewPassword: string = req.body.data.confirmNewPassword;
 
-    if (newPassword.length < 8 || confirmNewPassword.length < 8) {
+    if (newPassword !== confirmNewPassword)
+      return errorResponse("Passwords must be identical", res, 401);
+
+    if (
+      oldPassword.length < 8 ||
+      newPassword.length < 8 ||
+      confirmNewPassword.length < 8
+    ) {
       return errorResponse(
         "Password must contain 8 or more characters",
         res,
@@ -158,9 +161,6 @@ const updatePassword: any = async function (req: ReqUser, res: Response) {
     );
 
     if (user && "password" in user && user.active) {
-      if (newPassword !== confirmNewPassword)
-        return errorResponse("Passwords must be identical", res, 401);
-
       if (!(await bcrypt.compare(oldPassword, user.password)))
         return errorResponse("Incorrect old password", res, 401);
 
@@ -184,14 +184,22 @@ const updateEmail: any = async function (req: ReqUser, res: Response) {
     const newEmail: string = req.body.data.newEmail;
     const password: string = req.body.data.password;
 
+    if (oldEmail === newEmail)
+      return errorResponse("New mail is same as old email", res, 401);
+
+    if (password.length < 8) {
+      return errorResponse(
+        "Password must contain 8 or more characters",
+        res,
+        401
+      );
+    }
+
     const user: IUser | {} = await User.findById(req.user._id).select(
       `+password`
     );
 
     if (user && "password" in user && "email" in user && user.active) {
-      if (oldEmail === newEmail)
-        return errorResponse("New mail is same as old email", res, 401);
-
       if (oldEmail !== user.email)
         return errorResponse("Incorrect old mail", res, 401);
 
@@ -199,7 +207,7 @@ const updateEmail: any = async function (req: ReqUser, res: Response) {
         return errorResponse("Incorrect password", res, 401);
 
       if (await User.findOne({ email: newEmail }))
-        return errorResponse("Email is already in use", res, 401);
+        return errorResponse("New email is already in use", res, 401);
 
       user.email = newEmail;
 

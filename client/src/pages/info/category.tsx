@@ -2,17 +2,16 @@ import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import CategoryDescription from "../../data/categoryDescription";
 import Navigation from "../../components/navigation/navigation";
+import DestinationsList from "../../components/category/destinationsList";
 import Redirect from "../redirectLoading/redirect";
 import Loading from "../redirectLoading/loading";
-import ShowStars from "../../components/stars/showDestinationStars";
 import Pagination from "../../components/pagination/pagination";
 import Footer from "../../components/home/footer";
 import { IDestination } from "../../interfaces/IDestination";
-import { routes } from "../../routes/routes";
 import axios from "axios";
 import "../../styles/pages/category.css";
 
-function Category(): JSX.Element {
+export default function Category(): JSX.Element {
   const [categoryDestinations, setCategoryDestinations] = useState<
     IDestination[]
   >([]);
@@ -66,55 +65,6 @@ function Category(): JSX.Element {
     navigate(-1);
   };
 
-  const handleRedirectToDestination = (destinationName: string): void => {
-    navigate(`${routes.destination}/${destinationName}`);
-  };
-
-  const categoryDestinationsMapped: JSX.Element[] = categoryDestinations.map(
-    (destination: IDestination, i) => {
-      return (
-        <div className="categoryDestination" key={i}>
-          <div className="categoryDestinationTitle">
-            <div className="categoryDestinationTitleName">
-              {destination.name}
-            </div>
-          </div>
-          <img
-            src={destination.image}
-            alt={destination.name}
-            className="categoryImage"
-            onClick={() => handleRedirectToDestination(destination.name)}
-          ></img>
-          <div className="categoryDestinationRight">
-            <div className="categoryDestinationTitleRight">
-              {destination.name}
-            </div>
-            <div>
-              {destination.averageRating === 0 ? (
-                <div className="categoryDestinationNotRated">Not rated yet</div>
-              ) : (
-                ShowStars(destination.averageRating)
-              )}{" "}
-              <div className="categoryDestinationNoReviewRight">
-                {destination.ratingQuantity > 1
-                  ? `${destination.ratingQuantity} reviews`
-                  : `${destination.ratingQuantity} review`}
-              </div>
-            </div>
-            <div className="categoryDestinationDescriptionRight">
-              {destination.description}
-            </div>
-            <button
-              onClick={() => handleRedirectToDestination(destination.name)}
-            >
-              See more...
-            </button>
-          </div>
-        </div>
-      );
-    }
-  );
-
   if (error) {
     return <Redirect message={error} />;
   } else if (isLoading) {
@@ -139,7 +89,7 @@ function Category(): JSX.Element {
               {CategoryDescription(params.id!)}
             </p>
             <div>
-              <>{categoryDestinationsMapped}</>
+              <DestinationsList categoryDestinations={categoryDestinations} />
             </div>
             <Pagination
               totalLength={destinationsNo}
@@ -153,5 +103,3 @@ function Category(): JSX.Element {
       </div>
     );
 }
-
-export default Category;

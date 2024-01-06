@@ -1,9 +1,9 @@
 import { useContext, useState } from "react";
-import { UserContext } from "../../context/userContext";
-import { DestinationContext } from "../../context/destinationContext";
-import WriteReviewForm from "./writeReviewElements/writeReviewForm";
-import WriteReviewNoUser from "./writeReviewElements/writeReviewNoUser";
-import WriteReviewButton from "./writeReviewElements/writeReviewButton";
+import { UserContext } from "../../../context/userContext";
+import { DestinationContext } from "../../../context/destinationContext";
+import WriteReviewForm from "./writeReviewForm";
+import WriteReviewNoUser from "./writeReviewNoUser";
+import WriteReviewButton from "./writeReviewButton";
 
 export default function WriteReview(): JSX.Element {
   const [openForm, setOpenForm] = useState<boolean>(false);

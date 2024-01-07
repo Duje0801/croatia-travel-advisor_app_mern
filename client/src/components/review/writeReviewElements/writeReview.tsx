@@ -11,8 +11,11 @@ export default function WriteReview(): JSX.Element {
   const { state } = useContext(UserContext);
   const { destination } = useContext(DestinationContext);
 
-  if (!destination) return <div></div>;
+  const handleOpenForm = (): void => {
+    setOpenForm(openForm ? false : true);
+  };
 
+  if (!destination) return <div></div>;
   //If user is not logged in
   if (!state.user?.username) return <WriteReviewNoUser />;
   // A step before writing a review opens,
@@ -21,11 +24,11 @@ export default function WriteReview(): JSX.Element {
     return (
       <WriteReviewButton
         destinationId={destination.id}
-        setOpenForm={setOpenForm}
+        handleOpenForm={handleOpenForm}
       />
     );
   // If the user is logged in and has not reviewed the destination
   else if (state.user?.username && openForm)
-    return <WriteReviewForm setOpenForm={setOpenForm} />;
+    return <WriteReviewForm handleOpenForm={handleOpenForm} />;
   else return <div></div>;
 }

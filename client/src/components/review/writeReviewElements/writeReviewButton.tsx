@@ -1,4 +1,4 @@
-import { useState, useContext, Dispatch, SetStateAction } from "react";
+import { useState, useContext } from "react";
 import { useParams } from "react-router-dom";
 import { UserContext } from "../../../context/userContext";
 import { DestinationContext } from "../../../context/destinationContext";
@@ -6,7 +6,7 @@ import axios from "axios";
 
 export default function WriteReviewButton(props: {
   destinationId: string;
-  setOpenForm: Dispatch<SetStateAction<boolean>>;
+  handleOpenForm: () => void;
 }): JSX.Element {
   const [alreadyReviewedError, setAlreadyReviewedError] = useState<string>(``);
 
@@ -33,7 +33,7 @@ export default function WriteReviewButton(props: {
             `You have already reviewed this destination`
           );
         } else {
-          return props.setOpenForm(true);
+          return props.handleOpenForm();
         }
       })
       .catch((err) => {

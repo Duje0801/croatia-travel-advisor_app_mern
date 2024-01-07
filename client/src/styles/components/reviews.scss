@@ -40,7 +40,7 @@ $colorGreen: #00af87;
     font-size: $fontL;
   }
   .reviewTitleAuthor:hover {
-    color:$colorGreen;
+    color: $colorGreen;
     cursor: pointer;
   }
 }
@@ -375,22 +375,26 @@ $colorGreen: #00af87;
   color: white;
 }
 
-.reviewWriteFormButton {
+.reviewWriteForm > button {
   background-color: white;
   border: 1px solid black;
   border-radius: 0px;
   padding: $gapM 0px;
-  margin: $gapM 0px;
+  margin-top: $gapS;
   font-weight: bold;
 }
 
+.reviewWriteForm > button:last-child{
+  margin-bottom: $gapS;
+}
+
 @media only screen and (min-width: 1024px) {
-  .reviewWriteFormButton {
+  .reviewWriteForm > button {
     font-size: $fontS;
     cursor: pointer;
   }
 
-  .reviewWriteFormButton:hover{
+  .reviewWriteForm > button:hover {
     background-color: $colorGreen;
   }
 }

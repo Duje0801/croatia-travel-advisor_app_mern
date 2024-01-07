@@ -1,17 +1,11 @@
-import {
-  useState,
-  FormEvent,
-  useContext,
-  Dispatch,
-  SetStateAction,
-} from "react";
+import { useState, FormEvent, useContext } from "react";
 import { UserContext } from "../../../context/userContext";
 import { DestinationContext } from "../../../context/destinationContext";
 import { IDestination } from "../../../interfaces/IDestination";
 import axios from "axios";
 
 export default function WriteReviewForm(props: {
-  setOpenForm: Dispatch<SetStateAction<boolean>>;
+  handleOpenForm: () => void;
 }): JSX.Element {
   const [title, setTitle] = useState<string>(``);
   const [text, setText] = useState<string>(``);
@@ -55,7 +49,7 @@ export default function WriteReviewForm(props: {
         setReviews(data.reviews);
         setReviewsNo(data.ratingQuantity);
         setPage(1);
-        props.setOpenForm(false);
+        props.handleOpenForm();
         setTitle(``);
         setText(``);
         setRating(``);
@@ -152,9 +146,8 @@ export default function WriteReviewForm(props: {
           id="review"
           required
         ></textarea>
-        <button className="reviewWriteFormButton" type="submit">
-          Submit
-        </button>
+        <button onClick={props.handleOpenForm}>Close</button>
+        <button type="submit">Submit</button>
       </form>
     </>
   );

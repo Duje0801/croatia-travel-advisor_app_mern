@@ -63,6 +63,11 @@
   border: 1px solid black;
 }
 
+.signUpForm > input:focus {
+  background-color: #00af87;
+  color: white;
+}
+
 @media only screen and (min-width: 1024px) {
   .signUpForm > input {
     font-size: 1.25rem;
@@ -103,14 +108,26 @@
     cursor: pointer;
   }
 }
-.logInforgotPassword {
+.logInForgotPassword {
   color: #00af87;
 }
 
 @media only screen and (min-width: 1024px) {
-  .logInforgotPassword {
+  .logInForgotPassword {
     font-size: 1.25rem;
     cursor: pointer;
+  }
+  .logInForgotPassword:hover {
+    color: black;
+  }
+}
+.signUpRedirectText {
+  color: #00af87;
+}
+
+@media only screen and (min-width: 1024px) {
+  .signUpRedirectText:hover {
+    color: black;
   }
 }
 .forgotPasswordRedirect {
@@ -124,6 +141,14 @@
     cursor: pointer;
   }
 }
+.forgotPasswordRedirectText {
+  color: #00af87;
+}
+
+.forgotPasswordRedirectText:hover {
+  color: black;
+}
+
 .signUpError {
   font-size: 1rem;
   text-align: center;

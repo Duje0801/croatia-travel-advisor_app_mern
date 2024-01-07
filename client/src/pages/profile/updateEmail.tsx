@@ -1,8 +1,9 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
 import axios from "axios";
 
 export default function UpdateEmail(): JSX.Element {
@@ -10,11 +11,19 @@ export default function UpdateEmail(): JSX.Element {
   const [newEmail, setNewEmail] = useState<string>(``);
   const [password, setPassword] = useState<string>(``);
   const [isEmailChanged, setIsEmailChanged] = useState<boolean>(false);
+  const [notLogged, setNotLogged] = useState<boolean>(false);
   const [error, setError] = useState<string>(``);
 
   const navigate = useNavigate();
 
   const { state, dispatch } = useContext(UserContext);
+
+  useEffect(() => {
+    //Checking is user logged in, while waiting loading page will be displayed,
+    //if user is logged in it will show redirect page,
+    //else it will show restart password form
+    if (state.user === null) setNotLogged(true);
+  }, [state]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -66,9 +75,13 @@ export default function UpdateEmail(): JSX.Element {
     navigate(-1);
   };
 
-  if (isEmailChanged)
-    return <Redirect message={`Email is successfully changed`} />;
-  else
+  if (isEmailChanged) {
+    return <Redirect message={"Email is successfully changed"} />;
+  } else if (!state.user && !notLogged) {
+    return <Loading />;
+  } else if (!state.user && notLogged) {
+    return <Redirect message={"You don't have permission to view this page"} />;
+  } else {
     return (
       <>
         <Navigation />
@@ -106,4 +119,5 @@ export default function UpdateEmail(): JSX.Element {
         </div>
       </>
     );
+  }
 }

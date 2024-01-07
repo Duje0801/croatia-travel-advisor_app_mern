@@ -60,9 +60,19 @@ $colorGreen: #00af87;
   border: 1px solid black;
 }
 
+.newDestinationForm > input:focus {
+  background-color: $colorGreen;
+  color: white;
+}
+
 .newDestinationForm > textarea {
   border-radius: 0px;
   border: 1px solid black;
+}
+
+.newDestinationForm > textarea:focus {
+  background-color: $colorGreen;
+  color: white;
 }
 
 .newDestinationForm > fieldset {

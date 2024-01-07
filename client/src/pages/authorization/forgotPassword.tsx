@@ -1,20 +1,29 @@
-import { FormEvent, useContext, useState } from "react";
+import { FormEvent, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
 import { routes } from "../../routes/routes";
 import axios from "axios";
 
 export default function ForgotPassword(): JSX.Element {
   const [email, setEmail] = useState<string>(``);
   const [isSended, setIsSended] = useState<boolean>(false);
+  const [notLogged, setNotLogged] = useState<boolean>(false);
   //On this page error state displays errors and messages to users
   const [error, setError] = useState<string>(``);
 
   const { state } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //Checking is user logged in, while waiting loading page will be displayed,
+    //if user is logged in it will show redirect page,
+    //else it will show restart password form
+    if (state.user === null) setNotLogged(true);
+  }, [state]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -51,8 +60,11 @@ export default function ForgotPassword(): JSX.Element {
     navigate(-1);
   };
 
-  if (state.user) return <Redirect message={"You are already logged in"} />;
-  else
+  if (!state.user && !notLogged) {
+    return <Loading />;
+  } else if (state.user && notLogged) {
+    return <Redirect message={"You are already logged in"} />;
+  } else {
     return (
       <>
         <Navigation />
@@ -64,7 +76,7 @@ export default function ForgotPassword(): JSX.Element {
               Go to{" "}
               <span
                 onClick={handleGoToRedirectPassword}
-                style={{ color: `#00af87` }}
+                className="forgotPasswordRedirectText"
               >
                 restart password page
               </span>
@@ -93,4 +105,5 @@ export default function ForgotPassword(): JSX.Element {
         </div>
       </>
     );
+  }
 }

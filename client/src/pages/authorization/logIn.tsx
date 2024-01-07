@@ -1,8 +1,9 @@
-import { useState, useContext, FormEvent } from "react";
+import { useState, useContext, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
 import { routes } from "../../routes/routes";
 import axios from "axios";
 import "../../styles/pages/logInSignUp.css";
@@ -11,11 +12,19 @@ export default function LogIn(): JSX.Element {
   const [email, setEmail] = useState<string>(``);
   const [password, setPassword] = useState<string>(``);
   const [isLoggedIn, setIsLoggedIn] = useState<boolean>(false);
+  const [notLogged, setNotLogged] = useState<boolean>(false);
   const [error, setError] = useState<string>(``);
 
   const { state, dispatch } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //Checking is user logged in, while waiting loading page will be displayed,
+    //if user is logged in it will show redirect page,
+    //else it will show restart password form
+    if (state.user === null) setNotLogged(true);
+  }, [state]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -58,10 +67,13 @@ export default function LogIn(): JSX.Element {
     navigate(-1);
   };
 
-  if (isLoggedIn) return <Redirect message={"You are logged in"} />;
-  else if (state.user)
+  if (isLoggedIn) {
+    return <Redirect message={"You are logged in"} />;
+  } else if (!state.user && !notLogged) {
+    return <Loading />;
+  } else if (state.user && notLogged) {
     return <Redirect message={"You are already logged in"} />;
-  else
+  } else {
     return (
       <>
         <Navigation />
@@ -87,7 +99,7 @@ export default function LogIn(): JSX.Element {
             ></input>
             <div
               onClick={handleGoToForgotPassword}
-              className="logInforgotPassword"
+              className="logInForgotPassword"
             >
               Forgot password?
             </div>
@@ -96,11 +108,12 @@ export default function LogIn(): JSX.Element {
           <button onClick={handleGoBack}>Go Back</button>
           <div className="logInDontHaveAcc">
             Don't have an account?{" "}
-            <span onClick={handleGoToSignUp} style={{ color: `#00af87` }}>
+            <span onClick={handleGoToSignUp} className="signUpRedirectText">
               Sign up
             </span>
           </div>
         </div>
       </>
     );
+  }
 }

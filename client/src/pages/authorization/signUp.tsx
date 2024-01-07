@@ -1,8 +1,9 @@
-import { useState, useContext, FormEvent } from "react";
+import { useState, useContext, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import Redirect from "../redirectLoading/redirect";
+import Loading from "../redirectLoading/loading";
 import axios from "axios";
 import "../../styles/pages/logInSignUp.css";
 
@@ -12,11 +13,19 @@ export default function SignUp(): JSX.Element {
   const [password, setPassword] = useState<string>(``);
   const [confirmPassword, setConfirmPassword] = useState<string>(``);
   const [isSignedUp, setIsSignedUp] = useState<boolean>(false);
+  const [notLogged, setNotLogged] = useState<boolean>(false);
   const [error, setError] = useState<string>(``);
 
-  const { state, dispatch } = useContext(UserContext);
+  const { state } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //Checking is user logged in, while waiting loading page will be displayed,
+    //if user is logged in it will show redirect page,
+    //else it will show restart password form
+    if (state.user === null) setNotLogged(true);
+  }, [state]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -38,8 +47,6 @@ export default function SignUp(): JSX.Element {
         setConfirmPassword(``);
         setError(``);
         setIsSignedUp(true);
-        dispatch({ type: "SET", payload: res.data.data });
-        localStorage.setItem("user", JSON.stringify(res.data.data));
       })
       .catch((err) => {
         setPassword(``);
@@ -54,10 +61,15 @@ export default function SignUp(): JSX.Element {
     navigate(-1);
   };
 
-  if (isSignedUp) return <Redirect message={"You are logged in"} />;
-  else if (state.user)
+  if (isSignedUp) {
+    return (
+      <Redirect message={"Your profile has been created. Now you can log in"} />
+    );
+  } else if (!state.user && !notLogged) {
+    return <Loading />;
+  } else if (state.user && notLogged) {
     return <Redirect message={"You are already logged in"} />;
-  else
+  } else
     return (
       <>
         <Navigation />

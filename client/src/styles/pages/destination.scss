@@ -246,6 +246,11 @@ $colorGreen: #00af87;
   border: 1px solid black;
 }
 
+.destinationEditTextarea:focus {
+  background-color: $colorGreen;
+  color: white;
+}
+
 @media only screen and (min-width: 1024px) {
   .destinationEditTextarea {
     font-size: $fontS;

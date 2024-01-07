@@ -78,6 +78,11 @@ $colorGreen: #00af87;
   border: 1px solid black;
 }
 
+.signUpForm > input:focus {
+  background-color: $colorGreen;
+  color: white;
+}
+
 @media only screen and (min-width: 1024px) {
   .signUpForm > input {
     font-size: $fontM;
@@ -121,14 +126,27 @@ $colorGreen: #00af87;
   }
 }
 
-.logInforgotPassword {
+.logInForgotPassword {
   color: $colorGreen;
 }
 
 @media only screen and (min-width: 1024px) {
-  .logInforgotPassword {
+  .logInForgotPassword {
     font-size: $fontM;
     cursor: pointer;
+  }
+  .logInForgotPassword:hover {
+    color: black;
+  }
+}
+
+.signUpRedirectText {
+  color: $colorGreen;
+}
+
+@media only screen and (min-width: 1024px) {
+  .signUpRedirectText:hover {
+    color: black;
   }
 }
 
@@ -144,6 +162,14 @@ $colorGreen: #00af87;
   .forgotPasswordRedirect {
     cursor: pointer;
   }
+}
+
+.forgotPasswordRedirectText {
+  color: $colorGreen;
+}
+
+.forgotPasswordRedirectText:hover {
+  color: black;
 }
 
 //Error

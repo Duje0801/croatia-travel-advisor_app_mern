@@ -211,6 +211,11 @@
   border: 1px solid black;
 }
 
+.destinationEditTextarea:focus {
+  background-color: #00af87;
+  color: white;
+}
+
 @media only screen and (min-width: 1024px) {
   .destinationEditTextarea {
     font-size: 1rem;

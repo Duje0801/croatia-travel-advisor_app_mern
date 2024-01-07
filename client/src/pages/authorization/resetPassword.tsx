@@ -1,8 +1,10 @@
-import { FormEvent, useState } from "react";
+import { FormEvent, useContext, useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
+import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import Redirect from "../redirectLoading/redirect";
 import axios from "axios";
+import Loading from "../redirectLoading/loading";
 
 export default function ResetPassword(): JSX.Element {
   const [email, setEmail] = useState<string>(``);
@@ -10,9 +12,19 @@ export default function ResetPassword(): JSX.Element {
   const [newPassword, setNewPassword] = useState<string>(``);
   const [confirmNewPassword, setConfirmNewPassword] = useState<string>(``);
   const [isPasswordChanged, setIsPasswordChanged] = useState<boolean>(false);
+  const [notLogged, setNotLogged] = useState<boolean>(false);
   const [error, setError] = useState<string>(``);
 
   const navigate = useNavigate();
+
+  const { state } = useContext(UserContext);
+
+  useEffect(() => {
+    //Checking is user logged in, while waiting loading page will be displayed,
+    //if user is logged in it will show redirect page,
+    //else it will show restart password form
+    if (state.user === null) setNotLogged(true);
+  }, [state]);
 
   const handleSubmit = async (e: FormEvent): Promise<void> => {
     e.preventDefault();
@@ -47,9 +59,13 @@ export default function ResetPassword(): JSX.Element {
     navigate(-1);
   };
 
-  if (isPasswordChanged)
+  if (isPasswordChanged) {
     return <Redirect message={`Password is successfully changed`} />;
-  else
+  } else if (!state.user && !notLogged) {
+    return <Loading />;
+  } else if (state.user && notLogged) {
+    return <Redirect message={"You are already logged in"} />;
+  } else {
     return (
       <>
         <Navigation />
@@ -96,4 +112,5 @@ export default function ResetPassword(): JSX.Element {
         </div>
       </>
     );
+  }
 }

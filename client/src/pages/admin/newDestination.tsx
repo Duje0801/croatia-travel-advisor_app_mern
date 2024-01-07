@@ -1,8 +1,9 @@
-import { useContext, useState, FormEvent } from "react";
+import { useContext, useState, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import RedirectToHome from "../redirectLoading/redirectToHome";
+import Loading from "../redirectLoading/loading";
 import Footer from "../../components/home/footer";
 import axios from "axios";
 import "../../styles/pages/newDestination.css";
@@ -16,11 +17,17 @@ export default function NewDestination(): JSX.Element {
   const [history, setHistory] = useState<string>(``);
   const [entertainment, setEntertainment] = useState<string>(``);
   const [added, setAdded] = useState<boolean>(false);
+  const [isLoading, setIsloading] = useState<boolean>(true);
   const [error, setError] = useState<string>(``);
 
   const { state } = useContext(UserContext);
 
   const navigate = useNavigate();
+
+  useEffect(() => {
+    //Waiting user info update
+    setIsloading(false);
+  }, [state]);
 
   //This page is available only if username is admin
 
@@ -68,13 +75,17 @@ export default function NewDestination(): JSX.Element {
     navigate(-1);
   };
 
-  if (state.user?.username !== `admin`)
-    return <RedirectToHome message={`Only admin have access to this page`} />;
-  else if (added) {
+  if (added) {
     return (
-      <RedirectToHome message={`${name} is succesfully added to destinations list`} />
+      <RedirectToHome
+        message={`${name} is succesfully added to destinations list`}
+      />
     );
-  } else
+  } else if (isLoading) {
+    return <Loading />;
+  } else if (state.user?.username !== "admin") {
+    return <RedirectToHome message={`Only admin have access to this page`} />;
+  } else {
     return (
       <>
         <Navigation />
@@ -169,4 +180,5 @@ export default function NewDestination(): JSX.Element {
         <Footer />
       </>
     );
+  }
 }

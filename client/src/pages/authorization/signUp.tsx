@@ -23,7 +23,7 @@ export default function SignUp(): JSX.Element {
   useEffect(() => {
     //Checking is user logged in, while waiting loading page will be displayed,
     //if user is logged in it will show redirect page,
-    //else it will show restart password form
+    //else it will show sign up form
     if (state.user === null) setNotLogged(true);
   }, [state]);
 
@@ -63,13 +63,15 @@ export default function SignUp(): JSX.Element {
 
   if (isSignedUp) {
     return (
-      <RedirectToHome message={"Your profile has been created. Now you can log in"} />
+      <RedirectToHome
+        message={"Your profile has been created. Now you can log in"}
+      />
     );
   } else if (!state.user && !notLogged) {
     return <Loading />;
   } else if (state.user && notLogged) {
     return <RedirectToHome message={"You are already logged in"} />;
-  } else
+  } else {
     return (
       <>
         <Navigation />
@@ -121,4 +123,5 @@ export default function SignUp(): JSX.Element {
         </div>
       </>
     );
+  }
 }

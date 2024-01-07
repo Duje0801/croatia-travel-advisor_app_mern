@@ -21,7 +21,7 @@ export default function UpdatePassword(): JSX.Element {
   useEffect(() => {
     //Checking is user logged in, while waiting loading page will be displayed,
     //if user is logged in it will show redirect page,
-    //else it will show restart password form
+    //else it will show update password form
     if (state.user === null) setNotLogged(true);
   }, [state]);
 
@@ -76,7 +76,9 @@ export default function UpdatePassword(): JSX.Element {
   } else if (!state.user && !notLogged) {
     return <Loading />;
   } else if (!state.user && notLogged) {
-    return <RedirectToHome message={"You don't have permission to view this page"} />;
+    return (
+      <RedirectToHome message={"You don't have permission to view this page"} />
+    );
   } else {
     return (
       <>

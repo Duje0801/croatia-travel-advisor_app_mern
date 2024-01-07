@@ -21,7 +21,7 @@ export default function ForgotPassword(): JSX.Element {
   useEffect(() => {
     //Checking is user logged in, while waiting loading page will be displayed,
     //if user is logged in it will show redirect page,
-    //else it will show restart password form
+    //else it will show forgot password form
     if (state.user === null) setNotLogged(true);
   }, [state]);
 

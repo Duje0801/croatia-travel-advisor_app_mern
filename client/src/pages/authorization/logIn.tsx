@@ -22,7 +22,7 @@ export default function LogIn(): JSX.Element {
   useEffect(() => {
     //Checking is user logged in, while waiting loading page will be displayed,
     //if user is logged in it will show redirect page,
-    //else it will show restart password form
+    //else it will show log in form
     if (state.user === null) setNotLogged(true);
   }, [state]);
 

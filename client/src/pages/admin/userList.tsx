@@ -25,7 +25,7 @@ export default function UserList(): JSX.Element {
   //This page is available only if username is admin
 
   const fetchData = async (): Promise<void> => {
-    if (!state.user?.token) return;
+    if (state.user?.username !== "admin") return setIsLoading(false);
     else {
       axios
         .get(
@@ -115,10 +115,11 @@ export default function UserList(): JSX.Element {
       );
     });
 
-  if (state.user?.username !== `admin`)
+  if (isLoading) {
+    return <Loading />;
+  } else if (state.user?.username !== `admin`) {
     return <RedirectToHome message={`Only admin have access to this page`} />;
-  else if (isLoading) return <Loading />;
-  else
+  } else {
     return (
       <div>
         <Navigation />
@@ -159,4 +160,5 @@ export default function UserList(): JSX.Element {
         />
       </div>
     );
+  }
 }

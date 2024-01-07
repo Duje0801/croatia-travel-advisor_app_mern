@@ -7,7 +7,8 @@ import UserProfileInfo from "../../components/profile/userProfileInfo";
 import DeactivateUser from "../../components/profile/deactivateUser";
 import DeleteUser from "../../components/profile/deleteUser";
 import UserProfileReviews from "../../components/profile/userProfileReviews";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
+import RedirectToPrevious from "../redirectLoading/redirectToPrevious";
 import Loading from "../redirectLoading/loading";
 import Pagination from "../../components/pagination/pagination";
 import { IUser } from "../../interfaces/IUser";
@@ -84,23 +85,19 @@ export default function UserProfile(): JSX.Element {
 
   if (isLoading || (state.user && !userProfile && !error)) {
     return <Loading />;
-  } else if (isDeactivated || isDeleted) {
-    return (
-      <Redirect
-        message={`User is successfully ${
-          isDeactivated ? `deactivated` : `deleted`
-        }`}
-      />
-    );
+  } else if (isDeactivated) {
+    return <RedirectToHome message={`User is successfully deactivated`} />;
+  } else if (isDeleted) {
+    return <RedirectToPrevious message={`User is successfully deleted`} />;
   } else if (!isLoading && !state.user) {
-    return <Redirect message={"Only users can see this page"} />;
+    return <RedirectToHome message={"Only users can see this page"} />;
   } else if (error) {
-    return <Redirect message={error} />;
+    return <RedirectToHome message={error} />;
   } else if (
     state.user?.username !== `admin` &&
     userProfile?.active === false
   ) {
-    return <Redirect message={"User is not active anymore"} />;
+    return <RedirectToHome message={"User is not active anymore"} />;
   } else if (state.user && userProfile) {
     return (
       <>
@@ -152,6 +149,6 @@ export default function UserProfile(): JSX.Element {
       </>
     );
   } else {
-    return <Redirect message={"Something went wrong"} />;
+    return <RedirectToHome message={"Something went wrong"} />;
   }
 }

@@ -2,7 +2,7 @@ import { useState, useContext, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
 import Loading from "../redirectLoading/loading";
 import axios from "axios";
 import "../../styles/pages/logInSignUp.css";
@@ -63,12 +63,12 @@ export default function SignUp(): JSX.Element {
 
   if (isSignedUp) {
     return (
-      <Redirect message={"Your profile has been created. Now you can log in"} />
+      <RedirectToHome message={"Your profile has been created. Now you can log in"} />
     );
   } else if (!state.user && !notLogged) {
     return <Loading />;
   } else if (state.user && notLogged) {
-    return <Redirect message={"You are already logged in"} />;
+    return <RedirectToHome message={"You are already logged in"} />;
   } else
     return (
       <>

@@ -3,7 +3,7 @@ import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
 import Pagination from "../../components/pagination/pagination";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
 import Loading from "../redirectLoading/loading";
 import { IUser } from "../../interfaces/IUser";
 import { BiSearchAlt2 } from "react-icons/bi";
@@ -116,7 +116,7 @@ export default function UserList(): JSX.Element {
     });
 
   if (state.user?.username !== `admin`)
-    return <Redirect message={`Only admin have access to this page`} />;
+    return <RedirectToHome message={`Only admin have access to this page`} />;
   else if (isLoading) return <Loading />;
   else
     return (

@@ -2,7 +2,7 @@ import { useContext, useState, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
 import Footer from "../../components/home/footer";
 import axios from "axios";
 import "../../styles/pages/newDestination.css";
@@ -69,10 +69,10 @@ export default function NewDestination(): JSX.Element {
   };
 
   if (state.user?.username !== `admin`)
-    return <Redirect message={`Only admin have access to this page`} />;
+    return <RedirectToHome message={`Only admin have access to this page`} />;
   else if (added) {
     return (
-      <Redirect message={`${name} is succesfully added to destinations list`} />
+      <RedirectToHome message={`${name} is succesfully added to destinations list`} />
     );
   } else
     return (

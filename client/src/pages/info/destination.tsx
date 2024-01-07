@@ -7,7 +7,7 @@ import ShowDestinationStars from "../../components/stars/showDestinationStars";
 import DestinationButtons from "../../components/destination/destinationButtons";
 import DeleteDestination from "../../components/destination/deleteDestination";
 import EditDestination from "../../components/destination/editDestination";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
 import Loading from "../redirectLoading/loading";
 import Reviews from "../../components/review/reviews";
 import Footer from "../../components/home/footer";
@@ -123,10 +123,10 @@ export default function Destination(): JSX.Element {
     setDeleteQuestion(deleteQuestion ? false : true);
   };
 
-  if (error) return <Redirect message={error} />;
+  if (error) return <RedirectToHome message={error} />;
   else if (isDeleted) {
     return (
-      <Redirect
+      <RedirectToHome
         message={`Destination ${destination?.name} is successfully deleted`}
       />
     );
@@ -204,6 +204,6 @@ export default function Destination(): JSX.Element {
       </div>
     );
   } else {
-    return <Redirect message={"Something went wrong"} />;
+    return <RedirectToHome message={"Something went wrong"} />;
   }
 }

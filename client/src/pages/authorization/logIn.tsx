@@ -2,7 +2,7 @@ import { useState, useContext, useEffect, FormEvent } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
 import Loading from "../redirectLoading/loading";
 import { routes } from "../../routes/routes";
 import axios from "axios";
@@ -68,11 +68,11 @@ export default function LogIn(): JSX.Element {
   };
 
   if (isLoggedIn) {
-    return <Redirect message={"You are logged in"} />;
+    return <RedirectToHome message={"You are logged in"} />;
   } else if (!state.user && !notLogged) {
     return <Loading />;
   } else if (state.user && notLogged) {
-    return <Redirect message={"You are already logged in"} />;
+    return <RedirectToHome message={"You are already logged in"} />;
   } else {
     return (
       <>

@@ -2,7 +2,7 @@ import { FormEvent, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
 import Loading from "../redirectLoading/loading";
 import { routes } from "../../routes/routes";
 import axios from "axios";
@@ -63,7 +63,7 @@ export default function ForgotPassword(): JSX.Element {
   if (!state.user && !notLogged) {
     return <Loading />;
   } else if (state.user && notLogged) {
-    return <Redirect message={"You are already logged in"} />;
+    return <RedirectToHome message={"You are already logged in"} />;
   } else {
     return (
       <>

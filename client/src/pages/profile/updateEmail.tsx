@@ -2,7 +2,8 @@ import { FormEvent, useContext, useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { UserContext } from "../../context/userContext";
 import Navigation from "../../components/navigation/navigation";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
+import RedirectToPrevious from "../redirectLoading/redirectToPrevious";
 import Loading from "../redirectLoading/loading";
 import axios from "axios";
 
@@ -76,11 +77,11 @@ export default function UpdateEmail(): JSX.Element {
   };
 
   if (isEmailChanged) {
-    return <Redirect message={"Email is successfully changed"} />;
+    return <RedirectToPrevious message={"Email is successfully changed"} />;
   } else if (!state.user && !notLogged) {
     return <Loading />;
   } else if (!state.user && notLogged) {
-    return <Redirect message={"You don't have permission to view this page"} />;
+    return <RedirectToHome message={"You don't have permission to view this page"} />;
   } else {
     return (
       <>

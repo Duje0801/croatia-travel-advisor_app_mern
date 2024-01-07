@@ -3,7 +3,7 @@ import { useNavigate, useParams } from "react-router-dom";
 import CategoryDescription from "../../data/categoryDescription";
 import Navigation from "../../components/navigation/navigation";
 import DestinationsList from "../../components/category/destinationsList";
-import Redirect from "../redirectLoading/redirect";
+import RedirectToHome from "../redirectLoading/redirectToHome";
 import Loading from "../redirectLoading/loading";
 import Pagination from "../../components/pagination/pagination";
 import Footer from "../../components/home/footer";
@@ -66,7 +66,7 @@ export default function Category(): JSX.Element {
   };
 
   if (error) {
-    return <Redirect message={error} />;
+    return <RedirectToHome message={error} />;
   } else if (isLoading) {
     return <Loading />;
   } else

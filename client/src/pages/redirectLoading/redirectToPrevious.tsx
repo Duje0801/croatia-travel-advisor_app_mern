@@ -1,14 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import Navigation from "../../components/navigation/navigation";
 import Footer from "../../components/home/footer";
-import { routes } from "../../routes/routes";
 import "../../styles/pages/redirect.css";
 
-export default function Redirect(props: { message: string }): JSX.Element {
+export default function RedirectToPrevious(props: {
+  message: string;
+}): JSX.Element {
   const navigate = useNavigate();
 
   const handleHome = (): void => {
-    navigate(routes.home);
+    navigate(-1);
   };
 
   return (
@@ -20,7 +21,7 @@ export default function Redirect(props: { message: string }): JSX.Element {
           <div>
             Go to{" "}
             <a className="redirectGoToHomePage" onClick={handleHome}>
-              home page
+              previous page
             </a>
             .
           </div>

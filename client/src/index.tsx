@@ -9,11 +9,11 @@ const root: ReactDOM.Root = ReactDOM.createRoot(
   document.getElementById("root")!
 );
 root.render(
-  //<React.StrictMode>
+  <React.StrictMode>
     <UserProvider>
       <DestinationProvider>
         <App />
       </DestinationProvider>
     </UserProvider>
-  //</React.StrictMode>
+  </React.StrictMode>
 );
